@@ -1,0 +1,41 @@
+<resources>
+
+    <string name="app_name">Расписание</string>
+    <string name="app_json_name">Расписание:</string>
+    <string name="app_apply">Применить</string>
+    <string name="app_applied">Применено</string>
+    <string name="app_widget_description">Виджет с расписанием</string>
+
+    <string name="widget_now">Сейчас:</string>
+    <string name="widget_end_in">Закончится через:</string>
+    <string name="widget_end">Закончилось:</string>
+    <string name="widget_then">Далее:</string>
+    <string name="widget_start_in">Начнётся через:</string>
+
+    <string name="time_hours_single">час</string>
+    <string name="time_hours_small">часа</string>
+    <string name="time_hours_large">часов</string>
+    <string name="time_minutes_single">минуту</string>
+    <string name="time_minutes_small">минуты</string>
+    <string name="time_minutes_large">минут</string>
+    <string name="time_seconds_single">секунду</string>
+    <string name="time_seconds_small">секунды</string>
+    <string name="time_seconds_large">секунд</string>
+    <string name="time_ago">назад</string>
+
+    <string name="weekday_monday">Понедельник</string>
+    <string name="weekday_tuesday">Вторник</string>
+    <string name="weekday_wednesday">Среда</string>
+    <string name="weekday_thursday">Четверг</string>
+    <string name="weekday_friday">Пятница</string>
+    <string name="weekday_saturday">Суббота</string>
+    <string name="weekday_sunday">Воскресенье</string>
+
+    <string name="debug_date">ДД.ММ (НН)</string>
+    <string name="debug_time">чч:мм:сс</string>
+    <string name="debug_weekday">День недели</string>
+    <string name="debug_something">Что-то</string>
+    <string name="debug_sometime">99 Минут  99 Секунд</string>
+    <string name="debug_number">(К-228)</string>
+
+</resources>

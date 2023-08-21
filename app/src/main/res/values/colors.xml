@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="app_Background">#1A1A1A</color>
+    <color name="app_Button">#FFFFFF</color>
+    <color name="app_Button_Text">#000000</color>
+
+    <color name="widget_Text_Time">#808080</color>
+    <color name="widget_Text_Title">#A0A0A0</color>
+    <color name="widget_Text_Text">#D2D2D2</color>
+
+</resources>

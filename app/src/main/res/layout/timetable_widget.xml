@@ -1,0 +1,144 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_widget_background"
+    android:padding="12sp"
+    >
+
+    <Button
+        android:id="@+id/UpdateButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:layout_marginTop="-12dp"
+        android:layout_marginRight="-12dp"
+        android:layout_marginBottom="-12dp"
+        android:layout_marginLeft="-12dp" />
+
+    <TextView
+        android:id="@+id/WeekDayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:includeFontPadding="false"
+        android:text="@string/debug_weekday"
+        android:textAppearance="@style/Text.WeekDay" />
+
+    <TextView
+        android:id="@+id/DateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/debug_date"
+        android:textAppearance="@style/Text.DateTime"
+        tools:ignore="RelativeOverlap" />
+
+    <TextView
+        android:id="@+id/TimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DateText"
+        android:layout_alignParentEnd="true"
+        android:text="@string/debug_time"
+        android:textAppearance="@style/Text.DateTime" />
+
+
+    <TextView
+        android:id="@+id/NowTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/WeekDayText"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:text="@string/widget_now"
+        android:textAppearance="@style/Text.NameTitle" />
+
+    <TextView
+        android:id="@+id/NowText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/NowTitle"
+        android:layout_marginStart="6dp"
+        android:layout_toEndOf="@+id/NowTitle"
+        android:text="@string/debug_something"
+        android:textAppearance="@style/Text.Text" />
+
+    <TextView
+        android:id="@+id/NowSubText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/NowText"
+        android:layout_alignParentEnd="true"
+        android:text="@string/debug_number"
+        android:textAppearance="@style/Text.Text" />
+
+    <TextView
+        android:id="@+id/EndInTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NowTitle"
+        android:layout_alignStart="@+id/NowTitle"
+        android:text="@string/widget_end_in"
+        android:textAppearance="@style/Text.TimeTitle" />
+
+    <TextView
+        android:id="@+id/EndInText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EndInTitle"
+        android:layout_alignStart="@+id/EndInTitle"
+        android:text="@string/debug_sometime"
+        android:textAppearance="@style/Text.Text" />
+
+
+    <TextView
+        android:id="@+id/ThenTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/StartInTitle"
+        android:layout_alignStart="@+id/StartInTitle"
+        android:text="@string/widget_then"
+        android:textAppearance="@style/Text.NameTitle" />
+
+    <TextView
+        android:id="@+id/ThenText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ThenTitle"
+        android:layout_marginStart="6dp"
+        android:layout_toEndOf="@+id/ThenTitle"
+        android:text="@string/debug_something"
+        android:textAppearance="@style/Text.Text" />
+
+    <TextView
+        android:id="@+id/ThenSubText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ThenText"
+        android:layout_alignParentEnd="true"
+        android:text="@string/debug_number"
+        android:textAppearance="@style/Text.Text" />
+
+    <TextView
+        android:id="@+id/StartInTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/StartInText"
+        android:layout_alignStart="@+id/StartInText"
+        android:text="@string/widget_start_in"
+        android:textAppearance="@style/Text.TimeTitle" />
+
+    <TextView
+        android:id="@+id/StartInText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/debug_sometime"
+        android:textAppearance="@style/Text.Text" />
+
+</RelativeLayout>
