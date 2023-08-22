@@ -1,7 +1,7 @@
 <resources>
 
     <style name="Text.WeekDay" parent="android:TextAppearance">
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">38sp</item>
         <item name="android:textColor">@color/widget_Text_Text</item>
         <item name="android:textStyle">bold</item>
     </style>
