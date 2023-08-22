@@ -15,6 +15,9 @@ class MainActivity : AppCompatActivity() {
         val applyButton = findViewById<Button>(R.id.applyButton)
         val jsonText = findViewById<TextInputEditText>(R.id.jsonText)
 
+        val jsonDataString = applicationContext.getSharedPreferences("SavedTimetable", 0).getString("Data", null) ?: ""
+        jsonText.setText(jsonDataString)
+
         applyButton.setOnClickListener( View.OnClickListener {
             val settings = applicationContext.getSharedPreferences("SavedTimetable", 0)
             val editor = settings.edit()
