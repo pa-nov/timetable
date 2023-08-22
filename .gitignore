@@ -1,4 +1,11 @@
 .gradle/
+.idea/caches/
+.idea/libraries/
 build/
+captures/
 gradle/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
 local.properties

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="128dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,32 +19,34 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/blue"
+                app:boxStrokeColor="@color/green"
+                app:hintTextColor="@color/green">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/jsonText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/app_json_name" />
-
+                    android:layout_height="wrap_content"
+                    android:background="@color/app_Background_Dark"
+                    android:textColor="@color/white"
+                    android:hint="@string/app_json_name"/>
             </com.google.android.material.textfield.TextInputLayout>
-
         </LinearLayout>
-
     </ScrollView>
 
     <Button
         android:id="@+id/applyButton"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/app_Button"
+        android:backgroundTint="@color/yellow"
         android:text="@string/app_apply"
-        android:textColor="@color/app_Button_Text"
+        android:textColor="@color/app_Background"
         android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+        android:textStyle="bold"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

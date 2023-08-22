@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="yellow">#fbbc05</color>
+    <color name="red">#ea4335</color>
+    <color name="green">#34a853</color>
+    <color name="blue">#4285f4</color>
+
     <color name="app_Background">#1A1A1A</color>
-    <color name="app_Button">#FFFFFF</color>
-    <color name="app_Button_Text">#000000</color>
+    <color name="app_Background_Dark">#101010</color>
 
     <color name="widget_Text_Time">#808080</color>
     <color name="widget_Text_Title">#A0A0A0</color>
