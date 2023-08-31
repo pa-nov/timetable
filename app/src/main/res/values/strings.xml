@@ -15,9 +15,11 @@
     <string name="time_hours_single">час</string>
     <string name="time_hours_small">часа</string>
     <string name="time_hours_large">часов</string>
+    <string name="time_minutes">мин</string>
     <string name="time_minutes_single">минуту</string>
     <string name="time_minutes_small">минуты</string>
     <string name="time_minutes_large">минут</string>
+    <string name="time_seconds">сек</string>
     <string name="time_seconds_single">секунду</string>
     <string name="time_seconds_small">секунды</string>
     <string name="time_seconds_large">секунд</string>

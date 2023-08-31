@@ -15,13 +15,13 @@ class MainActivity : AppCompatActivity() {
         val applyButton = findViewById<Button>(R.id.applyButton)
         val jsonText = findViewById<TextInputEditText>(R.id.jsonText)
 
-        val jsonDataString = applicationContext.getSharedPreferences("SavedTimetable", 0).getString("Data", null) ?: ""
+        val jsonDataString = applicationContext.getSharedPreferences("SavedData", 0).getString("Settings", "")
         jsonText.setText(jsonDataString)
 
         applyButton.setOnClickListener( View.OnClickListener {
-            val settings = applicationContext.getSharedPreferences("SavedTimetable", 0)
+            val settings = applicationContext.getSharedPreferences("SavedData", 0)
             val editor = settings.edit()
-            editor.putString("Data", jsonText.text.toString())
+            editor.putString("Settings", jsonText.text.toString())
             editor.apply()
 
             Toast.makeText(this, R.string.app_applied, Toast.LENGTH_SHORT).show()

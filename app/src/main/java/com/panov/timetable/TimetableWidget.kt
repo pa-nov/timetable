@@ -11,7 +11,6 @@ import android.widget.RemoteViews
 import org.json.JSONObject
 import kotlin.math.abs
 import kotlin.math.floor
-import kotlin.math.min
 
 class TimetableWidget : AppWidgetProvider() {
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
@@ -35,27 +34,36 @@ class TimetableWidget : AppWidgetProvider() {
         views.setOnClickPendingIntent(R.id.UpdateButton, pendingIntent(context, "updateWidget"))
 
 
-        val jsonDataString = context.getSharedPreferences("SavedTimetable", 0).getString("Data", null) ?: ""
-        if (jsonDataString.isEmpty()) {
+        val jsonDataString = context.getSharedPreferences("SavedData", 0).getString("Settings", "")
+        if (jsonDataString.isNullOrEmpty()) {
             appWidgetManager.updateAppWidget(appWidgetId, views)
             return
         }
         val jsonData = JSONObject(jsonDataString)
         val date = Calendar.getInstance()
 
-        val weekdays = arrayOf( context.getString(R.string.weekday_monday), context.getString(R.string.weekday_tuesday), context.getString(R.string.weekday_wednesday), context.getString(R.string.weekday_thursday), context.getString(R.string.weekday_friday), context.getString(R.string.weekday_saturday), context.getString(R.string.weekday_sunday) )
+        val times       = jsonData.getJSONArray("times")
+        val lessons     = jsonData.getJSONArray("lessons")
+        val rooms       = jsonData.getJSONArray("rooms")
+        val modifiers   = jsonData.getJSONObject("modifiers")
+        val modHour     = modifiers.getInt("hour")
+        val modMinute   = modifiers.getInt("minute")
+        val modSecond   = modifiers.getInt("second")
+
+        val weekdays    = arrayOf( context.getString(R.string.weekday_monday), context.getString(R.string.weekday_tuesday), context.getString(R.string.weekday_wednesday), context.getString(R.string.weekday_thursday), context.getString(R.string.weekday_friday), context.getString(R.string.weekday_saturday), context.getString(R.string.weekday_sunday) )
         val dateWeekDay = if (date.get(Calendar.DAY_OF_WEEK) > 1) { date.get(Calendar.DAY_OF_WEEK) - 2 } else { 6 }
+        val dateWeek    = getTwoDigitNumber(date.get(Calendar.WEEK_OF_YEAR))
         val dateDay     = getTwoDigitNumber(date.get(Calendar.DAY_OF_MONTH))
         val dateMonth   = getTwoDigitNumber(date.get(Calendar.MONTH) + 1)
-        val dateHour    = getTwoDigitNumber(date.get(Calendar.HOUR_OF_DAY))
-        val dateMinute  = getTwoDigitNumber(date.get(Calendar.MINUTE))
-        val dateSecond  = getTwoDigitNumber(date.get(Calendar.SECOND))
-        val dateWeek    = getTwoDigitNumber(date.get(Calendar.WEEK_OF_YEAR))
-
-        val head = jsonData.getJSONObject("head")
-        val times = head.getJSONArray("times")
-        val lessons = head.getJSONArray("lessons")
-        val rooms = head.getJSONArray("rooms")
+        val dateHour    = if (modHour > 0)
+        { getTwoDigitNumber((date.get(Calendar.HOUR_OF_DAY) / modHour) * modHour) } else
+        { getTwoDigitNumber(abs(modHour)) }
+        val dateMinute  = if (modMinute > 0)
+        { getTwoDigitNumber((date.get(Calendar.MINUTE) / modMinute) * modMinute) } else
+        { getTwoDigitNumber(abs(modMinute)) }
+        val dateSecond  = if (modSecond > 0)
+        { getTwoDigitNumber((date.get(Calendar.SECOND) / modSecond) * modSecond) } else
+        { getTwoDigitNumber(abs(modSecond)) }
 
         val weekEvenOdd = if (date.get(Calendar.WEEK_OF_YEAR) % 2 == 0) { "even" } else { "odd" }
         val timesMax = times.length() - 1
@@ -147,11 +155,11 @@ class TimetableWidget : AppWidgetProvider() {
 
         views.setTextViewText(R.id.NowText, "${lessons[nowDayTimetable.getInt(nowLesson)]}")
         views.setTextViewText(R.id.NowSubText, "(К-${rooms[nowDayTimetable.getInt(nowLesson)]})")
-        views.setTextViewText(R.id.EndInText, getNiceTime(endTime, context))
+        views.setTextViewText(R.id.EndInText, getNiceTime(context, endTime))
 
         views.setTextViewText(R.id.ThenText, "${lessons[thenDayTimetable.getInt(thenLesson)]}")
         views.setTextViewText(R.id.ThenSubText, "(К-${rooms[thenDayTimetable.getInt(thenLesson)]})")
-        views.setTextViewText(R.id.StartInText, getNiceTime(startTime, context))
+        views.setTextViewText(R.id.StartInText, getNiceTime(context, startTime))
 
         appWidgetManager.updateAppWidget(appWidgetId, views)
     }
@@ -178,26 +186,28 @@ class TimetableWidget : AppWidgetProvider() {
         return number.toString()
     }
 
-    private fun getNiceTime(timeSource: Int, context: Context): String {
-        var postfix = ""
-        var time = timeSource
-        if (time < 0) {
-            postfix = "  ${context.getString(R.string.time_ago)}"
-            time = abs(timeSource)
-        }
+    private fun getNiceTime(context: Context, timeSource: Int): String {
+        val postfix = if (timeSource < 0) { "  ${context.getString(R.string.time_ago)}" } else { "" }
+        val time    = if (timeSource < 0) { abs(timeSource) } else { timeSource }
 
         val hours   = floor(time.toDouble() / 3600)
         val minutes = floor((time.toDouble() - (hours * 3600)) / 60)
         val seconds = time - (hours * 60 + minutes) * 60
 
-        val hoursText   = if (hours > 0) { "${hours.toInt()} ${getNiceNumberText(hours, context.getString(R.string.time_hours_single), context.getString(R.string.time_hours_small), context.getString(R.string.time_hours_large))}  " } else { "" }
-        val minutesText = "${minutes.toInt()} ${getNiceNumberText(minutes, context.getString(R.string.time_minutes_single), context.getString(R.string.time_minutes_small), context.getString(R.string.time_minutes_large))}"
-        val secondsText = "${seconds.toInt()} ${getNiceNumberText(seconds, context.getString(R.string.time_seconds_single), context.getString(R.string.time_seconds_small), context.getString(R.string.time_seconds_large))}"
+        val hoursText   = if (hours > 0)
+        { "${hours.toInt()} ${getNumberText(hours, context.getString(R.string.time_hours_single), context.getString(R.string.time_hours_small), context.getString(R.string.time_hours_large))}  " } else
+        { "" }
+        val minutesText = if (hours > 0)
+        { "${minutes.toInt()} ${context.getString(R.string.time_minutes)}" } else
+        { "${minutes.toInt()} ${getNumberText(minutes, context.getString(R.string.time_minutes_single), context.getString(R.string.time_minutes_small), context.getString(R.string.time_minutes_large))}" }
+        val secondsText = if (hours > 0)
+        { "${seconds.toInt()} ${context.getString(R.string.time_seconds)}" } else
+        { "${seconds.toInt()} ${getNumberText(seconds, context.getString(R.string.time_seconds_single), context.getString(R.string.time_seconds_small), context.getString(R.string.time_seconds_large))}" }
 
         return "$hoursText$minutesText  $secondsText$postfix"
     }
 
-    private fun getNiceNumberText(number: Double, textSingle: String, textSmall: String, textLarge: String): String {
+    private fun getNumberText(number: Double, textSingle: String, textSmall: String, textLarge: String): String {
         if (floor(number / 10) % 10 != 1.0) {
             if (number % 10 == 1.0) {
                 return textSingle
