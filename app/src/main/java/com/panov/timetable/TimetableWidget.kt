@@ -34,7 +34,8 @@ class TimetableWidget : AppWidgetProvider() {
         views.setOnClickPendingIntent(R.id.UpdateButton, pendingIntent(context, "updateWidget"))
 
 
-        val jsonDataString = context.getSharedPreferences("SavedData", 0).getString("Settings", "")
+        val savedData = context.getSharedPreferences("SavedData", 0)
+        val jsonDataString = savedData.getString("Json", "")
         if (jsonDataString.isNullOrEmpty()) {
             appWidgetManager.updateAppWidget(appWidgetId, views)
             return
@@ -45,10 +46,9 @@ class TimetableWidget : AppWidgetProvider() {
         val times       = jsonData.getJSONArray("times")
         val lessons     = jsonData.getJSONArray("lessons")
         val rooms       = jsonData.getJSONArray("rooms")
-        val modifiers   = jsonData.getJSONObject("modifiers")
-        val modHour     = modifiers.getInt("hour")
-        val modMinute   = modifiers.getInt("minute")
-        val modSecond   = modifiers.getInt("second")
+        val modHour     = savedData.getInt("ModifierHour", 1)
+        val modMinute   = savedData.getInt("ModifierMinute", 1)
+        val modSecond   = savedData.getInt("ModifierSecond", 1)
 
         val weekdays    = arrayOf( context.getString(R.string.weekday_monday), context.getString(R.string.weekday_tuesday), context.getString(R.string.weekday_wednesday), context.getString(R.string.weekday_thursday), context.getString(R.string.weekday_friday), context.getString(R.string.weekday_saturday), context.getString(R.string.weekday_sunday) )
         val dateWeekDay = if (date.get(Calendar.DAY_OF_WEEK) > 1) { date.get(Calendar.DAY_OF_WEEK) - 2 } else { 6 }

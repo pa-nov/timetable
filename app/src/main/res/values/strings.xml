@@ -1,10 +1,18 @@
 <resources>
 
     <string name="app_name">Расписание</string>
-    <string name="app_json_name">Расписание:</string>
+    <string name="app_widget_description">Виджет с расписанием</string>
+    <string name="app_clock">Часы</string>
+    <string name="app_timetable">Расписание</string>
+    <string name="app_settings">Настройки</string>
     <string name="app_apply">Применить</string>
     <string name="app_applied">Применено</string>
-    <string name="app_widget_description">Виджет с расписанием</string>
+    <string name="app_exit">Выйти</string>
+    <string name="app_json_name">JSON:</string>
+    <string name="app_modifier_hour">Модификатор (Часы):</string>
+    <string name="app_modifier_minute">Модификатор (Минуты):</string>
+    <string name="app_modifier_second">Модификатор (Секунды):</string>
+    <string name="app_initial_index">Начальный индекс:</string>
 
     <string name="widget_now">Сейчас:</string>
     <string name="widget_end_in">Закончится через:</string>
