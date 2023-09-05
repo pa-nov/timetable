@@ -7,7 +7,7 @@
     <string name="app_settings">Настройки</string>
     <string name="app_apply">Применить</string>
     <string name="app_applied">Применено</string>
-    <string name="app_exit">Выйти</string>
+    <string name="app_return">Вернуться</string>
     <string name="app_json_name">JSON:</string>
     <string name="app_modifier_hour">Модификатор (Часы):</string>
     <string name="app_modifier_minute">Модификатор (Минуты):</string>
@@ -43,9 +43,11 @@
 
     <string name="debug_date">ДД.ММ (НН)</string>
     <string name="debug_time">чч:мм:сс</string>
+    <string name="debug_times">ЧЧ:ММ ЧЧ:ММ</string>
     <string name="debug_weekday">День недели</string>
+    <string name="debug_somebody">Кто-то</string>
     <string name="debug_something">Что-то</string>
     <string name="debug_sometime">99 Минут  99 Секунд</string>
-    <string name="debug_number">(К-228)</string>
+    <string name="debug_room">(К-228)</string>
 
 </resources>

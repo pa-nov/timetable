@@ -8,128 +8,129 @@
     android:padding="16dp"
     tools:context=".Settings">
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/drawable_rounded"
         android:backgroundTint="@color/app_Background_Dark">
-        <LinearLayout
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="80dp"
+            android:text="@string/app_settings"
+            android:textAppearance="@style/App.Text.Title"
+            android:gravity="center"/>
 
-            <TextView
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/app_settings"
-                android:textAppearance="@style/App.Text.Title"
-                android:gravity="center_horizontal"/>
+                android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="16dp"
-                android:textColorHint="@color/blue"
-                app:boxStrokeColor="@color/green"
-                app:hintTextColor="@color/green">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textJson"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/drawable_rounded"
-                    android:backgroundTint="@color/app_Background"
-                    android:textColor="@color/white"
-                    android:hint="@string/app_json_name"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textColorHint="@color/blue"
+                    app:boxStrokeColor="@color/green"
+                    app:hintTextColor="@color/green">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textJson"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/drawable_rounded"
+                        android:backgroundTint="@color/app_Background"
+                        android:textColor="@color/white"
+                        android:hint="@string/app_json_name"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="16dp"
-                android:textColorHint="@color/blue"
-                app:boxStrokeColor="@color/green"
-                app:hintTextColor="@color/green">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textModifierHour"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/drawable_rounded"
-                    android:backgroundTint="@color/app_Background"
-                    android:textColor="@color/white"
-                    android:hint="@string/app_modifier_hour"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textColorHint="@color/blue"
+                    app:boxStrokeColor="@color/green"
+                    app:hintTextColor="@color/green">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textModifierHour"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/drawable_rounded"
+                        android:backgroundTint="@color/app_Background"
+                        android:textColor="@color/white"
+                        android:hint="@string/app_modifier_hour"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="16dp"
-                android:textColorHint="@color/blue"
-                app:boxStrokeColor="@color/green"
-                app:hintTextColor="@color/green">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textModifierMinute"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/drawable_rounded"
-                    android:backgroundTint="@color/app_Background"
-                    android:textColor="@color/white"
-                    android:hint="@string/app_modifier_minute"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textColorHint="@color/blue"
+                    app:boxStrokeColor="@color/green"
+                    app:hintTextColor="@color/green">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textModifierMinute"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/drawable_rounded"
+                        android:backgroundTint="@color/app_Background"
+                        android:textColor="@color/white"
+                        android:hint="@string/app_modifier_minute"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="16dp"
-                android:textColorHint="@color/blue"
-                app:boxStrokeColor="@color/green"
-                app:hintTextColor="@color/green">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textModifierSecond"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/drawable_rounded"
-                    android:backgroundTint="@color/app_Background"
-                    android:textColor="@color/white"
-                    android:hint="@string/app_modifier_second"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textColorHint="@color/blue"
+                    app:boxStrokeColor="@color/green"
+                    app:hintTextColor="@color/green">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textModifierSecond"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/drawable_rounded"
+                        android:backgroundTint="@color/app_Background"
+                        android:textColor="@color/white"
+                        android:hint="@string/app_modifier_second"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="16dp"
-                android:textColorHint="@color/blue"
-                app:boxStrokeColor="@color/green"
-                app:hintTextColor="@color/green">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInitialIndex"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/drawable_rounded"
-                    android:backgroundTint="@color/app_Background"
-                    android:textColor="@color/white"
-                    android:hint="@string/app_initial_index"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textColorHint="@color/blue"
+                    app:boxStrokeColor="@color/green"
+                    app:hintTextColor="@color/green">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInitialIndex"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/drawable_rounded"
+                        android:backgroundTint="@color/app_Background"
+                        android:textColor="@color/white"
+                        android:hint="@string/app_initial_index"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
 
     <Button
         android:id="@+id/applyButton"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/drawable_rounded"
         app:backgroundTint="@color/yellow"
         android:text="@string/app_apply"
@@ -146,7 +147,7 @@
         android:layout_height="64dp"
         android:background="@drawable/drawable_rounded"
         app:backgroundTint="@color/yellow"
-        android:contentDescription="@string/app_exit"
+        android:contentDescription="@string/app_return"
         app:srcCompat="@drawable/icon_return"
         android:scaleType="fitCenter"
         android:padding="8dp"

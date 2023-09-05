@@ -1,6 +1,5 @@
 package com.panov.timetable
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
@@ -15,7 +14,7 @@ class Clock : AppCompatActivity() {
             val editor = applicationContext.getSharedPreferences("SavedData", 0).edit()
             editor.putInt("LastPage", 0)
             editor.apply()
-            startActivity(Intent(this, MainActivity::class.java))
+            this.finish()
         }
     }
 }

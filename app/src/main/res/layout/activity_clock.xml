@@ -8,37 +8,44 @@
     android:padding="16dp"
     tools:context=".Clock">
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/drawable_rounded"
         android:backgroundTint="@color/app_Background_Dark">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <TextView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="@string/app_clock"
+            android:textAppearance="@style/App.Text.Title"
+            android:gravity="center"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/app_clock"
-                android:textAppearance="@style/App.Text.Title"
-                android:gravity="center_horizontal"/>
+                android:orientation="vertical">
 
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/drawable_rounded"
         app:backgroundTint="@color/yellow"
-        android:gravity="center"
         android:text="@string/debug_something"
         android:textColor="@color/app_Background"
         android:textAppearance="@style/App.Text.Button"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -48,7 +55,7 @@
         android:layout_height="64dp"
         android:background="@drawable/drawable_rounded"
         app:backgroundTint="@color/yellow"
-        android:contentDescription="@string/app_exit"
+        android:contentDescription="@string/app_return"
         app:srcCompat="@drawable/icon_return"
         android:scaleType="fitCenter"
         android:padding="8dp"
