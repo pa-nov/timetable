@@ -9,38 +9,26 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val lastPage = applicationContext.getSharedPreferences("SavedData", 0).getInt("LastPage", 0)
+        if (lastPage > 0) { openActivity(lastPage) }
+
+        findViewById<ImageButton>(R.id.openClockButton).setOnClickListener { openActivity(1) }
+        findViewById<ImageButton>(R.id.openTimetableButton).setOnClickListener { openActivity(2) }
+        findViewById<ImageButton>(R.id.openSettingsButton).setOnClickListener { openActivity(3) }
+    }
+
+    private fun openActivity(index: Int) {
         val activities = arrayOf(
-                Intent(this, MainActivity::class.java),
-                Intent(this, Clock::class.java),
-                Intent(this, Timetable::class.java),
-                Intent(this, Settings::class.java)
-            )
+            Intent(this, MainActivity::class.java),
+            Intent(this, Clock::class.java),
+            Intent(this, Timetable::class.java),
+            Intent(this, Settings::class.java)
+        )
 
-        val openClockButton = findViewById<ImageButton>(R.id.openClockButton)
-        val openTimetableButton = findViewById<ImageButton>(R.id.openTimetableButton)
-        val openSettingsButton = findViewById<ImageButton>(R.id.openSettingsButton)
-
-        val savedData = applicationContext.getSharedPreferences("SavedData", 0)
-        val lastPage = savedData.getInt("LastPage", 0)
-        if (lastPage > 0) { startActivity(activities[lastPage]) }
-
-        openClockButton.setOnClickListener {
-            val editor = savedData.edit()
-            editor.putInt("LastPage", 1)
-            editor.apply()
-            startActivity(activities[1])
-        }
-        openTimetableButton.setOnClickListener {
-            val editor = savedData.edit()
-            editor.putInt("LastPage", 2)
-            editor.apply()
-            startActivity(activities[2])
-        }
-        openSettingsButton.setOnClickListener {
-            val editor = savedData.edit()
-            editor.putInt("LastPage", 3)
-            editor.apply()
-            startActivity(activities[3])
-        }
+        val editor = applicationContext.getSharedPreferences("SavedData", 0).edit()
+        editor.putInt("LastPage", index)
+        editor.apply()
+        startActivity(activities[index])
     }
 }

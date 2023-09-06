@@ -1,5 +1,6 @@
 package com.panov.timetable
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -8,14 +9,12 @@ import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 
 class Settings : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
         val savedData = applicationContext.getSharedPreferences("SavedData", 0)
-        val applyButton = findViewById<Button>(R.id.applyButton)
-        val returnButton  = findViewById<ImageButton>(R.id.returnButton)
-
         val textJson           = findViewById<TextInputEditText>(R.id.textJson)
         val textModifierHour   = findViewById<TextInputEditText>(R.id.textModifierHour)
         val textModifierMinute = findViewById<TextInputEditText>(R.id.textModifierMinute)
@@ -34,7 +33,7 @@ class Settings : AppCompatActivity() {
         textModifierSecond.setText(sdModifierSecond.toString())
         textInitialIndex.setText(sdInitialIndex.toString())
 
-        applyButton.setOnClickListener {
+        findViewById<Button>(R.id.applyButton).setOnClickListener {
             val editor = savedData.edit()
             editor.putString("Json",        textJson.text.toString())
             editor.putInt("ModifierHour",   textModifierHour.text.toString().toInt())
@@ -45,11 +44,13 @@ class Settings : AppCompatActivity() {
             Toast.makeText(this, R.string.app_applied, Toast.LENGTH_SHORT).show()
         }
 
-        returnButton.setOnClickListener {
-            val editor = savedData.edit()
-            editor.putInt("LastPage", 0)
-            editor.apply()
-            this.finish()
-        }
+        findViewById<ImageButton>(R.id.returnButton).setOnClickListener { this.finish() }
+    }
+
+    override fun onDestroy() {
+        val editor = applicationContext.getSharedPreferences("SavedData", 0).edit()
+        editor.putInt("LastPage", 0)
+        editor.apply()
+        super.onDestroy()
     }
 }
