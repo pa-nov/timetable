@@ -12,9 +12,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Clock"     android:exported="false" />
-        <activity android:name=".Timetable" android:exported="false" android:screenOrientation="userPortrait" />
-        <activity android:name=".Settings"  android:exported="false" android:screenOrientation="userPortrait" />
+        <activity android:name=".ClockActivity"     android:exported="false" />
+        <activity android:name=".TimetableActivity" android:exported="false" android:screenOrientation="userPortrait" />
+        <activity android:name=".SettingsActivity"  android:exported="false" android:screenOrientation="userPortrait" />
 
         <receiver android:name=".TimetableWidget" android:exported="false" >
             <intent-filter>

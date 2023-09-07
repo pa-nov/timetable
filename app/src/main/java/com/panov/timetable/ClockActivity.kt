@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 
-class Clock : AppCompatActivity() {
+class ClockActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

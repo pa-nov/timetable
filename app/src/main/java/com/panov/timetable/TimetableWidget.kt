@@ -154,11 +154,11 @@ class TimetableWidget : AppWidgetProvider() {
         views.setTextViewText(R.id.TimeText, "$dateHour:$dateMinute:$dateSecond")
 
         views.setTextViewText(R.id.NowText, "${lessons[nowDayTimetable.getInt(nowLesson)]}")
-        views.setTextViewText(R.id.NowSubText, "(К-${rooms[nowDayTimetable.getInt(nowLesson)]})")
+        views.setTextViewText(R.id.NowSubText, "(${rooms[nowDayTimetable.getInt(nowLesson)]})")
         views.setTextViewText(R.id.EndInText, getNiceTime(context, endTime))
 
         views.setTextViewText(R.id.ThenText, "${lessons[thenDayTimetable.getInt(thenLesson)]}")
-        views.setTextViewText(R.id.ThenSubText, "(К-${rooms[thenDayTimetable.getInt(thenLesson)]})")
+        views.setTextViewText(R.id.ThenSubText, "(${rooms[thenDayTimetable.getInt(thenLesson)]})")
         views.setTextViewText(R.id.StartInText, getNiceTime(context, startTime))
 
         appWidgetManager.updateAppWidget(appWidgetId, views)

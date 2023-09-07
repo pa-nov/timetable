@@ -8,7 +8,7 @@ import android.widget.ImageButton
 import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 
-class Settings : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

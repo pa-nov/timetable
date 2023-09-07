@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
     private fun openActivity(index: Int) {
         val activities = arrayOf(
             Intent(this, MainActivity::class.java),
-            Intent(this, Clock::class.java),
-            Intent(this, Timetable::class.java),
-            Intent(this, Settings::class.java)
+            Intent(this, ClockActivity::class.java),
+            Intent(this, TimetableActivity::class.java),
+            Intent(this, SettingsActivity::class.java)
         )
 
         val editor = applicationContext.getSharedPreferences("SavedData", 0).edit()
