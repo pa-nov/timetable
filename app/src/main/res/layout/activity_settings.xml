@@ -30,7 +30,7 @@
                     app:boxStrokeWidthFocused="0dp">
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/App_TextInputEdit"
-                        android:id="@+id/textJson"
+                        android:id="@+id/inputJson"
                         android:hint="@string/app_json_name"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -41,7 +41,7 @@
                     app:boxStrokeWidthFocused="0dp">
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/App_TextInputEdit"
-                        android:id="@+id/textModifierHour"
+                        android:id="@+id/inputModifierHour"
                         android:hint="@string/app_modifier_hour"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,7 +52,7 @@
                     app:boxStrokeWidthFocused="0dp">
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/App_TextInputEdit"
-                        android:id="@+id/textModifierMinute"
+                        android:id="@+id/inputModifierMinute"
                         android:hint="@string/app_modifier_minute"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +63,7 @@
                     app:boxStrokeWidthFocused="0dp">
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/App_TextInputEdit"
-                        android:id="@+id/textModifierSecond"
+                        android:id="@+id/inputModifierSecond"
                         android:hint="@string/app_modifier_second"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +74,7 @@
                     app:boxStrokeWidthFocused="0dp">
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/App_TextInputEdit"
-                        android:id="@+id/textInitialIndex"
+                        android:id="@+id/inputInitialIndex"
                         android:hint="@string/app_initial_index"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,7 +84,7 @@
     </FrameLayout>
 
     <Button style="@style/App_Button_Action"
-        android:id="@+id/applyButton"
+        android:id="@+id/buttonApply"
         android:text="@string/app_apply"
         app:backgroundTint="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"

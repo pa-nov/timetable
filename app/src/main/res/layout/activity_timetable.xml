@@ -14,23 +14,18 @@
 
         <TextView style="@style/App_Text_Title" android:text="@string/app_timetable"/>
 
-        <ScrollView
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="80dp">
-            <LinearLayout
-                android:id="@+id/scrollView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-        </ScrollView>
+            android:layout_marginTop="80dp"
+            android:orientation="horizontal"/>
 
     </FrameLayout>
 
     <TextView style="@style/App_Button_Action"
-        android:text="@string/debug_something"
+        android:id="@+id/textDate"
+        android:text="@string/debug_date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 

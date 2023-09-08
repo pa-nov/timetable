@@ -15,11 +15,11 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         val savedData = applicationContext.getSharedPreferences("SavedData", 0)
-        val textJson           = findViewById<TextInputEditText>(R.id.textJson)
-        val textModifierHour   = findViewById<TextInputEditText>(R.id.textModifierHour)
-        val textModifierMinute = findViewById<TextInputEditText>(R.id.textModifierMinute)
-        val textModifierSecond = findViewById<TextInputEditText>(R.id.textModifierSecond)
-        val textInitialIndex   = findViewById<TextInputEditText>(R.id.textInitialIndex)
+        val textJson           = findViewById<TextInputEditText>(R.id.inputJson)
+        val textModifierHour   = findViewById<TextInputEditText>(R.id.inputModifierHour)
+        val textModifierMinute = findViewById<TextInputEditText>(R.id.inputModifierMinute)
+        val textModifierSecond = findViewById<TextInputEditText>(R.id.inputModifierSecond)
+        val textInitialIndex   = findViewById<TextInputEditText>(R.id.inputInitialIndex)
 
         val sdJson             = savedData.getString("Json", "")
         val sdModifierHour     = savedData.getInt("ModifierHour", 1)
@@ -33,7 +33,7 @@ class SettingsActivity : AppCompatActivity() {
         textModifierSecond.setText(sdModifierSecond.toString())
         textInitialIndex.setText(sdInitialIndex.toString())
 
-        findViewById<Button>(R.id.applyButton).setOnClickListener {
+        findViewById<Button>(R.id.buttonApply).setOnClickListener {
             val editor = savedData.edit()
             editor.putString("Json",        textJson.text.toString())
             editor.putInt("ModifierHour",   textModifierHour.text.toString().toInt())
@@ -44,7 +44,7 @@ class SettingsActivity : AppCompatActivity() {
             Toast.makeText(this, R.string.app_applied, Toast.LENGTH_SHORT).show()
         }
 
-        findViewById<ImageButton>(R.id.returnButton).setOnClickListener { this.finish() }
+        findViewById<ImageButton>(R.id.buttonReturn).setOnClickListener { this.finish() }
     }
 
     override fun onDestroy() {

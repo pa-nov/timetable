@@ -13,9 +13,9 @@ class MainActivity : AppCompatActivity() {
         val lastPage = applicationContext.getSharedPreferences("SavedData", 0).getInt("LastPage", 0)
         if (lastPage > 0) { openActivity(lastPage) }
 
-        findViewById<ImageButton>(R.id.openClockButton).setOnClickListener { openActivity(1) }
-        findViewById<ImageButton>(R.id.openTimetableButton).setOnClickListener { openActivity(2) }
-        findViewById<ImageButton>(R.id.openSettingsButton).setOnClickListener { openActivity(3) }
+        findViewById<ImageButton>(R.id.buttonOpenClock).setOnClickListener { openActivity(1) }
+        findViewById<ImageButton>(R.id.buttonOpenTimetable).setOnClickListener { openActivity(2) }
+        findViewById<ImageButton>(R.id.buttonOpenSettings).setOnClickListener { openActivity(3) }
     }
 
     private fun openActivity(index: Int) {

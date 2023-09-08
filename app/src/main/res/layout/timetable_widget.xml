@@ -1,11 +1,13 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_widget_background"
     android:padding="12sp">
 
     <Button
-        android:id="@+id/UpdateButton"
+        android:id="@+id/buttonUpdate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0"
@@ -14,86 +16,86 @@
         android:layout_marginBottom="-12dp"
         android:layout_marginLeft="-12dp" />
 
-    <TextView style="@style/Widget_WeekDay"
-        android:id="@+id/WeekDayText"
+    <TextView style="@style/Widget_DayOfWeek"
+        android:id="@+id/textWidgetDayOfWeek"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="-8dp"
         android:text="@string/debug_weekday" />
 
     <TextView style="@style/Widget_DateTime"
-        android:id="@+id/DateText"
+        android:id="@+id/textWidgetDate"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:text="@string/debug_date" />
 
     <TextView style="@style/Widget_DateTime"
-        android:id="@+id/TimeText"
-        android:layout_below="@+id/DateText"
+        android:id="@+id/textWidgetTime"
+        android:layout_below="@+id/textWidgetDate"
         android:layout_alignParentEnd="true"
         android:text="@string/debug_time" />
 
 
     <TextView style="@style/Widget_Title_Name"
-        android:id="@+id/NowTitle"
-        android:layout_below="@+id/WeekDayText"
+        android:id="@+id/textWidgetNowTitle"
+        android:layout_below="@+id/textWidgetDayOfWeek"
         android:layout_alignParentStart="true"
         android:layout_marginTop="4dp"
         android:text="@string/widget_now" />
 
     <TextView style="@style/Widget_Text"
-        android:id="@+id/NowText"
-        android:layout_alignTop="@+id/NowTitle"
-        android:layout_toEndOf="@+id/NowTitle"
+        android:id="@+id/textWidgetNowText"
+        android:layout_alignTop="@+id/textWidgetNowTitle"
+        android:layout_toEndOf="@+id/textWidgetNowTitle"
         android:layout_marginStart="6dp"
         android:text="@string/debug_something" />
 
     <TextView style="@style/Widget_Text"
-        android:id="@+id/NowSubText"
-        android:layout_alignTop="@+id/NowText"
+        android:id="@+id/textWidgetNowSubText"
+        android:layout_alignTop="@+id/textWidgetNowText"
         android:layout_alignParentEnd="true"
         android:text="@string/debug_room" />
 
     <TextView style="@style/Widget_Title_Time"
-        android:id="@+id/EndInTitle"
-        android:layout_below="@+id/NowTitle"
-        android:layout_alignStart="@+id/NowTitle"
+        android:id="@+id/textWidgetNowTimeTitle"
+        android:layout_below="@+id/textWidgetNowTitle"
+        android:layout_alignStart="@+id/textWidgetNowTitle"
         android:text="@string/widget_end_in" />
 
     <TextView style="@style/Widget_Text"
-        android:id="@+id/EndInText"
-        android:layout_below="@+id/EndInTitle"
-        android:layout_alignStart="@+id/EndInTitle"
+        android:id="@+id/textWidgetNowTimeText"
+        android:layout_below="@+id/textWidgetNowTimeTitle"
+        android:layout_alignStart="@+id/textWidgetNowTimeTitle"
         android:text="@string/debug_sometime" />
 
 
     <TextView style="@style/Widget_Title_Name"
-        android:id="@+id/ThenTitle"
-        android:layout_above="@+id/StartInTitle"
-        android:layout_alignStart="@+id/StartInTitle"
+        android:id="@+id/textWidgetThenTitle"
+        android:layout_above="@+id/textWidgetThenTimeTitle"
+        android:layout_alignStart="@+id/textWidgetThenTimeTitle"
         android:text="@string/widget_then" />
 
     <TextView style="@style/Widget_Text"
-        android:id="@+id/ThenText"
-        android:layout_alignTop="@+id/ThenTitle"
-        android:layout_toEndOf="@+id/ThenTitle"
+        android:id="@+id/textWidgetThenText"
+        android:layout_alignTop="@+id/textWidgetThenTitle"
+        android:layout_toEndOf="@+id/textWidgetThenTitle"
         android:layout_marginStart="6dp"
         android:text="@string/debug_something" />
 
     <TextView style="@style/Widget_Text"
-        android:id="@+id/ThenSubText"
-        android:layout_alignTop="@+id/ThenText"
+        android:id="@+id/textWidgetThenSubText"
+        android:layout_alignTop="@+id/textWidgetThenText"
         android:layout_alignParentEnd="true"
         android:text="@string/debug_room" />
 
     <TextView style="@style/Widget_Title_Time"
-        android:id="@+id/StartInTitle"
-        android:layout_above="@+id/StartInText"
-        android:layout_alignStart="@+id/StartInText"
+        android:id="@+id/textWidgetThenTimeTitle"
+        android:layout_above="@+id/textWidgetThenTimeText"
+        android:layout_alignStart="@+id/textWidgetThenTimeText"
         android:text="@string/widget_start_in" />
 
     <TextView style="@style/Widget_Text"
-        android:id="@+id/StartInText"
+        android:id="@+id/textWidgetThenTimeText"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:text="@string/debug_sometime" />

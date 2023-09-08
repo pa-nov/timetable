@@ -16,7 +16,7 @@ class ClockActivity : AppCompatActivity() {
         }
         setContentView(R.layout.activity_clock)
 
-        findViewById<ImageButton>(R.id.returnButton).setOnClickListener { this.finish() }
+        findViewById<ImageButton>(R.id.buttonReturn).setOnClickListener { this.finish() }
     }
 
     override fun onDestroy() {

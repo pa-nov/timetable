@@ -8,20 +8,20 @@
     tools:context=".MainActivity">
 
     <ImageButton
-        android:id="@+id/openClockButton"
+        android:id="@+id/buttonOpenClock"
         android:layout_width="192dp"
         android:layout_height="192dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/openTimetableButton"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOpenTimetable"
         app:srcCompat="@drawable/icon_clock"
         android:scaleType="fitCenter"
         android:background="@drawable/drawable_rounded"
         android:contentDescription="@string/app_clock" />
 
     <ImageButton
-        android:id="@+id/openTimetableButton"
+        android:id="@+id/buttonOpenTimetable"
         android:layout_width="192dp"
         android:layout_height="192dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,11 +34,11 @@
         android:contentDescription="@string/app_timetable" />
 
     <ImageButton
-        android:id="@+id/openSettingsButton"
+        android:id="@+id/buttonOpenSettings"
         android:layout_width="192dp"
         android:layout_height="192dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openTimetableButton"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOpenTimetable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/icon_settings"

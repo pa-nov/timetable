@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp">
 
@@ -38,9 +39,9 @@
         android:layout_alignParentStart="true"/>
 
     <TextView style="@style/App_Timetable_Name"
-        android:id="@+id/textLesson"
+        android:id="@+id/textName"
         android:text="@string/debug_something"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_alignParentTop="true"/>
@@ -48,22 +49,21 @@
     <TextView style="@style/App_Timetable_Data"
         android:id="@+id/textTeacher"
         android:text="@string/debug_somebody"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginBottom="2dp"
-        android:layout_marginEnd="80dp"
         android:layout_alignParentBottom="true"/>
 
     <TextView style="@style/App_Timetable_Data"
         android:id="@+id/textRoom"
         android:text="@string/debug_room"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
-        android:gravity="end"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        tools:ignore="RelativeOverlap" />
 
     <FrameLayout
         android:layout_width="match_parent"

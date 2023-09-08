@@ -31,7 +31,7 @@ class TimetableWidget : AppWidgetProvider() {
 
     private fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
         val views = RemoteViews(context.packageName, R.layout.timetable_widget)
-        views.setOnClickPendingIntent(R.id.UpdateButton, pendingIntent(context, "updateWidget"))
+        views.setOnClickPendingIntent(R.id.buttonUpdate, pendingIntent(context, "updateWidget"))
 
 
         val savedData = context.getSharedPreferences("SavedData", 0)
@@ -42,10 +42,11 @@ class TimetableWidget : AppWidgetProvider() {
         }
         val jsonData = JSONObject(jsonDataString)
         val date = Calendar.getInstance()
+        date.firstDayOfWeek = Calendar.MONDAY
+        date.minimalDaysInFirstWeek = 4
 
         val times       = jsonData.getJSONArray("times")
         val lessons     = jsonData.getJSONArray("lessons")
-        val rooms       = jsonData.getJSONArray("rooms")
         val modHour     = savedData.getInt("ModifierHour", 1)
         val modMinute   = savedData.getInt("ModifierMinute", 1)
         val modSecond   = savedData.getInt("ModifierSecond", 1)
@@ -144,22 +145,22 @@ class TimetableWidget : AppWidgetProvider() {
 
 
         if (endTime < 0) {
-            views.setTextViewText(R.id.EndInTitle, context.getString(R.string.widget_end))
+            views.setTextViewText(R.id.textWidgetNowTimeTitle, context.getString(R.string.widget_end))
         } else {
-            views.setTextViewText(R.id.EndInTitle, context.getString(R.string.widget_end_in))
+            views.setTextViewText(R.id.textWidgetNowTimeTitle, context.getString(R.string.widget_end_in))
         }
 
-        views.setTextViewText(R.id.WeekDayText, weekdays[dateWeekDay])
-        views.setTextViewText(R.id.DateText, "$dateDay.$dateMonth ($dateWeek)")
-        views.setTextViewText(R.id.TimeText, "$dateHour:$dateMinute:$dateSecond")
+        views.setTextViewText(R.id.textWidgetDayOfWeek, weekdays[dateWeekDay])
+        views.setTextViewText(R.id.textWidgetDate, "$dateDay.$dateMonth ($dateWeek)")
+        views.setTextViewText(R.id.textWidgetTime, "$dateHour:$dateMinute:$dateSecond")
 
-        views.setTextViewText(R.id.NowText, "${lessons[nowDayTimetable.getInt(nowLesson)]}")
-        views.setTextViewText(R.id.NowSubText, "(${rooms[nowDayTimetable.getInt(nowLesson)]})")
-        views.setTextViewText(R.id.EndInText, getNiceTime(context, endTime))
+        views.setTextViewText(R.id.textWidgetNowText, lessons.getJSONArray(nowDayTimetable.getInt(nowLesson)).getString(0))
+        views.setTextViewText(R.id.textWidgetNowSubText, "(${lessons.getJSONArray(nowDayTimetable.getInt(nowLesson)).getString(1)})")
+        views.setTextViewText(R.id.textWidgetNowTimeText, getNiceTime(context, endTime))
 
-        views.setTextViewText(R.id.ThenText, "${lessons[thenDayTimetable.getInt(thenLesson)]}")
-        views.setTextViewText(R.id.ThenSubText, "(${rooms[thenDayTimetable.getInt(thenLesson)]})")
-        views.setTextViewText(R.id.StartInText, getNiceTime(context, startTime))
+        views.setTextViewText(R.id.textWidgetThenText, lessons.getJSONArray(thenDayTimetable.getInt(thenLesson)).getString(0))
+        views.setTextViewText(R.id.textWidgetThenSubText, "(${lessons.getJSONArray(thenDayTimetable.getInt(thenLesson)).getString(1)})")
+        views.setTextViewText(R.id.textWidgetThenTimeText, getNiceTime(context, startTime))
 
         appWidgetManager.updateAppWidget(appWidgetId, views)
     }

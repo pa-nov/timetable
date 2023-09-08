@@ -1,6 +1,6 @@
 <resources>
 
-    <item name="returnButton" type="id"/>
+    <item name="buttonReturn" type="id"/>
 
 
     <style name="App_Frame_Main">
@@ -29,7 +29,7 @@
         <item name="android:textColor">@color/app_Background</item>
     </style>
     <style name="App_Button_Return">
-        <item name="android:id">@id/returnButton</item>
+        <item name="android:id">@id/buttonReturn</item>
         <item name="android:layout_width">64dp</item>
         <item name="android:layout_height">64dp</item>
         <item name="android:background">@drawable/drawable_rounded</item>
@@ -79,7 +79,7 @@
     </style>
 
 
-    <style name="Widget_WeekDay">
+    <style name="Widget_DayOfWeek">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">38sp</item>
