@@ -25,10 +25,6 @@ class MainActivity : AppCompatActivity() {
             Intent(this, TimetableActivity::class.java),
             Intent(this, SettingsActivity::class.java)
         )
-
-        val editor = applicationContext.getSharedPreferences("SavedData", 0).edit()
-        editor.putInt("LastPage", index)
-        editor.apply()
         startActivity(activities[index])
     }
 }

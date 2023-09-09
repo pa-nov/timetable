@@ -45,6 +45,9 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.buttonReturn).setOnClickListener { this.finish() }
+        val editor = applicationContext.getSharedPreferences("SavedData", 0).edit()
+        editor.putInt("LastPage", 3)
+        editor.apply()
     }
 
     override fun onDestroy() {

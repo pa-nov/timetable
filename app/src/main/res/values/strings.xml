@@ -9,11 +9,17 @@
 
     <string name="app_apply">Применить</string>
     <string name="app_applied">Применено</string>
-    <string name="app_json_name">JSON:</string>
-    <string name="app_modifier_hour">Модификатор (Часы):</string>
-    <string name="app_modifier_minute">Модификатор (Минуты):</string>
-    <string name="app_modifier_second">Модификатор (Секунды):</string>
-    <string name="app_initial_index">Номер первого предмета:</string>
+
+    <string name="settings_show_date">Отображать дату и время</string>
+    <string name="settings_show_title">Отображать заголовки</string>
+    <string name="settings_show_other">Отображать прочую информацию</string>
+    <string name="settings_bold_font">Использовать жирный шрифт</string>
+
+    <string name="settings_json_name">JSON:</string>
+    <string name="settings_modifier_hour">Модификатор (Часы):</string>
+    <string name="settings_modifier_minute">Модификатор (Минуты):</string>
+    <string name="settings_modifier_second">Модификатор (Секунды):</string>
+    <string name="settings_initial_index">Номер первого предмета:</string>
 
     <string name="widget_now">Сейчас:</string>
     <string name="widget_end_in">Закончится через:</string>
@@ -49,13 +55,14 @@
     </string-array>
 
     <string name="debug_index">00</string>
-    <string name="debug_date">ДД.ММ (НН)</string>
-    <string name="debug_time">чч:мм:сс</string>
-    <string name="debug_times">ЧЧ:ММ ЧЧ:ММ</string>
+    <string name="debug_date">00.00 (00)</string>
+    <string name="debug_time">00:00:00</string>
+    <string name="debug_date_time">00.00.0000   00:00:00</string>
+    <string name="debug_times">00:00 00:00</string>
     <string name="debug_weekday">День недели</string>
     <string name="debug_somebody">Кто-то</string>
     <string name="debug_something">Что-то</string>
-    <string name="debug_sometime">99 Минут  99 Секунд</string>
-    <string name="debug_room">(228)</string>
+    <string name="debug_sometime">00 Минут  00 Секунд</string>
+    <string name="debug_room">(000)</string>
 
 </resources>
