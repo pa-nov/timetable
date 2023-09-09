@@ -14,18 +14,6 @@
 
         <TextView style="@style/App_Text_Title" android:text="@string/app_clock"/>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="80dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-        </ScrollView>
-
     </FrameLayout>
 
     <TextView style="@style/App_Button_Action"

@@ -3,19 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="64dp">
 
     <TextView style="@style/App_Timetable_Index"
         android:id="@+id/textIndex"
         android:text="@string/debug_index"
         android:layout_width="32dp"
-        android:layout_height="80dp"
+        android:layout_height="64dp"
         android:layout_marginBottom="2dp"
         android:layout_alignParentStart="true"/>
 
     <FrameLayout
         android:layout_width="2dp"
-        android:layout_height="80dp"
+        android:layout_height="64dp"
         android:background="@color/app_Background"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="2dp"
@@ -25,14 +25,14 @@
         android:id="@+id/textTime"
         android:text="@string/debug_times"
         android:layout_width="64dp"
-        android:layout_height="80dp"
+        android:layout_height="64dp"
         android:layout_marginStart="34dp"
         android:layout_marginBottom="2dp"
         android:layout_alignParentStart="true"/>
 
     <FrameLayout
         android:layout_width="2dp"
-        android:layout_height="80dp"
+        android:layout_height="64dp"
         android:background="@color/app_Background"
         android:layout_marginStart="98dp"
         android:layout_marginBottom="2dp"

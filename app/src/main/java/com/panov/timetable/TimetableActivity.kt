@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,9 +59,8 @@ class TimetableActivity : AppCompatActivity() {
             }
         })
     }
-
     override fun onDestroy() {
-        val editor = applicationContext.getSharedPreferences("SavedData", 0).edit()
+        val editor = this.getSharedPreferences("SavedData", 0).edit()
         editor.putInt("LastPage", 0)
         editor.apply()
         super.onDestroy()
@@ -70,16 +70,17 @@ class TimetableActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n", "InflateParams")
     private fun updateView(linearLayout: LinearLayout, position: Int) {
         if (linearLayout.childCount > 2) { linearLayout.removeViewsInLayout(2, linearLayout.childCount - 2) }
-        val tempDate: Calendar = date.clone() as Calendar
+        val tempDate         = date.clone() as Calendar
         tempDate.add(Calendar.DAY_OF_YEAR, position - 1)
 
-        val weekdays        = arrayOf( this.getString(R.string.weekday_monday), this.getString(R.string.weekday_tuesday), this.getString(R.string.weekday_wednesday), this.getString(R.string.weekday_thursday), this.getString(R.string.weekday_friday), this.getString(R.string.weekday_saturday), this.getString(R.string.weekday_sunday) )
-        val dateDayOfWeek   = if (tempDate.get(Calendar.DAY_OF_WEEK) > 1) { tempDate.get(Calendar.DAY_OF_WEEK) - 2 } else { 6 }
-        val dateWeekEvenOdd = if (tempDate.get(Calendar.WEEK_OF_YEAR) % 2 == 0) { "even" } else { "odd" }
+        val weekdays         = this.resources.getStringArray(R.array.weekdays)
+        val dateDayOfWeek    = if (tempDate.get(Calendar.DAY_OF_WEEK) > 1) { tempDate.get(Calendar.DAY_OF_WEEK) - 2 } else { 6 }
+        val dateWeekEvenOdd  = if (tempDate.get(Calendar.WEEK_OF_YEAR) % 2 == 0) { "even" } else { "odd" }
 
-        val times     = jsonData.getJSONArray("times")
-        val lessons   = jsonData.getJSONArray("lessons")
-        val timetable = jsonData.getJSONArray(dateWeekEvenOdd).getJSONArray(dateDayOfWeek)
+        val times            = jsonData.getJSONArray("times")
+        val lessons          = jsonData.getJSONArray("lessons")
+        val currentTimetable = jsonData.getJSONArray(dateWeekEvenOdd).getJSONArray(dateDayOfWeek)
+        val anotherTimetable = jsonData.getJSONArray(if (dateWeekEvenOdd == "odd") { "even" } else { "odd" }).getJSONArray(dateDayOfWeek)
 
         linearLayout.findViewById<TextView>(R.id.textDayOfWeek).text = weekdays[dateDayOfWeek]
 
@@ -99,10 +100,24 @@ class TimetableActivity : AppCompatActivity() {
             val textTeacher = timetableLesson.findViewById<TextView>(R.id.textTeacher)
             val textRoom    = timetableLesson.findViewById<TextView>(R.id.textRoom)
 
-            if (timetable.getInt(i) > 0) {
-                val currentLesson = lessons.getJSONArray(timetable.getInt(i))
+            val currentLesson = lessons.getJSONArray(currentTimetable.getInt(i))
+            val anotherLesson = lessons.getJSONArray(anotherTimetable.getInt(i))
+
+            var isWeekChangeable = currentLesson != anotherLesson
+            if (isWeekChangeable and currentLesson.getString(3).isNotEmpty()) {
+                val otherLessons = currentLesson.getString(3).split("|")
+                for (l: Int in otherLessons.indices) {
+                    if (anotherTimetable.getInt(i) == otherLessons[l].toInt()) {
+                        isWeekChangeable = false
+                    }
+                }
+            }
+            if (isWeekChangeable) { timetableLesson.setBackgroundColor(this.resources.getColor(R.color.black)) }
+
+            if (currentTimetable.getInt(i) > 0) {
+                val currentTeacher = currentLesson.getString(2).split("|")
                 textName.text    = currentLesson.getString(0)
-                textTeacher.text = currentLesson.getString(2)
+                textTeacher.text = "${currentTeacher[0]} ${currentTeacher[1].substring(0, 1)}. ${currentTeacher[2].substring(0, 1)}."
                 textRoom.text    = "(${currentLesson.getString(1)})"
             } else {
                 textName.visibility    = View.INVISIBLE
@@ -115,6 +130,19 @@ class TimetableActivity : AppCompatActivity() {
     }
     @SuppressLint("SetTextI18n")
     private fun updateMainView() {
+        if (DateUtils.isToday(date.timeInMillis + DateUtils.DAY_IN_MILLIS)) {
+            findViewById<TextView>(R.id.textDate).text = this.getString(R.string.day_yesterday)
+            return
+        }
+        if (DateUtils.isToday(date.timeInMillis)) {
+            findViewById<TextView>(R.id.textDate).text = this.getString(R.string.day_today)
+            return
+        }
+        if (DateUtils.isToday(date.timeInMillis - DateUtils.DAY_IN_MILLIS)) {
+            findViewById<TextView>(R.id.textDate).text = this.getString(R.string.day_tomorrow)
+            return
+        }
+
         val dateDay   = getTwoDigitNumber(date.get(Calendar.DAY_OF_MONTH))
         val dateMonth = getTwoDigitNumber(date.get(Calendar.MONTH) + 1)
         val dateYear  = date.get(Calendar.YEAR)
