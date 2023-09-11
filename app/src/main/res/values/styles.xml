@@ -40,7 +40,7 @@
     </style>
 
     <style name="App_CheckBox_Text">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:buttonTint">@color/yellow</item>
         <item name="android:textSize">20sp</item>
@@ -88,16 +88,22 @@
     </style>
 
     <style name="App_Clock_Title">
-        <item name="android:textSize">24sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">italic</item>
         <item name="android:textColor">@color/widget_Text_Time</item>
     </style>
     <style name="App_Clock_Time">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">96sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/white</item>
     </style>
     <style name="App_Clock_Text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">32sp</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/white</item>

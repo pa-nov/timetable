@@ -14,31 +14,26 @@
 
         <TextView style="@style/App_Text_Title" android:text="@string/app_clock"/>
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="80dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:paddingHorizontal="8dp"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="8dp">
+            <CheckBox style="@style/App_CheckBox_Text"
+                android:id="@+id/inputDate"
+                android:text="@string/settings_show_date"/>
 
-                <CheckBox style="@style/App_CheckBox_Text"
-                    android:id="@+id/inputDate"
-                    android:text="@string/settings_show_date"/>
+            <CheckBox style="@style/App_CheckBox_Text"
+                android:id="@+id/inputTitle"
+                android:text="@string/settings_show_title"/>
 
-                <CheckBox style="@style/App_CheckBox_Text"
-                    android:id="@+id/inputTitle"
-                    android:text="@string/settings_show_title"/>
+            <CheckBox style="@style/App_CheckBox_Text"
+                android:id="@+id/inputOther"
+                android:text="@string/settings_show_other"/>
 
-                <CheckBox style="@style/App_CheckBox_Text"
-                    android:id="@+id/inputOther"
-                    android:text="@string/settings_show_other"/>
-
-            </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
