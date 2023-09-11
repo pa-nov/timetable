@@ -44,20 +44,20 @@ class TimetableWidget : AppWidgetProvider() {
             val modSecond = savedData.getInt("ModifierSecond", 1)
 
             val dateWeekOddOrEven = if (date.get(Calendar.WEEK_OF_YEAR) % 2 == 0) { "even" } else { "odd" }
-            val dateDayOfWeek = if (date.get(Calendar.DAY_OF_WEEK) > 1) { date.get(Calendar.DAY_OF_WEEK) - 2 } else { 6 }
-            val dateDay       = Tools.getTwoDigitNumber(date.get(Calendar.DAY_OF_MONTH))
-            val dateMonth     = Tools.getTwoDigitNumber(date.get(Calendar.MONTH) + 1)
-            val dateWeek      = Tools.getTwoDigitNumber(date.get(Calendar.WEEK_OF_YEAR))
-            val dateHour      = if (modHour > 0)
+            val dateDayOfWeek     = if (date.get(Calendar.DAY_OF_WEEK) > 1) { date.get(Calendar.DAY_OF_WEEK) - 2 } else { 6 }
+            val dateDay           = Tools.getTwoDigitNumber(date.get(Calendar.DAY_OF_MONTH))
+            val dateMonth         = Tools.getTwoDigitNumber(date.get(Calendar.MONTH) + 1)
+            val dateWeek          = Tools.getTwoDigitNumber(date.get(Calendar.WEEK_OF_YEAR))
+            val dateHour          = if (modHour > 0)
                 { Tools.getTwoDigitNumber((date.get(Calendar.HOUR_OF_DAY) / modHour) * modHour) } else
                 { Tools.getTwoDigitNumber(abs(modHour)) }
-            val dateMinute    = if (modMinute > 0)
+            val dateMinute        = if (modMinute > 0)
                 { Tools.getTwoDigitNumber((date.get(Calendar.MINUTE) / modMinute) * modMinute) } else
                 { Tools.getTwoDigitNumber(abs(modMinute)) }
-            val dateSecond    = if (modSecond > 0)
+            val dateSecond        = if (modSecond > 0)
                 { Tools.getTwoDigitNumber((date.get(Calendar.SECOND) / modSecond) * modSecond) } else
                 { Tools.getTwoDigitNumber(abs(modSecond)) }
-            val currentTime   = (dateHour.toInt() * 60 + dateMinute.toInt()) * 60 + dateSecond.toInt()
+            val currentTime       = (dateHour.toInt() * 60 + dateMinute.toInt()) * 60 + dateSecond.toInt()
 
             val timetable = Tools.getTimetable(jsonData, currentTime, dateWeekOddOrEven, dateDayOfWeek)
 

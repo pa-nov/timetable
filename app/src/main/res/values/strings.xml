@@ -5,15 +5,16 @@
     <string name="app_clock">Часы</string>
     <string name="app_timetable">Расписание</string>
     <string name="app_settings">Настройки</string>
+    <string name="app_information">Информация</string>
     <string name="app_return">Вернуться</string>
+    <string name="app_rotate">Повернуть</string>
 
     <string name="app_apply">Применить</string>
     <string name="app_applied">Применено</string>
 
-    <string name="settings_show_date">Отображать дату и время</string>
     <string name="settings_show_title">Отображать заголовки</string>
+    <string name="settings_show_date">Отображать дату и время</string>
     <string name="settings_show_other">Отображать прочую информацию</string>
-    <string name="settings_bold_font">Использовать жирный шрифт</string>
 
     <string name="settings_json_name">JSON:</string>
     <string name="settings_modifier_hour">Модификатор (Часы):</string>

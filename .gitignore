@@ -1,6 +1,7 @@
 .gradle/
 .idea/caches/
 .idea/libraries/
+.idea/assetWizardSettings.xml
 .idea/deploymentTargetDropDown.xml
 .idea/kotlinc.xml
 .idea/workspace.xml

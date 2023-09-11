@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import org.json.JSONObject
@@ -26,7 +27,7 @@ class TimetableActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timetable)
-        date.firstDayOfWeek = Calendar.MONDAY
+        date.firstDayOfWeek         = Calendar.MONDAY
         date.minimalDaysInFirstWeek = 4
         val timetableActivity: TimetableActivity = this
 
@@ -115,7 +116,7 @@ class TimetableActivity : AppCompatActivity() {
                     }
                 }
             }
-            if (isWeekChangeable) { timetableLesson.setBackgroundColor(this.resources.getColor(R.color.black)) }
+            if (isWeekChangeable) { timetableLesson.setBackgroundColor(ContextCompat.getColor(this, R.color.black)) }
 
             if (currentTimetable.getInt(i) > 0) {
                 val currentTeacher = currentLesson.getString(2).split("|")

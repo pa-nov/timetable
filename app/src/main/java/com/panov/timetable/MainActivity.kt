@@ -10,21 +10,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val lastPage = applicationContext.getSharedPreferences("SavedData", 0).getInt("LastPage", 0)
-        if (lastPage > 0) { openActivity(lastPage) }
-
-        findViewById<ImageButton>(R.id.buttonOpenClock).setOnClickListener { openActivity(1) }
-        findViewById<ImageButton>(R.id.buttonOpenTimetable).setOnClickListener { openActivity(2) }
-        findViewById<ImageButton>(R.id.buttonOpenSettings).setOnClickListener { openActivity(3) }
-    }
-
-    private fun openActivity(index: Int) {
         val activities = arrayOf(
             Intent(this, MainActivity::class.java),
             Intent(this, ClockActivity::class.java),
             Intent(this, TimetableActivity::class.java),
             Intent(this, SettingsActivity::class.java)
         )
-        startActivity(activities[index])
+
+        val lastPage = this.getSharedPreferences("SavedData", 0).getInt("LastPage", 0)
+        if (lastPage > 0) { startActivity(activities[lastPage]) }
+
+        findViewById<ImageButton>(R.id.buttonOpenClock).setOnClickListener { startActivity(activities[1]) }
+        findViewById<ImageButton>(R.id.buttonOpenTimetable).setOnClickListener { startActivity(activities[2]) }
+        findViewById<ImageButton>(R.id.buttonOpenSettings).setOnClickListener { startActivity(activities[3]) }
     }
 }

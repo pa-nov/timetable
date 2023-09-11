@@ -14,44 +14,45 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        val savedData = applicationContext.getSharedPreferences("SavedData", 0)
-        val textJson           = findViewById<TextInputEditText>(R.id.inputJson)
-        val textModifierHour   = findViewById<TextInputEditText>(R.id.inputModifierHour)
-        val textModifierMinute = findViewById<TextInputEditText>(R.id.inputModifierMinute)
-        val textModifierSecond = findViewById<TextInputEditText>(R.id.inputModifierSecond)
-        val textInitialIndex   = findViewById<TextInputEditText>(R.id.inputInitialIndex)
+        val inputModifierHour   = findViewById<TextInputEditText>(R.id.inputModifierHour)
+        val inputModifierMinute = findViewById<TextInputEditText>(R.id.inputModifierMinute)
+        val inputModifierSecond = findViewById<TextInputEditText>(R.id.inputModifierSecond)
+        val inputInitialIndex   = findViewById<TextInputEditText>(R.id.inputInitialIndex)
+        val inputJson           = findViewById<TextInputEditText>(R.id.inputJson)
 
-        val sdJson             = savedData.getString("Json", "")
-        val sdModifierHour     = savedData.getInt("ModifierHour", 1)
-        val sdModifierMinute   = savedData.getInt("ModifierMinute", 1)
-        val sdModifierSecond   = savedData.getInt("ModifierSecond", 1)
-        val sdInitialIndex     = savedData.getInt("InitialIndex", 1)
+        val savedData = this.getSharedPreferences("SavedData", 0)
+        val sdModifierHour      = savedData.getInt("ModifierHour", 1)
+        val sdModifierMinute    = savedData.getInt("ModifierMinute", 1)
+        val sdModifierSecond    = savedData.getInt("ModifierSecond", 1)
+        val sdInitialIndex      = savedData.getInt("InitialIndex", 1)
+        val sdJson              = savedData.getString("Json", "")
 
-        textJson.setText(sdJson)
-        textModifierHour.setText(sdModifierHour.toString())
-        textModifierMinute.setText(sdModifierMinute.toString())
-        textModifierSecond.setText(sdModifierSecond.toString())
-        textInitialIndex.setText(sdInitialIndex.toString())
+        inputModifierHour.setText(sdModifierHour.toString())
+        inputModifierMinute.setText(sdModifierMinute.toString())
+        inputModifierSecond.setText(sdModifierSecond.toString())
+        inputInitialIndex.setText(sdInitialIndex.toString())
+        inputJson.setText(sdJson)
 
         findViewById<Button>(R.id.buttonApply).setOnClickListener {
             val editor = savedData.edit()
-            editor.putString("Json",        textJson.text.toString())
-            editor.putInt("ModifierHour",   textModifierHour.text.toString().toInt())
-            editor.putInt("ModifierMinute", textModifierMinute.text.toString().toInt())
-            editor.putInt("ModifierSecond", textModifierSecond.text.toString().toInt())
-            editor.putInt("InitialIndex",   textInitialIndex.text.toString().toInt())
+            editor.putInt("ModifierHour",   inputModifierHour.text.toString().toInt())
+            editor.putInt("ModifierMinute", inputModifierMinute.text.toString().toInt())
+            editor.putInt("ModifierSecond", inputModifierSecond.text.toString().toInt())
+            editor.putInt("InitialIndex",   inputInitialIndex.text.toString().toInt())
+            editor.putString("Json",        inputJson.text.toString())
             editor.apply()
             Toast.makeText(this, R.string.app_applied, Toast.LENGTH_SHORT).show()
         }
 
         findViewById<ImageButton>(R.id.buttonReturn).setOnClickListener { this.finish() }
-        val editor = applicationContext.getSharedPreferences("SavedData", 0).edit()
+
+        val editor = this.getSharedPreferences("SavedData", 0).edit()
         editor.putInt("LastPage", 3)
         editor.apply()
     }
 
     override fun onDestroy() {
-        val editor = applicationContext.getSharedPreferences("SavedData", 0).edit()
+        val editor = this.getSharedPreferences("SavedData", 0).edit()
         editor.putInt("LastPage", 0)
         editor.apply()
         super.onDestroy()

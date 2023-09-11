@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <TextView style="@style/App_Clock_Title"
+            android:id="@+id/textTimeTitle"
+            android:text="@string/widget_end_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="64dp"/>
+
+        <TextView style="@style/App_Clock_Text"
+            android:id="@+id/textDateTime"
+            android:text="@string/debug_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"/>
+
+        <TextView style="@style/App_Clock_Time"
+            android:id="@+id/textTime"
+            android:text="@string/debug_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <TextView style="@style/App_Clock_Text"
+            android:id="@+id/textTimeBack"
+            android:text="@string/time_ago"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="64dp"/>
+
+    </FrameLayout>
+
+    <FrameLayout android:id="@+id/layer_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <TextView style="@style/App_Clock_Title"
+            android:text="@string/widget_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="190dp"/>
+
+        <TextView style="@style/App_Clock_Title"
+            android:text="@string/widget_then"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="110dp"/>
+
+    </FrameLayout>
+
+    <FrameLayout android:id="@+id/layer_other"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <TextView style="@style/App_Clock_Text"
+            android:id="@+id/textNowName"
+            android:text="@string/debug_something"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="160dp"/>
+
+        <TextView style="@style/App_Clock_Text"
+            android:id="@+id/textNowTeacher"
+            android:text="@string/debug_somebody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="120dp"/>
+
+        <TextView style="@style/App_Clock_Text"
+            android:id="@+id/textThenName"
+            android:text="@string/debug_something"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="140dp"/>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,10 +3,10 @@
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="yellow">#fbbc05</color>
-    <color name="red">#ea4335</color>
-    <color name="green">#34a853</color>
-    <color name="blue">#4285f4</color>
+    <color name="yellow">#FBBC05</color>
+    <color name="red">#EA4335</color>
+    <color name="green">#34A853</color>
+    <color name="blue">#4285F4</color>
 
     <color name="app_Background">#1A1A1A</color>
     <color name="app_Background_Dark">#101010</color>

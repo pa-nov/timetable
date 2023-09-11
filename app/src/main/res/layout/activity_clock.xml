@@ -14,10 +14,47 @@
 
         <TextView style="@style/App_Text_Title" android:text="@string/app_clock"/>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="8dp">
+
+                <CheckBox style="@style/App_CheckBox_Text"
+                    android:id="@+id/inputDate"
+                    android:text="@string/settings_show_date"/>
+
+                <CheckBox style="@style/App_CheckBox_Text"
+                    android:id="@+id/inputTitle"
+                    android:text="@string/settings_show_title"/>
+
+                <CheckBox style="@style/App_CheckBox_Text"
+                    android:id="@+id/inputOther"
+                    android:text="@string/settings_show_other"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/icon_rotate"
+            android:foregroundGravity="bottom"
+            android:scaleType="fitEnd"
+            android:padding="32dp"
+            android:contentDescription="@string/app_rotate"/>
+
     </FrameLayout>
 
-    <TextView style="@style/App_Button_Action"
-        android:text="@string/debug_something"
+    <Button style="@style/App_Button_Action"
+        android:id="@+id/buttonApply"
+        android:text="@string/app_apply"
+        app:backgroundTint="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
