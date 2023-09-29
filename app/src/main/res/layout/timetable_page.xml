@@ -20,7 +20,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/app_Background"/>
+            android:background="@color/gray_dark"/>
 
     </LinearLayout>
 </ScrollView>

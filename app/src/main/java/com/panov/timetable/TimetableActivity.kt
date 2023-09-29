@@ -116,7 +116,7 @@ class TimetableActivity : AppCompatActivity() {
                     }
                 }
             }
-            if (isWeekChangeable) { timetableLesson.setBackgroundColor(ContextCompat.getColor(this, R.color.black)) }
+            if (isWeekChangeable) { timetableLesson.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_dark)) }
 
             if (currentTimetable.getInt(i) > 0) {
                 val currentTeacher = currentLesson.getString(2).split("|")

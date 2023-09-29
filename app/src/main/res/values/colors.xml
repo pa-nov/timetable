@@ -8,11 +8,9 @@
     <color name="green">#34A853</color>
     <color name="blue">#4285F4</color>
 
-    <color name="app_Background">#1A1A1A</color>
-    <color name="app_Background_Dark">#101010</color>
-
-    <color name="widget_Text_Time">#808080</color>
-    <color name="widget_Text_Title">#A0A0A0</color>
-    <color name="widget_Text_Text">#D2D2D2</color>
+    <color name="gray_light">#D2D2D2</color>
+    <color name="gray">#808080</color>
+    <color name="gray_dark">#1A1A1A</color>
+    <color name="gray_very_dark">#101010</color>
 
 </resources>

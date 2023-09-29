@@ -15,6 +15,7 @@
     <string name="settings_show_title">Отображать заголовки</string>
     <string name="settings_show_date">Отображать дату и время</string>
     <string name="settings_show_other">Отображать прочую информацию</string>
+    <string name="settings_frame_rate">Период обновления (мс):</string>
 
     <string name="settings_json_name">JSON:</string>
     <string name="settings_modifier_hour">Модификатор (Часы):</string>
@@ -22,9 +23,10 @@
     <string name="settings_modifier_second">Модификатор (Секунды):</string>
     <string name="settings_initial_index">Номер первого предмета:</string>
 
+    <string name="widget_earlier">Ранее:</string>
+    <string name="widget_end">Закончилось:</string>
     <string name="widget_now">Сейчас:</string>
     <string name="widget_end_in">Закончится через:</string>
-    <string name="widget_end">Закончилось:</string>
     <string name="widget_then">Далее:</string>
     <string name="widget_start_in">Начнётся через:</string>
 

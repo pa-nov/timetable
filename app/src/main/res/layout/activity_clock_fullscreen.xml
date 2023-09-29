@@ -3,33 +3,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:keepScreenOn="true"
-    android:background="@color/black">
+    android:keepScreenOn="true">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView style="@style/App_Clock_Title"
-            android:id="@+id/textTimeTitle"
+            android:id="@+id/appClock_TimeTitle"
             android:text="@string/widget_end_in"
             android:layout_gravity="center"
             android:layout_marginBottom="64dp"/>
 
         <TextView style="@style/App_Clock_Time"
-            android:id="@+id/textTime"
+            android:id="@+id/appClock_TimeText"
             android:text="@string/debug_time"
             android:layout_gravity="center"
             android:includeFontPadding="false"/>
 
         <TextView style="@style/App_Clock_Text"
-            android:id="@+id/textTimeBack"
+            android:id="@+id/appClock_TimeSubText"
             android:text="@string/time_ago"
             android:layout_gravity="center"
             android:layout_marginTop="64dp"/>
 
         <TextView style="@style/App_Clock_Text"
-            android:id="@+id/textDateTime"
+            android:id="@+id/appClock_DateTime"
             android:text="@string/debug_date_time"
             android:layout_gravity="bottom|center_horizontal"/>
 
@@ -40,10 +39,12 @@
         android:layout_height="match_parent">
 
         <TextView style="@style/App_Clock_Title"
+            android:id="@+id/appClock_NowTitle"
             android:text="@string/widget_now"
             android:layout_gravity="top|center_horizontal"/>
 
         <TextView style="@style/App_Clock_Title"
+            android:id="@+id/appClock_ThenTitle"
             android:text="@string/widget_then"
             android:layout_gravity="center"
             android:layout_marginTop="100dp"/>
@@ -55,19 +56,19 @@
         android:layout_height="match_parent">
 
         <TextView style="@style/App_Clock_Text"
-            android:id="@+id/textNowName"
+            android:id="@+id/appClock_NowText"
             android:text="@string/debug_something"
             android:layout_gravity="top|center_horizontal"
             android:layout_marginTop="24dp"/>
 
         <TextView style="@style/App_Clock_Text"
-            android:id="@+id/textNowTeacher"
+            android:id="@+id/appClock_NowSubText"
             android:text="@string/debug_somebody"
             android:layout_gravity="top|center_horizontal"
             android:layout_marginTop="60dp"/>
 
         <TextView style="@style/App_Clock_Text"
-            android:id="@+id/textThenName"
+            android:id="@+id/appClock_ThenText"
             android:text="@string/debug_something"
             android:layout_gravity="center"
             android:layout_marginTop="130dp"/>

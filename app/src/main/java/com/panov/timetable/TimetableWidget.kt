@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
 import android.widget.RemoteViews
+import androidx.core.content.ContextCompat
 import org.json.JSONObject
 import kotlin.math.abs
 
@@ -63,15 +64,22 @@ class TimetableWidget : AppWidgetProvider() {
 
 
             val nowTimes = times.getJSONObject(timetable.nowNumber)
-            val nowTime = ((nowTimes.getInt("endHour") * 60 + nowTimes.getInt("endMinute")) * 60) + (86400 * timetable.nowDays) - currentTime
+            val nowTime  = ((nowTimes.getInt("endHour") * 60 + nowTimes.getInt("endMinute")) * 60) + (86400 * timetable.nowDays) - currentTime
             val thenTimes = times.getJSONObject(timetable.thenNumber)
-            val thenTime = ((thenTimes.getInt("startHour") * 60 + thenTimes.getInt("startMinute")) * 60) + (86400 * timetable.thenDays) - currentTime
+            val thenTime  = ((thenTimes.getInt("startHour") * 60 + thenTimes.getInt("startMinute")) * 60) + (86400 * timetable.thenDays) - currentTime
 
-            if (nowTime < 0) {
-                views.setTextViewText(R.id.textWidgetNowTimeTitle, context.getString(R.string.widget_end))
-            } else {
-                views.setTextViewText(R.id.textWidgetNowTimeTitle, context.getString(R.string.widget_end_in))
-            }
+            views.setTextViewText(R.id.textWidgetNowTitle, if (nowTime < 0) { context.getString(R.string.widget_earlier) } else { context.getString(R.string.widget_now) } )
+            views.setTextViewText(R.id.textWidgetNowTimeTitle, if (nowTime < 0) { context.getString(R.string.widget_end) } else { context.getString(R.string.widget_end_in) } )
+
+            val colorNow  = if (nowTime < 0) { ContextCompat.getColor(context, R.color.gray) } else { ContextCompat.getColor(context, R.color.gray_light) }
+            val colorThen = if (nowTime < 0 && timetable.thenDays < 1) { ContextCompat.getColor(context, R.color.gray_light) } else { ContextCompat.getColor(context, R.color.gray) }
+
+            views.setTextColor(R.id.textWidgetNowText, colorNow)
+            views.setTextColor(R.id.textWidgetNowSubText, colorNow)
+            views.setTextColor(R.id.textWidgetNowTimeText, colorNow)
+            views.setTextColor(R.id.textWidgetThenText, colorThen)
+            views.setTextColor(R.id.textWidgetThenSubText, colorThen)
+            views.setTextColor(R.id.textWidgetThenTimeText, colorThen)
 
             views.setTextViewText(R.id.textWidgetDayOfWeek, weekdays[dateDayOfWeek])
             views.setTextViewText(R.id.textWidgetDate, "$dateDay.$dateMonth ($dateWeek)")
