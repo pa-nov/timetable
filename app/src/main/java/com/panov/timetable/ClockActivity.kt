@@ -107,7 +107,7 @@ class ClockActivity : AppCompatActivity() {
                     findViewById<TextView>(R.id.appClock_DateTime).text = "$dateDay.$dateMonth.$dateYear   $dateHour:$dateMinute:$dateSecond"
                 }
                 if (sdTitle) {
-                    findViewById<TextView>(R.id.appClock_TimeTitle).text = if (nowTime < 0) { resources.getString(R.string.widget_end) } else { resources.getString(R.string.widget_end_in) }
+                    findViewById<TextView>(R.id.appClock_TimeTitle).text = if (nowTime < 0) { resources.getString(R.string.widget_earlier_time) } else { resources.getString(R.string.widget_now_time) }
                     findViewById<TextView>(R.id.appClock_NowTitle).text = if (nowTime < 0) { resources.getString(R.string.widget_earlier) } else { resources.getString(R.string.widget_now) }
                 }
                 if (sdOther) {

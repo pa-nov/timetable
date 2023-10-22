@@ -7,7 +7,7 @@
     android:padding="12sp">
 
     <Button
-        android:id="@+id/buttonUpdate"
+        android:id="@+id/widgetUpdate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0"
@@ -17,85 +17,85 @@
         android:layout_marginLeft="-12dp" />
 
     <TextView style="@style/Widget_DayOfWeek"
-        android:id="@+id/textWidgetDayOfWeek"
+        android:id="@+id/widgetDayOfWeek"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="-8dp"
         android:text="@string/debug_weekday" />
 
     <TextView style="@style/Widget_DateTime"
-        android:id="@+id/textWidgetDate"
+        android:id="@+id/widgetDate"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:text="@string/debug_date" />
 
     <TextView style="@style/Widget_DateTime"
-        android:id="@+id/textWidgetTime"
-        android:layout_below="@+id/textWidgetDate"
+        android:id="@+id/widgetTime"
+        android:layout_below="@+id/widgetDate"
         android:layout_alignParentEnd="true"
         android:text="@string/debug_time" />
 
 
     <TextView style="@style/Widget_Title_Name"
-        android:id="@+id/textWidgetNowTitle"
-        android:layout_below="@+id/textWidgetDayOfWeek"
+        android:id="@+id/widgetNowTitle"
+        android:layout_below="@+id/widgetDayOfWeek"
         android:layout_alignParentStart="true"
         android:layout_marginTop="4dp"
         android:text="@string/widget_now" />
 
     <TextView style="@style/Widget_Text"
-        android:id="@+id/textWidgetNowText"
-        android:layout_alignTop="@+id/textWidgetNowTitle"
-        android:layout_toEndOf="@+id/textWidgetNowTitle"
+        android:id="@+id/widgetNowText"
+        android:layout_alignTop="@+id/widgetNowTitle"
+        android:layout_toEndOf="@+id/widgetNowTitle"
         android:layout_marginStart="6dp"
         android:text="@string/debug_something" />
 
     <TextView style="@style/Widget_Text"
-        android:id="@+id/textWidgetNowSubText"
-        android:layout_alignTop="@+id/textWidgetNowText"
+        android:id="@+id/widgetNowSubText"
+        android:layout_alignTop="@+id/widgetNowText"
         android:layout_alignParentEnd="true"
         android:text="@string/debug_room" />
 
     <TextView style="@style/Widget_Title_Time"
-        android:id="@+id/textWidgetNowTimeTitle"
-        android:layout_below="@+id/textWidgetNowTitle"
-        android:layout_alignStart="@+id/textWidgetNowTitle"
-        android:text="@string/widget_end_in" />
+        android:id="@+id/widgetNowTimeTitle"
+        android:layout_below="@+id/widgetNowTitle"
+        android:layout_alignStart="@+id/widgetNowTitle"
+        android:text="@string/widget_now_time" />
 
     <TextView style="@style/Widget_Text"
-        android:id="@+id/textWidgetNowTimeText"
-        android:layout_below="@+id/textWidgetNowTimeTitle"
-        android:layout_alignStart="@+id/textWidgetNowTimeTitle"
+        android:id="@+id/widgetNowTimeText"
+        android:layout_below="@+id/widgetNowTimeTitle"
+        android:layout_alignStart="@+id/widgetNowTimeTitle"
         android:text="@string/debug_sometime" />
 
 
     <TextView style="@style/Widget_Title_Name"
-        android:id="@+id/textWidgetThenTitle"
-        android:layout_above="@+id/textWidgetThenTimeTitle"
-        android:layout_alignStart="@+id/textWidgetThenTimeTitle"
+        android:id="@+id/widgetThenTitle"
+        android:layout_above="@+id/widgetThenTimeTitle"
+        android:layout_alignStart="@+id/widgetThenTimeTitle"
         android:text="@string/widget_then" />
 
     <TextView style="@style/Widget_Text"
-        android:id="@+id/textWidgetThenText"
-        android:layout_alignTop="@+id/textWidgetThenTitle"
-        android:layout_toEndOf="@+id/textWidgetThenTitle"
+        android:id="@+id/widgetThenText"
+        android:layout_alignTop="@+id/widgetThenTitle"
+        android:layout_toEndOf="@+id/widgetThenTitle"
         android:layout_marginStart="6dp"
         android:text="@string/debug_something" />
 
     <TextView style="@style/Widget_Text"
-        android:id="@+id/textWidgetThenSubText"
-        android:layout_alignTop="@+id/textWidgetThenText"
+        android:id="@+id/widgetThenSubText"
+        android:layout_alignTop="@+id/widgetThenText"
         android:layout_alignParentEnd="true"
         android:text="@string/debug_room" />
 
     <TextView style="@style/Widget_Title_Time"
-        android:id="@+id/textWidgetThenTimeTitle"
-        android:layout_above="@+id/textWidgetThenTimeText"
-        android:layout_alignStart="@+id/textWidgetThenTimeText"
-        android:text="@string/widget_start_in" />
+        android:id="@+id/widgetThenTimeTitle"
+        android:layout_above="@+id/widgetThenTimeText"
+        android:layout_alignStart="@+id/widgetThenTimeText"
+        android:text="@string/widget_then_time" />
 
     <TextView style="@style/Widget_Text"
-        android:id="@+id/textWidgetThenTimeText"
+        android:id="@+id/widgetThenTimeText"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:text="@string/debug_sometime" />

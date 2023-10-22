@@ -28,7 +28,7 @@ class TimetableWidget : AppWidgetProvider() {
 
     private fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
         val views = RemoteViews(context.packageName, R.layout.timetable_widget)
-        views.setOnClickPendingIntent(R.id.buttonUpdate, pendingIntent(context, "updateWidget"))
+        views.setOnClickPendingIntent(R.id.widgetUpdate, pendingIntent(context, "updateWidget"))
         try {
             val savedData      = context.getSharedPreferences("SavedData", 0)
             val jsonDataString = savedData.getString("Json", "")
@@ -68,30 +68,30 @@ class TimetableWidget : AppWidgetProvider() {
             val thenTimes = times.getJSONObject(timetable.thenNumber)
             val thenTime  = ((thenTimes.getInt("startHour") * 60 + thenTimes.getInt("startMinute")) * 60) + (86400 * timetable.thenDays) - currentTime
 
-            views.setTextViewText(R.id.textWidgetNowTitle, if (nowTime < 0) { context.getString(R.string.widget_earlier) } else { context.getString(R.string.widget_now) } )
-            views.setTextViewText(R.id.textWidgetNowTimeTitle, if (nowTime < 0) { context.getString(R.string.widget_end) } else { context.getString(R.string.widget_end_in) } )
+            views.setTextViewText(R.id.widgetNowTitle, if (nowTime < 0) { context.getString(R.string.widget_earlier) } else { context.getString(R.string.widget_now) } )
+            views.setTextViewText(R.id.widgetNowTimeTitle, if (nowTime < 0) { context.getString(R.string.widget_earlier_time) } else { context.getString(R.string.widget_now_time) } )
 
             val colorNow  = if (nowTime < 0) { ContextCompat.getColor(context, R.color.gray) } else { ContextCompat.getColor(context, R.color.gray_light) }
             val colorThen = if (nowTime < 0 && timetable.thenDays < 1) { ContextCompat.getColor(context, R.color.gray_light) } else { ContextCompat.getColor(context, R.color.gray) }
 
-            views.setTextColor(R.id.textWidgetNowText, colorNow)
-            views.setTextColor(R.id.textWidgetNowSubText, colorNow)
-            views.setTextColor(R.id.textWidgetNowTimeText, colorNow)
-            views.setTextColor(R.id.textWidgetThenText, colorThen)
-            views.setTextColor(R.id.textWidgetThenSubText, colorThen)
-            views.setTextColor(R.id.textWidgetThenTimeText, colorThen)
+            views.setTextColor(R.id.widgetNowText, colorNow)
+            views.setTextColor(R.id.widgetNowSubText, colorNow)
+            views.setTextColor(R.id.widgetNowTimeText, colorNow)
+            views.setTextColor(R.id.widgetThenText, colorThen)
+            views.setTextColor(R.id.widgetThenSubText, colorThen)
+            views.setTextColor(R.id.widgetThenTimeText, colorThen)
 
-            views.setTextViewText(R.id.textWidgetDayOfWeek, weekdays[dateDayOfWeek])
-            views.setTextViewText(R.id.textWidgetDate, "$dateDay.$dateMonth ($dateWeek)")
-            views.setTextViewText(R.id.textWidgetTime, "$dateHour:$dateMinute:$dateSecond")
+            views.setTextViewText(R.id.widgetDayOfWeek, weekdays[dateDayOfWeek])
+            views.setTextViewText(R.id.widgetDate, "$dateDay.$dateMonth ($dateWeek)")
+            views.setTextViewText(R.id.widgetTime, "$dateHour:$dateMinute:$dateSecond")
 
-            views.setTextViewText(R.id.textWidgetNowText, lessons.getJSONArray(timetable.nowId).getString(0))
-            views.setTextViewText(R.id.textWidgetNowSubText, "(${lessons.getJSONArray(timetable.nowId).getString(1)})")
-            views.setTextViewText(R.id.textWidgetNowTimeText, Tools.getNiceTime(context.resources, nowTime.toDouble()))
+            views.setTextViewText(R.id.widgetNowText, lessons.getJSONArray(timetable.nowId).getString(0))
+            views.setTextViewText(R.id.widgetNowSubText, "(${lessons.getJSONArray(timetable.nowId).getString(1)})")
+            views.setTextViewText(R.id.widgetNowTimeText, Tools.getNiceTime(context.resources, nowTime.toDouble()))
 
-            views.setTextViewText(R.id.textWidgetThenText, lessons.getJSONArray(timetable.thenId).getString(0))
-            views.setTextViewText(R.id.textWidgetThenSubText, "(${lessons.getJSONArray(timetable.thenId).getString(1)})")
-            views.setTextViewText(R.id.textWidgetThenTimeText, Tools.getNiceTime(context.resources, thenTime.toDouble()))
+            views.setTextViewText(R.id.widgetThenText, lessons.getJSONArray(timetable.thenId).getString(0))
+            views.setTextViewText(R.id.widgetThenSubText, "(${lessons.getJSONArray(timetable.thenId).getString(1)})")
+            views.setTextViewText(R.id.widgetThenTimeText, Tools.getNiceTime(context.resources, thenTime.toDouble()))
 
             appWidgetManager.updateAppWidget(appWidgetId, views)
         } catch (error: Error) {
