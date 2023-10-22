@@ -8,8 +8,10 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -91,18 +93,18 @@ class TimetableActivity : AppCompatActivity() {
         for (i: Int in 0 until times.length()) {
             val timetableLesson = layoutInflater.inflate(R.layout.timetable_lesson, null)
 
-            val currentTime = times.getJSONObject(i)
-            val startHour   = Tools.getTwoDigitNumber(currentTime.getInt("startHour"))
-            val startMinute = Tools.getTwoDigitNumber(currentTime.getInt("startMinute"))
-            val endHour     = Tools.getTwoDigitNumber(currentTime.getInt("endHour"))
-            val endMinute   = Tools.getTwoDigitNumber(currentTime.getInt("endMinute"))
+            var currentTime = times.getJSONObject(i)
+            var startHour   = Tools.getTwoDigitNumber(currentTime.getInt("startHour"))
+            var startMinute = Tools.getTwoDigitNumber(currentTime.getInt("startMinute"))
+            var endHour     = Tools.getTwoDigitNumber(currentTime.getInt("endHour"))
+            var endMinute   = Tools.getTwoDigitNumber(currentTime.getInt("endMinute"))
 
             timetableLesson.findViewById<TextView>(R.id.textIndex).text = "${i + initialIndex}"
             timetableLesson.findViewById<TextView>(R.id.textTime).text  = "${startHour}:${startMinute} ${endHour}:${endMinute}"
 
-            val textName    = timetableLesson.findViewById<TextView>(R.id.textName)
-            val textTeacher = timetableLesson.findViewById<TextView>(R.id.textTeacher)
-            val textRoom    = timetableLesson.findViewById<TextView>(R.id.textRoom)
+            var textName    = timetableLesson.findViewById<TextView>(R.id.textName)
+            var textTeacher = timetableLesson.findViewById<TextView>(R.id.textTeacher)
+            var textRoom    = timetableLesson.findViewById<TextView>(R.id.textRoom)
 
             val currentLesson = lessons.getJSONArray(currentTimetable.getInt(i))
             val anotherLesson = lessons.getJSONArray(anotherTimetable.getInt(i))
@@ -127,6 +129,92 @@ class TimetableActivity : AppCompatActivity() {
                 textName.visibility    = View.INVISIBLE
                 textTeacher.visibility = View.INVISIBLE
                 textRoom.visibility    = View.INVISIBLE
+            }
+
+            timetableLesson.setOnClickListener {
+                if (currentTimetable.getInt(i) > 0) {
+                    val popupView        = layoutInflater.inflate(R.layout.timetable_lesson_info, null)
+                    val linearLayoutEven = popupView.findViewById<LinearLayout>(R.id.infoWeekEven)
+                    val linearLayoutOdd  = popupView.findViewById<LinearLayout>(R.id.infoWeekOdd)
+
+                    popupView.findViewById<TextView>(R.id.infoTitle).text   = currentLesson.getString(0)
+                    popupView.findViewById<TextView>(R.id.infoTeacher).text = currentLesson.getString(2).split("|").joinToString(" ")
+                    popupView.findViewById<TextView>(R.id.infoRoom).text    = "(${currentLesson.getString(1)})"
+
+                    var dayEven = -1
+                    for (d: Int in 0 until 7) {
+                        for (l: Int in 0 until times.length()) {
+                            if (jsonData.getJSONArray("even").getJSONArray(d).getInt(l) == currentTimetable.getInt(i)){
+                                if (dayEven < d) {
+                                    dayEven = d
+                                    val dayName = layoutInflater.inflate(R.layout.timetable_page, null)
+                                    dayName.findViewById<TextView>(R.id.textDayOfWeek).text = weekdays[d]
+                                    linearLayoutEven.addView(dayName)
+                                }
+
+                                val infoLesson = layoutInflater.inflate(R.layout.timetable_lesson, null)
+
+                                currentTime = times.getJSONObject(l)
+                                startHour   = Tools.getTwoDigitNumber(currentTime.getInt("startHour"))
+                                startMinute = Tools.getTwoDigitNumber(currentTime.getInt("startMinute"))
+                                endHour     = Tools.getTwoDigitNumber(currentTime.getInt("endHour"))
+                                endMinute   = Tools.getTwoDigitNumber(currentTime.getInt("endMinute"))
+
+                                infoLesson.findViewById<TextView>(R.id.textIndex).text = "${l + initialIndex}"
+                                infoLesson.findViewById<TextView>(R.id.textTime).text  = "${startHour}:${startMinute} ${endHour}:${endMinute}"
+
+                                textName    = infoLesson.findViewById(R.id.textName)
+                                textTeacher = infoLesson.findViewById(R.id.textTeacher)
+                                textRoom    = infoLesson.findViewById(R.id.textRoom)
+
+                                textName.text      = currentLesson.getString(0)
+                                textTeacher.visibility = View.INVISIBLE
+                                textRoom.text      = "(${currentLesson.getString(1)})"
+
+                                linearLayoutEven.addView(infoLesson)
+                            }
+                        }
+                    }
+
+                    var dayOdd = -1
+                    for (d: Int in 0 until 7) {
+                        for (l: Int in 0 until times.length()) {
+                            if (jsonData.getJSONArray("odd").getJSONArray(d).getInt(l) == currentTimetable.getInt(i)){
+                                if (dayOdd < d) {
+                                    dayOdd = d
+                                    val dayName = layoutInflater.inflate(R.layout.timetable_page, null)
+                                    dayName.findViewById<TextView>(R.id.textDayOfWeek).text = weekdays[d]
+                                    linearLayoutOdd.addView(dayName)
+                                }
+
+                                val infoLesson = layoutInflater.inflate(R.layout.timetable_lesson, null)
+
+                                currentTime = times.getJSONObject(l)
+                                startHour   = Tools.getTwoDigitNumber(currentTime.getInt("startHour"))
+                                startMinute = Tools.getTwoDigitNumber(currentTime.getInt("startMinute"))
+                                endHour     = Tools.getTwoDigitNumber(currentTime.getInt("endHour"))
+                                endMinute   = Tools.getTwoDigitNumber(currentTime.getInt("endMinute"))
+
+                                infoLesson.findViewById<TextView>(R.id.textIndex).text = "${l + initialIndex}"
+                                infoLesson.findViewById<TextView>(R.id.textTime).text  = "${startHour}:${startMinute} ${endHour}:${endMinute}"
+
+                                textName    = infoLesson.findViewById(R.id.textName)
+                                textTeacher = infoLesson.findViewById(R.id.textTeacher)
+                                textRoom    = infoLesson.findViewById(R.id.textRoom)
+
+                                textName.text      = currentLesson.getString(0)
+                                textTeacher.visibility = View.INVISIBLE
+                                textRoom.text      = "(${currentLesson.getString(1)})"
+
+                                linearLayoutOdd.addView(infoLesson)
+                            }
+                        }
+                    }
+
+                    val frameLayout = findViewById<FrameLayout>(R.id.frameView)
+                    val popupWindow = PopupWindow(popupView, frameLayout.width, frameLayout.height / 2, true)
+                    popupWindow.showAsDropDown(timetableLesson)
+                }
             }
 
             linearLayout.addView(timetableLesson)

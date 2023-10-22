@@ -9,6 +9,7 @@
     tools:context=".ClockActivity">
 
     <FrameLayout style="@style/App_Frame_Main"
+        android:id="@+id/frameView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

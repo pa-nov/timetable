@@ -5,12 +5,18 @@
     <string name="app_clock">Часы</string>
     <string name="app_timetable">Расписание</string>
     <string name="app_settings">Настройки</string>
-    <string name="app_information">Информация</string>
     <string name="app_return">Вернуться</string>
     <string name="app_rotate">Повернуть</string>
-
     <string name="app_apply">Применить</string>
     <string name="app_applied">Применено</string>
+
+    <string name="info_title">Название:</string>
+    <string name="info_teacher">Преподаватель:</string>
+    <string name="info_teachers">Преподаватели:</string>
+    <string name="info_room">Кабинет:</string>
+    <string name="info_rooms">Кабинеты:</string>
+    <string name="info_week_even">Чётная неделя</string>
+    <string name="info_week_odd">Нечётная неделя</string>
 
     <string name="settings_show_title">Отображать заголовки</string>
     <string name="settings_show_date">Отображать дату и время</string>
