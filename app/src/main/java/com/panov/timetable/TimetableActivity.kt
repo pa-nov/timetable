@@ -87,34 +87,35 @@ class TimetableActivity : AppCompatActivity() {
         linearLayout.findViewById<TextView>(R.id.textDayOfWeek).text = weekdays[dateDayOfWeek]
 
         for (i: Int in 0 until jsonData.getJSONArray("times").length()) {
-            fillLessonView(linearLayout, false, i, currentTimetable.getInt(i), anotherTimetable.getInt(i))
+            fillLessonView(linearLayout, false, i, currentTimetable.getInt(i), anotherTimetable.getInt(i), arrayOf(dateWeekOddOrEven, "$dateDayOfWeek", "$i"), false)
         }
     }
     @SuppressLint("SetTextI18n")
     private fun updateMainView() {
+        val dateWeek  = Tools.getTwoDigitNumber(date.get(Calendar.WEEK_OF_YEAR))
+
         if (DateUtils.isToday(date.timeInMillis + DateUtils.DAY_IN_MILLIS)) {
-            findViewById<TextView>(R.id.textDate).text = this.getString(R.string.day_yesterday)
+            findViewById<TextView>(R.id.textDate).text = "${this.getString(R.string.day_yesterday)} ($dateWeek)"
             return
         }
         if (DateUtils.isToday(date.timeInMillis)) {
-            findViewById<TextView>(R.id.textDate).text = this.getString(R.string.day_today)
+            findViewById<TextView>(R.id.textDate).text = "${this.getString(R.string.day_today)} ($dateWeek)"
             return
         }
         if (DateUtils.isToday(date.timeInMillis - DateUtils.DAY_IN_MILLIS)) {
-            findViewById<TextView>(R.id.textDate).text = this.getString(R.string.day_tomorrow)
+            findViewById<TextView>(R.id.textDate).text = "${this.getString(R.string.day_tomorrow)} ($dateWeek)"
             return
         }
 
         val dateDay   = Tools.getTwoDigitNumber(date.get(Calendar.DAY_OF_MONTH))
         val dateMonth = Tools.getTwoDigitNumber(date.get(Calendar.MONTH) + 1)
         val dateYear  = date.get(Calendar.YEAR)
-        val dateWeek  = Tools.getTwoDigitNumber(date.get(Calendar.WEEK_OF_YEAR))
 
         findViewById<TextView>(R.id.textDate).text = "$dateDay.$dateMonth.$dateYear ($dateWeek)"
     }
 
     @SuppressLint("SetTextI18n", "InflateParams")
-    private fun fillLessonView(background: LinearLayout, isInfo: Boolean, lessonNumber: Int, currentLessonId: Int, anotherLessonId: Int) {
+    private fun fillLessonView(background: LinearLayout, isInfo: Boolean, lessonNumber: Int, currentLessonId: Int, anotherLessonId: Int, date: Array<String>, isNow: Boolean) {
         val timetableLesson = layoutInflater.inflate(R.layout.timetable_lesson, null)
         val times           = jsonData.getJSONArray("times")
         val lessons         = jsonData.getJSONArray("lessons")
@@ -140,6 +141,7 @@ class TimetableActivity : AppCompatActivity() {
             }
         }
         if (isWeekChangeable) { timetableLesson.findViewById<FrameLayout>(R.id.frameViewRight).setBackgroundColor(ContextCompat.getColor(this, R.color.red)) }
+        if (isNow) { timetableLesson.findViewById<FrameLayout>(R.id.frameViewLeft).setBackgroundColor(ContextCompat.getColor(this, R.color.green)) }
 
         timetableLesson.findViewById<TextView>(R.id.textIndex).text = "${lessonNumber + initialIndex}"
         timetableLesson.findViewById<TextView>(R.id.textTime).text  = "${startHour}:${startMinute} ${endHour}:${endMinute}"
@@ -157,7 +159,7 @@ class TimetableActivity : AppCompatActivity() {
 
         if (currentLessonId > 0 && !isInfo) {
             timetableLesson.setOnClickListener {
-                showLessonInfo(timetableLesson, currentLessonId)
+                showLessonInfo(timetableLesson, currentLessonId, date)
             }
         }
         if (isInfo) {
@@ -167,7 +169,7 @@ class TimetableActivity : AppCompatActivity() {
         background.addView(timetableLesson)
     }
     @SuppressLint("SetTextI18n", "InflateParams")
-    private fun showLessonInfo(background: View, lessonId: Int) {
+    private fun showLessonInfo(background: View, lessonId: Int, date: Array<String>) {
         val popupView        = layoutInflater.inflate(R.layout.timetable_lesson_info, null)
         val linearLayoutEven = popupView.findViewById<LinearLayout>(R.id.infoWeekEven)
         val linearLayoutOdd  = popupView.findViewById<LinearLayout>(R.id.infoWeekOdd)
@@ -235,7 +237,8 @@ class TimetableActivity : AppCompatActivity() {
                             dayName.findViewById<TextView>(R.id.textDayOfWeek).text = weekdays[d]
                             linearLayoutEven.addView(dayName)
                         }
-                        fillLessonView(linearLayoutEven, true, l, lessonIds[i], timetableOdd.getJSONArray(d).getInt(l))
+                        val isNow = date.contentEquals(arrayOf("even", "$d", "$l"))
+                        fillLessonView(linearLayoutEven, true, l, lessonIds[i], timetableOdd.getJSONArray(d).getInt(l), date, isNow)
                     }
                 }
             }
@@ -251,7 +254,8 @@ class TimetableActivity : AppCompatActivity() {
                             dayName.findViewById<TextView>(R.id.textDayOfWeek).text = weekdays[d]
                             linearLayoutOdd.addView(dayName)
                         }
-                        fillLessonView(linearLayoutOdd, true, l, lessonIds[i], timetableEven.getJSONArray(d).getInt(l))
+                        val isNow = date.contentEquals(arrayOf("odd", "$d", "$l"))
+                        fillLessonView(linearLayoutOdd, true, l, lessonIds[i], timetableEven.getJSONArray(d).getInt(l), date, isNow)
                     }
                 }
             }
