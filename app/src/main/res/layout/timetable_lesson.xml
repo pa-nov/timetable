@@ -14,6 +14,7 @@
         android:layout_alignParentStart="true"/>
 
     <FrameLayout
+        android:id="@+id/frameViewLeft"
         android:layout_width="2dp"
         android:layout_height="64dp"
         android:background="@color/gray_dark"
@@ -31,6 +32,7 @@
         android:layout_alignParentStart="true"/>
 
     <FrameLayout
+        android:id="@+id/frameViewRight"
         android:layout_width="2dp"
         android:layout_height="64dp"
         android:background="@color/gray_dark"
