@@ -7,43 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageButton
-        android:id="@+id/buttonOpenClock"
-        android:layout_width="192dp"
-        android:layout_height="192dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/buttonOpenTimetable"
-        app:srcCompat="@drawable/icon_clock"
-        android:scaleType="fitCenter"
-        android:background="@drawable/drawable_rounded"
-        android:contentDescription="@string/app_clock" />
-
-    <ImageButton
-        android:id="@+id/buttonOpenTimetable"
-        android:layout_width="192dp"
-        android:layout_height="192dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="64dp"/>
+    
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/gray_very_dark"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:itemIconSize="36dp"
+        app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/icon_timetable"
-        android:scaleType="fitCenter"
-        android:background="@drawable/drawable_rounded"
-        android:contentDescription="@string/app_timetable" />
-
-    <ImageButton
-        android:id="@+id/buttonOpenSettings"
-        android:layout_width="192dp"
-        android:layout_height="192dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonOpenTimetable"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/icon_settings"
-        android:scaleType="fitCenter"
-        android:background="@drawable/drawable_rounded"
-        android:contentDescription="@string/app_settings" />
+        app:menu="@menu/menu_items"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

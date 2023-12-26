@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".SettingsActivity">
+    tools:context=".SettingsFragment">
 
     <FrameLayout style="@style/App_Frame_Main"
         android:layout_width="match_parent"
@@ -90,13 +90,6 @@
         android:id="@+id/buttonApply"
         android:text="@string/app_apply"
         app:backgroundTint="@color/yellow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_gravity="bottom"/>
 
-    <ImageButton style="@style/App_Button_Return"
-        app:srcCompat="@drawable/icon_return"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/app_return"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

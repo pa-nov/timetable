@@ -1,15 +1,13 @@
 package com.panov.timetable
 
-import android.annotation.SuppressLint
 import android.icu.util.Calendar
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateUtils
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
@@ -18,31 +16,32 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import org.json.JSONObject
 
-class TimetableActivity : AppCompatActivity() {
+class TimetableFragment : Fragment() {
     private var date = Calendar.getInstance()
     private var jsonData = JSONObject()
     private var initialIndex = 1
     private var tempPosition = 0
 
 
-    @SuppressLint("MissingInflatedId")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_timetable)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_timetable, container, false)
+
         date.firstDayOfWeek         = Calendar.MONDAY
         date.minimalDaysInFirstWeek = 4
-        val timetableActivity: TimetableActivity = this
+        val timetableClass: TimetableFragment = this
 
-        val savedData      = getSharedPreferences("SavedData", 0)
+        val savedData      = requireActivity().getSharedPreferences("SavedData", 0)
         val jsonDataString = savedData.getString("Json", "")
-        if (jsonDataString.isNullOrEmpty()) { this.finish() }
-        jsonData           = JSONObject(jsonDataString!!)
-        initialIndex       = savedData.getInt("InitialIndex", 1)
+        if (jsonDataString.isNullOrEmpty()) { return view }
+        try {
+            jsonData     = JSONObject(jsonDataString)
+            initialIndex = savedData.getInt("InitialIndex", 1)
+        } catch (e: Exception) {
+            return view
+        }
 
-        findViewById<ImageButton>(R.id.buttonReturn).setOnClickListener { this.finish() }
-
-        val viewPager = findViewById<ViewPager2>(R.id.viewPager)
-        viewPager.adapter = TimetablePageAdapter(timetableActivity)
+        val viewPager = view.findViewById<ViewPager2>(R.id.viewPager)
+        viewPager.adapter = TimetablePageAdapter(timetableClass)
         viewPager.setCurrentItem(1, false)
         viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -56,24 +55,16 @@ class TimetableActivity : AppCompatActivity() {
                     date.add(Calendar.DAY_OF_YEAR, tempPosition)
                     tempPosition = 0
                     viewPager.adapter = null
-                    viewPager.adapter = TimetablePageAdapter(timetableActivity)
+                    viewPager.adapter = TimetablePageAdapter(timetableClass)
                     viewPager.setCurrentItem(1, false)
                 }
             }
         })
-        val editor = this.getSharedPreferences("SavedData", 0).edit()
-        editor.putInt("LastPage", 2)
-        editor.apply()
-    }
-    override fun onDestroy() {
-        val editor = this.getSharedPreferences("SavedData", 0).edit()
-        editor.putInt("LastPage", 0)
-        editor.apply()
-        super.onDestroy()
+
+        return view
     }
 
 
-    @SuppressLint("SetTextI18n", "InflateParams")
     private fun updateView(linearLayout: LinearLayout, position: Int) {
         val tempDate = date.clone() as Calendar
         tempDate.add(Calendar.DAY_OF_YEAR, position - 1)
@@ -90,31 +81,29 @@ class TimetableActivity : AppCompatActivity() {
             fillLessonView(linearLayout, false, i, currentTimetable.getInt(i), anotherTimetable.getInt(i), arrayOf(dateWeekOddOrEven, "$dateDayOfWeek", "$i"), false)
         }
     }
-    @SuppressLint("SetTextI18n")
     private fun updateMainView() {
         val dateWeek  = Tools.getTwoDigitNumber(date.get(Calendar.WEEK_OF_YEAR))
 
         if (DateUtils.isToday(date.timeInMillis + DateUtils.DAY_IN_MILLIS)) {
-            findViewById<TextView>(R.id.textDate).text = "${this.getString(R.string.day_yesterday)} ($dateWeek)"
+            requireView().findViewById<TextView>(R.id.textDate).text = this.getString(R.string.placeholder_date_text, this.getString(R.string.day_yesterday), dateWeek)
             return
         }
         if (DateUtils.isToday(date.timeInMillis)) {
-            findViewById<TextView>(R.id.textDate).text = "${this.getString(R.string.day_today)} ($dateWeek)"
+            requireView().findViewById<TextView>(R.id.textDate).text = this.getString(R.string.placeholder_date_text, this.getString(R.string.day_today), dateWeek)
             return
         }
         if (DateUtils.isToday(date.timeInMillis - DateUtils.DAY_IN_MILLIS)) {
-            findViewById<TextView>(R.id.textDate).text = "${this.getString(R.string.day_tomorrow)} ($dateWeek)"
+            requireView().findViewById<TextView>(R.id.textDate).text = this.getString(R.string.placeholder_date_text, this.getString(R.string.day_tomorrow), dateWeek)
             return
         }
 
         val dateDay   = Tools.getTwoDigitNumber(date.get(Calendar.DAY_OF_MONTH))
         val dateMonth = Tools.getTwoDigitNumber(date.get(Calendar.MONTH) + 1)
-        val dateYear  = date.get(Calendar.YEAR)
+        val dateYear  = date.get(Calendar.YEAR).toString()
 
-        findViewById<TextView>(R.id.textDate).text = "$dateDay.$dateMonth.$dateYear ($dateWeek)"
+        requireView().findViewById<TextView>(R.id.textDate).text = this.getString(R.string.placeholder_date_number, dateDay, dateMonth, dateYear, dateWeek)
     }
 
-    @SuppressLint("SetTextI18n", "InflateParams")
     private fun fillLessonView(background: LinearLayout, isInfo: Boolean, lessonNumber: Int, currentLessonId: Int, anotherLessonId: Int, date: Array<String>, isNow: Boolean) {
         val timetableLesson = layoutInflater.inflate(R.layout.timetable_lesson, null)
         val times           = jsonData.getJSONArray("times")
@@ -140,17 +129,17 @@ class TimetableActivity : AppCompatActivity() {
                 }
             }
         }
-        if (isWeekChangeable) { timetableLesson.findViewById<FrameLayout>(R.id.frameViewRight).setBackgroundColor(ContextCompat.getColor(this, R.color.red)) }
-        if (isNow) { timetableLesson.findViewById<FrameLayout>(R.id.frameViewLeft).setBackgroundColor(ContextCompat.getColor(this, R.color.green)) }
+        if (isWeekChangeable) { timetableLesson.findViewById<FrameLayout>(R.id.frameViewRight).setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red)) }
+        if (isNow) { timetableLesson.findViewById<FrameLayout>(R.id.frameViewLeft).setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green)) }
 
-        timetableLesson.findViewById<TextView>(R.id.textIndex).text = "${lessonNumber + initialIndex}"
-        timetableLesson.findViewById<TextView>(R.id.textTime).text  = "${startHour}:${startMinute} ${endHour}:${endMinute}"
+        timetableLesson.findViewById<TextView>(R.id.textIndex).text = this.getString(R.string.placeholder, (lessonNumber + initialIndex).toString())
+        timetableLesson.findViewById<TextView>(R.id.textTime).text  = this.getString(R.string.placeholder_times, startHour, startMinute, endHour, endMinute)
 
         if (currentLessonId > 0) {
             val currentTeacher     = currentLesson.getString(2).split("|")
             textName.text          = currentLesson.getString(0)
-            textTeacher.text       = "${currentTeacher[0]} ${currentTeacher[1].substring(0, 1)}. ${currentTeacher[2].substring(0, 1)}."
-            textRoom.text          = "(${currentLesson.getString(1)})"
+            textTeacher.text       = this.getString(R.string.placeholder_teacher, currentTeacher[0], currentTeacher[1].substring(0, 1), currentTeacher[2].substring(0, 1))
+            textRoom.text          = this.getString(R.string.placeholder_room, currentLesson.getString(1))
         } else {
             textName.visibility    = View.INVISIBLE
             textTeacher.visibility = View.INVISIBLE
@@ -168,7 +157,6 @@ class TimetableActivity : AppCompatActivity() {
 
         background.addView(timetableLesson)
     }
-    @SuppressLint("SetTextI18n", "InflateParams")
     private fun showLessonInfo(background: View, lessonId: Int, date: Array<String>) {
         val popupView        = layoutInflater.inflate(R.layout.timetable_lesson_info, null)
         val linearLayoutEven = popupView.findViewById<LinearLayout>(R.id.infoWeekEven)
@@ -261,14 +249,20 @@ class TimetableActivity : AppCompatActivity() {
             }
         }
 
+        //val isDifferent = false
+        //if (isDifferent) {
+        //    return
+        //} else {
+        //    return
+        //}
 
-        val frameLayout = findViewById<FrameLayout>(R.id.frameView)
+        val frameLayout = requireView().findViewById<FrameLayout>(R.id.frameView)
         val popupWindow = PopupWindow(popupView, frameLayout.width, frameLayout.height / 2, true)
         popupWindow.showAsDropDown(background)
     }
 
 
-    class TimetablePageAdapter( private val timetableActivity: TimetableActivity) : RecyclerView.Adapter<TimetablePageAdapter.TimetablePage>() {
+    class TimetablePageAdapter( private val timetableClass: TimetableFragment) : RecyclerView.Adapter<TimetablePageAdapter.TimetablePage>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimetablePage {
             return TimetablePage(LayoutInflater.from(parent.context).inflate(R.layout.timetable_page, parent, false))
         }
@@ -278,8 +272,8 @@ class TimetableActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: TimetablePage, position: Int) {
-            timetableActivity.updateView(holder.itemView.findViewById(R.id.linearLayout), position)
-            if (position == 1) { timetableActivity.updateMainView() }
+            timetableClass.updateView(holder.itemView.findViewById(R.id.linearLayout), position)
+            if (position == 1) { timetableClass.updateMainView() }
         }
 
         class TimetablePage(itemView: View) : RecyclerView.ViewHolder(itemView)

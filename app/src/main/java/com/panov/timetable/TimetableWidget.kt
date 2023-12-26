@@ -94,7 +94,7 @@ class TimetableWidget : AppWidgetProvider() {
             views.setTextViewText(R.id.widgetThenTimeText, Tools.getNiceTime(context.resources, thenTime.toDouble()))
 
             appWidgetManager.updateAppWidget(appWidgetId, views)
-        } catch (error: Error) {
+        } catch (error: Exception) {
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
     }

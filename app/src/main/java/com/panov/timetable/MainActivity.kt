@@ -1,27 +1,30 @@
 package com.panov.timetable
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageButton
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val activities = arrayOf(
-            Intent(this, MainActivity::class.java),
-            Intent(this, ClockActivity::class.java),
-            Intent(this, TimetableActivity::class.java),
-            Intent(this, SettingsActivity::class.java)
-        )
+        findViewById<BottomNavigationView>(R.id.menu).selectedItemId = R.id.timetable
+        openFragment(TimetableFragment())
 
-        val lastPage = this.getSharedPreferences("SavedData", 0).getInt("LastPage", 0)
-        if (lastPage > 0) { startActivity(activities[lastPage]) }
+        findViewById<BottomNavigationView>(R.id.menu).setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.clock     -> openFragment(ClockFragment())
+                R.id.timetable -> openFragment(TimetableFragment())
+                R.id.settings  -> openFragment(SettingsFragment())
+                else -> { }
+            }
+            true
+        }
+    }
 
-        findViewById<ImageButton>(R.id.buttonOpenClock).setOnClickListener { startActivity(activities[1]) }
-        findViewById<ImageButton>(R.id.buttonOpenTimetable).setOnClickListener { startActivity(activities[2]) }
-        findViewById<ImageButton>(R.id.buttonOpenSettings).setOnClickListener { startActivity(activities[3]) }
+    private fun openFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
     }
 }

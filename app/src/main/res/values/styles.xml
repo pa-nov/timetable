@@ -1,8 +1,5 @@
 <resources>
 
-    <item name="buttonReturn" type="id"/>
-
-
     <style name="App_Frame_Main">
         <item name="android:layout_marginBottom">80dp</item>
         <item name="android:background">@drawable/drawable_rounded</item>
@@ -19,7 +16,6 @@
     <style name="App_Button_Action">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">64dp</item>
-        <item name="android:layout_marginEnd">80dp</item>
         <item name="android:background">@drawable/drawable_rounded</item>
         <item name="android:backgroundTint">@color/yellow</item>
         <item name="android:padding">0dp</item>
@@ -28,15 +24,6 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/gray_very_dark</item>
         <item name="android:includeFontPadding">false</item>
-    </style>
-    <style name="App_Button_Return">
-        <item name="android:id">@id/buttonReturn</item>
-        <item name="android:layout_width">64dp</item>
-        <item name="android:layout_height">64dp</item>
-        <item name="android:background">@drawable/drawable_rounded</item>
-        <item name="android:backgroundTint">@color/yellow</item>
-        <item name="android:scaleType">fitCenter</item>
-        <item name="android:padding">8dp</item>
     </style>
 
     <style name="App_CheckBox_Text">
