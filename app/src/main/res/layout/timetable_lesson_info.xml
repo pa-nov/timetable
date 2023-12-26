@@ -41,7 +41,7 @@
 
             <LinearLayout style="@style/App_Info_Frame" android:id="@+id/infoWeekEven">
 
-                <TextView style="@style/App_Info_Title"
+                <TextView style="@style/App_Info_Title" android:id="@+id/infoWeekEvenTitle"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/info_week_even"/>
 
@@ -49,7 +49,7 @@
 
             <LinearLayout style="@style/App_Info_Frame" android:id="@+id/infoWeekOdd" android:layout_marginBottom="0dp">
 
-                <TextView style="@style/App_Info_Title"
+                <TextView style="@style/App_Info_Title" android:id="@+id/infoWeekOddTitle"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/info_week_odd"/>
 

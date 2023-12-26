@@ -215,6 +215,8 @@ class TimetableFragment : Fragment() {
         popupView.findViewById<TextView>(R.id.infoTeacher).text = teachers.joinToString(", \n")
         popupView.findViewById<TextView>(R.id.infoRoom).text    = rooms.joinToString(", \n")
 
+        var isDifferent = false
+
         var dayEven = -1
         for (d: Int in 0 until 7) {
             for (l: Int in 0 until times.length()) {
@@ -224,6 +226,9 @@ class TimetableFragment : Fragment() {
                             val dayName = layoutInflater.inflate(R.layout.timetable_page, null)
                             dayName.findViewById<TextView>(R.id.textDayOfWeek).text = weekdays[d]
                             linearLayoutEven.addView(dayName)
+                        }
+                        if (lessonIds[i] != timetableOdd.getJSONArray(d).getInt(l)) {
+                            isDifferent = true
                         }
                         val isNow = date.contentEquals(arrayOf("even", "$d", "$l"))
                         fillLessonView(linearLayoutEven, true, l, lessonIds[i], timetableOdd.getJSONArray(d).getInt(l), date, isNow)
@@ -242,6 +247,9 @@ class TimetableFragment : Fragment() {
                             dayName.findViewById<TextView>(R.id.textDayOfWeek).text = weekdays[d]
                             linearLayoutOdd.addView(dayName)
                         }
+                        if (lessonIds[i] != timetableEven.getJSONArray(d).getInt(l)) {
+                            isDifferent = true
+                        }
                         val isNow = date.contentEquals(arrayOf("odd", "$d", "$l"))
                         fillLessonView(linearLayoutOdd, true, l, lessonIds[i], timetableEven.getJSONArray(d).getInt(l), date, isNow)
                     }
@@ -249,12 +257,10 @@ class TimetableFragment : Fragment() {
             }
         }
 
-        //val isDifferent = false
-        //if (isDifferent) {
-        //    return
-        //} else {
-        //    return
-        //}
+        if (!isDifferent) {
+            linearLayoutEven.visibility = View.GONE
+            popupView.findViewById<TextView>(R.id.infoWeekOddTitle).text = this.getString(R.string.info_week_every)
+        }
 
         val frameLayout = requireView().findViewById<FrameLayout>(R.id.frameView)
         val popupWindow = PopupWindow(popupView, frameLayout.width, frameLayout.height / 2, true)

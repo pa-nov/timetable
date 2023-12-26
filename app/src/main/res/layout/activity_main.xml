@@ -12,12 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="64dp"/>
-    
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/menu"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="@color/gray_very_dark"
+        app:itemRippleColor="@color/gray"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
         app:itemIconSize="36dp"
