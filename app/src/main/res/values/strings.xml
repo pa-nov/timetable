@@ -8,6 +8,7 @@
     <string name="app_apply">Apply</string>
     <string name="app_applied">Applied</string>
     <string name="app_error">Error</string>
+    <string name="app_clock_hint">To open the clock, you need to turn the phone and press the «Open» button</string>
 
     <string name="info_title">Name:</string>
     <string name="info_teacher">Teacher:</string>

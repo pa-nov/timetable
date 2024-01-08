@@ -8,6 +8,7 @@
     <string name="app_apply">Применить</string>
     <string name="app_applied">Применено</string>
     <string name="app_error">Ошибка</string>
+    <string name="app_clock_hint">Чтобы открыть часы, нужно повернуть телефон и нажать кнопку «Открыть»</string>
 
     <string name="info_title">Название:</string>
     <string name="info_teacher">Преподаватель:</string>

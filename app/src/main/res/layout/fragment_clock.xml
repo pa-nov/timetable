@@ -9,6 +9,7 @@
     tools:context=".ClockFragment">
 
     <FrameLayout style="@style/App_Frame_Main"
+        android:layout_marginBottom="160dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -35,14 +36,21 @@
 
         </LinearLayout>
 
-        <Button style="@style/App_Button_Action"
-            android:id="@+id/buttonOpen"
-            android:text="@string/app_open"
-            app:backgroundTint="@color/yellow"
-            android:layout_margin="8dp"
+        <TextView style="@style/Widget_Title_Name"
+            android:text="@string/app_clock_hint"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"/>
 
     </FrameLayout>
+
+    <Button style="@style/App_Button_Action"
+        android:id="@+id/buttonOpen"
+        android:text="@string/app_open"
+        app:backgroundTint="@color/yellow"
+        android:layout_marginBottom="80dp"
+        android:layout_gravity="bottom"/>
 
     <Button style="@style/App_Button_Action"
         android:id="@+id/buttonApply"
