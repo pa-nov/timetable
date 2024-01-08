@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Timetable</string>
-    <string name="app_widget_description">Widget with timetable</string>
     <string name="app_clock">Clock</string>
     <string name="app_timetable">Timetable</string>
     <string name="app_settings">Settings</string>

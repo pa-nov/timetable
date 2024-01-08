@@ -12,13 +12,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ClockActivity" android:exported="false"/>
+        <activity android:name=".ClockActivity" android:exported="false" />
 
-        <receiver android:name=".TimetableWidget" android:exported="false" >
+        <receiver android:name=".TimetableWidgetNormal" android:exported="false" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/timetable_widget_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/timetable_widget_normal_info" />
+        </receiver>
+
+        <receiver android:name=".TimetableWidgetSmall" android:exported="false" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/timetable_widget_small_info" />
         </receiver>
 
     </application>
