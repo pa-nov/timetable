@@ -236,6 +236,9 @@ class TimetableFragment : Fragment() {
                 }
             }
         }
+        if (linearLayoutEven.childCount < 2) {
+            linearLayoutEven.visibility = View.GONE
+        }
 
         var dayOdd = -1
         for (d: Int in 0 until 7) {
@@ -256,10 +259,18 @@ class TimetableFragment : Fragment() {
                 }
             }
         }
+        if (linearLayoutOdd.childCount < 2) {
+            linearLayoutOdd.visibility = View.GONE
+        }
 
         if (!isDifferent) {
-            linearLayoutEven.visibility = View.GONE
-            popupView.findViewById<TextView>(R.id.infoWeekOddTitle).text = this.getString(R.string.info_week_every)
+            if (date[0] == "odd") {
+                linearLayoutEven.visibility = View.GONE
+                popupView.findViewById<TextView>(R.id.infoWeekOddTitle).text = this.getString(R.string.info_week_every)
+            } else {
+                linearLayoutOdd.visibility = View.GONE
+                popupView.findViewById<TextView>(R.id.infoWeekEvenTitle).text = this.getString(R.string.info_week_every)
+            }
         }
 
         val frameLayout = requireView().findViewById<FrameLayout>(R.id.frameView)

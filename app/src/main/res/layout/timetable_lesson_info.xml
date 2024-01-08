@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout style="@style/App_Info_Frame">
+            <LinearLayout style="@style/App_Info_Frame" android:layout_marginTop="0dp">
 
                 <TextView style="@style/App_Info_Title"
                     android:text="@string/info_title"/>
@@ -47,7 +47,7 @@
 
             </LinearLayout>
 
-            <LinearLayout style="@style/App_Info_Frame" android:id="@+id/infoWeekOdd" android:layout_marginBottom="0dp">
+            <LinearLayout style="@style/App_Info_Frame" android:id="@+id/infoWeekOdd">
 
                 <TextView style="@style/App_Info_Title" android:id="@+id/infoWeekOddTitle"
                     android:layout_gravity="center_horizontal"
