@@ -35,14 +35,12 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/icon_rotate"
-            android:foregroundGravity="bottom"
-            android:scaleType="fitEnd"
-            android:padding="32dp"
-            android:contentDescription="@string/app_rotate"/>
+        <Button style="@style/App_Button_Action"
+            android:id="@+id/buttonOpen"
+            android:text="@string/app_open"
+            app:backgroundTint="@color/yellow"
+            android:layout_margin="8dp"
+            android:layout_gravity="bottom"/>
 
     </FrameLayout>
 

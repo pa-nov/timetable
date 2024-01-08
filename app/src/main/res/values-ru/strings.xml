@@ -5,7 +5,7 @@
     <string name="app_clock">Часы</string>
     <string name="app_timetable">Расписание</string>
     <string name="app_settings">Настройки</string>
-    <string name="app_rotate">Повернуть</string>
+    <string name="app_open">Открыть</string>
     <string name="app_apply">Применить</string>
     <string name="app_applied">Применено</string>
     <string name="app_error">Ошибка</string>

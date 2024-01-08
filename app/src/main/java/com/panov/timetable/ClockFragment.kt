@@ -35,6 +35,9 @@ class ClockFragment : Fragment() {
             editor.apply()
 
             Toast.makeText(requireContext(), R.string.app_applied, Toast.LENGTH_SHORT).show()
+        }
+
+        view.findViewById<Button>(R.id.buttonOpen).setOnClickListener {
             startActivity(Intent(requireContext(), ClockActivity::class.java))
         }
 

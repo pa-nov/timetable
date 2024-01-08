@@ -5,7 +5,7 @@
     <string name="app_clock">Clock</string>
     <string name="app_timetable">Timetable</string>
     <string name="app_settings">Settings</string>
-    <string name="app_rotate">Rotate</string>
+    <string name="app_open">Open</string>
     <string name="app_apply">Apply</string>
     <string name="app_applied">Applied</string>
     <string name="app_error">Error</string>

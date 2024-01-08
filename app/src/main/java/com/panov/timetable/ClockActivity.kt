@@ -22,7 +22,13 @@ class ClockActivity : AppCompatActivity() {
         val savedData      = this.getSharedPreferences("SavedData", 0)
         val jsonDataString = savedData.getString("Json", "")
         if (jsonDataString.isNullOrEmpty()) { this.finish() }
-        val jsonData       = JSONObject(jsonDataString!!)
+        val jsonData: JSONObject
+        try {
+            jsonData = JSONObject(jsonDataString!!)
+        } catch (e: Exception) {
+            this.finish()
+            return
+        }
         val times          = jsonData.getJSONArray("times")
         val lessons        = jsonData.getJSONArray("lessons")
         val sdDate         = savedData.getBoolean("ClockDate", true)
