@@ -15,7 +15,8 @@ class TimetablePageAdapter(private val timetable: TimetableFragment) : RecyclerV
     }
 
     override fun onBindViewHolder(holder: TimetablePage, position: Int) {
-
+        try { timetable.updatePage(holder.itemView.findViewById(R.id.layout), position) } catch (_: Exception) { }
+        if (position == 1) timetable.updateDate()
     }
 }
 
