@@ -59,4 +59,9 @@
         <item>Суббота</item>
         <item>Воскресенье</item>
     </string-array>
+
+    <string name="placeholder_day_of_week">День недели</string>
+    <string name="placeholder_somebody">Кто-то</string>
+    <string name="placeholder_something">Что-то</string>
+    <string name="placeholder_sometime">%S минут  %S секунд</string>
 </resources>

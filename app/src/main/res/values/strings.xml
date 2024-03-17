@@ -32,7 +32,7 @@
     <string name="widget_now_time">End in:</string>
     <string name="widget_then">Then:</string>
     <string name="widget_then_time">Start in:</string>
-    
+
     <string name="time_hours_single">hour</string>
     <string name="time_hours_small">hours</string>
     <string name="time_hours_large">hours</string>
@@ -59,4 +59,19 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+
+    <string name="placeholder_day_of_week">Day of week</string>
+    <string name="placeholder_somebody">Somebody</string>
+    <string name="placeholder_something">Something</string>
+    <string name="placeholder_sometime">%S minutes  %S seconds</string>
+
+    <string name="placeholder" translatable="false">%S</string>
+    <string name="placeholder_room" translatable="false">(%S)</string>
+    <string name="placeholder_teacher" translatable="false">%S %S. %S.</string>
+    <string name="placeholder_date_time" translatable="false">%S.%S.%S   %S:%S:%S</string>
+    <string name="placeholder_date" translatable="false">%S.%S (%S)</string>
+    <string name="placeholder_time" translatable="false">%S:%S:%S</string>
+    <string name="placeholder_times" translatable="false">%S:%S\n%S:%S</string>
+    <string name="placeholder_date_text" translatable="false">%S (%S)</string>
+    <string name="placeholder_date_number" translatable="false">%S.%S.%S (%S)</string>
 </resources>
