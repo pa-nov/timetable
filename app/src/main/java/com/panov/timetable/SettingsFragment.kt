@@ -12,6 +12,7 @@ import com.google.android.material.textfield.TextInputEditText
 class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
+        val savedData = requireActivity().getSharedPreferences("SavedData", 0)
 
         val inputModifierHour = view.findViewById<TextInputEditText>(R.id.inputModifierHour)
         val inputModifierMinute = view.findViewById<TextInputEditText>(R.id.inputModifierMinute)
@@ -19,18 +20,11 @@ class SettingsFragment : Fragment() {
         val inputInitialIndex = view.findViewById<TextInputEditText>(R.id.inputInitialIndex)
         val inputJson = view.findViewById<TextInputEditText>(R.id.inputJson)
 
-        val savedData = requireActivity().getSharedPreferences("SavedData", 0)
-        val sdModifierHour = savedData.getInt("ModifierHour", 1)
-        val sdModifierMinute = savedData.getInt("ModifierMinute", 1)
-        val sdModifierSecond = savedData.getInt("ModifierSecond", 1)
-        val sdInitialIndex = savedData.getInt("InitialIndex", 1)
-        val sdJson = savedData.getString("Json", "")
-
-        inputModifierHour.setText(sdModifierHour.toString())
-        inputModifierMinute.setText(sdModifierMinute.toString())
-        inputModifierSecond.setText(sdModifierSecond.toString())
-        inputInitialIndex.setText(sdInitialIndex.toString())
-        inputJson.setText(sdJson)
+        inputModifierHour.setText(savedData.getInt("ModifierHour", 1).toString())
+        inputModifierMinute.setText(savedData.getInt("ModifierMinute", 1).toString())
+        inputModifierSecond.setText(savedData.getInt("ModifierSecond", 1).toString())
+        inputInitialIndex.setText(savedData.getInt("InitialIndex", 1).toString())
+        inputJson.setText(savedData.getString("Json", ""))
 
         view.findViewById<Button>(R.id.buttonAction).setOnClickListener {
             try {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,14 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="@color/background"
-        app:itemIconTint="@color/text"
-        app:itemTextColor="@color/text"
         app:itemActiveIndicatorStyle="@style/Widget.MaterialComponents.BottomNavigationView"
-        app:labelVisibilityMode="selected"
         app:itemIconSize="36dp"
-        app:itemPaddingTop="4dp"
+        app:itemIconTint="@color/text"
         app:itemPaddingBottom="8dp"
-        app:menu="@menu/main_menu"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:itemPaddingTop="4dp"
+        app:itemTextColor="@color/text"
+        app:labelVisibilityMode="selected"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/main_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
