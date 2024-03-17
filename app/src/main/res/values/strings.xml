@@ -16,4 +16,47 @@
     <string name="modifier_second">Modifier (Second):</string>
     <string name="initial_index">Number of the first lesson:</string>
     <string name="json">Timetable (JSON):</string>
+
+    <string name="info_name">Name:</string>
+    <string name="info_teacher">Teacher:</string>
+    <string name="info_teachers">Teachers:</string>
+    <string name="info_room">Room:</string>
+    <string name="info_rooms">Rooms:</string>
+    <string name="info_week_every">Every week</string>
+    <string name="info_week_even">Even week</string>
+    <string name="info_week_odd">Odd week</string>
+
+    <string name="widget_earlier">Earlier:</string>
+    <string name="widget_earlier_time">Ended:</string>
+    <string name="widget_now">Now:</string>
+    <string name="widget_now_time">End in:</string>
+    <string name="widget_then">Then:</string>
+    <string name="widget_then_time">Start in:</string>
+    
+    <string name="time_hours_single">hour</string>
+    <string name="time_hours_small">hours</string>
+    <string name="time_hours_large">hours</string>
+    <string name="time_minutes">min</string>
+    <string name="time_minutes_single">minute</string>
+    <string name="time_minutes_small">minutes</string>
+    <string name="time_minutes_large">minutes</string>
+    <string name="time_seconds">sec</string>
+    <string name="time_seconds_single">second</string>
+    <string name="time_seconds_small">seconds</string>
+    <string name="time_seconds_large">seconds</string>
+
+    <string name="time_ago">ago</string>
+    <string name="day_yesterday">Yesterday</string>
+    <string name="day_today">Today</string>
+    <string name="day_tomorrow">Tomorrow</string>
+
+    <string-array name="weekdays">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 </resources>
