@@ -6,6 +6,7 @@
     </style>
 
     <color name="item">#202020</color>
+    <color name="line">#202020</color>
     <color name="background">#101010</color>
     <color name="text">@color/white</color>
     <color name="button">@color/yellow</color>

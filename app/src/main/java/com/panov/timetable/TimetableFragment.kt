@@ -5,8 +5,10 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import org.json.JSONObject
@@ -62,13 +64,13 @@ class TimetableFragment : Fragment() {
 
         val dateDayOfWeek = if (tempDate.get(Calendar.DAY_OF_WEEK) > 1) tempDate.get(Calendar.DAY_OF_WEEK) - 2 else 6
         val dateWeekOddOrEven = if (tempDate.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
-        val currentTimetable = data.getJSONArray(dateWeekOddOrEven).getJSONArray(dateDayOfWeek)
-        val anotherTimetable = data.getJSONArray(if (dateWeekOddOrEven == "odd") "even" else "odd").getJSONArray(dateDayOfWeek)
+        val currentDay = data.getJSONArray(dateWeekOddOrEven).getJSONArray(dateDayOfWeek)
+        val anotherDay = data.getJSONArray(if (dateWeekOddOrEven == "odd") "even" else "odd").getJSONArray(dateDayOfWeek)
 
         layout.findViewById<TextView>(R.id.title).text = resources.getStringArray(R.array.weekdays)[dateDayOfWeek]
 
         for (i: Int in 0 until data.getJSONArray("times").length()) {
-
+            fillLesson(layout, i, currentDay.getInt(i), anotherDay.getInt(i), arrayOf(dateWeekOddOrEven, "", ""), false, false)
         }
     }
 
@@ -97,5 +99,54 @@ class TimetableFragment : Fragment() {
         val dateYear = date.get(Calendar.YEAR).toString()
 
         dateText.text = resources.getString(R.string.placeholder_date_number, dateDay, dateMonth, dateYear, dateWeek)
+    }
+
+    private fun fillLesson(layout: LinearLayout, lesson: Int, currentId: Int, anotherId: Int, date: Array<String>, isNow: Boolean, isInfo: Boolean) {
+        val lessonView = layoutInflater.inflate(R.layout.timetable_lesson, null)
+        val times = data.getJSONArray("times")
+        val lessons = data.getJSONArray("lessons")
+        val lessonData = lessons.getJSONArray(currentId)
+
+        val time = times.getJSONObject(lesson)
+        val startHour = Tools.getTwoDigitNumber(time.getInt("startHour"))
+        val startMinute = Tools.getTwoDigitNumber(time.getInt("startMinute"))
+        val endHour = Tools.getTwoDigitNumber(time.getInt("endHour"))
+        val endMinute = Tools.getTwoDigitNumber(time.getInt("endMinute"))
+
+        val name = lessonView.findViewById<TextView>(R.id.name)
+        val teacher = lessonView.findViewById<TextView>(R.id.teacher)
+        val room = lessonView.findViewById<TextView>(R.id.room)
+
+        var isWeekChangeable = currentId != anotherId
+        if (isWeekChangeable && lessonData.getString(3).isNotBlank()) {
+            lessonData.getString(3).split("|").forEach {
+                if (anotherId == it.toInt()) isWeekChangeable = false
+            }
+        }
+        if (isWeekChangeable) lessonView.findViewById<FrameLayout>(R.id.lineRight)
+            .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red))
+        if (isNow) lessonView.findViewById<FrameLayout>(R.id.lineLeft)
+            .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green))
+
+        lessonView.findViewById<TextView>(R.id.index).text =
+            resources.getString(R.string.placeholder, (lesson + initialIndex).toString())
+        lessonView.findViewById<TextView>(R.id.times).text =
+            resources.getString(R.string.placeholder_times, startHour, startMinute, endHour, endMinute)
+
+        if (currentId > 0) {
+            val teachers = lessonData.getString(2).split("|")
+            name.text = lessonData.getString(0)
+            teacher.text = resources.getString(R.string.placeholder_teacher, teachers[0], teachers[1][0], teachers[2][0])
+            room.text = resources.getString(R.string.placeholder_room, lessonData.getString(1))
+            if (!isInfo) lessonView.setOnClickListener {
+                // Show lesson info
+            }
+        } else {
+            name.visibility = View.INVISIBLE
+            teacher.visibility = View.INVISIBLE
+            room.visibility = View.INVISIBLE
+        }
+
+        layout.addView(lessonView)
     }
 }
