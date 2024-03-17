@@ -1,95 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".SettingsFragment">
 
-    <FrameLayout style="@style/App_Frame_Main"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView style="@style/App_Text_Title" android:text="@string/app_settings"/>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
-            android:layout_marginBottom="16dp"
-            android:scrollbarSize="0dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/App_TextInput"
-                    app:hintTextColor="@color/green"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp">
-                    <com.google.android.material.textfield.TextInputEditText
-                        style="@style/App_TextInputEdit"
-                        android:id="@+id/inputModifierHour"
-                        android:hint="@string/settings_modifier_hour"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/App_TextInput"
-                    app:hintTextColor="@color/green"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp">
-                    <com.google.android.material.textfield.TextInputEditText
-                        style="@style/App_TextInputEdit"
-                        android:id="@+id/inputModifierMinute"
-                        android:hint="@string/settings_modifier_minute"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/App_TextInput"
-                    app:hintTextColor="@color/green"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp">
-                    <com.google.android.material.textfield.TextInputEditText
-                        style="@style/App_TextInputEdit"
-                        android:id="@+id/inputModifierSecond"
-                        android:hint="@string/settings_modifier_second"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/App_TextInput"
-                    app:hintTextColor="@color/green"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp">
-                    <com.google.android.material.textfield.TextInputEditText
-                        style="@style/App_TextInputEdit"
-                        android:id="@+id/inputInitialIndex"
-                        android:hint="@string/settings_initial_index"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginBottom="0dp"
-                    style="@style/App_TextInput"
-                    app:hintTextColor="@color/green"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp">
-                    <com.google.android.material.textfield.TextInputEditText
-                        style="@style/App_TextInputEdit"
-                        android:id="@+id/inputJson"
-                        android:hint="@string/settings_json"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-        </ScrollView>
-
-    </FrameLayout>
-
-    <Button style="@style/App_Button_Action"
-        android:id="@+id/buttonApply"
-        android:text="@string/app_apply"
-        app:backgroundTint="@color/yellow"
-        android:layout_gravity="bottom"/>
+        android:layout_height="match_parent"
+        android:text="@string/settings" />
 
 </FrameLayout>

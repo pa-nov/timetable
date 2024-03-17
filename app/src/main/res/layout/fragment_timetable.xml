@@ -4,29 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".TimetableFragment">
 
-    <FrameLayout style="@style/App_Frame_Main"
-        android:id="@+id/frameView"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView style="@style/App_Text_Title" android:text="@string/app_timetable"/>
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
-            android:layout_marginBottom="32dp"
-            android:orientation="horizontal"/>
-
-    </FrameLayout>
-
-    <TextView style="@style/App_Button_Action"
-        android:id="@+id/textDate"
-        android:text="@string/debug_date"
-        android:layout_gravity="bottom"/>
+        android:layout_height="match_parent"
+        android:text="@string/timetable" />
 
 </FrameLayout>

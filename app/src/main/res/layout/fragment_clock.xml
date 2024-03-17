@@ -1,61 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".ClockFragment">
 
-    <FrameLayout style="@style/App_Frame_Main"
-        android:layout_marginBottom="160dp"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView style="@style/App_Text_Title" android:text="@string/app_clock"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:paddingHorizontal="8dp"
-            android:orientation="vertical">
-
-            <CheckBox style="@style/App_CheckBox_Text"
-                android:id="@+id/inputDate"
-                android:text="@string/settings_show_date"/>
-
-            <CheckBox style="@style/App_CheckBox_Text"
-                android:id="@+id/inputTitle"
-                android:text="@string/settings_show_title"/>
-
-            <CheckBox style="@style/App_CheckBox_Text"
-                android:id="@+id/inputOther"
-                android:text="@string/settings_show_other"/>
-
-        </LinearLayout>
-
-        <TextView style="@style/Widget_Title_Name"
-            android:text="@string/app_clock_hint"
-            android:padding="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"/>
-
-    </FrameLayout>
-
-    <Button style="@style/App_Button_Action"
-        android:id="@+id/buttonOpen"
-        android:text="@string/app_open"
-        app:backgroundTint="@color/yellow"
-        android:layout_marginBottom="80dp"
-        android:layout_gravity="bottom"/>
-
-    <Button style="@style/App_Button_Action"
-        android:id="@+id/buttonApply"
-        android:text="@string/app_apply"
-        app:backgroundTint="@color/yellow"
-        android:layout_gravity="bottom"/>
+        android:layout_height="match_parent"
+        android:text="@string/clock" />
 
 </FrameLayout>
