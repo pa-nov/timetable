@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".TimetableFragment">
 
+    <FrameLayout style="@style/Frame_Main">
+
+        <TextView
+            style="@style/Text_Title"
+            android:text="@string/timetable" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="32dp"
+            android:orientation="horizontal" />
+
+    </FrameLayout>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/timetable" />
+        android:id="@+id/buttonAction"
+        style="@style/Button"
+        android:layout_gravity="bottom"
+        android:text="@string/placeholder_date_number" />
 
 </FrameLayout>
