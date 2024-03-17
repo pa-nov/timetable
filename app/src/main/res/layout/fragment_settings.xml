@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,11 +24,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/TextInput"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:hintTextColor="@color/green">
+                <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputModifierHour"
@@ -38,11 +33,7 @@
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/TextInput"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:hintTextColor="@color/green">
+                <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputModifierMinute"
@@ -51,11 +42,7 @@
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/TextInput"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:hintTextColor="@color/green">
+                <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputModifierSecond"
@@ -64,11 +51,7 @@
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/TextInput"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:hintTextColor="@color/green">
+                <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputInitialIndex"
@@ -77,11 +60,7 @@
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/TextInput"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:hintTextColor="@color/green">
+                <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputJson"
@@ -97,7 +76,7 @@
 
     <Button
         android:id="@+id/buttonAction"
-        style="@style/Button_Main"
+        style="@style/Button"
         android:layout_gravity="bottom"
         android:text="@string/apply" />
 

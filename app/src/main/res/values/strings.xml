@@ -7,6 +7,10 @@
     <string name="applied">Applied</string>
     <string name="error">Error</string>
 
+    <string name="clock_hint">Rotate device to open clock</string>
+    <string name="show_date">Show date and time</string>
+    <string name="show_title">Show titles</string>
+    <string name="show_other">Show other info</string>
     <string name="modifier_hour">Modifier (Hour):</string>
     <string name="modifier_minute">Modifier (Minute):</string>
     <string name="modifier_second">Modifier (Second):</string>

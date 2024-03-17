@@ -7,6 +7,10 @@
     <string name="applied">Применено</string>
     <string name="error">Ошибка</string>
 
+    <string name="clock_hint">Поверните устройство, чтобы открыть часы</string>
+    <string name="show_date">Отображать дату и время</string>
+    <string name="show_title">Отображать заголовки</string>
+    <string name="show_other">Отображать прочую информацию</string>
     <string name="modifier_hour">Модификатор (Часы):</string>
     <string name="modifier_minute">Модификатор (Минуты):</string>
     <string name="modifier_second">Модификатор (Секунды):</string>
