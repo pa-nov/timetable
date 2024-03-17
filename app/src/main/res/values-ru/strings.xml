@@ -3,4 +3,13 @@
     <string name="clock">Часы</string>
     <string name="timetable">Расписание</string>
     <string name="settings">Настройки</string>
+    <string name="apply">Применить</string>
+    <string name="applied">Применено</string>
+    <string name="error">Ошибка</string>
+
+    <string name="modifier_hour">Модификатор (Часы):</string>
+    <string name="modifier_minute">Модификатор (Минуты):</string>
+    <string name="modifier_second">Модификатор (Секунды):</string>
+    <string name="initial_index">Номер первого предмета:</string>
+    <string name="json">Расписание (JSON):</string>
 </resources>

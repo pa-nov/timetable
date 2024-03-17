@@ -3,4 +3,13 @@
     <string name="clock">Clock</string>
     <string name="timetable">Timetable</string>
     <string name="settings">Settings</string>
+    <string name="apply">Apply</string>
+    <string name="applied">Applied</string>
+    <string name="error">Error</string>
+
+    <string name="modifier_hour">Modifier (Hour):</string>
+    <string name="modifier_minute">Modifier (Minute):</string>
+    <string name="modifier_second">Modifier (Second):</string>
+    <string name="initial_index">Number of the first lesson:</string>
+    <string name="json">Timetable (JSON):</string>
 </resources>
