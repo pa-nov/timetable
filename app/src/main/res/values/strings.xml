@@ -63,15 +63,15 @@
     <string name="placeholder_day_of_week">Day of week</string>
     <string name="placeholder_somebody">Somebody</string>
     <string name="placeholder_something">Something</string>
-    <string name="placeholder_sometime">%S minutes  %S seconds</string>
+    <string name="placeholder_sometime">%s minutes  %s seconds</string>
 
-    <string name="placeholder" translatable="false">%S</string>
-    <string name="placeholder_room" translatable="false">(%S)</string>
-    <string name="placeholder_teacher" translatable="false">%S %S. %S.</string>
-    <string name="placeholder_date_time" translatable="false">%S.%S.%S   %S:%S:%S</string>
-    <string name="placeholder_date" translatable="false">%S.%S (%S)</string>
-    <string name="placeholder_time" translatable="false">%S:%S:%S</string>
-    <string name="placeholder_times" translatable="false">%S:%S\n%S:%S</string>
-    <string name="placeholder_date_text" translatable="false">%S (%S)</string>
-    <string name="placeholder_date_number" translatable="false">%S.%S.%S (%S)</string>
+    <string name="placeholder" translatable="false">%s</string>
+    <string name="placeholder_room" translatable="false">(%s)</string>
+    <string name="placeholder_teacher" translatable="false">%s %s. %s.</string>
+    <string name="placeholder_date_time" translatable="false">%s.%s.%s   %s:%s:%s</string>
+    <string name="placeholder_date" translatable="false">%s.%s (%s)</string>
+    <string name="placeholder_time" translatable="false">%s:%s:%s</string>
+    <string name="placeholder_times" translatable="false">%s:%s\n%s:%s</string>
+    <string name="placeholder_date_text" translatable="false">%s (%s)</string>
+    <string name="placeholder_date_number" translatable="false">%s.%s.%s (%s)</string>
 </resources>
