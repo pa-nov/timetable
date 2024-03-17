@@ -101,13 +101,13 @@ class TimetableFragment : Fragment() {
         dateText.text = resources.getString(R.string.placeholder_date_number, dateDay, dateMonth, dateYear, dateWeek)
     }
 
-    private fun fillLesson(layout: LinearLayout, lesson: Int, currentId: Int, anotherId: Int, date: Array<String>, isNow: Boolean, isInfo: Boolean) {
+    private fun fillLesson(layout: LinearLayout, lessonNumber: Int, currentId: Int, anotherId: Int, date: Array<String>, isNow: Boolean, isInfo: Boolean) {
         val lessonView = layoutInflater.inflate(R.layout.timetable_lesson, null)
         val times = data.getJSONArray("times")
         val lessons = data.getJSONArray("lessons")
         val lessonData = lessons.getJSONArray(currentId)
 
-        val time = times.getJSONObject(lesson)
+        val time = times.getJSONObject(lessonNumber)
         val startHour = Tools.getTwoDigitNumber(time.getInt("startHour"))
         val startMinute = Tools.getTwoDigitNumber(time.getInt("startMinute"))
         val endHour = Tools.getTwoDigitNumber(time.getInt("endHour"))
@@ -129,7 +129,7 @@ class TimetableFragment : Fragment() {
             .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green))
 
         lessonView.findViewById<TextView>(R.id.index).text =
-            resources.getString(R.string.placeholder, (lesson + initialIndex).toString())
+            resources.getString(R.string.placeholder, (lessonNumber + initialIndex).toString())
         lessonView.findViewById<TextView>(R.id.times).text =
             resources.getString(R.string.placeholder_times, startHour, startMinute, endHour, endMinute)
 
@@ -139,7 +139,7 @@ class TimetableFragment : Fragment() {
             teacher.text = resources.getString(R.string.placeholder_teacher, teachers[0], teachers[1][0], teachers[2][0])
             room.text = resources.getString(R.string.placeholder_room, lessonData.getString(1))
             if (!isInfo) lessonView.setOnClickListener {
-                // Show lesson info
+                showInfo(lessonView, currentId, date)
             }
         } else {
             name.visibility = View.INVISIBLE
@@ -148,5 +148,9 @@ class TimetableFragment : Fragment() {
         }
 
         layout.addView(lessonView)
+    }
+
+    private fun showInfo(view: View, lessonId: Int, date: Array<String>) {
+        // Show popup view
     }
 }
