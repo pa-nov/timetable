@@ -8,7 +8,7 @@
     tools:context=".ClockActivity">
 
     <TextView
-        style="@style/Text_Title"
+        style="@style/Title"
         android:text="@string/clock"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

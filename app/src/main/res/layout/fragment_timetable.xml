@@ -11,7 +11,7 @@
         style="@style/Frame_Main">
 
         <TextView
-            style="@style/Text_Title"
+            style="@style/Title"
             android:text="@string/timetable" />
 
         <androidx.viewpager2.widget.ViewPager2

@@ -9,7 +9,7 @@
     <FrameLayout style="@style/Frame_Main">
 
         <TextView
-            style="@style/Text_Title"
+            style="@style/Title"
             android:text="@string/settings" />
 
         <ScrollView

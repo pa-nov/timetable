@@ -15,7 +15,7 @@
             android:paddingHorizontal="16dp">
 
             <TextView
-                style="@style/Text_Title"
+                style="@style/Title"
                 android:text="@string/clock" />
 
             <CheckBox
