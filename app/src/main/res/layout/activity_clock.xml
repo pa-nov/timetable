@@ -11,7 +11,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:constraint_referenced_ids="timeTitle, currentTitle, nextTitle" />
+        app:constraint_referenced_ids="currentTitle, nextTitle" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/other"

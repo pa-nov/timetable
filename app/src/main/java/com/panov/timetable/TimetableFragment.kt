@@ -1,5 +1,6 @@
 package com.panov.timetable
 
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
@@ -13,7 +14,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import org.json.JSONObject
-import java.util.Calendar
 
 class TimetableFragment : Fragment() {
     private var date = Calendar.getInstance()
