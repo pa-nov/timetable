@@ -70,7 +70,8 @@ class TimetableFragment : Fragment() {
         layout.findViewById<TextView>(R.id.title).text = resources.getStringArray(R.array.weekdays)[dateDayOfWeek]
 
         for (i: Int in 0 until data.getJSONArray("times").length()) {
-            fillLesson(layout, i, currentDay.getInt(i), anotherDay.getInt(i), arrayOf(dateWeekOddOrEven, "", ""), false, false)
+            val date = arrayOf(dateWeekOddOrEven, dateDayOfWeek.toString(), i.toString())
+            fillLesson(layout, i, currentDay.getInt(i), anotherDay.getInt(i), date, false, false)
         }
     }
 
