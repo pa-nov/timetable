@@ -17,7 +17,7 @@
 
         <FrameLayout
             style="@style/Frame_Line"
-            android:layout_height="2dp" />
+            android:layout_height="1dp" />
 
     </LinearLayout>
 

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Default">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:background">@drawable/rounded</item>
+        <item name="android:backgroundTint">@color/background</item>
+        <item name="android:gravity">center</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textColorHint">@color/title</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Frame_Main">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginBottom">80dp</item>
+        <item name="android:background">@drawable/rounded</item>
+        <item name="android:backgroundTint">@color/background</item>
+    </style>
+
+    <style name="Frame_Info">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@drawable/rounded</item>
+        <item name="android:backgroundTint">@color/background</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="Frame_Line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:background">@color/line</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:background">@drawable/rounded</item>
+        <item name="backgroundTint">@color/button</item>
+        <item name="android:gravity">center</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textColor">@color/background</item>
+        <item name="android:textSize">36dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CheckBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:buttonTint">@color/button</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textColorHint">@color/button</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="hintTextColor">@color/green</item>
+    </style>
+
+    <style name="TextInputEdit">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/rounded</item>
+        <item name="android:backgroundTint">@color/item</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
+
+</resources>
