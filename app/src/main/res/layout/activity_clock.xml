@@ -7,12 +7,87 @@
     android:layout_height="match_parent"
     tools:context=".ClockActivity">
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:constraint_referenced_ids="timeTitle, currentTitle, nextTitle" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/other"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:constraint_referenced_ids="currentText, currentSubText, nextText" />
+
     <TextView
-        style="@style/Title"
-        android:text="@string/clock"
+        android:id="@+id/timeTitle"
+        style="@style/Clock_Title"
+        android:layout_marginBottom="-24dp"
+        android:text="@string/widget_now_time"
+        app:layout_constraintBottom_toTopOf="@+id/time"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/time"
+        style="@style/Clock_Time"
+        android:text="@string/placeholder_time"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/timeAgo"
+        style="@style/Clock_Text"
+        android:layout_marginTop="-24dp"
+        android:text="@string/time_ago"
+        app:layout_constraintTop_toBottomOf="@+id/time"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/dateTime"
+        style="@style/Clock_Text"
+        android:text="@string/placeholder_date_time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/currentTitle"
+        style="@style/Clock_Title"
+        android:layout_marginBottom="-8dp"
+        android:text="@string/widget_now"
+        app:layout_constraintBottom_toTopOf="@+id/currentText"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/currentText"
+        style="@style/Clock_Text"
+        android:text="@string/placeholder_something"
+        app:layout_constraintBottom_toTopOf="@+id/time"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/currentSubText"
+        style="@style/Clock_Text"
+        android:layout_marginTop="-4dp"
+        android:text="@string/placeholder_somebody"
+        app:layout_constraintTop_toBottomOf="@+id/currentText"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/nextTitle"
+        style="@style/Clock_Title"
+        android:layout_marginBottom="-8dp"
+        android:text="@string/widget_then"
+        app:layout_constraintBottom_toTopOf="@+id/nextText"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/nextText"
+        style="@style/Clock_Text"
+        android:text="@string/placeholder_something"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
