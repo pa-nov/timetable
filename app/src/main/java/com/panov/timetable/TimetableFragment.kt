@@ -72,7 +72,7 @@ class TimetableFragment : Fragment() {
 
         for (i: Int in 0 until data.getJSONArray("times").length()) {
             val date = arrayOf(dateWeekOddOrEven, dateDayOfWeek.toString(), i.toString())
-            fillLesson(layout, i, currentDay.getInt(i), anotherDay.getInt(i), date, false, false)
+            fillLesson(layout, i, currentDay.getInt(i), anotherDay.getInt(i), date, isNow = false, isInfo = false)
         }
     }
 
