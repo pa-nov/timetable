@@ -6,7 +6,9 @@
     android:padding="16dp"
     tools:context=".TimetableFragment">
 
-    <FrameLayout style="@style/Frame_Main">
+    <FrameLayout
+        android:id="@+id/mainFrame"
+        style="@style/Frame_Main">
 
         <TextView
             style="@style/Text_Title"

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -152,6 +153,105 @@ class TimetableFragment : Fragment() {
     }
 
     private fun showInfo(view: View, lessonId: Int, date: Array<String>) {
-        // Show popup view
+        val popupView = layoutInflater.inflate(R.layout.timetable_info, null)
+        val layoutEven = popupView.findViewById<LinearLayout>(R.id.weekEven)
+        val layoutOdd = popupView.findViewById<LinearLayout>(R.id.weekOdd)
+
+        val times = data.getJSONArray("times")
+        val lessons = data.getJSONArray("lessons")
+        val weekEven = data.getJSONArray("even")
+        val weekOdd = data.getJSONArray("odd")
+        val lessonData = lessons.getJSONArray(lessonId)
+        val weekdays = resources.getStringArray(R.array.weekdays)
+
+        val lessonIds = ArrayList<Int>()
+        lessonIds.add(lessonId)
+        if (lessonData.getString(3).isNotBlank()) {
+            lessonData.getString(3).split("|").forEach { lessonIds.add(it.toInt()) }
+        }
+
+        val teachers = ArrayList<String>()
+        val rooms = ArrayList<String>()
+        teachers.add(lessonData.getString(2).split("|").joinToString(" "))
+        rooms.add(resources.getString(R.string.placeholder_room, lessonData.getString(1)))
+
+        if (lessonIds.count() > 1) {
+            lessonIds.forEach { otherId ->
+                val lesson = lessons.getJSONArray(otherId)
+                val teacher = lesson.getString(2).split("|").joinToString(" ")
+                val room = resources.getString(R.string.placeholder_room, lesson.getString(1))
+
+                var isOtherTeacher = true
+                teachers.forEach { if (teacher == it) isOtherTeacher = false }
+                if (isOtherTeacher) teachers.add(teacher)
+
+                var isOtherRoom = true
+                rooms.forEach { if (room == it) isOtherRoom = false }
+                if (isOtherRoom) rooms.add(room)
+            }
+
+            if (teachers.count() > 1) popupView.findViewById<TextView>(R.id.teacherTitle).text =
+                resources.getString(R.string.info_teachers)
+            if (rooms.count() > 1) popupView.findViewById<TextView>(R.id.roomTitle).text =
+                resources.getString(R.string.info_rooms)
+        }
+
+        popupView.findViewById<TextView>(R.id.name).text = lessonData.getString(0)
+        popupView.findViewById<TextView>(R.id.teacher).text = teachers.joinToString(",\n")
+        popupView.findViewById<TextView>(R.id.room).text = rooms.joinToString(",\n")
+
+        var isDifferent = false
+
+        var dayEven = -1
+        for (d: Int in 0 until 7) {
+            for (l: Int in 0 until times.length()) {
+                lessonIds.forEach {
+                    if (weekEven.getJSONArray(d).getInt(l) == it) {
+                        if (dayEven < d) {
+                            dayEven = d
+                            val dayName = layoutInflater.inflate(R.layout.timetable_page, null)
+                            dayName.findViewById<TextView>(R.id.title).text = weekdays[d]
+                            layoutEven.addView(dayName)
+                        }
+                        if (weekOdd.getJSONArray(d).getInt(l) != it) isDifferent = true
+                        val isNow = date.contentEquals(arrayOf("even", d.toString(), l.toString()))
+                        fillLesson(layoutEven, l, it, weekOdd.getJSONArray(d).getInt(l), date, isNow, true)
+                    }
+                }
+            }
+        }
+        if (layoutEven.childCount < 2) layoutEven.visibility = View.GONE
+
+        var dayOdd = -1
+        for (d: Int in 0 until 7) {
+            for (l: Int in 0 until times.length()) {
+                lessonIds.forEach {
+                    if (weekOdd.getJSONArray(d).getInt(l) == it) {
+                        if (dayOdd < d) {
+                            dayOdd = d
+                            val dayName = layoutInflater.inflate(R.layout.timetable_page, null)
+                            dayName.findViewById<TextView>(R.id.title).text = weekdays[d]
+                            layoutOdd.addView(dayName)
+                        }
+                        if (weekEven.getJSONArray(d).getInt(l) != it) isDifferent = true
+                        val isNow = date.contentEquals(arrayOf("odd", d.toString(), l.toString()))
+                        fillLesson(layoutOdd, l, it, weekEven.getJSONArray(d).getInt(l), date, isNow, true)
+                    }
+                }
+            }
+        }
+        if (layoutOdd.childCount < 2) layoutOdd.visibility = View.GONE
+
+        if (!isDifferent) if (date[0] == "odd") {
+            layoutEven.visibility = View.GONE
+            popupView.findViewById<TextView>(R.id.weekOddTitle).text = resources.getString(R.string.info_week_every)
+        } else {
+            layoutOdd.visibility = View.GONE
+            popupView.findViewById<TextView>(R.id.weekEvenTitle).text = resources.getString(R.string.info_week_every)
+        }
+
+        val mainFrame = requireView().findViewById<FrameLayout>(R.id.mainFrame)
+        val popupWindow = PopupWindow(popupView, mainFrame.width, mainFrame.height / 2, true)
+        popupWindow.showAsDropDown(view)
     }
 }

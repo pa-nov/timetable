@@ -18,7 +18,8 @@
 
             <LinearLayout
                 style="@style/Frame_Info"
-                android:layout_marginTop="0dp">
+                android:layout_marginTop="0dp"
+                android:padding="16dp">
 
                 <TextView
                     style="@style/Text_Info_Title"
