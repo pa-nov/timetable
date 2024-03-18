@@ -29,7 +29,7 @@ class ClockFragment : Fragment() {
             editor.putBoolean("ShowOther", inputOther.isChecked)
             editor.apply()
 
-            Toast.makeText(requireActivity(), R.string.applied, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.applied, Toast.LENGTH_SHORT).show()
         }
 
         return view

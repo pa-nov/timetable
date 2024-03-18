@@ -36,9 +36,9 @@ class SettingsFragment : Fragment() {
                 editor.putString("Json", inputJson.text.toString())
                 editor.apply()
 
-                Toast.makeText(requireActivity(), R.string.applied, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.applied, Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
-                Toast.makeText(requireActivity(), R.string.error, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.error, Toast.LENGTH_SHORT).show()
             }
         }
 

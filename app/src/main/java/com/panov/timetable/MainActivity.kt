@@ -33,11 +33,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun selectItem(item: Int): Boolean {
         selectedItem = item
-        requestedOrientation = if (item == R.id.menu_clock) {
-            ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-        } else {
-            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        }
+        requestedOrientation =
+            if (item == R.id.menu_clock) ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+            else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         val fragment = when (item) {
             R.id.menu_clock -> clockFragment
             R.id.menu_settings -> settingsFragment
