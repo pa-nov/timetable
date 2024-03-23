@@ -31,10 +31,11 @@ class ClockActivity : AppCompatActivity() {
             data = JSONObject(this.getSharedPreferences("SavedTimetable", 0).getString("Json", "") ?: "")
         } catch (e: Exception) {
             findViewById<TextView>(R.id.time).text = resources.getString(R.string.error)
-            findViewById<TextView>(R.id.timeAgo).visibility = View.INVISIBLE
-            findViewById<TextView>(R.id.dateTime).visibility = View.INVISIBLE
             findViewById<Group>(R.id.title).visibility = View.INVISIBLE
             findViewById<Group>(R.id.other).visibility = View.INVISIBLE
+            findViewById<TextView>(R.id.timeAgo).visibility = View.INVISIBLE
+            findViewById<TextView>(R.id.dateTime).visibility = View.INVISIBLE
+            findViewById<TextView>(R.id.timeTitle).visibility = View.INVISIBLE
             return
         }
         val savedData = this.getSharedPreferences("SavedClock", 0)
@@ -70,12 +71,12 @@ class ClockActivity : AppCompatActivity() {
                 val time = (dateHour.toInt() * 60 + dateMinute.toInt()) * 60 + dateSecond.toInt()
                 val timetableData = Tools.getTimetableData(data, time, dateDayOfWeek, dateWeekOddOrEven)
 
-                val currentTimes = times.getJSONObject(timetableData.currentNumber)
-                val currentTime =
-                    ((currentTimes.getInt("endHour") * 60 + currentTimes.getInt("endMinute")) * 60 + (86400 * timetableData.currentDays)) - time
+                val lessonTimes = times.getJSONObject(timetableData.currentNumber)
+                val lessonTime =
+                    ((lessonTimes.getInt("endHour") * 60 + lessonTimes.getInt("endMinute")) * 60 + (86400 * timetableData.currentDays)) - time
 
-                findViewById<TextView>(R.id.time).text = Tools.getTime(currentTime.toDouble())
-                findViewById<TextView>(R.id.timeAgo).visibility = if (currentTime < 0) View.VISIBLE else View.INVISIBLE
+                findViewById<TextView>(R.id.time).text = Tools.getTime(lessonTime.toDouble())
+                findViewById<TextView>(R.id.timeAgo).visibility = if (lessonTime < 0) View.VISIBLE else View.INVISIBLE
 
                 if (showDate) {
                     val dateDay = Tools.getTwoDigitNumber(date.get(Calendar.DAY_OF_MONTH))
@@ -87,17 +88,18 @@ class ClockActivity : AppCompatActivity() {
                 }
                 if (showTitle) {
                     findViewById<TextView>(R.id.timeTitle).text =
-                        if (currentTime < 0) resources.getString(R.string.widget_earlier_time)
+                        if (lessonTime < 0) resources.getString(R.string.widget_earlier_time)
                         else resources.getString(R.string.widget_now_time)
                     findViewById<TextView>(R.id.currentTitle).text =
-                        if (currentTime < 0) resources.getString(R.string.widget_earlier)
+                        if (lessonTime < 0) resources.getString(R.string.widget_earlier)
                         else resources.getString(R.string.widget_now)
                 }
                 if (showOther) {
-                    findViewById<TextView>(R.id.currentText).text = lessons.getJSONArray(timetableData.currentId).getString(0)
-                    findViewById<TextView>(R.id.currentSubText).text =
-                        lessons.getJSONArray(timetableData.currentId).getString(2).split("|").joinToString(" ")
-                    findViewById<TextView>(R.id.nextText).text = lessons.getJSONArray(timetableData.nextId).getString(0)
+                    val currentData = lessons.getJSONArray(timetableData.currentId)
+                    val nextData = lessons.getJSONArray(timetableData.nextId)
+                    findViewById<TextView>(R.id.currentText).text = currentData.getString(0)
+                    findViewById<TextView>(R.id.currentSubText).text = currentData.getString(2).split("|").joinToString(" ")
+                    findViewById<TextView>(R.id.nextText).text = nextData.getString(0)
                 }
 
                 handler.postDelayed(this, (1001 - date.get(Calendar.MILLISECOND)).toLong())
