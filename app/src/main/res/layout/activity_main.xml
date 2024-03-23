@@ -17,13 +17,11 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="@color/background"
-        app:itemActiveIndicatorStyle="@style/Widget.MaterialComponents.BottomNavigationView"
-        app:itemIconSize="36dp"
-        app:itemIconTint="@color/text"
-        app:itemPaddingBottom="8dp"
-        app:itemPaddingTop="4dp"
-        app:itemTextColor="@color/text"
-        app:labelVisibilityMode="selected"
+        app:itemIconSize="32dp"
+        app:itemIconTint="@color/button_navigation"
+        app:itemRippleColor="@color/item"
+        app:itemTextAppearanceActiveBoldEnabled="false"
+        app:itemTextColor="@color/button_navigation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/main_menu" />
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Timetable" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Timetable" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/white</item>
         <item name="android:statusBarColor">@color/background</item>
     </style>
@@ -14,4 +14,5 @@
     <color name="button">@color/blue</color>
 
     <color name="widget_background">#F3F3F3</color>
+
 </resources>
