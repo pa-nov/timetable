@@ -38,7 +38,7 @@ class TimetableFragment : Fragment() {
 
         val pages = view.findViewById<ViewPager2>(R.id.pages)
         pages.adapter = TimetablePageAdapter(fragment)
-        pages.setCurrentItem(1, false)
+        pages.post { pages.setCurrentItem(1, false) }
         pages.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
