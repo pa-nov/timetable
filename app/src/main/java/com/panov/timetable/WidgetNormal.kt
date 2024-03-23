@@ -13,19 +13,19 @@ import kotlin.math.abs
 
 class WidgetNormal : AppWidgetProvider() {
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        for (appWidgetId in appWidgetIds) updateAppWidget(context, appWidgetManager, appWidgetId)
+        for (appWidgetId in appWidgetIds) updateNormalWidget(context, appWidgetManager, appWidgetId)
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
         super.onReceive(context, intent)
         if (context != null && intent != null) {
             val action = (intent.action ?: "").split("|")
-            if (action[0] == "update") updateAppWidget(context, AppWidgetManager.getInstance(context), action[1].toInt())
+            if (action[0] == "update") updateNormalWidget(context, AppWidgetManager.getInstance(context), action[1].toInt())
         }
     }
 }
 
-internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
+internal fun updateNormalWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
     val views = RemoteViews(context.packageName, R.layout.widget_normal)
     val intent = Intent(context, WidgetNormal::class.java)
     intent.action = "update|${appWidgetId}"
