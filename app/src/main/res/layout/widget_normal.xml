@@ -32,7 +32,7 @@
         style="@style/Widget_Title"
         android:layout_width="wrap_content"
         android:layout_below="@id/day_of_week"
-        android:text="@string/widget_now" />
+        android:text="@string/now" />
 
     <TextView
         android:id="@+id/current_text"
@@ -53,7 +53,7 @@
         android:id="@+id/current_time_title"
         style="@style/Widget_Title_Small"
         android:layout_below="@id/current_text"
-        android:text="@string/widget_now_time" />
+        android:text="@string/now_time" />
 
     <TextView
         android:id="@+id/current_time_text"
@@ -66,7 +66,7 @@
         style="@style/Widget_Title"
         android:layout_width="wrap_content"
         android:layout_above="@id/next_time_title"
-        android:text="@string/widget_then" />
+        android:text="@string/then" />
 
     <TextView
         android:id="@+id/next_text"
@@ -87,7 +87,7 @@
         android:id="@+id/next_time_title"
         style="@style/Widget_Title_Small"
         android:layout_above="@id/next_time_text"
-        android:text="@string/widget_then_time" />
+        android:text="@string/then_time" />
 
     <TextView
         android:id="@+id/next_time_text"

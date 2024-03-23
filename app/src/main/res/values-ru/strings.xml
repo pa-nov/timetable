@@ -26,12 +26,12 @@
     <string name="info_week_even">Чётная неделя</string>
     <string name="info_week_odd">Нечётная неделя</string>
 
-    <string name="widget_earlier">Ранее:</string>
-    <string name="widget_earlier_time">Закончилось:</string>
-    <string name="widget_now">Сейчас:</string>
-    <string name="widget_now_time">Закончится через:</string>
-    <string name="widget_then">Далее:</string>
-    <string name="widget_then_time">Начнётся через:</string>
+    <string name="earlier">Ранее:</string>
+    <string name="earlier_time">Закончилось:</string>
+    <string name="now">Сейчас:</string>
+    <string name="now_time">Закончится через:</string>
+    <string name="then">Далее:</string>
+    <string name="then_time">Начнётся через:</string>
 
     <string name="time_hours_single">час</string>
     <string name="time_hours_small">часа</string>

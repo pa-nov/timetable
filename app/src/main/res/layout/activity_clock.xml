@@ -23,7 +23,7 @@
         android:id="@+id/timeTitle"
         style="@style/Clock_Title"
         android:layout_marginBottom="-24dp"
-        android:text="@string/widget_now_time"
+        android:text="@string/now_time"
         app:layout_constraintBottom_toTopOf="@+id/time"
         tools:ignore="MissingConstraints" />
 
@@ -54,7 +54,7 @@
         android:id="@+id/currentTitle"
         style="@style/Clock_Title"
         android:layout_marginBottom="-8dp"
-        android:text="@string/widget_now"
+        android:text="@string/now"
         app:layout_constraintBottom_toTopOf="@+id/currentText"
         tools:ignore="MissingConstraints" />
 
@@ -78,7 +78,7 @@
         android:id="@+id/nextTitle"
         style="@style/Clock_Title"
         android:layout_marginBottom="-8dp"
-        android:text="@string/widget_then"
+        android:text="@string/then"
         app:layout_constraintBottom_toTopOf="@+id/nextText"
         tools:ignore="MissingConstraints" />
 

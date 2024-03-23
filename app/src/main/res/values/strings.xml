@@ -26,12 +26,12 @@
     <string name="info_week_even">Even week</string>
     <string name="info_week_odd">Odd week</string>
 
-    <string name="widget_earlier">Earlier:</string>
-    <string name="widget_earlier_time">Ended:</string>
-    <string name="widget_now">Now:</string>
-    <string name="widget_now_time">End in:</string>
-    <string name="widget_then">Then:</string>
-    <string name="widget_then_time">Start in:</string>
+    <string name="earlier">Earlier:</string>
+    <string name="earlier_time">Ended:</string>
+    <string name="now">Now:</string>
+    <string name="now_time">End in:</string>
+    <string name="then">Then:</string>
+    <string name="then_time">Start in:</string>
 
     <string name="time_hours_single">hour</string>
     <string name="time_hours_small">hours</string>

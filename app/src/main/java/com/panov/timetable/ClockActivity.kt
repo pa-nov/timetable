@@ -87,12 +87,10 @@ class ClockActivity : AppCompatActivity() {
                     )
                 }
                 if (showTitle) {
-                    findViewById<TextView>(R.id.timeTitle).text =
-                        if (lessonTime < 0) resources.getString(R.string.widget_earlier_time)
-                        else resources.getString(R.string.widget_now_time)
-                    findViewById<TextView>(R.id.currentTitle).text =
-                        if (lessonTime < 0) resources.getString(R.string.widget_earlier)
-                        else resources.getString(R.string.widget_now)
+                    findViewById<TextView>(R.id.timeTitle).text = if (lessonTime < 0) resources.getString(R.string.earlier_time)
+                    else resources.getString(R.string.now_time)
+                    findViewById<TextView>(R.id.currentTitle).text = if (lessonTime < 0) resources.getString(R.string.earlier)
+                    else resources.getString(R.string.now)
                 }
                 if (showOther) {
                     val currentData = lessons.getJSONArray(timetableData.currentId)
