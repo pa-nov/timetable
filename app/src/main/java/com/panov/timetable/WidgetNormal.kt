@@ -68,7 +68,7 @@ internal fun updateNormalWidget(context: Context, appWidgetManager: AppWidgetMan
             ((currentTimes.getInt("endHour") * 60 + currentTimes.getInt("endMinute")) * 60 + (86400 * timetableData.currentDays)) - time
         val nextTimes = times.getJSONObject(timetableData.nextNumber)
         val nextTime =
-            ((nextTimes.getInt("endHour") * 60 + nextTimes.getInt("endMinute")) * 60 + (86400 * timetableData.nextDays)) - time
+            ((nextTimes.getInt("startHour") * 60 + nextTimes.getInt("startMinute")) * 60 + (86400 * timetableData.nextDays)) - time
 
         views.setTextViewText(R.id.day_of_week, context.resources.getStringArray(R.array.weekdays)[dateDayOfWeek])
         views.setTextViewText(R.id.date, context.getString(R.string.placeholder_date, dateDay, dateMonth, dateWeek))
