@@ -28,69 +28,69 @@
         android:text="@string/placeholder_time" />
 
     <TextView
-        android:id="@+id/now_title"
+        android:id="@+id/current_title"
         style="@style/Widget_Title"
         android:layout_width="wrap_content"
         android:layout_below="@id/day_of_week"
         android:text="@string/widget_now" />
 
     <TextView
-        android:id="@+id/now_text"
+        android:id="@+id/current_text"
         style="@style/Widget_Text"
         android:layout_below="@id/day_of_week"
         android:layout_marginStart="4dp"
-        android:layout_toEndOf="@id/now_title"
+        android:layout_toEndOf="@id/current_title"
         android:text="@string/placeholder_something" />
 
     <TextView
-        android:id="@+id/now_subtext"
+        android:id="@+id/current_subtext"
         style="@style/Widget_Text"
         android:layout_below="@id/day_of_week"
         android:gravity="end"
         android:text="@string/placeholder_room" />
 
     <TextView
-        android:id="@+id/now_time_title"
+        android:id="@+id/current_time_title"
         style="@style/Widget_Title_Small"
-        android:layout_below="@id/now_text"
+        android:layout_below="@id/current_text"
         android:text="@string/widget_now_time" />
 
     <TextView
-        android:id="@+id/now_time_text"
+        android:id="@+id/current_time_text"
         style="@style/Widget_Text"
-        android:layout_below="@id/now_time_title"
+        android:layout_below="@id/current_time_title"
         android:text="@string/placeholder_sometime" />
 
     <TextView
-        android:id="@+id/then_title"
+        android:id="@+id/next_title"
         style="@style/Widget_Title"
         android:layout_width="wrap_content"
-        android:layout_above="@id/then_time_title"
+        android:layout_above="@id/next_time_title"
         android:text="@string/widget_then" />
 
     <TextView
-        android:id="@+id/then_text"
+        android:id="@+id/next_text"
         style="@style/Widget_Text"
-        android:layout_above="@id/then_time_title"
+        android:layout_above="@id/next_time_title"
         android:layout_marginStart="4dp"
-        android:layout_toEndOf="@id/then_title"
+        android:layout_toEndOf="@id/next_title"
         android:text="@string/placeholder_something" />
 
     <TextView
-        android:id="@+id/then_subtext"
+        android:id="@+id/next_subtext"
         style="@style/Widget_Text"
-        android:layout_above="@id/then_time_title"
+        android:layout_above="@id/next_time_title"
         android:gravity="end"
         android:text="@string/placeholder_room" />
 
     <TextView
-        android:id="@+id/then_time_title"
+        android:id="@+id/next_time_title"
         style="@style/Widget_Title_Small"
-        android:layout_above="@id/then_time_text"
+        android:layout_above="@id/next_time_text"
         android:text="@string/widget_then_time" />
 
     <TextView
-        android:id="@+id/then_time_text"
+        android:id="@+id/next_time_text"
         style="@style/Widget_Text"
         android:layout_alignParentBottom="true"
         android:text="@string/placeholder_sometime" />
