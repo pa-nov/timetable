@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_small"
+    android:backgroundTint="@color/widget_background"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/day_of_week"
+        style="@style/Widget_DayOfWeek"
+        android:layout_alignParentTop="true"
+        android:text="@string/placeholder_day_of_week" />
+
+    <TextView
+        android:id="@+id/date"
+        style="@style/Widget_DateTime"
+        android:layout_alignParentTop="true"
+        android:gravity="end"
+        android:text="@string/placeholder_date" />
+
+    <TextView
+        android:id="@+id/time"
+        style="@style/Widget_DateTime"
+        android:layout_below="@id/date"
+        android:gravity="end"
+        android:text="@string/placeholder_time" />
+
+    <TextView
+        android:id="@+id/current_title"
+        style="@style/Widget_Title"
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/now" />
+
+    <TextView
+        android:id="@+id/current_text"
+        style="@style/Widget_Text"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@id/current_title"
+        android:text="@string/placeholder_something" />
+
+    <TextView
+        android:id="@+id/current_subtext"
+        style="@style/Widget_Text"
+        android:layout_alignParentBottom="true"
+        android:gravity="end"
+        android:text="@string/placeholder_room" />
+
+</RelativeLayout>

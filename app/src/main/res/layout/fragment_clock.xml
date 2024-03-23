@@ -1,61 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".ClockFragment">
 
-    <FrameLayout style="@style/App_Frame_Main"
-        android:layout_marginBottom="160dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView style="@style/App_Text_Title" android:text="@string/app_clock"/>
+    <FrameLayout style="@style/Frame_Main">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:paddingHorizontal="8dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp">
 
-            <CheckBox style="@style/App_CheckBox_Text"
+            <TextView
+                style="@style/Title"
+                android:text="@string/clock" />
+
+            <CheckBox
                 android:id="@+id/inputDate"
-                android:text="@string/settings_show_date"/>
+                style="@style/CheckBox"
+                android:text="@string/show_date" />
 
-            <CheckBox style="@style/App_CheckBox_Text"
+            <CheckBox
                 android:id="@+id/inputTitle"
-                android:text="@string/settings_show_title"/>
+                style="@style/CheckBox"
+                android:text="@string/show_title" />
 
-            <CheckBox style="@style/App_CheckBox_Text"
+            <CheckBox
                 android:id="@+id/inputOther"
-                android:text="@string/settings_show_other"/>
+                style="@style/CheckBox"
+                android:text="@string/show_other" />
 
         </LinearLayout>
 
-        <TextView style="@style/Widget_Title_Name"
-            android:text="@string/app_clock_hint"
+        <TextView
+            style="@style/Text"
+            android:layout_gravity="bottom"
             android:padding="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"/>
+            android:text="@string/clock_hint" />
 
     </FrameLayout>
 
-    <Button style="@style/App_Button_Action"
-        android:id="@+id/buttonOpen"
-        android:text="@string/app_open"
-        app:backgroundTint="@color/yellow"
-        android:layout_marginBottom="80dp"
-        android:layout_gravity="bottom"/>
-
-    <Button style="@style/App_Button_Action"
-        android:id="@+id/buttonApply"
-        android:text="@string/app_apply"
-        app:backgroundTint="@color/yellow"
-        android:layout_gravity="bottom"/>
+    <Button
+        android:id="@+id/buttonAction"
+        style="@style/Button"
+        android:layout_gravity="bottom"
+        android:text="@string/apply" />
 
 </FrameLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Timetable" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:statusBarColor">@color/background</item>
+    </style>
+
+    <color name="item">#202020</color>
+    <color name="line">#202020</color>
+    <color name="background">#101010</color>
+    <color name="title">#808080</color>
+    <color name="text">@color/white</color>
+    <color name="button">@color/yellow</color>
+
+    <color name="widget_background">#1A1A1A</color>
+
+</resources>

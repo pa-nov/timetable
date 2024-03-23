@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Timetable</string>
-    <string name="app_clock">Clock</string>
-    <string name="app_timetable">Timetable</string>
-    <string name="app_settings">Settings</string>
-    <string name="app_open">Open</string>
-    <string name="app_apply">Apply</string>
-    <string name="app_applied">Applied</string>
-    <string name="app_error">Error</string>
-    <string name="app_clock_hint">To open the clock, you need to turn the phone and press the «Open» button</string>
+    <string name="clock">Clock</string>
+    <string name="timetable">Timetable</string>
+    <string name="settings">Settings</string>
+    <string name="apply">Apply</string>
+    <string name="applied">Applied</string>
+    <string name="error">Error</string>
 
-    <string name="info_title">Name:</string>
+    <string name="clock_hint">Rotate device to open clock</string>
+    <string name="show_date">Show date and time</string>
+    <string name="show_title">Show titles</string>
+    <string name="show_other">Show other info</string>
+    <string name="modifier_hour">Modifier (Hour):</string>
+    <string name="modifier_minute">Modifier (Minute):</string>
+    <string name="modifier_second">Modifier (Second):</string>
+    <string name="initial_index">Number of the first lesson:</string>
+    <string name="json">Timetable (JSON):</string>
+
+    <string name="info_name">Name:</string>
     <string name="info_teacher">Teacher:</string>
     <string name="info_teachers">Teachers:</string>
     <string name="info_room">Room:</string>
@@ -19,21 +26,12 @@
     <string name="info_week_even">Even week</string>
     <string name="info_week_odd">Odd week</string>
 
-    <string name="settings_show_title">Show titles</string>
-    <string name="settings_show_date">Show date and time</string>
-    <string name="settings_show_other">Show other info</string>
-    <string name="settings_modifier_hour">Modifier (Hour):</string>
-    <string name="settings_modifier_minute">Modifier (Minute):</string>
-    <string name="settings_modifier_second">Modifier (Second):</string>
-    <string name="settings_initial_index">Number of the first lesson:</string>
-    <string name="settings_json">Timetable (JSON):</string>
-
-    <string name="widget_earlier">Earlier:</string>
-    <string name="widget_earlier_time">Ended:</string>
-    <string name="widget_now">Now:</string>
-    <string name="widget_now_time">End in:</string>
-    <string name="widget_then">Then:</string>
-    <string name="widget_then_time">Start in:</string>
+    <string name="earlier">Earlier:</string>
+    <string name="earlier_time">Ended:</string>
+    <string name="now">Now:</string>
+    <string name="now_time">End in:</string>
+    <string name="then">Then:</string>
+    <string name="then_time">Start in:</string>
 
     <string name="time_hours_single">hour</string>
     <string name="time_hours_small">hours</string>
@@ -62,22 +60,18 @@
         <item>Sunday</item>
     </string-array>
 
-    <string name="debug_weekday">Day of week</string>
-    <string name="debug_somebody">Somebody</string>
-    <string name="debug_something">Something</string>
-    <string name="debug_sometime">00 minute  00 second</string>
-    <string name="debug_index">00</string>
-    <string name="debug_date">00.00 (00)</string>
-    <string name="debug_time">00:00:00</string>
-    <string name="debug_date_time">00.00.0000   00:00:00</string>
-    <string name="debug_times">00:00\n00:00</string>
-    <string name="debug_room">(000)</string>
+    <string name="placeholder_day_of_week">Day of week</string>
+    <string name="placeholder_somebody">Somebody</string>
+    <string name="placeholder_something">Something</string>
+    <string name="placeholder_sometime">%s minutes  %s seconds</string>
 
-    <string name="placeholder">%s</string>
-    <string name="placeholder_teacher">%s %s. %s.</string>
-    <string name="placeholder_room">(%s)</string>
-    <string name="placeholder_date_text">%s (%s)</string>
-    <string name="placeholder_date_number">%s.%s.%s (%s)</string>
-    <string name="placeholder_date_time">%s.%s.%s   %s:%s:%s</string>
-    <string name="placeholder_times">%s:%s\n%s:%s</string>
+    <string name="placeholder" translatable="false">%s</string>
+    <string name="placeholder_room" translatable="false">(%s)</string>
+    <string name="placeholder_teacher" translatable="false">%s %s. %s.</string>
+    <string name="placeholder_date_time" translatable="false">%s.%s.%s   %s:%s:%s</string>
+    <string name="placeholder_date" translatable="false">%s.%s (%s)</string>
+    <string name="placeholder_time" translatable="false">%s:%s:%s</string>
+    <string name="placeholder_times" translatable="false">%s:%s\n%s:%s</string>
+    <string name="placeholder_date_text" translatable="false">%s (%s)</string>
+    <string name="placeholder_date_number" translatable="false">%s.%s.%s (%s)</string>
 </resources>

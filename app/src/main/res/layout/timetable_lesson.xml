@@ -1,76 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="64dp">
 
-    <TextView style="@style/App_Timetable_Index"
-        android:id="@+id/textIndex"
-        android:text="@string/debug_index"
-        android:layout_width="32dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="2dp"
-        android:layout_alignParentStart="true"/>
+    <TextView
+        android:id="@+id/index"
+        style="@style/Timetable_Index"
+        android:text="@string/placeholder" />
 
-    <FrameLayout
-        android:id="@+id/frameViewLeft"
-        android:layout_width="2dp"
-        android:layout_height="64dp"
-        android:background="@color/gray_dark"
+    <TextView
+        android:id="@+id/times"
+        style="@style/Timetable_Times"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="2dp"
-        android:layout_alignParentStart="true"/>
+        android:text="@string/placeholder_times" />
 
-    <TextView style="@style/App_Timetable_Time"
-        android:id="@+id/textTime"
-        android:text="@string/debug_times"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginBottom="2dp"
-        android:layout_alignParentStart="true"/>
+    <TextView
+        android:id="@+id/name"
+        style="@style/Timetable_Name"
+        android:text="@string/placeholder_something" />
+
+    <TextView
+        android:id="@+id/teacher"
+        style="@style/Timetable_Data"
+        android:gravity="bottom"
+        android:text="@string/placeholder_somebody" />
+
+    <TextView
+        android:id="@+id/room"
+        style="@style/Timetable_Data"
+        android:gravity="bottom|end"
+        android:text="@string/placeholder_room" />
 
     <FrameLayout
-        android:id="@+id/frameViewRight"
+        style="@style/Frame_Line"
+        android:layout_width="1dp"
+        android:layout_alignParentStart="true" />
+
+    <FrameLayout
+        style="@style/Frame_Line"
+        android:layout_width="1dp"
+        android:layout_alignParentEnd="true" />
+
+    <FrameLayout
+        style="@style/Frame_Line"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true" />
+
+    <FrameLayout
+        style="@style/Frame_Line"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true" />
+
+    <FrameLayout
+        android:id="@+id/lineLeft"
+        style="@style/Frame_Line"
         android:layout_width="2dp"
-        android:layout_height="64dp"
-        android:background="@color/gray_dark"
-        android:layout_marginStart="98dp"
-        android:layout_marginBottom="2dp"
-        android:layout_alignParentStart="true"/>
-
-    <TextView style="@style/App_Timetable_Name"
-        android:id="@+id/textName"
-        android:text="@string/debug_something"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_alignParentTop="true"/>
-
-    <TextView style="@style/App_Timetable_Data"
-        android:id="@+id/textTeacher"
-        android:text="@string/debug_somebody"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginBottom="2dp"
-        android:layout_alignParentBottom="true"/>
-
-    <TextView style="@style/App_Timetable_Data"
-        android:id="@+id/textRoom"
-        android:text="@string/debug_room"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        tools:ignore="RelativeOverlap" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="31dp" />
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/gray_dark"
-        android:layout_alignParentBottom="true"/>
+        android:id="@+id/lineRight"
+        style="@style/Frame_Line"
+        android:layout_width="2dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="95dp" />
 
 </RelativeLayout>

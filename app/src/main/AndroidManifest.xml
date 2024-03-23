@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <application
         android:icon="@mipmap/app_icon"
-        android:label="@string/app_name"
+        android:label="@string/timetable"
         android:theme="@style/Theme.Timetable">
 
-        <activity android:name=".MainActivity" android:exported="true" android:screenOrientation="portrait" >
+        <activity android:name=".MainActivity" android:exported="true" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -14,19 +15,20 @@
 
         <activity android:name=".ClockActivity" android:exported="false" />
 
-        <receiver android:name=".TimetableWidgetNormal" android:exported="false" >
+        <receiver android:name=".WidgetNormal" android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/timetable_widget_normal_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_normal_info" />
         </receiver>
 
-        <receiver android:name=".TimetableWidgetSmall" android:exported="false" >
+        <receiver android:name=".WidgetSmall" android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/timetable_widget_small_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_small_info" />
         </receiver>
 
     </application>
+
 </manifest>

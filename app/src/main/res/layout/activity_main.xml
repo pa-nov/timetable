@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,22 +7,22 @@
     tools:context=".MainActivity">
 
     <FrameLayout
-        android:id="@+id/container"
+        android:id="@+id/mainView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="64dp"/>
+        android:layout_marginBottom="64dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/menu"
+        android:id="@+id/mainMenu"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/gray_very_dark"
-        app:itemRippleColor="@color/gray"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:itemIconSize="36dp"
-        app:labelVisibilityMode="selected"
+        android:background="@color/background"
+        app:itemIconSize="32dp"
+        app:itemIconTint="@color/button_navigation"
+        app:itemRippleColor="@color/item"
+        app:itemTextAppearanceActiveBoldEnabled="false"
+        app:itemTextColor="@color/button_navigation"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu_items"/>
+        app:menu="@menu/main_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

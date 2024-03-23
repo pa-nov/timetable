@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Расписание</string>
-    <string name="app_clock">Часы</string>
-    <string name="app_timetable">Расписание</string>
-    <string name="app_settings">Настройки</string>
-    <string name="app_open">Открыть</string>
-    <string name="app_apply">Применить</string>
-    <string name="app_applied">Применено</string>
-    <string name="app_error">Ошибка</string>
-    <string name="app_clock_hint">Чтобы открыть часы, нужно повернуть телефон и нажать кнопку «Открыть»</string>
+    <string name="clock">Часы</string>
+    <string name="timetable">Расписание</string>
+    <string name="settings">Настройки</string>
+    <string name="apply">Применить</string>
+    <string name="applied">Применено</string>
+    <string name="error">Ошибка</string>
 
-    <string name="info_title">Название:</string>
+    <string name="clock_hint">Поверните устройство, чтобы открыть часы</string>
+    <string name="show_date">Отображать дату и время</string>
+    <string name="show_title">Отображать заголовки</string>
+    <string name="show_other">Отображать прочую информацию</string>
+    <string name="modifier_hour">Модификатор (Часы):</string>
+    <string name="modifier_minute">Модификатор (Минуты):</string>
+    <string name="modifier_second">Модификатор (Секунды):</string>
+    <string name="initial_index">Номер первого предмета:</string>
+    <string name="json">Расписание (JSON):</string>
+
+    <string name="info_name">Название:</string>
     <string name="info_teacher">Преподаватель:</string>
     <string name="info_teachers">Преподаватели:</string>
     <string name="info_room">Кабинет:</string>
@@ -19,21 +26,12 @@
     <string name="info_week_even">Чётная неделя</string>
     <string name="info_week_odd">Нечётная неделя</string>
 
-    <string name="settings_show_title">Отображать заголовки</string>
-    <string name="settings_show_date">Отображать дату и время</string>
-    <string name="settings_show_other">Отображать прочую информацию</string>
-    <string name="settings_modifier_hour">Модификатор (Часы):</string>
-    <string name="settings_modifier_minute">Модификатор (Минуты):</string>
-    <string name="settings_modifier_second">Модификатор (Секунды):</string>
-    <string name="settings_initial_index">Номер первого предмета:</string>
-    <string name="settings_json">Расписание (JSON):</string>
-
-    <string name="widget_earlier">Ранее:</string>
-    <string name="widget_earlier_time">Закончилось:</string>
-    <string name="widget_now">Сейчас:</string>
-    <string name="widget_now_time">Закончится через:</string>
-    <string name="widget_then">Далее:</string>
-    <string name="widget_then_time">Начнётся через:</string>
+    <string name="earlier">Ранее:</string>
+    <string name="earlier_time">Закончилось:</string>
+    <string name="now">Сейчас:</string>
+    <string name="now_time">Закончится через:</string>
+    <string name="then">Далее:</string>
+    <string name="then_time">Начнётся через:</string>
 
     <string name="time_hours_single">час</string>
     <string name="time_hours_small">часа</string>
@@ -62,22 +60,8 @@
         <item>Воскресенье</item>
     </string-array>
 
-    <string name="debug_weekday">День недели</string>
-    <string name="debug_somebody">Кто-то</string>
-    <string name="debug_something">Что-то</string>
-    <string name="debug_sometime">00 минут  00 секунд</string>
-    <string name="debug_index">00</string>
-    <string name="debug_date">00.00 (00)</string>
-    <string name="debug_time">00:00:00</string>
-    <string name="debug_date_time">00.00.0000   00:00:00</string>
-    <string name="debug_times">00:00\n00:00</string>
-    <string name="debug_room">(000)</string>
-
-    <string name="placeholder">%s</string>
-    <string name="placeholder_teacher">%s %s. %s.</string>
-    <string name="placeholder_room">(%s)</string>
-    <string name="placeholder_date_text">%s (%s)</string>
-    <string name="placeholder_date_number">%s.%s.%s (%s)</string>
-    <string name="placeholder_date_time">%s.%s.%s   %s:%s:%s</string>
-    <string name="placeholder_times">%s:%s\n%s:%s</string>
+    <string name="placeholder_day_of_week">День недели</string>
+    <string name="placeholder_somebody">Кто-то</string>
+    <string name="placeholder_something">Что-то</string>
+    <string name="placeholder_sometime">%s минут  %s секунд</string>
 </resources>
