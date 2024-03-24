@@ -59,6 +59,21 @@ class TimetableFragment : Fragment() {
         return view
     }
 
+    fun resetDate() {
+        val view = view
+        if (view != null && view.findViewById<TextView>(R.id.buttonAction).text != resources.getString(R.string.error)) {
+            val fragment: TimetableFragment = this
+            date = Calendar.getInstance()
+            date.firstDayOfWeek = Calendar.MONDAY
+            date.minimalDaysInFirstWeek = 4
+            tempPosition = 0
+
+            val pages = view.findViewById<ViewPager2>(R.id.pages)
+            pages.adapter = TimetablePageAdapter(fragment)
+            pages.setCurrentItem(1, false)
+        }
+    }
+
     fun updatePage(layout: LinearLayout, position: Int) {
         val tempDate = date.clone() as Calendar
         tempDate.add(Calendar.DAY_OF_YEAR, position - 1)
