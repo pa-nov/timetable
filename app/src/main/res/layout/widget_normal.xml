@@ -2,97 +2,115 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/rounded_small"
-    android:backgroundTint="@color/widget_background"
-    android:padding="12dp">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/day_of_week"
-        style="@style/Widget_DayOfWeek"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="@string/placeholder_day_of_week" />
+        android:background="@drawable/rounded_small"
+        android:backgroundTint="@color/widget_background"
+        android:padding="12dp">
 
-    <TextView
-        android:id="@+id/date"
-        style="@style/Widget_DateTime"
-        android:layout_alignParentTop="true"
-        android:gravity="end"
-        android:text="@string/placeholder_date" />
+        <TextView
+            android:id="@+id/day_of_week"
+            style="@style/Widget_DayOfWeek"
+            android:layout_alignParentTop="true"
+            android:text="@string/placeholder_day_of_week" />
 
-    <TextView
-        android:id="@+id/time"
-        style="@style/Widget_DateTime"
-        android:layout_below="@id/date"
-        android:gravity="end"
-        android:text="@string/placeholder_time" />
+        <TextView
+            android:id="@+id/date"
+            style="@style/Widget_DateTime"
+            android:layout_alignParentTop="true"
+            android:gravity="end"
+            android:text="@string/placeholder_date" />
 
-    <TextView
-        android:id="@+id/current_title"
-        style="@style/Widget_Title"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/day_of_week"
-        android:text="@string/now" />
+        <TextView
+            android:id="@+id/time"
+            style="@style/Widget_DateTime"
+            android:layout_below="@id/date"
+            android:gravity="end"
+            android:text="@string/placeholder_time" />
 
-    <TextView
-        android:id="@+id/current_text"
-        style="@style/Widget_Text"
-        android:layout_below="@id/day_of_week"
-        android:layout_marginStart="4dp"
-        android:layout_toEndOf="@id/current_title"
-        android:text="@string/placeholder_something" />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/current_subtext"
-        style="@style/Widget_Text"
-        android:layout_below="@id/day_of_week"
-        android:gravity="end"
-        android:text="@string/placeholder_room" />
-
-    <TextView
-        android:id="@+id/current_time_title"
-        style="@style/Widget_Title_Small"
-        android:layout_below="@id/current_text"
-        android:text="@string/now_time" />
-
-    <TextView
-        android:id="@+id/current_time_text"
-        style="@style/Widget_Text"
-        android:layout_below="@id/current_time_title"
-        android:text="@string/placeholder_sometime" />
-
-    <TextView
-        android:id="@+id/next_title"
-        style="@style/Widget_Title"
-        android:layout_width="wrap_content"
-        android:layout_above="@id/next_time_title"
-        android:text="@string/then" />
-
-    <TextView
-        android:id="@+id/next_text"
-        style="@style/Widget_Text"
-        android:layout_above="@id/next_time_title"
-        android:layout_marginStart="4dp"
-        android:layout_toEndOf="@id/next_title"
-        android:text="@string/placeholder_something" />
-
-    <TextView
-        android:id="@+id/next_subtext"
-        style="@style/Widget_Text"
-        android:layout_above="@id/next_time_title"
-        android:gravity="end"
-        android:text="@string/placeholder_room" />
-
-    <TextView
-        android:id="@+id/next_time_title"
-        style="@style/Widget_Title_Small"
-        android:layout_above="@id/next_time_text"
-        android:text="@string/then_time" />
-
-    <TextView
-        android:id="@+id/next_time_text"
-        style="@style/Widget_Text"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="@string/placeholder_sometime" />
+        android:background="@drawable/rounded_small"
+        android:backgroundTint="@color/widget_background"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/current_title"
+            style="@style/Widget_Title"
+            android:layout_width="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/now" />
+
+        <TextView
+            android:id="@+id/current_text"
+            style="@style/Widget_Text"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="4dp"
+            android:layout_toEndOf="@id/current_title"
+            android:text="@string/placeholder_something" />
+
+        <TextView
+            android:id="@+id/current_subtext"
+            style="@style/Widget_Text"
+            android:layout_alignParentTop="true"
+            android:gravity="end"
+            android:text="@string/placeholder_room" />
+
+        <TextView
+            android:id="@+id/current_time_title"
+            style="@style/Widget_Title_Small"
+            android:layout_below="@id/current_title"
+            android:text="@string/now_time" />
+
+        <TextView
+            android:id="@+id/current_time_text"
+            style="@style/Widget_Text"
+            android:layout_below="@id/current_time_title"
+            android:paddingBottom="8dp"
+            android:text="@string/placeholder_sometime" />
+
+        <TextView
+            android:id="@+id/next_title"
+            style="@style/Widget_Title"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/current_time_text"
+            android:text="@string/then" />
+
+        <TextView
+            android:id="@+id/next_text"
+            style="@style/Widget_Text"
+            android:layout_below="@id/current_time_text"
+            android:layout_marginStart="4dp"
+            android:layout_toEndOf="@id/next_title"
+            android:text="@string/placeholder_something" />
+
+        <TextView
+            android:id="@+id/next_subtext"
+            style="@style/Widget_Text"
+            android:layout_below="@id/current_time_text"
+            android:gravity="end"
+            android:text="@string/placeholder_room" />
+
+        <TextView
+            android:id="@+id/next_time_title"
+            style="@style/Widget_Title_Small"
+            android:layout_below="@id/next_title"
+            android:text="@string/then_time" />
+
+        <TextView
+            android:id="@+id/next_time_text"
+            style="@style/Widget_Text"
+            android:layout_below="@id/next_time_title"
+            android:text="@string/placeholder_sometime" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
