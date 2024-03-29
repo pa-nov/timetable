@@ -91,6 +91,7 @@
         <item name="android:textColor">@color/text</item>
         <item name="android:textSize">16dp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:theme">@style/Theme.CheckBox</item>
     </style>
 
     <style name="TextInput">
