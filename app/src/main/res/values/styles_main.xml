@@ -28,7 +28,6 @@
     <style name="Frame_Info">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">10dp</item>
         <item name="android:background">@drawable/rounded</item>
         <item name="android:backgroundTint">@color/background</item>
         <item name="android:orientation">vertical</item>
@@ -68,8 +67,6 @@
     <style name="TextInput">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginHorizontal">16dp</item>
-        <item name="android:layout_marginTop">16dp</item>
         <item name="android:textColorHint">@color/button</item>
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxStrokeWidthFocused">0dp</item>

@@ -22,7 +22,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:divider="@drawable/divider"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:showDividers="middle">
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
 
