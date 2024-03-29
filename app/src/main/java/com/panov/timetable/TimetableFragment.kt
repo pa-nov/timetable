@@ -60,16 +60,14 @@ class TimetableFragment : Fragment() {
     }
 
     fun resetDate() {
+        date = Calendar.getInstance()
+        date.firstDayOfWeek = Calendar.MONDAY
+        date.minimalDaysInFirstWeek = 4
         val view = view
         if (view != null && view.findViewById<TextView>(R.id.button_action).text != resources.getString(R.string.error)) {
-            val fragment: TimetableFragment = this
-            date = Calendar.getInstance()
-            date.firstDayOfWeek = Calendar.MONDAY
-            date.minimalDaysInFirstWeek = 4
             tempPosition = 0
-
             val pages = view.findViewById<ViewPager2>(R.id.pages)
-            pages.adapter = TimetablePageAdapter(fragment)
+            pages.adapter = TimetablePageAdapter(this)
             pages.setCurrentItem(1, false)
         }
     }
