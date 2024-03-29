@@ -30,12 +30,12 @@ class ClockActivity : AppCompatActivity() {
         try {
             data = JSONObject(this.getSharedPreferences("SavedTimetable", 0).getString("Json", "") ?: "")
         } catch (e: Exception) {
-            findViewById<TextView>(R.id.time).text = resources.getString(R.string.error)
+            findViewById<TextView>(R.id.text_time).text = resources.getString(R.string.error)
             findViewById<Group>(R.id.title).visibility = View.INVISIBLE
             findViewById<Group>(R.id.other).visibility = View.INVISIBLE
-            findViewById<TextView>(R.id.timeAgo).visibility = View.INVISIBLE
-            findViewById<TextView>(R.id.dateTime).visibility = View.INVISIBLE
-            findViewById<TextView>(R.id.timeTitle).visibility = View.INVISIBLE
+            findViewById<TextView>(R.id.text_time_ago).visibility = View.INVISIBLE
+            findViewById<TextView>(R.id.text_date_time).visibility = View.INVISIBLE
+            findViewById<TextView>(R.id.title_time).visibility = View.INVISIBLE
             return
         }
         val savedData = this.getSharedPreferences("SavedClock", 0)
@@ -45,9 +45,9 @@ class ClockActivity : AppCompatActivity() {
         val showTitle = savedData.getBoolean("ShowTitle", false)
         val showOther = savedData.getBoolean("ShowOther", false)
 
-        if (!showDate) findViewById<TextView>(R.id.dateTime).visibility = View.INVISIBLE
+        if (!showDate) findViewById<TextView>(R.id.text_date_time).visibility = View.INVISIBLE
         if (!showTitle) {
-            findViewById<TextView>(R.id.timeTitle).visibility = View.INVISIBLE
+            findViewById<TextView>(R.id.title_time).visibility = View.INVISIBLE
             findViewById<Group>(R.id.title).visibility = View.INVISIBLE
         }
         if (!showOther) {
@@ -75,29 +75,29 @@ class ClockActivity : AppCompatActivity() {
                 val lessonTime =
                     ((lessonTimes.getInt("endHour") * 60 + lessonTimes.getInt("endMinute")) * 60 + (86400 * timetableData.currentDays)) - time
 
-                findViewById<TextView>(R.id.time).text = Tools.getTime(lessonTime.toDouble())
-                findViewById<TextView>(R.id.timeAgo).visibility = if (lessonTime < 0) View.VISIBLE else View.INVISIBLE
+                findViewById<TextView>(R.id.text_time).text = Tools.getTime(lessonTime.toDouble())
+                findViewById<TextView>(R.id.text_time_ago).visibility = if (lessonTime < 0) View.VISIBLE else View.INVISIBLE
 
                 if (showDate) {
                     val dateDay = Tools.getTwoDigitNumber(date.get(Calendar.DAY_OF_MONTH))
                     val dateMonth = Tools.getTwoDigitNumber(date.get(Calendar.MONTH) + 1)
                     val dateYear = date.get(Calendar.YEAR).toString()
-                    findViewById<TextView>(R.id.dateTime).text = resources.getString(
+                    findViewById<TextView>(R.id.text_date_time).text = resources.getString(
                         R.string.placeholder_date_time, dateDay, dateMonth, dateYear, dateHour, dateMinute, dateSecond
                     )
                 }
                 if (showTitle) {
-                    findViewById<TextView>(R.id.timeTitle).text = if (lessonTime < 0) resources.getString(R.string.earlier_time)
+                    findViewById<TextView>(R.id.title_time).text = if (lessonTime < 0) resources.getString(R.string.earlier_time)
                     else resources.getString(R.string.now_time)
-                    findViewById<TextView>(R.id.currentTitle).text = if (lessonTime < 0) resources.getString(R.string.earlier)
+                    findViewById<TextView>(R.id.title_current).text = if (lessonTime < 0) resources.getString(R.string.earlier)
                     else resources.getString(R.string.now)
                 }
                 if (showOther) {
                     val currentData = lessons.getJSONArray(timetableData.currentId)
                     val nextData = lessons.getJSONArray(timetableData.nextId)
-                    findViewById<TextView>(R.id.currentText).text = currentData.getString(0)
-                    findViewById<TextView>(R.id.currentSubText).text = currentData.getString(2).split("|").joinToString(" ")
-                    findViewById<TextView>(R.id.nextText).text = nextData.getString(0)
+                    findViewById<TextView>(R.id.text_current).text = currentData.getString(0)
+                    findViewById<TextView>(R.id.text_current_other).text = currentData.getString(2).split("|").joinToString(" ")
+                    findViewById<TextView>(R.id.text_next).text = nextData.getString(0)
                 }
 
                 handler.postDelayed(this, (1001 - date.get(Calendar.MILLISECOND)).toLong())

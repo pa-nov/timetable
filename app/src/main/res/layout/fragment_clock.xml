@@ -19,17 +19,17 @@
                 android:text="@string/clock" />
 
             <CheckBox
-                android:id="@+id/inputDate"
+                android:id="@+id/input_date"
                 style="@style/CheckBox"
                 android:text="@string/show_date" />
 
             <CheckBox
-                android:id="@+id/inputTitle"
+                android:id="@+id/input_title"
                 style="@style/CheckBox"
                 android:text="@string/show_title" />
 
             <CheckBox
-                android:id="@+id/inputOther"
+                android:id="@+id/input_other"
                 style="@style/CheckBox"
                 android:text="@string/show_other" />
 
@@ -44,7 +44,7 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/buttonAction"
+        android:id="@+id/button_action"
         style="@style/Button"
         android:layout_gravity="bottom"
         android:text="@string/apply" />

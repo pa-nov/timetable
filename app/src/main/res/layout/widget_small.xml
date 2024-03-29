@@ -8,42 +8,42 @@
     android:padding="12dp">
 
     <TextView
-        android:id="@+id/day_of_week"
+        android:id="@+id/text_day"
         style="@style/Widget_DayOfWeek"
         android:layout_alignParentTop="true"
         android:text="@string/placeholder_day_of_week" />
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/text_date"
         style="@style/Widget_DateTime"
         android:layout_alignParentTop="true"
         android:gravity="end"
         android:text="@string/placeholder_date" />
 
     <TextView
-        android:id="@+id/time"
+        android:id="@+id/text_time"
         style="@style/Widget_DateTime"
-        android:layout_below="@id/date"
+        android:layout_below="@id/text_date"
         android:gravity="end"
         android:text="@string/placeholder_time" />
 
     <TextView
-        android:id="@+id/current_title"
+        android:id="@+id/title_current"
         style="@style/Widget_Title"
         android:layout_width="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="@string/now" />
 
     <TextView
-        android:id="@+id/current_text"
+        android:id="@+id/text_current"
         style="@style/Widget_Text"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="4dp"
-        android:layout_toEndOf="@id/current_title"
+        android:layout_toEndOf="@id/title_current"
         android:text="@string/placeholder_something" />
 
     <TextView
-        android:id="@+id/current_subtext"
+        android:id="@+id/text_current_other"
         style="@style/Widget_Text"
         android:layout_alignParentBottom="true"
         android:gravity="end"

@@ -7,7 +7,7 @@
     tools:context=".TimetableFragment">
 
     <FrameLayout
-        android:id="@+id/mainFrame"
+        android:id="@+id/frame_main"
         style="@style/Frame_Main">
 
         <TextView
@@ -25,7 +25,7 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/buttonAction"
+        android:id="@+id/button_action"
         style="@style/Button"
         android:layout_gravity="bottom"
         android:text="@string/placeholder_date_number" />

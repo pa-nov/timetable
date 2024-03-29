@@ -66,17 +66,17 @@ internal fun updateSmallWidget(context: Context, appWidgetManager: AppWidgetMana
         val currentTime =
             ((currentTimes.getInt("endHour") * 60 + currentTimes.getInt("endMinute")) * 60 + (86400 * timetableData.currentDays)) - time
 
-        views.setTextViewText(R.id.day_of_week, context.resources.getStringArray(R.array.weekdays)[dateDayOfWeek])
-        views.setTextViewText(R.id.date, context.getString(R.string.placeholder_date, dateDay, dateMonth, dateWeek))
-        views.setTextViewText(R.id.time, context.getString(R.string.placeholder_time, dateHour, dateMinute, dateSecond))
+        views.setTextViewText(R.id.text_day, context.resources.getStringArray(R.array.weekdays)[dateDayOfWeek])
+        views.setTextViewText(R.id.text_date, context.getString(R.string.placeholder_date, dateDay, dateMonth, dateWeek))
+        views.setTextViewText(R.id.text_time, context.getString(R.string.placeholder_time, dateHour, dateMinute, dateSecond))
 
-        views.setTextViewText(R.id.current_title, context.getString(if (currentTime > 0) R.string.now else R.string.then))
+        views.setTextViewText(R.id.title_current, context.getString(if (currentTime > 0) R.string.now else R.string.then))
 
         val lessonId = lessons.getJSONArray(if (currentTime > 0) timetableData.currentId else timetableData.nextId)
-        views.setTextViewText(R.id.current_text, lessonId.getString(0))
-        views.setTextViewText(R.id.current_subtext, context.getString(R.string.placeholder_room, lessonId.getString(1)))
+        views.setTextViewText(R.id.text_current, lessonId.getString(0))
+        views.setTextViewText(R.id.text_current_other, context.getString(R.string.placeholder_room, lessonId.getString(1)))
     } catch (e: Exception) {
-        views.setTextViewText(R.id.day_of_week, context.getString(R.string.error))
+        views.setTextViewText(R.id.text_day, context.getString(R.string.error))
     }
 
     appWidgetManager.updateAppWidget(appWidgetId, views)

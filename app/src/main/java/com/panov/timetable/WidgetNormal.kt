@@ -70,39 +70,39 @@ internal fun updateNormalWidget(context: Context, appWidgetManager: AppWidgetMan
         val nextTime =
             ((nextTimes.getInt("startHour") * 60 + nextTimes.getInt("startMinute")) * 60 + (86400 * timetableData.nextDays)) - time
 
-        views.setTextViewText(R.id.day_of_week, context.resources.getStringArray(R.array.weekdays)[dateDayOfWeek])
-        views.setTextViewText(R.id.date, context.getString(R.string.placeholder_date, dateDay, dateMonth, dateWeek))
-        views.setTextViewText(R.id.time, context.getString(R.string.placeholder_time, dateHour, dateMinute, dateSecond))
+        views.setTextViewText(R.id.text_day, context.resources.getStringArray(R.array.weekdays)[dateDayOfWeek])
+        views.setTextViewText(R.id.text_date, context.getString(R.string.placeholder_date, dateDay, dateMonth, dateWeek))
+        views.setTextViewText(R.id.text_time, context.getString(R.string.placeholder_time, dateHour, dateMinute, dateSecond))
 
         views.setTextViewText(
-            R.id.current_title, context.getString(if (currentTime > 0) R.string.now else R.string.earlier)
+            R.id.title_current, context.getString(if (currentTime > 0) R.string.now else R.string.earlier)
         )
         views.setTextViewText(
-            R.id.current_time_title, context.getString(if (currentTime > 0) R.string.now_time else R.string.earlier_time)
+            R.id.title_current_time, context.getString(if (currentTime > 0) R.string.now_time else R.string.earlier_time)
         )
 
         val currentColor = ContextCompat.getColor(context, if (currentTime > 0) R.color.text else R.color.title)
         val nextColor =
             ContextCompat.getColor(context, if (currentTime > 0 || timetableData.nextDays > 0) R.color.title else R.color.text)
 
-        views.setTextColor(R.id.current_text, currentColor)
-        views.setTextColor(R.id.current_subtext, currentColor)
-        views.setTextColor(R.id.current_time_text, currentColor)
-        views.setTextColor(R.id.next_text, nextColor)
-        views.setTextColor(R.id.next_subtext, nextColor)
-        views.setTextColor(R.id.next_time_text, nextColor)
+        views.setTextColor(R.id.text_current, currentColor)
+        views.setTextColor(R.id.text_current_other, currentColor)
+        views.setTextColor(R.id.text_current_time, currentColor)
+        views.setTextColor(R.id.text_next, nextColor)
+        views.setTextColor(R.id.text_next_other, nextColor)
+        views.setTextColor(R.id.text_next_time, nextColor)
 
         val currentLesson = lessons.getJSONArray(timetableData.currentId)
-        views.setTextViewText(R.id.current_text, currentLesson.getString(0))
-        views.setTextViewText(R.id.current_subtext, context.getString(R.string.placeholder_room, currentLesson.getString(1)))
-        views.setTextViewText(R.id.current_time_text, Tools.getTimeText(currentTime.toDouble(), context.resources))
+        views.setTextViewText(R.id.text_current, currentLesson.getString(0))
+        views.setTextViewText(R.id.text_current_other, context.getString(R.string.placeholder_room, currentLesson.getString(1)))
+        views.setTextViewText(R.id.text_current_time, Tools.getTimeText(currentTime.toDouble(), context.resources))
 
         val nextLesson = lessons.getJSONArray(timetableData.nextId)
-        views.setTextViewText(R.id.next_text, nextLesson.getString(0))
-        views.setTextViewText(R.id.next_subtext, context.getString(R.string.placeholder_room, nextLesson.getString(1)))
-        views.setTextViewText(R.id.next_time_text, Tools.getTimeText(nextTime.toDouble(), context.resources))
+        views.setTextViewText(R.id.text_next, nextLesson.getString(0))
+        views.setTextViewText(R.id.text_next_other, context.getString(R.string.placeholder_room, nextLesson.getString(1)))
+        views.setTextViewText(R.id.text_next_time, Tools.getTimeText(nextTime.toDouble(), context.resources))
     } catch (e: Exception) {
-        views.setTextViewText(R.id.day_of_week, context.getString(R.string.error))
+        views.setTextViewText(R.id.text_day, context.getString(R.string.error))
     }
 
     appWidgetManager.updateAppWidget(appWidgetId, views)

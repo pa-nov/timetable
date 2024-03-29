@@ -11,14 +11,14 @@ import com.google.android.material.textfield.TextInputEditText
 
 class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_settings, container, false)
+        val fragment = inflater.inflate(R.layout.fragment_settings, container, false)
         val savedData = requireActivity().getSharedPreferences("SavedTimetable", 0)
 
-        val inputModifierHour = view.findViewById<TextInputEditText>(R.id.inputModifierHour)
-        val inputModifierMinute = view.findViewById<TextInputEditText>(R.id.inputModifierMinute)
-        val inputModifierSecond = view.findViewById<TextInputEditText>(R.id.inputModifierSecond)
-        val inputInitialIndex = view.findViewById<TextInputEditText>(R.id.inputInitialIndex)
-        val inputJson = view.findViewById<TextInputEditText>(R.id.inputJson)
+        val inputModifierHour = fragment.findViewById<TextInputEditText>(R.id.input_modifier_hour)
+        val inputModifierMinute = fragment.findViewById<TextInputEditText>(R.id.input_modifier_minute)
+        val inputModifierSecond = fragment.findViewById<TextInputEditText>(R.id.input_modifier_second)
+        val inputInitialIndex = fragment.findViewById<TextInputEditText>(R.id.input_initial_index)
+        val inputJson = fragment.findViewById<TextInputEditText>(R.id.input_json)
 
         inputModifierHour.setText(savedData.getInt("ModifierHour", 1).toString())
         inputModifierMinute.setText(savedData.getInt("ModifierMinute", 1).toString())
@@ -26,7 +26,7 @@ class SettingsFragment : Fragment() {
         inputInitialIndex.setText(savedData.getInt("InitialIndex", 1).toString())
         inputJson.setText(savedData.getString("Json", ""))
 
-        view.findViewById<Button>(R.id.buttonAction).setOnClickListener {
+        fragment.findViewById<Button>(R.id.button_action).setOnClickListener {
             try {
                 val editor = savedData.edit()
                 editor.putInt("ModifierHour", inputModifierHour.text.toString().toInt())
@@ -42,6 +42,6 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        return view
+        return fragment
     }
 }

@@ -21,10 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val mainMenu = findViewById<BottomNavigationView>(R.id.mainMenu)
-        mainMenu.menu.forEach { mainMenu.findViewById<View>(it.itemId).setOnLongClickListener { true } }
-        mainMenu.setOnItemSelectedListener { selectItem(it.itemId) }
-        mainMenu.findViewById<View>(selectedItem).performClick()
+        val menuMain = findViewById<BottomNavigationView>(R.id.menu_main)
+        menuMain.menu.forEach { menuMain.findViewById<View>(it.itemId).setOnLongClickListener { true } }
+        menuMain.setOnItemSelectedListener { selectItem(it.itemId) }
+        menuMain.findViewById<View>(selectedItem).performClick()
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             startActivity(Intent(applicationContext, ClockActivity::class.java))
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_settings -> settingsFragment
             else -> timetableFragment
         }
-        supportFragmentManager.beginTransaction().replace(R.id.mainView, fragment).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.view_main, fragment).commit()
         return true
     }
 }

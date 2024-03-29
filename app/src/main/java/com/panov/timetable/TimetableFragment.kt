@@ -22,8 +22,8 @@ class TimetableFragment : Fragment() {
     private var tempPosition = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_timetable, container, false)
-        val fragment: TimetableFragment = this
+        val fragment = inflater.inflate(R.layout.fragment_timetable, container, false)
+        val fragmentClass: TimetableFragment = this
         date.firstDayOfWeek = Calendar.MONDAY
         date.minimalDaysInFirstWeek = 4
 
@@ -32,12 +32,12 @@ class TimetableFragment : Fragment() {
             data = JSONObject(savedData.getString("Json", "") ?: "")
             initialIndex = savedData.getInt("InitialIndex", 1)
         } catch (e: Exception) {
-            view.findViewById<TextView>(R.id.buttonAction).text = resources.getString(R.string.error)
-            return view
+            fragment.findViewById<TextView>(R.id.button_action).text = resources.getString(R.string.error)
+            return fragment
         }
 
-        val pages = view.findViewById<ViewPager2>(R.id.pages)
-        pages.adapter = TimetablePageAdapter(fragment)
+        val pages = fragment.findViewById<ViewPager2>(R.id.pages)
+        pages.adapter = TimetablePageAdapter(fragmentClass)
         pages.post { pages.setCurrentItem(1, false) }
         pages.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -50,18 +50,18 @@ class TimetableFragment : Fragment() {
                 if (state == ViewPager2.SCROLL_STATE_IDLE) {
                     date.add(Calendar.DAY_OF_YEAR, tempPosition)
                     tempPosition = 0
-                    pages.adapter = TimetablePageAdapter(fragment)
+                    pages.adapter = TimetablePageAdapter(fragmentClass)
                     pages.setCurrentItem(1, false)
                 }
             }
         })
 
-        return view
+        return fragment
     }
 
     fun resetDate() {
         val view = view
-        if (view != null && view.findViewById<TextView>(R.id.buttonAction).text != resources.getString(R.string.error)) {
+        if (view != null && view.findViewById<TextView>(R.id.button_action).text != resources.getString(R.string.error)) {
             val fragment: TimetableFragment = this
             date = Calendar.getInstance()
             date.firstDayOfWeek = Calendar.MONDAY
@@ -93,7 +93,7 @@ class TimetableFragment : Fragment() {
 
     fun updateDate() {
         val dateWeek = Tools.getTwoDigitNumber(date.get(Calendar.WEEK_OF_YEAR))
-        val dateText = requireView().findViewById<TextView>(R.id.buttonAction)
+        val dateText = requireView().findViewById<TextView>(R.id.button_action)
 
         if (DateUtils.isToday(date.timeInMillis + DateUtils.DAY_IN_MILLIS)) {
             dateText.text =
@@ -130,9 +130,9 @@ class TimetableFragment : Fragment() {
         val endHour = Tools.getTwoDigitNumber(time.getInt("endHour"))
         val endMinute = Tools.getTwoDigitNumber(time.getInt("endMinute"))
 
-        val name = lessonView.findViewById<TextView>(R.id.name)
-        val teacher = lessonView.findViewById<TextView>(R.id.teacher)
-        val room = lessonView.findViewById<TextView>(R.id.room)
+        val name = lessonView.findViewById<TextView>(R.id.text_name)
+        val teacher = lessonView.findViewById<TextView>(R.id.text_teacher)
+        val room = lessonView.findViewById<TextView>(R.id.text_room)
 
         var isWeekChangeable = currentId != anotherId
         if (isWeekChangeable && lessonData.getString(3).isNotBlank()) {
@@ -140,14 +140,14 @@ class TimetableFragment : Fragment() {
                 if (anotherId == it.toInt()) isWeekChangeable = false
             }
         }
-        if (isWeekChangeable) lessonView.findViewById<FrameLayout>(R.id.lineRight)
+        if (isWeekChangeable) lessonView.findViewById<FrameLayout>(R.id.line_right)
             .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red))
-        if (isNow) lessonView.findViewById<FrameLayout>(R.id.lineLeft)
+        if (isNow) lessonView.findViewById<FrameLayout>(R.id.line_left)
             .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green))
 
-        lessonView.findViewById<TextView>(R.id.index).text =
+        lessonView.findViewById<TextView>(R.id.text_index).text =
             resources.getString(R.string.placeholder, (lessonNumber + initialIndex).toString())
-        lessonView.findViewById<TextView>(R.id.times).text =
+        lessonView.findViewById<TextView>(R.id.text_times).text =
             resources.getString(R.string.placeholder_times, startHour, startMinute, endHour, endMinute)
 
         if (currentId > 0) {
@@ -169,8 +169,8 @@ class TimetableFragment : Fragment() {
 
     private fun showInfo(view: View, lessonId: Int, date: Array<String>) {
         val popupView = layoutInflater.inflate(R.layout.timetable_info, null)
-        val layoutEven = popupView.findViewById<LinearLayout>(R.id.weekEven)
-        val layoutOdd = popupView.findViewById<LinearLayout>(R.id.weekOdd)
+        val layoutEven = popupView.findViewById<LinearLayout>(R.id.frame_week_even)
+        val layoutOdd = popupView.findViewById<LinearLayout>(R.id.frame_week_odd)
 
         val times = data.getJSONArray("times")
         val lessons = data.getJSONArray("lessons")
@@ -205,15 +205,15 @@ class TimetableFragment : Fragment() {
                 if (isOtherRoom) rooms.add(room)
             }
 
-            if (teachers.count() > 1) popupView.findViewById<TextView>(R.id.teacherTitle).text =
+            if (teachers.count() > 1) popupView.findViewById<TextView>(R.id.title_teacher).text =
                 resources.getString(R.string.info_teachers)
-            if (rooms.count() > 1) popupView.findViewById<TextView>(R.id.roomTitle).text =
+            if (rooms.count() > 1) popupView.findViewById<TextView>(R.id.title_room).text =
                 resources.getString(R.string.info_rooms)
         }
 
-        popupView.findViewById<TextView>(R.id.name).text = lessonData.getString(0)
-        popupView.findViewById<TextView>(R.id.teacher).text = teachers.joinToString(",\n")
-        popupView.findViewById<TextView>(R.id.room).text = rooms.joinToString(",\n")
+        popupView.findViewById<TextView>(R.id.text_name).text = lessonData.getString(0)
+        popupView.findViewById<TextView>(R.id.text_teacher).text = teachers.joinToString(",\n")
+        popupView.findViewById<TextView>(R.id.text_room).text = rooms.joinToString(",\n")
 
         var isDifferent = false
 
@@ -259,14 +259,14 @@ class TimetableFragment : Fragment() {
 
         if (!isDifferent) if (date[0] == "odd") {
             layoutEven.visibility = View.GONE
-            popupView.findViewById<TextView>(R.id.weekOddTitle).text = resources.getString(R.string.info_week_every)
+            popupView.findViewById<TextView>(R.id.title_week_odd).text = resources.getString(R.string.info_week_every)
         } else {
             layoutOdd.visibility = View.GONE
-            popupView.findViewById<TextView>(R.id.weekEvenTitle).text = resources.getString(R.string.info_week_every)
+            popupView.findViewById<TextView>(R.id.title_week_even).text = resources.getString(R.string.info_week_every)
         }
 
-        val mainFrame = requireView().findViewById<FrameLayout>(R.id.mainFrame)
-        val popupWindow = PopupWindow(popupView, mainFrame.width, mainFrame.height / 2, true)
+        val frameMain = requireView().findViewById<FrameLayout>(R.id.frame_main)
+        val popupWindow = PopupWindow(popupView, frameMain.width, frameMain.height / 2, true)
         popupWindow.showAsDropDown(view)
     }
 }

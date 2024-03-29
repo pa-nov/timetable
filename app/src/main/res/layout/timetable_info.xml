@@ -26,38 +26,38 @@
                     android:text="@string/info_name" />
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/text_name"
                     style="@style/Info_Text"
                     android:text="@string/placeholder_something" />
 
                 <TextView
-                    android:id="@+id/teacherTitle"
+                    android:id="@+id/title_teacher"
                     style="@style/Info_Title"
                     android:text="@string/info_teacher" />
 
                 <TextView
-                    android:id="@+id/teacher"
+                    android:id="@+id/text_teacher"
                     style="@style/Info_Text"
                     android:text="@string/placeholder_somebody" />
 
                 <TextView
-                    android:id="@+id/roomTitle"
+                    android:id="@+id/title_room"
                     style="@style/Info_Title"
                     android:text="@string/info_room" />
 
                 <TextView
-                    android:id="@+id/room"
+                    android:id="@+id/text_room"
                     style="@style/Info_Text"
                     android:text="@string/placeholder_room" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/weekEven"
+                android:id="@+id/frame_week_even"
                 style="@style/Frame_Info">
 
                 <TextView
-                    android:id="@+id/weekEvenTitle"
+                    android:id="@+id/title_week_even"
                     style="@style/Info_Title"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/info_week_even" />
@@ -65,11 +65,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/weekOdd"
+                android:id="@+id/frame_week_odd"
                 style="@style/Frame_Info">
 
                 <TextView
-                    android:id="@+id/weekOddTitle"
+                    android:id="@+id/title_week_odd"
                     style="@style/Info_Title"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/info_week_odd" />
