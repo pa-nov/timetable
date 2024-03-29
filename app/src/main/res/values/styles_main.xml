@@ -110,6 +110,7 @@
         <item name="android:backgroundTint">@color/item</item>
         <item name="android:textColor">@color/text</item>
         <item name="android:text">@string/error</item>
+        <item name="android:theme">@style/Theme.TextInputEdit</item>
     </style>
 
 </resources>
