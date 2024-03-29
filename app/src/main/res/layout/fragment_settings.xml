@@ -20,12 +20,41 @@
             android:scrollbarSize="0dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/Frame_Vertical"
                 android:divider="@drawable/divider"
-                android:orientation="vertical"
                 android:paddingHorizontal="16dp"
                 android:showDividers="middle">
+
+                <LinearLayout style="@style/Frame_Vertical">
+
+                    <TextView
+                        style="@style/SubTitle"
+                        android:text="@string/theme" />
+
+                    <LinearLayout
+                        style="@style/Frame_Horizontal"
+                        android:layout_height="32dp"
+                        android:background="@drawable/rounded"
+                        android:backgroundTint="@color/text">
+
+                        <Button
+                            android:id="@+id/button_system"
+                            style="@style/ButtonToggle"
+                            android:text="@string/theme_system" />
+
+                        <Button
+                            android:id="@+id/button_dark"
+                            style="@style/ButtonToggle"
+                            android:text="@string/theme_dark" />
+
+                        <Button
+                            android:id="@+id/button_light"
+                            style="@style/ButtonToggle"
+                            android:text="@string/theme_light" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
 

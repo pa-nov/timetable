@@ -35,7 +35,7 @@ internal fun updateNormalWidget(context: Context, appWidgetManager: AppWidgetMan
     )
 
     try {
-        val savedData = context.getSharedPreferences("SavedTimetable", 0)
+        val savedData = context.getSharedPreferences("Timetable", 0)
         val data = JSONObject(savedData.getString("Json", "") ?: "")
         val date = Calendar.getInstance()
         date.firstDayOfWeek = Calendar.MONDAY

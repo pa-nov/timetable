@@ -11,6 +11,10 @@
     <string name="show_date">Отображать дату и время</string>
     <string name="show_title">Отображать заголовки</string>
     <string name="show_other">Отображать прочую информацию</string>
+    <string name="theme">Тема:</string>
+    <string name="theme_system">Системная</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="theme_light">Светлая</string>
     <string name="modifier_hour">Модификатор (Часы):</string>
     <string name="modifier_minute">Модификатор (Минуты):</string>
     <string name="modifier_second">Модификатор (Секунды):</string>

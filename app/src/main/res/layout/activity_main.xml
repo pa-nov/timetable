@@ -18,10 +18,10 @@
         android:layout_height="64dp"
         android:background="@color/background"
         app:itemIconSize="32dp"
-        app:itemIconTint="@color/button_navigation"
+        app:itemIconTint="@color/button_checked"
         app:itemRippleColor="@color/item"
         app:itemTextAppearanceActiveBoldEnabled="false"
-        app:itemTextColor="@color/button_navigation"
+        app:itemTextColor="@color/button_checked"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/main_menu" />
 

@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 class ClockFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragment = inflater.inflate(R.layout.fragment_clock, container, false)
-        val savedData = requireActivity().getSharedPreferences("SavedClock", 0)
+        val savedData = requireActivity().getSharedPreferences("Clock", 0)
 
         val inputDate = fragment.findViewById<CheckBox>(R.id.input_date)
         val inputTitle = fragment.findViewById<CheckBox>(R.id.input_title)

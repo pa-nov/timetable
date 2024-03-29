@@ -28,7 +28,7 @@ class TimetableFragment : Fragment() {
         date.minimalDaysInFirstWeek = 4
 
         try {
-            val savedData = requireActivity().getSharedPreferences("SavedTimetable", 0)
+            val savedData = requireActivity().getSharedPreferences("Timetable", 0)
             data = JSONObject(savedData.getString("Json", "") ?: "")
             initialIndex = savedData.getInt("InitialIndex", 1)
         } catch (e: Exception) {

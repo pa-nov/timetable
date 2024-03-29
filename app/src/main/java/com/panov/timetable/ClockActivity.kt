@@ -28,7 +28,7 @@ class ClockActivity : AppCompatActivity() {
 
         val data: JSONObject
         try {
-            data = JSONObject(this.getSharedPreferences("SavedTimetable", 0).getString("Json", "") ?: "")
+            data = JSONObject(this.getSharedPreferences("Timetable", 0).getString("Json", "") ?: "")
         } catch (e: Exception) {
             findViewById<TextView>(R.id.text_time).text = resources.getString(R.string.error)
             findViewById<Group>(R.id.title).visibility = View.INVISIBLE
@@ -38,7 +38,7 @@ class ClockActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.title_time).visibility = View.INVISIBLE
             return
         }
-        val savedData = this.getSharedPreferences("SavedClock", 0)
+        val savedData = this.getSharedPreferences("Clock", 0)
         val times = data.getJSONArray("times")
         val lessons = data.getJSONArray("lessons")
         val showDate = savedData.getBoolean("ShowDate", false)
