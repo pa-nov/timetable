@@ -57,7 +57,6 @@
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_modifier_hour"
                         style="@style/TextInputEdit"
@@ -66,7 +65,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_modifier_minute"
                         style="@style/TextInputEdit"
@@ -75,7 +73,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_modifier_second"
                         style="@style/TextInputEdit"
@@ -84,7 +81,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_initial_index"
                         style="@style/TextInputEdit"
@@ -93,7 +89,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_json"
                         style="@style/TextInputEdit"
