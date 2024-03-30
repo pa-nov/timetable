@@ -6,15 +6,6 @@
         <item name="android:statusBarColor">@color/background</item>
     </style>
 
-    <style name="Theme.CheckBox" parent="Theme.Timetable">
-        <item name="android:colorControlActivated">@color/empty</item>
-        <item name="android:colorControlHighlight">@color/empty</item>
-    </style>
-
-    <style name="Theme.TextInputEdit" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="android:colorControlActivated">@color/green</item>
-    </style>
-
     <color name="item">#B0B0B0</color>
     <color name="line">#B0B0B0</color>
     <color name="background">#D0D0D0</color>
@@ -23,5 +14,14 @@
     <color name="button">@color/blue</color>
 
     <color name="widget_background">#F3F3F3</color>
+
+    <style name="Theme.CheckBox" parent="Theme.Timetable">
+        <item name="android:colorControlActivated">@color/empty</item>
+        <item name="android:colorControlHighlight">@color/empty</item>
+    </style>
+
+    <style name="Theme.TextInputEdit" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:colorControlActivated">@color/green</item>
+    </style>
 
 </resources>
