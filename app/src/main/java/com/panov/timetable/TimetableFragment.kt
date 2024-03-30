@@ -1,5 +1,6 @@
 package com.panov.timetable
 
+import android.app.DatePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.text.format.DateUtils
@@ -23,7 +24,6 @@ class TimetableFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragment = inflater.inflate(R.layout.fragment_timetable, container, false)
-        val fragmentClass: TimetableFragment = this
         date.firstDayOfWeek = Calendar.MONDAY
         date.minimalDaysInFirstWeek = 4
 
@@ -37,7 +37,7 @@ class TimetableFragment : Fragment() {
         }
 
         val pages = fragment.findViewById<ViewPager2>(R.id.pages)
-        pages.adapter = TimetablePageAdapter(fragmentClass)
+        pages.adapter = TimetablePageAdapter(this)
         pages.post { pages.setCurrentItem(1, false) }
         pages.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -49,27 +49,40 @@ class TimetableFragment : Fragment() {
                 super.onPageScrollStateChanged(state)
                 if (state == ViewPager2.SCROLL_STATE_IDLE) {
                     date.add(Calendar.DAY_OF_YEAR, tempPosition)
-                    tempPosition = 0
-                    pages.adapter = TimetablePageAdapter(fragmentClass)
-                    pages.setCurrentItem(1, false)
+                    updateView()
                 }
             }
         })
 
+        fragment.findViewById<TextView>(R.id.button_action).setOnClickListener {
+            DatePickerDialog(requireContext(), R.style.Theme_DatePicker, { _, year, month, day ->
+                run {
+                    date.set(Calendar.YEAR, year)
+                    date.set(Calendar.MONTH, month)
+                    date.set(Calendar.DAY_OF_MONTH, day)
+                    updateView()
+                }
+            }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH)).show()
+        }
+
         return fragment
+    }
+
+    private fun updateView() {
+        val view = view
+        if (view != null && view.findViewById<TextView>(R.id.button_action).text != resources.getString(R.string.error)) {
+            val pages = view.findViewById<ViewPager2>(R.id.pages)
+            pages.adapter = TimetablePageAdapter(this)
+            pages.setCurrentItem(1, false)
+            tempPosition = 0
+        }
     }
 
     fun resetDate() {
         date = Calendar.getInstance()
         date.firstDayOfWeek = Calendar.MONDAY
         date.minimalDaysInFirstWeek = 4
-        val view = view
-        if (view != null && view.findViewById<TextView>(R.id.button_action).text != resources.getString(R.string.error)) {
-            tempPosition = 0
-            val pages = view.findViewById<ViewPager2>(R.id.pages)
-            pages.adapter = TimetablePageAdapter(this)
-            pages.setCurrentItem(1, false)
-        }
+        updateView()
     }
 
     fun updatePage(layout: LinearLayout, position: Int) {
