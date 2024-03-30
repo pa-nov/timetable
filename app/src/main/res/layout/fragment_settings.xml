@@ -33,7 +33,7 @@
                         style="@style/Frame_Horizontal"
                         android:layout_height="32dp"
                         android:background="@drawable/rounded"
-                        android:backgroundTint="@color/text">
+                        android:backgroundTint="@color/item">
 
                         <Button
                             android:id="@+id/button_system"
