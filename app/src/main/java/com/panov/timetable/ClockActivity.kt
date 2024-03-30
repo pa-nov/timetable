@@ -26,9 +26,9 @@ class ClockActivity : AppCompatActivity() {
             override fun handleOnBackPressed() {}
         })
 
-        val data: JSONObject
+        val timetable: JSONObject
         try {
-            data = JSONObject(this.getSharedPreferences("Timetable", 0).getString("Json", "") ?: "")
+            timetable = JSONObject(getSharedPreferences("Timetable", 0).getString("Json", "") ?: "")
         } catch (e: Exception) {
             findViewById<TextView>(R.id.text_time).text = resources.getString(R.string.error)
             findViewById<Group>(R.id.title).visibility = View.INVISIBLE
@@ -38,12 +38,12 @@ class ClockActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.title_time).visibility = View.INVISIBLE
             return
         }
-        val savedData = this.getSharedPreferences("Clock", 0)
-        val times = data.getJSONArray("times")
-        val lessons = data.getJSONArray("lessons")
-        val showDate = savedData.getBoolean("ShowDate", false)
-        val showTitle = savedData.getBoolean("ShowTitle", false)
-        val showOther = savedData.getBoolean("ShowOther", false)
+        val clock = getSharedPreferences("Clock", 0)
+        val times = timetable.getJSONArray("times")
+        val lessons = timetable.getJSONArray("lessons")
+        val showDate = clock.getBoolean("ShowDate", false)
+        val showTitle = clock.getBoolean("ShowTitle", false)
+        val showOther = clock.getBoolean("ShowOther", false)
 
         if (!showDate) findViewById<TextView>(R.id.text_date_time).visibility = View.INVISIBLE
         if (!showTitle) {
@@ -69,7 +69,7 @@ class ClockActivity : AppCompatActivity() {
                 val dateSecond = Tools.getTwoDigitNumber(date.get(Calendar.SECOND))
 
                 val time = (dateHour.toInt() * 60 + dateMinute.toInt()) * 60 + dateSecond.toInt()
-                val timetableData = Tools.getTimetableData(data, time, dateDayOfWeek, dateWeekOddOrEven)
+                val timetableData = Tools.getTimetableData(timetable, time, dateDayOfWeek, dateWeekOddOrEven)
 
                 val lessonTimes = times.getJSONObject(timetableData.currentNumber)
                 val lessonTime =

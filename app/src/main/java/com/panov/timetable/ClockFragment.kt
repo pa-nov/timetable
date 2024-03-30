@@ -12,18 +12,18 @@ import androidx.fragment.app.Fragment
 class ClockFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragment = inflater.inflate(R.layout.fragment_clock, container, false)
-        val savedData = requireActivity().getSharedPreferences("Clock", 0)
+        val clock = requireActivity().getSharedPreferences("Clock", 0)
 
         val inputDate = fragment.findViewById<CheckBox>(R.id.input_date)
         val inputTitle = fragment.findViewById<CheckBox>(R.id.input_title)
         val inputOther = fragment.findViewById<CheckBox>(R.id.input_other)
 
-        inputDate.isChecked = savedData.getBoolean("ShowDate", false)
-        inputTitle.isChecked = savedData.getBoolean("ShowTitle", false)
-        inputOther.isChecked = savedData.getBoolean("ShowOther", false)
+        inputDate.isChecked = clock.getBoolean("ShowDate", false)
+        inputTitle.isChecked = clock.getBoolean("ShowTitle", false)
+        inputOther.isChecked = clock.getBoolean("ShowOther", false)
 
         fragment.findViewById<Button>(R.id.button_action).setOnClickListener {
-            val editor = savedData.edit()
+            val editor = clock.edit()
             editor.putBoolean("ShowDate", inputDate.isChecked)
             editor.putBoolean("ShowTitle", inputTitle.isChecked)
             editor.putBoolean("ShowOther", inputOther.isChecked)

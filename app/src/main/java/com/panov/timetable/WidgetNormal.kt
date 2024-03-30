@@ -35,17 +35,17 @@ internal fun updateNormalWidget(context: Context, appWidgetManager: AppWidgetMan
     )
 
     try {
-        val savedData = context.getSharedPreferences("Timetable", 0)
-        val data = JSONObject(savedData.getString("Json", "") ?: "")
+        val data = context.getSharedPreferences("Timetable", 0)
+        val timetable = JSONObject(data.getString("Json", "") ?: "")
         val date = Calendar.getInstance()
         date.firstDayOfWeek = Calendar.MONDAY
         date.minimalDaysInFirstWeek = 4
 
-        val times = data.getJSONArray("times")
-        val lessons = data.getJSONArray("lessons")
-        val modHour = savedData.getInt("ModifierHour", 1)
-        val modMinute = savedData.getInt("ModifierMinute", 1)
-        val modSecond = savedData.getInt("ModifierSecond", 1)
+        val times = timetable.getJSONArray("times")
+        val lessons = timetable.getJSONArray("lessons")
+        val modHour = data.getInt("ModifierHour", 1)
+        val modMinute = data.getInt("ModifierMinute", 1)
+        val modSecond = data.getInt("ModifierSecond", 1)
 
         val dateDayOfWeek = if (date.get(Calendar.DAY_OF_WEEK) > 1) date.get(Calendar.DAY_OF_WEEK) - 2 else 6
         val dateWeekOddOrEven = if (date.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
@@ -61,7 +61,7 @@ internal fun updateNormalWidget(context: Context, appWidgetManager: AppWidgetMan
         else Tools.getTwoDigitNumber((date.get(Calendar.SECOND) / modSecond) * modSecond)
         val time = (dateHour.toInt() * 60 + dateMinute.toInt()) * 60 + dateSecond.toInt()
 
-        val timetableData = Tools.getTimetableData(data, time, dateDayOfWeek, dateWeekOddOrEven)
+        val timetableData = Tools.getTimetableData(timetable, time, dateDayOfWeek, dateWeekOddOrEven)
 
         val currentTimes = times.getJSONObject(timetableData.currentNumber)
         val currentTime =

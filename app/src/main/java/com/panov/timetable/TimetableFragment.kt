@@ -17,7 +17,7 @@ import org.json.JSONObject
 
 class TimetableFragment : Fragment() {
     private var date = Calendar.getInstance()
-    private var data = JSONObject()
+    private var timetable = JSONObject()
     private var initialIndex = 1
     private var tempPosition = 0
 
@@ -29,7 +29,7 @@ class TimetableFragment : Fragment() {
 
         try {
             val savedData = requireActivity().getSharedPreferences("Timetable", 0)
-            data = JSONObject(savedData.getString("Json", "") ?: "")
+            timetable = JSONObject(savedData.getString("Json", "") ?: "")
             initialIndex = savedData.getInt("InitialIndex", 1)
         } catch (e: Exception) {
             fragment.findViewById<TextView>(R.id.button_action).text = resources.getString(R.string.error)
@@ -78,12 +78,12 @@ class TimetableFragment : Fragment() {
 
         val dateDayOfWeek = if (tempDate.get(Calendar.DAY_OF_WEEK) > 1) tempDate.get(Calendar.DAY_OF_WEEK) - 2 else 6
         val dateWeekOddOrEven = if (tempDate.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
-        val currentDay = data.getJSONArray(dateWeekOddOrEven).getJSONArray(dateDayOfWeek)
-        val anotherDay = data.getJSONArray(if (dateWeekOddOrEven == "odd") "even" else "odd").getJSONArray(dateDayOfWeek)
+        val currentDay = timetable.getJSONArray(dateWeekOddOrEven).getJSONArray(dateDayOfWeek)
+        val anotherDay = timetable.getJSONArray(if (dateWeekOddOrEven == "odd") "even" else "odd").getJSONArray(dateDayOfWeek)
 
         layout.findViewById<TextView>(R.id.title).text = resources.getStringArray(R.array.weekdays)[dateDayOfWeek]
 
-        for (i: Int in 0 until data.getJSONArray("times").length()) {
+        for (i: Int in 0 until timetable.getJSONArray("times").length()) {
             val date = arrayOf(dateWeekOddOrEven, dateDayOfWeek.toString(), i.toString())
             fillLesson(layout, i, currentDay.getInt(i), anotherDay.getInt(i), date, isNow = false, isInfo = false)
         }
@@ -118,8 +118,8 @@ class TimetableFragment : Fragment() {
 
     private fun fillLesson(layout: LinearLayout, lessonNumber: Int, currentId: Int, anotherId: Int, date: Array<String>, isNow: Boolean, isInfo: Boolean) {
         val lessonView = layoutInflater.inflate(R.layout.timetable_lesson, null)
-        val times = data.getJSONArray("times")
-        val lessons = data.getJSONArray("lessons")
+        val times = timetable.getJSONArray("times")
+        val lessons = timetable.getJSONArray("lessons")
         val lessonData = lessons.getJSONArray(currentId)
 
         val time = times.getJSONObject(lessonNumber)
@@ -170,10 +170,10 @@ class TimetableFragment : Fragment() {
         val layoutEven = popupView.findViewById<LinearLayout>(R.id.frame_week_even)
         val layoutOdd = popupView.findViewById<LinearLayout>(R.id.frame_week_odd)
 
-        val times = data.getJSONArray("times")
-        val lessons = data.getJSONArray("lessons")
-        val weekEven = data.getJSONArray("even")
-        val weekOdd = data.getJSONArray("odd")
+        val times = timetable.getJSONArray("times")
+        val lessons = timetable.getJSONArray("lessons")
+        val weekEven = timetable.getJSONArray("even")
+        val weekOdd = timetable.getJSONArray("odd")
         val lessonData = lessons.getJSONArray(lessonId)
         val weekdays = resources.getStringArray(R.array.weekdays)
 
