@@ -13,11 +13,9 @@
             android:text="@string/settings" />
 
         <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/Frame_Scroll"
             android:layout_marginTop="80dp"
-            android:layout_marginBottom="16dp"
-            android:scrollbarSize="0dp">
+            android:layout_marginBottom="16dp">
 
             <LinearLayout
                 style="@style/Frame_Vertical"
