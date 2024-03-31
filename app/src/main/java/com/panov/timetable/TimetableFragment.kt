@@ -38,6 +38,7 @@ class TimetableFragment : Fragment() {
 
         val pages = fragment.findViewById<ViewPager2>(R.id.pages)
         pages.adapter = TimetablePageAdapter(this)
+        pages.setCurrentItem(1, false)
         pages.post { pages.setCurrentItem(1, false) }
         pages.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -76,13 +77,6 @@ class TimetableFragment : Fragment() {
             pages.setCurrentItem(1, false)
             tempPosition = 0
         }
-    }
-
-    fun resetDate() {
-        date = Calendar.getInstance()
-        date.firstDayOfWeek = Calendar.MONDAY
-        date.minimalDaysInFirstWeek = 4
-        updateView()
     }
 
     fun updatePage(layout: LinearLayout, position: Int) {

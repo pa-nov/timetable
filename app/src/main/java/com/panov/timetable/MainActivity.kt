@@ -12,9 +12,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
     companion object {
         private var selectedItem = R.id.menu_timetable
-        private val clockFragment = ClockFragment()
-        private val timetableFragment = TimetableFragment()
-        private val settingsFragment = SettingsFragment()
+        private var clockFragment = ClockFragment()
+        private var timetableFragment = TimetableFragment()
+        private var settingsFragment = SettingsFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,16 +32,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun selectItem(item: Int): Boolean {
-        if (item == selectedItem && item == R.id.menu_timetable) timetableFragment.resetDate()
+        if (item == selectedItem) when (item) {
+            R.id.menu_clock -> clockFragment = ClockFragment()
+            R.id.menu_settings -> settingsFragment = SettingsFragment()
+            else -> timetableFragment = TimetableFragment()
+        }
         selectedItem = item
         requestedOrientation = if (item == R.id.menu_clock) ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        val fragment = when (item) {
-            R.id.menu_clock -> clockFragment
-            R.id.menu_settings -> settingsFragment
-            else -> timetableFragment
-        }
-        supportFragmentManager.beginTransaction().replace(R.id.view_main, fragment).commit()
+        supportFragmentManager.beginTransaction().replace(
+            R.id.view_main, when (item) {
+                R.id.menu_clock -> clockFragment
+                R.id.menu_settings -> settingsFragment
+                else -> timetableFragment
+            }
+        ).commit()
         return true
     }
 }
