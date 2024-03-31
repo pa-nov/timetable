@@ -31,10 +31,10 @@
     <style name="Frame_Info">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/rounded</item>
+        <item name="android:background">@drawable/rounded_middle</item>
         <item name="android:backgroundTint">@color/background</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:padding">12dp</item>
+        <item name="android:padding">8dp</item>
     </style>
 
     <style name="Frame_Line">
@@ -63,7 +63,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:background">@drawable/rounded</item>
+        <item name="android:background">@drawable/rounded_small</item>
         <item name="backgroundTint">@color/button_enabled</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:gravity">center</item>
@@ -99,7 +99,7 @@
     <style name="TextInputEdit">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/rounded</item>
+        <item name="android:background">@drawable/rounded_small</item>
         <item name="android:backgroundTint">@color/item</item>
         <item name="android:textColor">@color/text</item>
         <item name="android:text">@string/error</item>

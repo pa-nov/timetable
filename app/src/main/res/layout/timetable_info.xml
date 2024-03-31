@@ -12,8 +12,7 @@
 
         <LinearLayout
             style="@style/Frame_Info"
-            android:layout_marginTop="0dp"
-            android:padding="16dp">
+            android:padding="12dp">
 
             <TextView
                 style="@style/Info_Title"

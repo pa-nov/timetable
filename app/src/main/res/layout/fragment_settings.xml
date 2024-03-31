@@ -23,7 +23,10 @@
                 android:paddingHorizontal="16dp"
                 android:showDividers="middle">
 
-                <LinearLayout style="@style/Frame_Vertical">
+                <LinearLayout
+                    style="@style/Frame_Vertical"
+                    android:background="@drawable/rounded_small"
+                    android:backgroundTint="@color/item">
 
                     <TextView
                         style="@style/SubTitle"
@@ -31,9 +34,7 @@
 
                     <LinearLayout
                         style="@style/Frame_Horizontal"
-                        android:layout_height="32dp"
-                        android:background="@drawable/rounded"
-                        android:backgroundTint="@color/item">
+                        android:layout_height="32dp">
 
                         <Button
                             android:id="@+id/button_system"
