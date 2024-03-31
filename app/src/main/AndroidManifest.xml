@@ -7,27 +7,40 @@
         android:label="@string/timetable"
         android:theme="@style/Theme.Timetable">
 
-        <activity android:name=".MainActivity" android:exported="true" android:screenOrientation="portrait">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ClockActivity" android:exported="false" />
+        <activity
+            android:name=".ClockActivity"
+            android:exported="false" />
 
-        <receiver android:name=".WidgetNormal" android:exported="false">
+        <receiver
+            android:name=".WidgetNormal"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_normal_info" />
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_normal_info" />
         </receiver>
 
-        <receiver android:name=".WidgetSmall" android:exported="false">
+        <receiver
+            android:name=".WidgetSmall"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_small_info" />
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_small_info" />
         </receiver>
 
     </application>

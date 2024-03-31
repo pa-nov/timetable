@@ -56,42 +56,52 @@
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_modifier_hour"
                         style="@style/TextInputEdit"
                         android:hint="@string/modifier_hour"
                         android:inputType="numberSigned" />
+
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_modifier_minute"
                         style="@style/TextInputEdit"
                         android:hint="@string/modifier_minute"
                         android:inputType="numberSigned" />
+
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_modifier_second"
                         style="@style/TextInputEdit"
                         android:hint="@string/modifier_second"
                         android:inputType="numberSigned" />
+
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_initial_index"
                         style="@style/TextInputEdit"
                         android:hint="@string/initial_index"
                         android:inputType="numberSigned" />
+
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/TextInput">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_json"
                         style="@style/TextInputEdit"
                         android:hint="@string/json" />
+
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
