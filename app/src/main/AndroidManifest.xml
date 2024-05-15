@@ -22,7 +22,7 @@
             android:exported="false" />
 
         <receiver
-            android:name=".WidgetNormal"
+            android:name=".widget.WidgetClock"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -33,7 +33,7 @@
         </receiver>
 
         <receiver
-            android:name=".WidgetSmall"
+            android:name=".widget.WidgetLesson"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
