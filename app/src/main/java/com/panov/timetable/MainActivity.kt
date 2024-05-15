@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val menuMain = findViewById<BottomNavigationView>(R.id.menu_main)
-        menuMain.menu.forEach { menuMain.findViewById<View>(it.itemId).setOnLongClickListener { true } }
+        menuMain.menu.forEach { item -> menuMain.findViewById<View>(item.itemId).setOnLongClickListener { resetItem(item.itemId) } }
         menuMain.setOnItemSelectedListener { selectItem(it.itemId) }
         menuMain.findViewById<View>(selectedItem).performClick()
 
@@ -32,11 +32,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun selectItem(item: Int): Boolean {
-        if (item == selectedItem) when (item) {
-            R.id.menu_clock -> clockFragment = ClockFragment()
-            R.id.menu_settings -> settingsFragment = SettingsFragment()
-            else -> timetableFragment = TimetableFragment()
-        }
         selectedItem = item
         requestedOrientation = if (item == R.id.menu_clock) ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -47,6 +42,16 @@ class MainActivity : AppCompatActivity() {
                 else -> timetableFragment
             }
         ).commit()
+        return true
+    }
+
+    private fun resetItem(item: Int): Boolean {
+        when (item) {
+            R.id.menu_clock -> clockFragment = ClockFragment()
+            R.id.menu_settings -> settingsFragment = SettingsFragment()
+            else -> timetableFragment = TimetableFragment()
+        }
+        selectItem(item)
         return true
     }
 }
