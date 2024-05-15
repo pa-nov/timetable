@@ -64,14 +64,12 @@ class WidgetLesson : AppWidgetProvider() {
             val timetableData = Tools.getTimetableData(timetable, time, dateDayOfWeek, dateWeekOddOrEven)
 
             val currentTimes = times.getJSONObject(timetableData.currentNumber)
-            val currentTime =
-                ((currentTimes.getInt("endHour") * 60 + currentTimes.getInt("endMinute")) * 60 + (86400 * timetableData.currentDays)) - time
+            val currentTime = ((currentTimes.getInt("endHour") * 60 + currentTimes.getInt("endMinute")) * 60 +
+                    (86400 * timetableData.currentDays)) - time
 
             views.setTextViewText(R.id.text_day, context.resources.getStringArray(R.array.weekdays)[dateDayOfWeek])
             views.setTextViewText(R.id.text_date, context.getString(R.string.placeholder_date, dateDay, dateMonth, dateWeek))
-            views.setTextViewText(
-                R.id.text_time, context.getString(R.string.placeholder_time, dateHour, dateMinute, dateSecond)
-            )
+            views.setTextViewText(R.id.text_time, context.getString(R.string.placeholder_time, dateHour, dateMinute, dateSecond))
 
             views.setTextViewText(R.id.title_current, context.getString(if (currentTime > 0) R.string.now else R.string.then))
 

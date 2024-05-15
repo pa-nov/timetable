@@ -65,25 +65,21 @@ class WidgetClock : AppWidgetProvider() {
             val timetableData = Tools.getTimetableData(timetable, time, dateDayOfWeek, dateWeekOddOrEven)
 
             val currentTimes = times.getJSONObject(timetableData.currentNumber)
-            val currentTime =
-                ((currentTimes.getInt("endHour") * 60 + currentTimes.getInt("endMinute")) * 60 + (86400 * timetableData.currentDays)) - time
+            val currentTime = ((currentTimes.getInt("endHour") * 60 + currentTimes.getInt("endMinute")) * 60 +
+                    (86400 * timetableData.currentDays)) - time
             val nextTimes = times.getJSONObject(timetableData.nextNumber)
-            val nextTime =
-                ((nextTimes.getInt("startHour") * 60 + nextTimes.getInt("startMinute")) * 60 + (86400 * timetableData.nextDays)) - time
+            val nextTime = ((nextTimes.getInt("startHour") * 60 + nextTimes.getInt("startMinute")) * 60 +
+                    (86400 * timetableData.nextDays)) - time
 
             views.setTextViewText(R.id.text_day, context.resources.getStringArray(R.array.weekdays)[dateDayOfWeek])
             views.setTextViewText(R.id.text_date, context.getString(R.string.placeholder_date, dateDay, dateMonth, dateWeek))
-            views.setTextViewText(
-                R.id.text_time, context.getString(R.string.placeholder_time, dateHour, dateMinute, dateSecond)
-            )
+            views.setTextViewText(R.id.text_time, context.getString(R.string.placeholder_time, dateHour, dateMinute, dateSecond))
 
             views.setTextViewText(R.id.title_current, context.getString(if (currentTime < 0) R.string.earlier else R.string.now))
             views.setTextViewText(R.id.title_current_time, context.getString(if (currentTime < 0) R.string.earlier_time else R.string.now_time))
 
             val currentColor = ContextCompat.getColor(context, if (currentTime > 0) R.color.text else R.color.title)
-            val nextColor = ContextCompat.getColor(
-                context, if (currentTime > 0 || timetableData.nextDays > 0) R.color.title else R.color.text
-            )
+            val nextColor = ContextCompat.getColor(context, if (currentTime > 0 || timetableData.nextDays > 0) R.color.title else R.color.text)
 
             views.setTextColor(R.id.text_current, currentColor)
             views.setTextColor(R.id.text_current_other, currentColor)
@@ -94,9 +90,7 @@ class WidgetClock : AppWidgetProvider() {
 
             val currentLesson = lessons.getJSONArray(timetableData.currentId)
             views.setTextViewText(R.id.text_current, currentLesson.getString(0))
-            views.setTextViewText(
-                R.id.text_current_other, context.getString(R.string.placeholder_room, currentLesson.getString(1))
-            )
+            views.setTextViewText(R.id.text_current_other, context.getString(R.string.placeholder_room, currentLesson.getString(1)))
             views.setTextViewText(R.id.text_current_time, Tools.getTimeText(currentTime.toDouble(), context.resources))
 
             val nextLesson = lessons.getJSONArray(timetableData.nextId)
