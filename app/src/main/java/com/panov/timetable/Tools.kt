@@ -37,14 +37,12 @@ object Tools {
         val minutes = floor((time - (hours * 3600)) / 60)
         val seconds = time - (hours * 60 + minutes) * 60
 
-        val hoursText = if (hours > 0) "${hours.toInt()} ${
-            getNumberText(
-                hours,
-                res.getString(R.string.time_hours_single),
-                res.getString(R.string.time_hours_small),
-                res.getString(R.string.time_hours_large)
-            )
-        }" else ""
+        val hoursText = if (hours > 0) "${hours.toInt()} ${getNumberText(
+            hours,
+            res.getString(R.string.time_hours_single),
+            res.getString(R.string.time_hours_small),
+            res.getString(R.string.time_hours_large)
+        )}" else ""
         val minutesText = if (hours > 0) res.getString(R.string.time_minutes) else getNumberText(
             minutes,
             res.getString(R.string.time_minutes_single),
@@ -122,7 +120,12 @@ object Tools {
         }
 
         return TimetableData(
-            currentDay.getInt(currentLesson), currentLesson, currentDays, nextDay.getInt(nextLesson), nextLesson, nextDays
+            currentDay.getInt(currentLesson),
+            currentLesson,
+            currentDays,
+            nextDay.getInt(nextLesson),
+            nextLesson,
+            nextDays
         )
     }
 }
