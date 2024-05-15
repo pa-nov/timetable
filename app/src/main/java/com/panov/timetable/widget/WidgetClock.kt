@@ -77,12 +77,8 @@ class WidgetClock : AppWidgetProvider() {
                 R.id.text_time, context.getString(R.string.placeholder_time, dateHour, dateMinute, dateSecond)
             )
 
-            views.setTextViewText(
-                R.id.title_current, context.getString(if (currentTime > 0) R.string.now else R.string.earlier)
-            )
-            views.setTextViewText(
-                R.id.title_current_time, context.getString(if (currentTime > 0) R.string.now_time else R.string.earlier_time)
-            )
+            views.setTextViewText(R.id.title_current, context.getString(if (currentTime < 0) R.string.earlier else R.string.now))
+            views.setTextViewText(R.id.title_current_time, context.getString(if (currentTime < 0) R.string.earlier_time else R.string.now_time))
 
             val currentColor = ContextCompat.getColor(context, if (currentTime > 0) R.color.text else R.color.title)
             val nextColor = ContextCompat.getColor(
