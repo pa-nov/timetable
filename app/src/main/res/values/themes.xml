@@ -6,9 +6,9 @@
         <item name="android:statusBarColor">@color/background</item>
     </style>
 
-    <color name="item">#B0B0B0</color>
-    <color name="line">#B0B0B0</color>
-    <color name="background">#D0D0D0</color>
+    <color name="item">#D0D0D0</color>
+    <color name="line">#C0C0C0</color>
+    <color name="background">#E0E0E0</color>
     <color name="title">#808080</color>
     <color name="text">@color/black</color>
     <color name="button">@color/blue</color>
