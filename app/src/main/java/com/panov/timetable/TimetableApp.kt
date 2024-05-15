@@ -3,7 +3,7 @@ package com.panov.timetable
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 
-class Timetable : Application() {
+class TimetableApp : Application() {
     override fun onCreate() {
         super.onCreate()
         AppCompatDelegate.setDefaultNightMode(
