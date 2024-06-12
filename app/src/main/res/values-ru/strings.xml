@@ -5,10 +5,26 @@
     <string name="title_clock">Часы</string>
     <string name="title_timetable">Расписание</string>
     <string name="title_settings">Настройки</string>
+    <string name="title_settings_application">Приложение</string>
+    <string name="title_settings_timetable">Расписание</string>
+    <string name="title_settings_widget">Виджет</string>
 
     <string name="description_widget">Виджет</string>
 
     <string name="message_error">Ошибка</string>
     <string name="message_success">Успешно</string>
+    <string name="message_applied">Применено</string>
+    <string name="apply">Применить</string>
+
+    <string name="theme">Тема</string>
+    <string name="theme_system">Системная</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="theme_light">Светлая</string>
+    <string name="initial_index">Номер первого предмета</string>
+    <string name="timetable_json">Расписание (JSON)</string>
+    <string name="modifiers">Модификаторы</string>
+    <string name="modifier_hour">Час</string>
+    <string name="modifier_minute">Минута</string>
+    <string name="modifier_second">Секунда</string>
 
 </resources>

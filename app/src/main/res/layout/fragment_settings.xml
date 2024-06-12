@@ -3,11 +3,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SettingsFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_settings" />
+    <ScrollView style="@style/ScrollContainer">
+
+        <LinearLayout style="@style/VerticalLayout">
+
+            <TextView
+                style="@style/Title"
+                android:text="@string/title_settings_application" />
+
+            <LinearLayout style="@style/Vertical_Rounded_Small">
+
+                <TextView
+                    style="@style/SubTitle"
+                    android:text="@string/theme" />
+
+                <LinearLayout style="@style/Horizontal_Rounded_Small">
+
+                    <Button
+                        android:id="@+id/button_theme_system"
+                        style="@style/Button_Item"
+                        android:text="@string/theme_system" />
+
+                    <Button
+                        android:id="@+id/button_theme_dark"
+                        style="@style/Button_Item"
+                        android:text="@string/theme_dark" />
+
+                    <Button
+                        android:id="@+id/button_theme_light"
+                        style="@style/Button_Item"
+                        android:text="@string/theme_light" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_initial_index"
+                    style="@style/TextInputEdit"
+                    android:hint="@string/initial_index"
+                    android:inputType="numberSigned" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                style="@style/Title"
+                android:text="@string/title_settings_timetable" />
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_timetable_json"
+                    style="@style/TextInputEdit"
+                    android:hint="@string/timetable_json" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                style="@style/Title"
+                android:text="@string/title_settings_widget" />
+
+            <LinearLayout style="@style/Vertical_Rounded_Small">
+
+                <TextView
+                    style="@style/SubTitle"
+                    android:text="@string/modifiers" />
+
+                <LinearLayout style="@style/Horizontal_Rounded_Small">
+
+                    <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout_Item">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/input_modifier_hour"
+                            style="@style/TextInputEdit_Item"
+                            android:hint="@string/modifier_hour"
+                            android:inputType="numberSigned" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout_Item">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/input_modifier_minute"
+                            style="@style/TextInputEdit_Item"
+                            android:hint="@string/modifier_minute"
+                            android:inputType="numberSigned" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout_Item">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/input_modifier_second"
+                            style="@style/TextInputEdit_Item"
+                            android:hint="@string/modifier_second"
+                            android:inputType="numberSigned" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button_action"
+        style="@style/Button"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/apply" />
 
 </LinearLayout>
