@@ -8,4 +8,7 @@
 
     <string name="description_widget">Widget</string>
 
+    <string name="message_error">Error</string>
+    <string name="message_success">Success</string>
+
 </resources>
