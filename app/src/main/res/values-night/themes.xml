@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="background">@color/black</color>
+    <color name="accent">@color/yellow</color>
+    <color name="title">#808080</color>
+    <color name="text">@color/white</color>
+    <color name="item">#101010</color>
+    <color name="line">#202020</color>
+
+</resources>

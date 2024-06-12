@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="background">@color/white</color>
+    <color name="accent">@color/blue</color>
+    <color name="title">#808080</color>
+    <color name="text">@color/black</color>
+    <color name="item">#E0E0E0</color>
+    <color name="line">#C0C0C0</color>
+
+    <style name="Theme.Timetable" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/line</item>
+    </style>
+
+</resources>
