@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".SettingsFragment">
 
-    <ScrollView style="@style/ScrollContainer">
+    <com.panov.timetable.utils.BounceScrollView style="@style/ScrollContainer">
 
         <LinearLayout style="@style/VerticalLayout">
 
@@ -112,7 +112,7 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </com.panov.timetable.utils.BounceScrollView>
 
     <Button
         android:id="@+id/button_action"
