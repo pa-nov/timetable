@@ -16,12 +16,9 @@ class SettingsFragment : Fragment() {
         val fragment = inflater.inflate(R.layout.fragment_settings, container, false)
 
         // Application settings
-        fragment.findViewById<Button>(R.id.button_theme_system)
-            .setOnClickListener { setTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, fragment) }
-        fragment.findViewById<Button>(R.id.button_theme_dark)
-            .setOnClickListener { setTheme(AppCompatDelegate.MODE_NIGHT_YES, fragment) }
-        fragment.findViewById<Button>(R.id.button_theme_light)
-            .setOnClickListener { setTheme(AppCompatDelegate.MODE_NIGHT_NO, fragment) }
+        fragment.findViewById<Button>(R.id.button_theme_system).setOnClickListener { setTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, fragment) }
+        fragment.findViewById<Button>(R.id.button_theme_dark).setOnClickListener { setTheme(AppCompatDelegate.MODE_NIGHT_YES, fragment) }
+        fragment.findViewById<Button>(R.id.button_theme_light).setOnClickListener { setTheme(AppCompatDelegate.MODE_NIGHT_NO, fragment) }
         setTheme(Storage.settings.getInt("application_theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM), fragment)
 
         val inputInitialIndex = fragment.findViewById<TextInputEditText>(R.id.input_initial_index)

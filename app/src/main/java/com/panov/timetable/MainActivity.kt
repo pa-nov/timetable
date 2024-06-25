@@ -34,8 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun selectItem(item: Int): Boolean {
         selectedItem = item
-        requestedOrientation = if (item == R.id.menu_clock) ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-        else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        requestedOrientation = if (item == R.id.menu_clock) ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         supportFragmentManager.beginTransaction().replace(
             R.id.view_main, when (item) {
                 R.id.menu_clock -> clockFragment
@@ -47,12 +46,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetItem(item: Int): Boolean {
-        when (item) {
-            R.id.menu_clock -> clockFragment = ClockFragment()
-            R.id.menu_timetable -> timetableFragment = TimetableFragment()
-            R.id.menu_settings -> settingsFragment = SettingsFragment()
+        if (item == selectedItem) {
+            when (item) {
+                R.id.menu_clock -> clockFragment = ClockFragment()
+                R.id.menu_timetable -> timetableFragment = TimetableFragment()
+                R.id.menu_settings -> settingsFragment = SettingsFragment()
+            }
+            findViewById<View>(item).performClick()
         }
-        findViewById<View>(item).performClick()
         return true
     }
 }

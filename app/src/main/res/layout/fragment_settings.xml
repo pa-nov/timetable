@@ -114,11 +114,17 @@
 
     </com.panov.timetable.utils.BounceScrollView>
 
-    <Button
-        android:id="@+id/button_action"
-        style="@style/Button"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/apply" />
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/button_action"
+            style="@style/Button"
+            android:text="@string/apply" />
+
+    </ScrollView>
 
 </LinearLayout>
