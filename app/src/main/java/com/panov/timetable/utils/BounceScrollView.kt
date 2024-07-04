@@ -42,14 +42,16 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
 
     override fun onScrollChanged(xCurrent: Int, yCurrent: Int, xPrevious: Int, yPrevious: Int) {
         super.onScrollChanged(xCurrent, yCurrent, xPrevious, yPrevious)
-        onScrolled(yPrevious, yCurrent, yPrevious - yCurrent)
+        onScrolled(yPrevious, yCurrent)
     }
 
     private fun onPointerDown(event: MotionEvent) {
         if (!touched) {
             touched = true
-            touchPrevious = event.y
+            stopAnimation()
             if (childCount > 0 && (!::childView.isInitialized || childView != getChildAt(0))) childView = getChildAt(0)
+            overScrollDelta = -childView.translationY
+            touchPrevious = event.y
         }
     }
 
@@ -77,13 +79,14 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     private fun onPointerUp(event: MotionEvent) {
         if (touched) {
             touched = false
-            overScrollDelta = 0f
             overScrollDirection = 0
             moveToDefaultPosition()
         }
     }
 
-    private fun onScrolled(yPrevious: Int, yCurrent: Int, yOffset: Int) {
+    private fun onScrolled(yPrevious: Int, yCurrent: Int) {
+        val yOffset = yPrevious - yCurrent
+
         if (overScrollDirection != 0) {
             if (overScrollDirection < 0 && yOffset < 0) {
                 if (overScrollDelta - yOffset < 0) {
@@ -115,8 +118,14 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
         }
     }
 
+    private fun stopAnimation() {
+        if (::animator.isInitialized && animator.isRunning) {
+            animator.cancel()
+        }
+    }
+
     private fun moveToDefaultPosition() {
-        if (::animator.isInitialized && animator.isRunning) animator.cancel()
+        stopAnimation()
         animator = ObjectAnimator.ofFloat(childView, View.TRANSLATION_Y, 0f)
         animator.setDuration(400).interpolator = QuartOutInterpolator
         animator.start()
