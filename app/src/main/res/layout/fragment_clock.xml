@@ -3,11 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ClockFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_clock" />
+    <com.panov.timetable.utils.BounceScrollView style="@style/ScrollContainer">
+
+        <LinearLayout
+            android:id="@+id/layout_container"
+            style="@style/VerticalContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_clock" />
+
+        </LinearLayout>
+
+    </com.panov.timetable.utils.BounceScrollView>
 
 </LinearLayout>

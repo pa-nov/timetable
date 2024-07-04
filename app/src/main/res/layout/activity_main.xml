@@ -22,12 +22,19 @@
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:background="@color/item"
+            android:outlineSpotShadowColor="@color/empty"
             app:itemIconSize="32dp"
             app:itemIconTint="@color/accent_checked"
             app:itemRippleColor="@color/line"
             app:itemTextAppearanceActiveBoldEnabled="false"
             app:itemTextColor="@color/accent_checked"
             app:menu="@menu/menu_main" />
+
+        <FrameLayout
+            android:id="@+id/navigation_system"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/line" />
 
     </LinearLayout>
 

@@ -45,13 +45,16 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
         onScrolled(yPrevious, yCurrent)
     }
 
+    override fun onViewAdded(child: View?) {
+        if (child != null) childView = child
+        super.onViewAdded(child)
+    }
+
     private fun onPointerDown(event: MotionEvent) {
         if (!touched) {
             touched = true
-            stopAnimation()
-            if (childCount > 0 && (!::childView.isInitialized || childView != getChildAt(0))) childView = getChildAt(0)
-            overScrollDelta = -childView.translationY
             touchPrevious = event.y
+            stopAnimation()
         }
     }
 
@@ -67,6 +70,7 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
                 overScrollDelta += getDamping(touchOffset)
                 childView.translationY = -overScrollDelta
             }
+
             if (touchOffset > 0f && scrollY == getScrollMax()) {
                 overScrollDirection = 1
 
@@ -121,6 +125,9 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     private fun stopAnimation() {
         if (::animator.isInitialized && animator.isRunning) {
             animator.cancel()
+        }
+        if (::childView.isInitialized) {
+            overScrollDelta = -childView.translationY
         }
     }
 

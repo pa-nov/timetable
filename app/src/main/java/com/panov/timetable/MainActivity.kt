@@ -3,10 +3,12 @@ package com.panov.timetable
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.forEach
+import androidx.core.view.updateLayoutParams
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -18,17 +20,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val navigationSystem = findViewById<View>(R.id.navigation_system)
         val navigation = findViewById<BottomNavigationView>(R.id.navigation_main)
         navigation.setOnItemSelectedListener { item -> selectItem(item.itemId) }
         navigation.findViewById<View>(selectedItem).performClick()
         navigation.menu.forEach { item -> findViewById<View>(item.itemId).setOnLongClickListener { resetItem(item.itemId) } }
 
-        ViewCompat.setOnApplyWindowInsetsListener(window.decorView.rootView) { _, insets ->
-            navigation.visibility = if (insets.isVisible(WindowInsetsCompat.Type.ime())) View.GONE else View.VISIBLE
-            insets
+        ViewCompat.setOnApplyWindowInsetsListener(window.decorView.rootView) { view, insets ->
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val keyboardInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+
+            if (insets.isVisible(WindowInsetsCompat.Type.ime())) {
+                navigation.visibility = View.GONE
+                navigationSystem.visibility = View.GONE
+                view.setPadding(0, 0, 0, keyboardInsets.bottom)
+            } else {
+                navigation.visibility = View.VISIBLE
+                navigationSystem.visibility = View.VISIBLE
+                view.setPadding(0, 0, 0, 0)
+            }
+
+            findViewById<View>(R.id.layout_container)?.setPadding(0, systemBarsInsets.top, 0, 0)
+            navigationSystem.updateLayoutParams { height = systemBarsInsets.bottom }
+
+            WindowInsetsCompat.CONSUMED
         }
     }
 

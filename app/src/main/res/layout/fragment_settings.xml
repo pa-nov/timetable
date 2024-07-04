@@ -8,7 +8,9 @@
 
     <com.panov.timetable.utils.BounceScrollView style="@style/ScrollContainer">
 
-        <LinearLayout style="@style/VerticalLayout">
+        <LinearLayout
+            android:id="@+id/layout_container"
+            style="@style/VerticalContainer">
 
             <TextView
                 style="@style/Title"
@@ -114,17 +116,10 @@
 
     </com.panov.timetable.utils.BounceScrollView>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp">
-
-        <Button
-            android:id="@+id/button_action"
-            style="@style/Button"
-            android:text="@string/apply" />
-
-    </ScrollView>
+    <Button
+        android:id="@+id/button_action"
+        style="@style/Button"
+        android:layout_margin="16dp"
+        android:text="@string/apply" />
 
 </LinearLayout>
