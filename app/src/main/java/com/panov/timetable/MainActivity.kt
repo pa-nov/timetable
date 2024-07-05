@@ -24,11 +24,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val navigationSystem = findViewById<View>(R.id.navigation_system)
         val navigation = findViewById<BottomNavigationView>(R.id.navigation_main)
         navigation.setOnItemSelectedListener { item -> selectItem(item.itemId) }
         navigation.findViewById<View>(selectedItem).performClick()
         navigation.menu.forEach { item -> findViewById<View>(item.itemId).setOnLongClickListener { resetItem(item.itemId) } }
+
+        val shadowStatusBar = findViewById<View>(R.id.shadow_status_bar)
+        val navigationSystem = findViewById<View>(R.id.navigation_system)
 
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView.rootView) { view, insets ->
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             findViewById<View>(R.id.layout_container)?.setPadding(0, systemBarsInsets.top, 0, 0)
+            shadowStatusBar.updateLayoutParams { height = systemBarsInsets.top * 2 }
             navigationSystem.updateLayoutParams { height = systemBarsInsets.bottom }
 
             WindowInsetsCompat.CONSUMED

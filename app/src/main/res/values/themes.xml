@@ -10,7 +10,6 @@
 
     <style name="Theme.Timetable" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/background</item>
-        <item name="android:statusBarColor">@color/line</item>
     </style>
 
     <style name="Theme.TextInputEdit" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">

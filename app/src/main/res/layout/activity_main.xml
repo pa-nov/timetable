@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:background="@color/item"
+            android:outlineAmbientShadowColor="@color/empty"
             android:outlineSpotShadowColor="@color/empty"
             app:itemIconSize="32dp"
             app:itemIconTint="@color/accent_checked"
@@ -37,5 +38,13 @@
             android:background="@color/line" />
 
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/shadow_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/square_shadow_top"
+        android:backgroundTint="@color/background"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
