@@ -15,6 +15,7 @@
     <string name="message_success">Успешно</string>
     <string name="message_applied">Применено</string>
     <string name="apply">Применить</string>
+    <string name="source_code">Исходный код</string>
 
     <string name="theme">Тема</string>
     <string name="theme_system">Системная</string>
@@ -23,6 +24,9 @@
     <string name="initial_index">Номер первого предмета</string>
     <string name="timetable_json">Расписание (JSON)</string>
     <string name="modifiers">Модификаторы</string>
+    <string name="modifier_off">Выкл</string>
+    <string name="modifier_set">Установить</string>
+    <string name="modifier_round">Округлить</string>
     <string name="modifier_hour">Час</string>
     <string name="modifier_minute">Минута</string>
     <string name="modifier_second">Секунда</string>
