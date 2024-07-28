@@ -6,38 +6,60 @@
     android:orientation="vertical"
     tools:context=".SettingsFragment">
 
-    <com.panov.timetable.utils.BounceScrollView style="@style/ScrollContainer">
+    <com.panov.timetable.utils.BounceScrollView style="@style/ScrollView">
 
         <LinearLayout
             android:id="@+id/layout_container"
-            style="@style/VerticalContainer">
+            style="@style/ScrollLayout">
 
             <TextView
-                style="@style/Title"
+                style="@style/Text.Title"
                 android:text="@string/title_settings_application" />
 
-            <LinearLayout style="@style/Vertical_Rounded_Small">
+            <LinearLayout style="@style/Layout.Vertical">
 
                 <TextView
-                    style="@style/SubTitle"
+                    style="@style/Text.Setting"
                     android:text="@string/theme" />
 
-                <LinearLayout style="@style/Horizontal_Rounded_Small">
+                <LinearLayout style="@style/Layout.Horizontal.Rounded">
 
                     <Button
                         android:id="@+id/button_theme_system"
-                        style="@style/Button_Item"
+                        style="@style/Button.Item"
                         android:text="@string/theme_system" />
 
                     <Button
-                        android:id="@+id/button_theme_dark"
-                        style="@style/Button_Item"
-                        android:text="@string/theme_dark" />
+                        android:id="@+id/button_theme_light"
+                        style="@style/Button.Item"
+                        android:text="@string/theme_light" />
 
                     <Button
-                        android:id="@+id/button_theme_light"
-                        style="@style/Button_Item"
-                        android:text="@string/theme_light" />
+                        android:id="@+id/button_theme_dark"
+                        style="@style/Button.Item"
+                        android:text="@string/theme_dark" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/Layout.Vertical">
+
+                <TextView
+                    style="@style/Text.Setting"
+                    android:text="@string/language" />
+
+                <LinearLayout style="@style/Layout.Horizontal.Rounded">
+
+                    <Button
+                        android:id="@+id/button_language_english"
+                        style="@style/Button.Item"
+                        android:text="@string/language_english" />
+
+                    <Button
+                        android:id="@+id/button_language_russian"
+                        style="@style/Button.Item"
+                        android:text="@string/language_russian" />
 
                 </LinearLayout>
 
@@ -47,7 +69,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_initial_index"
-                    style="@style/TextInputEdit"
+                    style="@style/TextInputEditText"
                     android:hint="@string/initial_index"
                     android:inputType="numberSigned" />
 
@@ -55,136 +77,153 @@
 
 
             <TextView
-                style="@style/Title"
+                style="@style/Text.Title"
                 android:text="@string/title_settings_timetable" />
 
             <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_timetable_json"
-                    style="@style/TextInputEdit"
+                    style="@style/TextInputEditText"
                     android:hint="@string/timetable_json" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <TextView
-                style="@style/Title"
+                style="@style/Text.Title"
                 android:text="@string/title_settings_widget" />
 
-            <LinearLayout style="@style/Vertical_Rounded_Small">
+            <LinearLayout style="@style/Layout.Vertical">
 
-                <TextView
-                    style="@style/SubTitle"
-                    android:text="@string/modifiers" />
+                <FrameLayout style="@style/Layout">
 
-                <LinearLayout style="@style/Horizontal_Rounded_Small">
+                    <TextView
+                        style="@style/Text.Setting"
+                        android:layout_gravity="center"
+                        android:text="@string/modifiers" />
 
-                    <Button
-                        android:id="@+id/button_mod_hour_off"
-                        style="@style/Button_Item"
-                        android:text="@string/modifier_off" />
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_modifiers"
+                        style="@style/SwitchMaterial" />
 
-                    <Button
-                        android:id="@+id/button_mod_minute_off"
-                        style="@style/Button_Item"
-                        android:text="@string/modifier_off" />
+                </FrameLayout>
 
-                    <Button
-                        android:id="@+id/button_mod_second_off"
-                        style="@style/Button_Item"
-                        android:text="@string/modifier_off" />
+                <LinearLayout
+                    android:id="@+id/layout_modifiers"
+                    style="@style/Layout.Vertical.Rounded">
 
-                </LinearLayout>
+                    <LinearLayout style="@style/Layout.Horizontal">
 
-                <LinearLayout style="@style/Horizontal_Rounded_Small">
+                        <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout.Item">
 
-                    <Button
-                        android:id="@+id/button_mod_hour_set"
-                        style="@style/Button_Item"
-                        android:text="@string/modifier_set" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/input_modifier_hour"
+                                style="@style/TextInputEditText.Item"
+                                android:hint="@string/modifier_hour"
+                                android:inputType="number" />
 
-                    <Button
-                        android:id="@+id/button_mod_minute_set"
-                        style="@style/Button_Item"
-                        android:text="@string/modifier_set" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                    <Button
-                        android:id="@+id/button_mod_second_set"
-                        style="@style/Button_Item"
-                        android:text="@string/modifier_set" />
+                        <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout.Item">
 
-                </LinearLayout>
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/input_modifier_minute"
+                                style="@style/TextInputEditText.Item"
+                                android:hint="@string/modifier_minute"
+                                android:inputType="number" />
 
-                <LinearLayout style="@style/Horizontal_Rounded_Small">
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                    <Button
-                        android:id="@+id/button_mod_hour_round"
-                        style="@style/Button_Item"
-                        android:text="@string/modifier_round" />
+                        <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout.Item">
 
-                    <Button
-                        android:id="@+id/button_mod_minute_round"
-                        style="@style/Button_Item"
-                        android:text="@string/modifier_round" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/input_modifier_second"
+                                style="@style/TextInputEditText.Item"
+                                android:hint="@string/modifier_second"
+                                android:inputType="number" />
 
-                    <Button
-                        android:id="@+id/button_mod_second_round"
-                        style="@style/Button_Item"
-                        android:text="@string/modifier_round" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                </LinearLayout>
+                    </LinearLayout>
 
-                <LinearLayout style="@style/Horizontal_Rounded_Small">
+                    <LinearLayout style="@style/Layout.Horizontal">
 
-                    <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout_Item">
+                        <Button
+                            android:id="@+id/button_modifier_hour_round"
+                            style="@style/Button.Item"
+                            android:text="@string/modifier_round" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/input_mod_hour"
-                            style="@style/TextInputEdit_Item"
-                            android:hint="@string/modifier_hour"
-                            android:inputType="number" />
+                        <Button
+                            android:id="@+id/button_modifier_minute_round"
+                            style="@style/Button.Item"
+                            android:text="@string/modifier_round" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <Button
+                            android:id="@+id/button_modifier_second_round"
+                            style="@style/Button.Item"
+                            android:text="@string/modifier_round" />
 
-                    <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout_Item">
+                    </LinearLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/input_mod_minute"
-                            style="@style/TextInputEdit_Item"
-                            android:hint="@string/modifier_minute"
-                            android:inputType="number" />
+                    <LinearLayout style="@style/Layout.Horizontal">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <Button
+                            android:id="@+id/button_modifier_hour_set"
+                            style="@style/Button.Item"
+                            android:text="@string/modifier_set" />
 
-                    <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout_Item">
+                        <Button
+                            android:id="@+id/button_modifier_minute_set"
+                            style="@style/Button.Item"
+                            android:text="@string/modifier_set" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/input_mod_second"
-                            style="@style/TextInputEdit_Item"
-                            android:hint="@string/modifier_second"
-                            android:inputType="number" />
+                        <Button
+                            android:id="@+id/button_modifier_second_set"
+                            style="@style/Button.Item"
+                            android:text="@string/modifier_set" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
 
 
-            <Button
+            <TextView
+                style="@style/Text.Title"
+                android:text="@string/title_settings_about" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_source_code"
-                style="@style/Button"
+                style="@style/Button.GitHub"
                 android:text="@string/source_code" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_timetable_editor"
+                style="@style/Button.GitHub"
+                android:text="@string/timetable_editor" />
+
+            <TextView
+                android:id="@+id/text_app_version"
+                style="@style/Text"
+                android:gravity="center"
+                android:text="@string/app_version" />
 
         </LinearLayout>
 
     </com.panov.timetable.utils.BounceScrollView>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="-48dp"
+        android:background="@drawable/square_shadow_bottom"
+        android:backgroundTint="@color/background" />
+
     <Button
         android:id="@+id/button_action"
-        style="@style/Button"
-        android:layout_margin="16dp"
-        android:text="@string/apply" />
+        style="@style/Button.Action"
+        android:text="@string/message_apply" />
 
 </LinearLayout>

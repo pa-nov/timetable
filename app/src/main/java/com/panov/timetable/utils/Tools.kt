@@ -1,6 +1,8 @@
 package com.panov.timetable.utils
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.widget.Toast
 
 object Tools {
@@ -10,5 +12,13 @@ object Tools {
 
     fun showToast(context: Context, text: CharSequence) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+    }
+
+    fun openURL(context: Context, url: String) {
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    }
+
+    fun convertDpToPx(context: Context, dp: Int): Int {
+        return (dp * (context.resources.displayMetrics.densityDpi / 160f)).toInt()
     }
 }

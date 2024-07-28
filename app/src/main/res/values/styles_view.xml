@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/square_rounded_small</item>
+        <item name="android:backgroundTint">@color/accent</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/background</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+
+    <style name="Button.Item">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:backgroundTint">@color/accent_disabled</item>
+        <item name="android:textColor">@color/text_enabled</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Button.GitHub">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="icon">@drawable/icon_github</item>
+        <item name="iconPadding">4dp</item>
+        <item name="iconSize">40dp</item>
+        <item name="iconTint">@color/background</item>
+    </style>
+
+    <style name="Button.Action">
+        <item name="android:layout_height">64dp</item>
+        <item name="android:background">@drawable/square_rounded</item>
+        <item name="android:layout_marginHorizontal">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginTop">-32dp</item>
+    </style>
+
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorHint">@color/accent</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxStrokeColor">@color/stroke_input</item>
+        <item name="cursorColor">@color/green</item>
+        <item name="hintTextColor">@color/green</item>
+    </style>
+
+    <style name="TextInputLayout.Item" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColorHint">@color/accent</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="cursorColor">@color/green</item>
+        <item name="hintTextColor">@color/green</item>
+    </style>
+
+    <style name="TextInputEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/message_error</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="theme">@style/Theme.TextInputEditText.OutlinedBox</item>
+    </style>
+
+    <style name="TextInputEditText.Item">
+        <item name="android:background">@color/empty</item>
+        <item name="android:gravity">center</item>
+        <item name="theme">@style/Theme.TextInputEditText.FilledBox</item>
+    </style>
+
+    <style name="SwitchMaterial" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical|right</item>
+        <item name="thumbTint">@color/yellow</item>
+        <item name="trackTint">@color/track_switch</item>
+        <item name="theme">@style/Theme.SwitchMaterial</item>
+    </style>
+
+</resources>

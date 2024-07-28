@@ -6,11 +6,11 @@
     android:orientation="vertical"
     tools:context=".TimetableFragment">
 
-    <com.panov.timetable.utils.BounceScrollView style="@style/ScrollContainer">
+    <com.panov.timetable.utils.BounceScrollView style="@style/ScrollView">
 
         <LinearLayout
             android:id="@+id/layout_container"
-            style="@style/VerticalContainer">
+            style="@style/ScrollLayout">
 
             <TextView
                 android:layout_width="wrap_content"

@@ -8,27 +8,35 @@
     <string name="title_settings_application">Application</string>
     <string name="title_settings_timetable">Timetable</string>
     <string name="title_settings_widget">Widget</string>
+    <string name="title_settings_about">About the app</string>
 
     <string name="description_widget">Widget</string>
 
     <string name="message_error">Error</string>
     <string name="message_success">Success</string>
     <string name="message_applied">Applied</string>
-    <string name="apply">Apply</string>
-    <string name="source_code">Source code</string>
+    <string name="message_apply">Apply</string>
 
     <string name="theme">Theme</string>
     <string name="theme_system">System</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_light">Light</string>
+    <string name="language">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_russian">Russian</string>
     <string name="initial_index">Number of the first lesson</string>
+
     <string name="timetable_json">Timetable (JSON)</string>
+
     <string name="modifiers">Modifiers</string>
-    <string name="modifier_off">Off</string>
-    <string name="modifier_set">Set</string>
-    <string name="modifier_round">Round</string>
     <string name="modifier_hour">Hour</string>
     <string name="modifier_minute">Minute</string>
     <string name="modifier_second">Second</string>
+    <string name="modifier_round">Round</string>
+    <string name="modifier_set">Set</string>
+
+    <string name="source_code">Source code</string>
+    <string name="timetable_editor">Timetable editor</string>
+    <string name="app_version">Application version: %s</string>
 
 </resources>

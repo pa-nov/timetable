@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.forEach
 import androidx.core.view.updateLayoutParams
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.panov.timetable.utils.Tools
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 view.setPadding(0, 0, 0, 0)
             }
 
-            findViewById<View>(R.id.layout_container)?.setPadding(0, systemBarsInsets.top, 0, 0)
+            findViewById<View>(R.id.layout_container)?.setPadding(0, systemBarsInsets.top, 0, Tools.convertDpToPx(applicationContext, 48))
             shadowStatusBar.updateLayoutParams { height = systemBarsInsets.top * 2 }
             navigationSystem.updateLayoutParams { height = systemBarsInsets.bottom }
 

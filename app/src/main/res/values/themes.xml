@@ -12,8 +12,17 @@
         <item name="android:windowBackground">@color/background</item>
     </style>
 
-    <style name="Theme.TextInputEdit" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+    <style name="Theme.TextInputEditText.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:colorControlActivated">@color/green</item>
+    </style>
+
+    <style name="Theme.TextInputEditText.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:colorControlActivated">@color/green</item>
+    </style>
+
+    <style name="Theme.SwitchMaterial" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="android:colorControlActivated">@color/empty</item>
+        <item name="android:colorControlHighlight">@color/empty</item>
     </style>
 
 </resources>

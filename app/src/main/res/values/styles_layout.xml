@@ -1,35 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="ScrollContainer">
+    <style name="ScrollView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:paddingHorizontal">16dp</item>
     </style>
 
-    <style name="VerticalContainer">
+    <style name="ScrollLayout">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:divider">@drawable/divider</item>
         <item name="android:orientation">vertical</item>
         <item name="android:showDividers">middle</item>
     </style>
 
-    <style name="Layout_Rounded_Small">
+    <style name="Layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Layout.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Layout.Vertical.Rounded">
         <item name="android:background">@drawable/square_rounded_small</item>
         <item name="android:backgroundTint">@color/item</item>
         <item name="backgroundTint">@null</item>
     </style>
 
-    <style name="Vertical_Rounded_Small" parent="Layout_Rounded_Small">
-        <item name="android:orientation">vertical</item>
+    <style name="Layout.Horizontal">
+        <item name="android:orientation">horizontal</item>
     </style>
 
-    <style name="Horizontal_Rounded_Small" parent="Layout_Rounded_Small">
-        <item name="android:orientation">horizontal</item>
+    <style name="Layout.Horizontal.Rounded">
+        <item name="android:background">@drawable/square_rounded_small</item>
+        <item name="android:backgroundTint">@color/item</item>
+        <item name="backgroundTint">@null</item>
     </style>
 
 </resources>

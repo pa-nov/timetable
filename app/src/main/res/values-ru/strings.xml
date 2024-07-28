@@ -8,27 +8,35 @@
     <string name="title_settings_application">Приложение</string>
     <string name="title_settings_timetable">Расписание</string>
     <string name="title_settings_widget">Виджет</string>
+    <string name="title_settings_about">О приложении</string>
 
     <string name="description_widget">Виджет</string>
 
     <string name="message_error">Ошибка</string>
     <string name="message_success">Успешно</string>
     <string name="message_applied">Применено</string>
-    <string name="apply">Применить</string>
-    <string name="source_code">Исходный код</string>
+    <string name="message_apply">Применить</string>
 
     <string name="theme">Тема</string>
     <string name="theme_system">Системная</string>
     <string name="theme_dark">Тёмная</string>
     <string name="theme_light">Светлая</string>
+    <string name="language">Язык</string>
+    <string name="language_english">Английский</string>
+    <string name="language_russian">Русский</string>
     <string name="initial_index">Номер первого предмета</string>
+
     <string name="timetable_json">Расписание (JSON)</string>
+
     <string name="modifiers">Модификаторы</string>
-    <string name="modifier_off">Выкл</string>
-    <string name="modifier_set">Установить</string>
-    <string name="modifier_round">Округлить</string>
     <string name="modifier_hour">Час</string>
     <string name="modifier_minute">Минута</string>
     <string name="modifier_second">Секунда</string>
+    <string name="modifier_round">Округлить</string>
+    <string name="modifier_set">Установить</string>
+
+    <string name="source_code">Исходный код</string>
+    <string name="timetable_editor">Редактор расписания</string>
+    <string name="app_version">Версия приложения: %s</string>
 
 </resources>
