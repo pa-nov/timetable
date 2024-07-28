@@ -8,6 +8,9 @@ import android.view.View
 import android.view.animation.Interpolator
 import androidx.core.widget.NestedScrollView
 import kotlin.math.abs
+import kotlin.math.floor
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.pow
 
 class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : NestedScrollView(context, attrs, defStyleAttr) {
@@ -42,12 +45,12 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
 
     override fun onScrollChanged(xCurrent: Int, yCurrent: Int, xPrevious: Int, yPrevious: Int) {
         super.onScrollChanged(xCurrent, yCurrent, xPrevious, yPrevious)
-        onScrolled(yPrevious, yCurrent)
+        onScrolled(yCurrent, yPrevious)
     }
 
     override fun onViewAdded(child: View?) {
-        if (child != null) childView = child
         super.onViewAdded(child)
+        if (child != null) childView = child
     }
 
     private fun onPointerDown(event: MotionEvent) {
@@ -61,64 +64,64 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     private fun onPointerMove(event: MotionEvent) {
         if (touched) {
             val touchCurrent = event.y
-            val touchOffset = touchPrevious - touchCurrent
+            val touchOffset = touchCurrent - touchPrevious
+            val scrollMax = getScrollMax()
             touchPrevious = touchCurrent
 
-            if (touchOffset < 0f && scrollY == 0) {
-                overScrollDirection = -1
-
-                overScrollDelta += getDamping(touchOffset)
-                childView.translationY = -overScrollDelta
+            if (overScrollDirection >= 0 && scrollY == 0) {
+                if (touchOffset > 0) {
+                    overScrollDirection = 1
+                    overScrollDelta += getDamping(abs(touchOffset))
+                } else {
+                    overScrollDelta -= max(abs(touchOffset) - scrollMax, 0f)
+                    if (overScrollDelta <= 0) overScrollDelta = 0f
+                }
             }
 
-            if (touchOffset > 0f && scrollY == getScrollMax()) {
-                overScrollDirection = 1
-
-                overScrollDelta += getDamping(touchOffset)
-                childView.translationY = -overScrollDelta
+            if (overScrollDirection <= 0 && scrollY == scrollMax) {
+                if (touchOffset < 0) {
+                    overScrollDirection = -1
+                    overScrollDelta += getDamping(abs(touchOffset))
+                } else {
+                    overScrollDelta -= max(abs(touchOffset) - scrollMax, 0f)
+                    if (overScrollDelta <= 0) overScrollDelta = 0f
+                }
             }
+
+            if (overScrollDelta == 0f) overScrollDirection = 0
+            overScrollDelta = min(overScrollDelta, height / 2f)
+            childView.translationY = overScrollDelta * overScrollDirection
         }
     }
 
     private fun onPointerUp(event: MotionEvent) {
         if (touched) {
             touched = false
+            touchPrevious = event.y
+            overScrollDelta = 0f
             overScrollDirection = 0
             moveToDefaultPosition()
         }
     }
 
-    private fun onScrolled(yPrevious: Int, yCurrent: Int) {
-        val yOffset = yPrevious - yCurrent
+    private fun onScrolled(yCurrent: Int, yPrevious: Int) {
+        val yOffset = yCurrent - yPrevious
 
-        if (overScrollDirection != 0) {
-            if (overScrollDirection < 0 && yOffset < 0) {
-                if (overScrollDelta - yOffset < 0) {
-                    scrollY += yOffset
-                    overScrollDelta -= yOffset
+        if (touched) {
+            if ((overScrollDirection > 0 && yOffset > 0) || (overScrollDirection < 0 && yOffset < 0)) {
+                if (overScrollDelta > abs(yOffset)) {
+                    scrollY -= yOffset
+                    overScrollDelta -= abs(yOffset)
                 } else {
-                    overScrollDirection = 0
+                    scrollY -= floor(overScrollDelta).toInt()
                     overScrollDelta = 0f
-                }
-                childView.translationY = -overScrollDelta
-            }
-            if (overScrollDirection > 0 && yOffset > 0) {
-                if (overScrollDelta - yOffset > 0) {
-                    scrollY += yOffset
-                    overScrollDelta -= yOffset
-                } else {
                     overScrollDirection = 0
-                    overScrollDelta = 0f
                 }
-                childView.translationY = -overScrollDelta
+                childView.translationY = overScrollDelta * overScrollDirection
             }
-        } else {
-            if (!touched) {
-                if (yCurrent == 0 || (yCurrent == getScrollMax() && yOffset < 0)) {
-                    childView.translationY = yOffset.toFloat()
-                    moveToDefaultPosition()
-                }
-            }
+        } else if ((yCurrent == 0 && yOffset < 0) || (yCurrent == getScrollMax() && yOffset > 0)) {
+            childView.translationY = -yOffset.toFloat()
+            moveToDefaultPosition()
         }
     }
 
@@ -127,7 +130,10 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
             animator.cancel()
         }
         if (::childView.isInitialized) {
-            overScrollDelta = -childView.translationY
+            val delta = childView.translationY
+            if (delta > 0) overScrollDirection = 1
+            if (delta < 0) overScrollDirection = -1
+            overScrollDelta = abs(delta)
         }
     }
 
@@ -139,12 +145,12 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     }
 
     private fun getDamping(offset: Float): Float {
-        return offset / (2 / (1 - (abs(childView.translationY) / (height / 2)).pow(2)))
+        return offset / (2 / (1 - (overScrollDelta / (height / 2)).pow(2)))
     }
 
     private fun getScrollMax(): Int {
         val scrollMax = childView.height - height
-        return if (scrollMax < 0) 0 else scrollMax
+        return max(scrollMax, 0)
     }
 
 
