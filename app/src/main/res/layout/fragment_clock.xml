@@ -13,12 +13,18 @@
             style="@style/ScrollLayout">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/Text.Title"
                 android:text="@string/title_clock" />
 
         </LinearLayout>
 
     </com.panov.timetable.utils.BounceScrollView>
+
+    <FrameLayout style="@style/ShadowBottom" />
+
+    <Button
+        android:id="@+id/button_action"
+        style="@style/Button.Action"
+        android:text="@string/message_error" />
 
 </LinearLayout>

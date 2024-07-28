@@ -214,12 +214,7 @@
 
     </com.panov.timetable.utils.BounceScrollView>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="-48dp"
-        android:background="@drawable/square_shadow_bottom"
-        android:backgroundTint="@color/background" />
+    <FrameLayout style="@style/ShadowBottom" />
 
     <Button
         android:id="@+id/button_action"
