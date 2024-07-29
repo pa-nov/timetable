@@ -75,6 +75,8 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <FrameLayout style="@style/Separator" />
+
 
             <TextView
                 style="@style/Text.Title"
@@ -88,6 +90,8 @@
                     android:hint="@string/timetable_json" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <FrameLayout style="@style/Separator" />
 
 
             <TextView
@@ -188,6 +192,8 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <FrameLayout style="@style/Separator" />
 
 
             <TextView
