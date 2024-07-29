@@ -18,7 +18,13 @@ object Tools {
         context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
 
+
     fun convertDpToPx(context: Context, dp: Int): Int {
         return (dp * (context.resources.displayMetrics.densityDpi / 160f)).toInt()
+    }
+
+    fun getTwoDigitNumber(number: Int): String {
+        if (number > 9) return number.toString()
+        return "0$number"
     }
 }
