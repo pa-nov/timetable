@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import android.view.animation.Interpolator
 import androidx.core.widget.NestedScrollView
 import kotlin.math.abs
@@ -26,11 +27,15 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
 
     private lateinit var childView: View
     private lateinit var animator: ObjectAnimator
+    private val scaledTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
 
     private var touched = false
+    private var touchStart = 0f
     private var touchPrevious = 0f
     private var overScrollDelta = 0f
     private var overScrollDirection = 0
+    private var canScroll = false
+
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
         if (event != null) {
@@ -53,16 +58,33 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
         if (child != null) childView = child
     }
 
+
     private fun onPointerDown(event: MotionEvent) {
         if (!touched) {
             touched = true
+            touchStart = event.x
             touchPrevious = event.y
+            canScroll = !(childView.canScrollHorizontally(-1) || childView.canScrollHorizontally(1))
             stopAnimation()
         }
     }
 
     private fun onPointerMove(event: MotionEvent) {
         if (touched) {
+            if (!canScroll) {
+                val xOffset = event.x - touchStart
+                val yOffset = event.y - touchPrevious
+
+                if (abs(xOffset) > scaledTouchSlop) {
+                    onPointerUp(event)
+                } else if (abs(yOffset) > scaledTouchSlop) {
+                    touchPrevious = event.y
+                    canScroll = true
+                }
+
+                return
+            }
+
             val touchCurrent = event.y
             val touchOffset = touchCurrent - touchPrevious
             val scrollMax = getScrollMax()
@@ -97,7 +119,6 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     private fun onPointerUp(event: MotionEvent) {
         if (touched) {
             touched = false
-            touchPrevious = event.y
             overScrollDelta = 0f
             overScrollDirection = 0
             moveToDefaultPosition()
