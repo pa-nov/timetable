@@ -45,12 +45,12 @@ class TimetableFragment : Fragment() {
         viewTimetable.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 if (position < 1 && positionOffset <= 0) {
-                    viewTimetable.setCurrentItem(1, false)
                     calendar.add(Calendar.DAY_OF_MONTH, -1)
+                    viewTimetable.setCurrentItem(1, false)
                 }
                 if (position > 1) {
-                    viewTimetable.setCurrentItem(1, false)
                     calendar.add(Calendar.DAY_OF_MONTH, 1)
+                    viewTimetable.setCurrentItem(1, false)
                 }
 
                 tempPosition = if (position < 1) if (positionOffset < 0.5f) -1 else 0 else if (positionOffset > 0.5f) 1 else 0
