@@ -34,8 +34,9 @@ class SettingsFragment : Fragment() {
         setLanguage(fragment, Storage.settings.getString("app_language", Locale.getDefault().language) ?: Locale.getDefault().language, true)
 
 
+        Tools.setViewVisibility(fragment.findViewById(R.id.layout_modifiers), View.GONE)
         fragment.findViewById<SwitchMaterial>(R.id.switch_modifiers).setOnCheckedChangeListener { _, isChecked ->
-            fragment.findViewById<View>(R.id.layout_modifiers).visibility = if (isChecked) View.VISIBLE else View.GONE
+            Tools.setViewVisibility(fragment.findViewById(R.id.layout_modifiers), if (isChecked) View.VISIBLE else View.GONE)
         }
         val buttonModifierHourRound = fragment.findViewById<Button>(R.id.button_modifier_hour_round)
         val buttonModifierHourSet = fragment.findViewById<Button>(R.id.button_modifier_hour_set)
@@ -114,12 +115,11 @@ class SettingsFragment : Fragment() {
         val modifierMinute = Storage.settings.getInt("widget_modifier_minute", 1)
         val modifierSecond = Storage.settings.getInt("widget_modifier_second", 1)
 
+        val switchModifiers = view.findViewById<SwitchMaterial>(R.id.switch_modifiers)
         if (modifierHour == 1 && modifierMinute == 1 && modifierSecond == 1) {
-            view.findViewById<SwitchMaterial>(R.id.switch_modifiers).isChecked = false
-            view.findViewById<View>(R.id.layout_modifiers).visibility = View.GONE
+            if (switchModifiers.isChecked) switchModifiers.isChecked = false
         } else {
-            view.findViewById<SwitchMaterial>(R.id.switch_modifiers).isChecked = true
-            view.findViewById<View>(R.id.layout_modifiers).visibility = View.VISIBLE
+            if (!switchModifiers.isChecked) switchModifiers.isChecked = true
         }
 
         view.findViewById<TextInputEditText>(R.id.input_modifier_hour).setText(abs(modifierHour).toString())
