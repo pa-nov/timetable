@@ -97,8 +97,8 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
                 if (offset > 0) {
                     overScrollDirection = 1
                     overScrollDelta += getDamping(abs(offset))
-                } else if (scrollMax == 0) {
-                    overScrollDelta -= abs(offset)
+                } else {
+                    overScrollDelta -= max(abs(offset) - scrollMax, 0f)
                     if (overScrollDelta <= 0) overScrollDelta = 0f
                 }
             }
@@ -107,8 +107,8 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
                 if (offset < 0) {
                     overScrollDirection = -1
                     overScrollDelta += getDamping(abs(offset))
-                } else if (scrollMax == 0) {
-                    overScrollDelta -= abs(offset)
+                } else {
+                    overScrollDelta -= max(abs(offset) - scrollMax, 0f)
                     if (overScrollDelta <= 0) overScrollDelta = 0f
                 }
             }
