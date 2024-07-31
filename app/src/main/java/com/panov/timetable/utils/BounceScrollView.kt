@@ -30,22 +30,21 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     private val scaledTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
 
     private var touched = false
-    private var touchStart = 0f
-    private var touchPrevious = 0f
+    private var canScroll = false
+    private var pointerId = 0
+    private var pointerPrevious = 0f
     private var overScrollDelta = 0f
     private var overScrollDirection = 0
-    private var canScroll = false
 
 
-    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
-        if (event != null) {
-            when (event.actionMasked) {
-                MotionEvent.ACTION_DOWN -> onPointerDown(event)
-                MotionEvent.ACTION_MOVE -> onPointerMove(event)
-                MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP -> onPointerUp(event)
-            }
-        }
-        return super.dispatchTouchEvent(event)
+    override fun onInterceptTouchEvent(event: MotionEvent): Boolean {
+        onPointerEvent(event)
+        return super.onInterceptTouchEvent(event)
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        onPointerEvent(event)
+        return super.onTouchEvent(event)
     }
 
     override fun onScrollChanged(xCurrent: Int, yCurrent: Int, xPrevious: Int, yPrevious: Int) {
@@ -59,69 +58,81 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     }
 
 
-    private fun onPointerDown(event: MotionEvent) {
-        if (!touched) {
-            touched = true
-            touchStart = event.x
-            touchPrevious = event.y
-            canScroll = !(childView.canScrollHorizontally(-1) || childView.canScrollHorizontally(1))
-            stopAnimation()
+    private fun onPointerEvent(event: MotionEvent) {
+        when (event.actionMasked) {
+            MotionEvent.ACTION_DOWN, MotionEvent.ACTION_POINTER_DOWN -> onPointerDown(event)
+            MotionEvent.ACTION_MOVE -> onPointerMove(event)
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP, MotionEvent.ACTION_CANCEL -> onPointerUp(event)
         }
     }
 
+    private fun onPointerDown(event: MotionEvent) {
+        val index = event.actionIndex
+        if (!touched) stopAnimation()
+
+        touched = true
+        pointerId = event.getPointerId(index)
+        pointerPrevious = event.getY(index)
+    }
+
     private fun onPointerMove(event: MotionEvent) {
-        if (touched) {
+        val index = event.findPointerIndex(pointerId)
+
+        if (index >= 0) {
+            val pointerCurrent = event.getY(index)
+            val offset = pointerCurrent - pointerPrevious
+
             if (!canScroll) {
-                val xOffset = event.x - touchStart
-                val yOffset = event.y - touchPrevious
-
-                if (abs(xOffset) > scaledTouchSlop) {
-                    onPointerUp(event)
-                } else if (abs(yOffset) > scaledTouchSlop) {
-                    touchPrevious = event.y
+                if (abs(offset) > scaledTouchSlop) {
                     canScroll = true
+                    pointerPrevious = pointerCurrent
                 }
-
                 return
             }
 
-            val touchCurrent = event.y
-            val touchOffset = touchCurrent - touchPrevious
             val scrollMax = getScrollMax()
-            touchPrevious = touchCurrent
+            pointerPrevious = pointerCurrent
 
             if (overScrollDirection >= 0 && scrollY == 0) {
-                if (touchOffset > 0) {
+                if (offset > 0) {
                     overScrollDirection = 1
-                    overScrollDelta += getDamping(abs(touchOffset))
+                    overScrollDelta += getDamping(abs(offset))
                 } else if (scrollMax == 0) {
-                    overScrollDelta -= abs(touchOffset)
+                    overScrollDelta -= abs(offset)
                     if (overScrollDelta <= 0) overScrollDelta = 0f
                 }
             }
 
             if (overScrollDirection <= 0 && scrollY == scrollMax) {
-                if (touchOffset < 0) {
+                if (offset < 0) {
                     overScrollDirection = -1
-                    overScrollDelta += getDamping(abs(touchOffset))
+                    overScrollDelta += getDamping(abs(offset))
                 } else if (scrollMax == 0) {
-                    overScrollDelta -= abs(touchOffset)
+                    overScrollDelta -= abs(offset)
                     if (overScrollDelta <= 0) overScrollDelta = 0f
                 }
             }
 
-            if (overScrollDelta == 0f) overScrollDirection = 0
+            if (overScrollDelta <= 0) overScrollDirection = 0
             overScrollDelta = min(overScrollDelta, height / 2f)
             childView.translationY = overScrollDelta * overScrollDirection
         }
     }
 
     private fun onPointerUp(event: MotionEvent) {
-        if (touched) {
-            touched = false
-            overScrollDelta = 0f
-            overScrollDirection = 0
-            moveToDefaultPosition()
+        val index = event.actionIndex
+
+        if (event.getPointerId(index) == pointerId) {
+            if (event.pointerCount > 1) {
+                pointerId = event.getPointerId(if (index == 0) 1 else 0)
+                pointerPrevious = event.getY(if (index == 0) 1 else 0)
+            } else {
+                touched = false
+                canScroll = false
+                overScrollDelta = 0f
+                overScrollDirection = 0
+                moveToDefaultPosition()
+            }
         }
     }
 
