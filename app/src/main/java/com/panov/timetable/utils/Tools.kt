@@ -2,6 +2,7 @@ package com.panov.timetable.utils
 
 import android.content.Context
 import android.content.Intent
+import android.icu.util.Calendar
 import android.net.Uri
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
@@ -49,5 +50,13 @@ object Tools {
     fun getTwoDigitNumber(number: Int): String {
         if (number > 9) return number.toString()
         return "0$number"
+    }
+
+    fun getDateText(calendar: Calendar): String {
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val year = calendar.get(Calendar.YEAR)
+        val week = calendar.get(Calendar.WEEK_OF_YEAR)
+        return "${getTwoDigitNumber(day)}.${getTwoDigitNumber(month)}.$year (${getTwoDigitNumber(week)})"
     }
 }

@@ -6,17 +6,15 @@
     android:orientation="vertical"
     tools:context=".TimetableFragment">
 
-    <com.panov.timetable.utils.BounceScrollView style="@style/ScrollView">
+    <com.panov.timetable.utils.BounceScrollView
+        style="@style/ScrollView"
+        android:paddingHorizontal="0dp">
 
-        <LinearLayout
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/layout_container"
-            style="@style/ScrollLayout">
-
-            <TextView
-                style="@style/Text.Title"
-                android:text="@string/title_timetable" />
-
-        </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
 
     </com.panov.timetable.utils.BounceScrollView>
 

@@ -25,4 +25,16 @@
         <item name="android:colorControlHighlight">@color/empty</item>
     </style>
 
+    <style name="Theme.DatePickerDialog" parent="ThemeOverlay.Material3.Dialog">
+        <item name="android:windowBackground">@drawable/square_rounded_small</item>
+        <item name="android:backgroundTint">@color/item</item>
+        <item name="android:colorControlActivated">@color/accent</item>
+        <item name="android:colorControlHighlight">@color/line</item>
+        <item name="android:textColorPrimary">@color/text</item>
+        <item name="android:textColorPrimaryInverse">@color/text</item>
+        <item name="android:textColorSecondary">@color/title</item>
+        <item name="android:textColorSecondaryInverse">@color/title</item>
+        <item name="colorPrimary">@color/accent</item>
+    </style>
+
 </resources>
