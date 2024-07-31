@@ -6,7 +6,9 @@
     android:orientation="vertical"
     tools:context=".SettingsFragment">
 
-    <com.panov.timetable.utils.BounceScrollView style="@style/ScrollView">
+    <com.panov.timetable.utils.BounceScrollView
+        style="@style/ScrollView"
+        android:paddingHorizontal="16dp">
 
         <LinearLayout
             android:id="@+id/layout_container"

@@ -6,9 +6,7 @@
     android:orientation="vertical"
     tools:context=".TimetableFragment">
 
-    <com.panov.timetable.utils.BounceScrollView
-        style="@style/ScrollView"
-        android:paddingHorizontal="0dp">
+    <com.panov.timetable.utils.BounceScrollView style="@style/ScrollView">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/layout_container"

@@ -16,9 +16,8 @@ import com.panov.timetable.utils.Tools
 import kotlin.math.abs
 
 class TimetableFragment : Fragment() {
-    private var tempPosition = 0
-
     val calendar: Calendar = Calendar.getInstance()
+    private var tempPosition = 0
 
     init {
         calendar.firstDayOfWeek = Calendar.MONDAY
@@ -48,12 +47,10 @@ class TimetableFragment : Fragment() {
                 if (position < 1 && positionOffset <= 0) {
                     viewTimetable.setCurrentItem(1, false)
                     calendar.add(Calendar.DAY_OF_MONTH, -1)
-                    calendar.get(Calendar.DAY_OF_YEAR)
                 }
                 if (position > 1) {
                     viewTimetable.setCurrentItem(1, false)
                     calendar.add(Calendar.DAY_OF_MONTH, 1)
-                    calendar.get(Calendar.DAY_OF_YEAR)
                 }
 
                 tempPosition = if (position < 1) if (positionOffset < 0.5f) -1 else 0 else if (positionOffset > 0.5f) 1 else 0
@@ -75,7 +72,6 @@ class TimetableFragment : Fragment() {
                     calendar.set(Calendar.YEAR, year)
                     calendar.set(Calendar.MONTH, month)
                     calendar.set(Calendar.DAY_OF_MONTH, day)
-                    calendar.get(Calendar.DAY_OF_YEAR)
                     updateView(fragment)
                 }
             }, tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH)).show()
@@ -85,12 +81,11 @@ class TimetableFragment : Fragment() {
     }
 
     private fun resetCalendar() {
-        val temp = Calendar.getInstance()
+        val tempCalendar = Calendar.getInstance()
         calendar.clear()
-        calendar.set(Calendar.YEAR, temp.get(Calendar.YEAR))
-        calendar.set(Calendar.MONTH, temp.get(Calendar.MONTH))
-        calendar.set(Calendar.DAY_OF_MONTH, temp.get(Calendar.DAY_OF_MONTH))
-        calendar.get(Calendar.DAY_OF_YEAR)
+        calendar.set(Calendar.YEAR, tempCalendar.get(Calendar.YEAR))
+        calendar.set(Calendar.MONTH, tempCalendar.get(Calendar.MONTH))
+        calendar.set(Calendar.DAY_OF_MONTH, tempCalendar.get(Calendar.DAY_OF_MONTH))
     }
 
     private fun updateView(view: View) {
