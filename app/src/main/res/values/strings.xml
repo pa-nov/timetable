@@ -17,6 +17,10 @@
     <string name="message_applied">Applied</string>
     <string name="message_apply">Apply</string>
 
+    <string name="day_yesterday">Yesterday</string>
+    <string name="day_today">Today</string>
+    <string name="day_tomorrow">Tomorrow</string>
+
     <string name="theme">Theme</string>
     <string name="theme_system">System</string>
     <string name="theme_dark">Dark</string>
@@ -38,5 +42,15 @@
     <string name="source_code">Source code</string>
     <string name="timetable_editor">Timetable editor</string>
     <string name="app_version">Application version: %s</string>
+
+    <string-array name="weekdays">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 
 </resources>

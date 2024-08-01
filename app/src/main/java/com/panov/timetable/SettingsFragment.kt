@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
 import com.panov.timetable.utils.Storage
+import com.panov.timetable.utils.TimetableData
 import com.panov.timetable.utils.Tools
 import java.util.Locale
 import kotlin.math.abs
@@ -130,7 +131,13 @@ class SettingsFragment : Fragment() {
 
         editor.putInt("app_initial_index", getIntFromInput(view.findViewById(R.id.input_initial_index), 1))
 
-        editor.putString("timetable_json", view.findViewById<TextInputEditText>(R.id.input_timetable_json).text.toString())
+        val timetableString = view.findViewById<TextInputEditText>(R.id.input_timetable_json).text.toString()
+        editor.putString("timetable_json", timetableString)
+        Storage.timetable = try {
+            TimetableData(timetableString)
+        } catch (_: Exception) {
+            null
+        }
 
         if (view.findViewById<SwitchMaterial>(R.id.switch_modifiers).isChecked) {
             val modifierHour = getIntFromInput(view.findViewById(R.id.input_modifier_hour), 1)

@@ -17,6 +17,10 @@
     <string name="message_applied">Применено</string>
     <string name="message_apply">Применить</string>
 
+    <string name="day_yesterday">Вчера</string>
+    <string name="day_today">Сегодня</string>
+    <string name="day_tomorrow">Завтра</string>
+
     <string name="theme">Тема</string>
     <string name="theme_system">Системная</string>
     <string name="theme_dark">Тёмная</string>
@@ -38,5 +42,15 @@
     <string name="source_code">Исходный код</string>
     <string name="timetable_editor">Редактор расписания</string>
     <string name="app_version">Версия приложения: %s</string>
+
+    <string-array name="weekdays">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+        <item>Воскресенье</item>
+    </string-array>
 
 </resources>

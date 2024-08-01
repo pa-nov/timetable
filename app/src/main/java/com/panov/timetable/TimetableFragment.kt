@@ -3,6 +3,7 @@ package com.panov.timetable
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,7 +85,22 @@ class TimetableFragment : Fragment() {
 
     private fun updateDate(view: View) {
         val button = view.findViewById<Button>(R.id.button_action)
-        button.text = Tools.getDateText(getTempCalendar())
+        val tempCalendar = getTempCalendar()
+
+        if (DateUtils.isToday(tempCalendar.timeInMillis + DateUtils.DAY_IN_MILLIS)) {
+            button.text = getString(R.string.day_yesterday)
+            return
+        }
+        if (DateUtils.isToday(tempCalendar.timeInMillis)) {
+            button.text = getString(R.string.day_today)
+            return
+        }
+        if (DateUtils.isToday(tempCalendar.timeInMillis - DateUtils.DAY_IN_MILLIS)) {
+            button.text = getString(R.string.day_tomorrow)
+            return
+        }
+
+        button.text = Tools.getDateText(tempCalendar)
     }
 
     private fun resetCalendar() {

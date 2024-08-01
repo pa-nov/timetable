@@ -49,16 +49,16 @@ class TimetableData(jsonString: String?) {
         return times.count()
     }
 
-    fun getLessonTime(lessonNumber: Int): String {
-        return times[lessonNumber].toString()
+    fun getLessonTime(lessonIndex: Int): String {
+        return times[lessonIndex].toString()
     }
 
-    fun getLessonStart(lessonNumber: Int): Int {
-        return times[lessonNumber].getStartSeconds()
+    fun getLessonStart(lessonIndex: Int): Int {
+        return times[lessonIndex].getStartSeconds()
     }
 
-    fun getLessonEnd(lessonNumber: Int): Int {
-        return times[lessonNumber].getEndSeconds()
+    fun getLessonEnd(lessonIndex: Int): Int {
+        return times[lessonIndex].getEndSeconds()
     }
 
 
@@ -70,12 +70,12 @@ class TimetableData(jsonString: String?) {
         return lessons[lessonId].getFullTitle()
     }
 
-    fun getLessonRoom(lessonId: Int): String {
-        return lessons[lessonId].getRoom()
+    fun getLessonClassroom(lessonId: Int): String {
+        return lessons[lessonId].getClassroom()
     }
 
-    fun getLessonRoomText(lessonId: Int): String {
-        return lessons[lessonId].getRoomText()
+    fun getLessonClassroomText(lessonId: Int): String {
+        return lessons[lessonId].getClassroomText()
     }
 
     fun getTeacherShortName(lessonId: Int): String {
@@ -91,9 +91,9 @@ class TimetableData(jsonString: String?) {
     }
 
 
-    fun getLessonId(week: String, day: Int, lessonNumber: Int): Int {
-        if (week == "even") return even[day][lessonNumber]
-        if (week == "odd") return odd[day][lessonNumber]
+    fun getLessonId(week: String, day: Int, lessonIndex: Int): Int {
+        if (week == "even") return even[day][lessonIndex]
+        if (week == "odd") return odd[day][lessonIndex]
         return 0
     }
 }
@@ -122,7 +122,7 @@ class TimetableTime(jsonArray: JSONArray) {
 class TimetableLesson(jsonArray: JSONArray) {
     private val titleShort: String
     private val titleFull: String
-    private val room: String = jsonArray.getString(1).trim()
+    private val classroom: String = jsonArray.getString(1).trim()
     private val teacherLastName: String
     private val teacherFirstName: String
     private val teacherMiddleName: String
@@ -155,12 +155,12 @@ class TimetableLesson(jsonArray: JSONArray) {
         return titleFull
     }
 
-    fun getRoom(): String {
-        return room
+    fun getClassroom(): String {
+        return classroom
     }
 
-    fun getRoomText(): String {
-        return "($room)"
+    fun getClassroomText(): String {
+        return "($classroom)"
     }
 
     fun getTeacherShortName(): String {
