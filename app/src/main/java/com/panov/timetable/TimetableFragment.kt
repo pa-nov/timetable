@@ -31,7 +31,7 @@ class TimetableFragment : Fragment() {
         val transformer = CompositePageTransformer()
         transformer.addTransformer { page, position ->
             val offset = 1 - abs(position)
-            page.translationX = position * Tools.convertDpToPx(requireContext(), -40)
+            page.translationX = position * Tools.getPxFromDp(requireContext(), -40)
             page.scaleX = 0.8f + offset * 0.2f
             page.scaleY = 0.8f + offset * 0.2f
             page.alpha = offset
@@ -44,29 +44,16 @@ class TimetableFragment : Fragment() {
         viewTimetable.setPageTransformer(transformer)
         viewTimetable.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                if (position < 1 && positionOffset <= 0) {
-                    calendar.add(Calendar.DAY_OF_MONTH, -1)
-                    viewTimetable.setCurrentItem(1, false)
-                }
-                if (position > 1) {
-                    calendar.add(Calendar.DAY_OF_MONTH, 1)
-                    viewTimetable.setCurrentItem(1, false)
-                }
+                if (position < 1 && positionOffset <= 0) selectPage(fragment, -1)
+                if (position > 1) selectPage(fragment, 1)
 
                 tempPosition = if (position < 1) if (positionOffset < 0.5f) -1 else 0 else if (positionOffset > 0.5f) 1 else 0
-                val tempCalendar = calendar.clone() as Calendar
-                tempCalendar.add(Calendar.DAY_OF_MONTH, tempPosition)
-                fragment.findViewById<Button>(R.id.button_action).text = Tools.getDateText(tempCalendar)
-            }
-
-            override fun onPageSelected(position: Int) {
-                updateView(fragment)
+                updateDate(fragment)
             }
         })
 
         fragment.findViewById<Button>(R.id.button_action).setOnClickListener {
-            val tempCalendar = calendar.clone() as Calendar
-            tempCalendar.add(Calendar.DAY_OF_MONTH, tempPosition)
+            val tempCalendar = getTempCalendar()
             DatePickerDialog(requireContext(), R.style.Theme_DatePickerDialog, { _, year, month, day ->
                 run {
                     calendar.set(Calendar.YEAR, year)
@@ -80,6 +67,25 @@ class TimetableFragment : Fragment() {
         return fragment
     }
 
+    private fun selectPage(view: View, offset: Int) {
+        calendar.add(Calendar.DAY_OF_MONTH, offset)
+        view.findViewById<ViewPager2>(R.id.layout_container).setCurrentItem(1, false)
+        updateView(view)
+    }
+
+    private fun updateView(view: View) {
+        val viewAdapter = view.findViewById<ViewPager2>(R.id.layout_container).adapter as TimetableAdapter
+        viewAdapter.notifyItemChanged(0)
+        viewAdapter.notifyItemChanged(1)
+        viewAdapter.notifyItemChanged(2)
+        updateDate(view)
+    }
+
+    private fun updateDate(view: View) {
+        val button = view.findViewById<Button>(R.id.button_action)
+        button.text = Tools.getDateText(getTempCalendar())
+    }
+
     private fun resetCalendar() {
         val tempCalendar = Calendar.getInstance()
         calendar.clear()
@@ -88,11 +94,9 @@ class TimetableFragment : Fragment() {
         calendar.set(Calendar.DAY_OF_MONTH, tempCalendar.get(Calendar.DAY_OF_MONTH))
     }
 
-    private fun updateView(view: View) {
-        val viewAdapter = view.findViewById<ViewPager2>(R.id.layout_container).adapter as TimetableAdapter
-        viewAdapter.notifyItemChanged(0)
-        viewAdapter.notifyItemChanged(1)
-        viewAdapter.notifyItemChanged(2)
-        view.findViewById<Button>(R.id.button_action).text = Tools.getDateText(calendar)
+    private fun getTempCalendar(): Calendar {
+        val tempCalendar = calendar.clone() as Calendar
+        tempCalendar.add(Calendar.DAY_OF_MONTH, tempPosition)
+        return tempCalendar
     }
 }

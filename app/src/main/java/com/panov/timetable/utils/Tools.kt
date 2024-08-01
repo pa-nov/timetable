@@ -23,27 +23,27 @@ object Tools {
     }
 
     fun setViewVisibility(view: View, visibility: Int, duration: Long = 250) {
-        if (visibility == View.VISIBLE) view.visibility = View.VISIBLE
         val start = if (visibility == View.VISIBLE) 0 else 1
-        val margin = convertDpToPx(view.context, 16)
+        val offset = getPxFromDp(view.context, 32)
         val animator = view.animate()
 
         animator.cancel()
         animator.setDuration(duration)
         animator.setUpdateListener { valueAnimator ->
             val value = abs(start - valueAnimator.animatedValue as Float)
-            val layoutParams = view.layoutParams as MarginLayoutParams
-            layoutParams.topMargin = -(margin * value).toInt()
-            layoutParams.bottomMargin = -((view.height + margin) * (1 - value)).toInt()
-            view.layoutParams = layoutParams
+            val params = view.layoutParams as MarginLayoutParams
+            params.bottomMargin = (-view.height * (1 - value)).toInt()
+            view.layoutParams = params
+            view.translationY = offset * (1 - value)
             view.alpha = value
         }
+        animator.withStartAction { if (visibility == View.VISIBLE) view.visibility = View.VISIBLE }
         animator.withEndAction { view.visibility = visibility }
         animator.start()
     }
 
 
-    fun convertDpToPx(context: Context, dp: Int): Int {
+    fun getPxFromDp(context: Context, dp: Int): Int {
         return (dp * (context.resources.displayMetrics.densityDpi / 160f)).toInt()
     }
 

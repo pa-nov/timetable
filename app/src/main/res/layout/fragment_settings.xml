@@ -116,7 +116,8 @@
             <LinearLayout
                 android:id="@+id/layout_modifiers"
                 style="@style/Layout.Vertical.Rounded"
-                android:layout_marginTop="-16dp">
+                android:layout_marginTop="-16dp"
+                android:visibility="gone">
 
                 <LinearLayout style="@style/Layout.Horizontal">
 
