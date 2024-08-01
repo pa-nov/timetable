@@ -5,6 +5,7 @@ import android.content.Intent
 import android.icu.util.Calendar
 import android.net.Uri
 import android.view.View
+import android.view.View.MeasureSpec
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import kotlin.math.abs
@@ -32,12 +33,20 @@ object Tools {
         animator.setUpdateListener { valueAnimator ->
             val value = abs(start - valueAnimator.animatedValue as Float)
             val params = view.layoutParams as MarginLayoutParams
-            params.bottomMargin = (-view.height * (1 - value)).toInt()
+            params.bottomMargin = (-view.measuredHeight * (1 - value)).toInt()
             view.layoutParams = params
             view.translationY = offset * (1 - value)
+            view.scaleX = 0.8f + value * 0.2f
+            view.scaleY = 0.8f + value * 0.2f
             view.alpha = value
         }
-        animator.withStartAction { if (visibility == View.VISIBLE) view.visibility = View.VISIBLE }
+        animator.withStartAction {
+            if (visibility == View.VISIBLE) {
+                val measureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+                view.measure(measureSpec, measureSpec)
+                view.visibility = View.VISIBLE
+            }
+        }
         animator.withEndAction { view.visibility = visibility }
         animator.start()
     }

@@ -59,6 +59,7 @@ class TimetableFragment : Fragment() {
                     calendar.set(Calendar.YEAR, year)
                     calendar.set(Calendar.MONTH, month)
                     calendar.set(Calendar.DAY_OF_MONTH, day)
+                    calendar.add(Calendar.DAY_OF_MONTH, -tempPosition)
                     updateView(fragment)
                 }
             }, tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH)).show()
