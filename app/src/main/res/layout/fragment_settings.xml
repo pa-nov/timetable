@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".fragment.SettingsFragment">
 
-    <com.panov.timetable.utils.BounceScrollView
+    <com.panov.widget.BounceScrollView
         style="@style/ScrollView"
         android:paddingHorizontal="16dp">
 
@@ -218,7 +218,7 @@
 
         </LinearLayout>
 
-    </com.panov.timetable.utils.BounceScrollView>
+    </com.panov.widget.BounceScrollView>
 
     <FrameLayout style="@style/ShadowBottom" />
 

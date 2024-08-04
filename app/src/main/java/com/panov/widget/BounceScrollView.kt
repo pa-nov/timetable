@@ -38,6 +38,7 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
 
 
     override fun onInterceptTouchEvent(event: MotionEvent): Boolean {
+        if (getScrollMax() == 0) return false
         onPointerEvent(event)
         return super.onInterceptTouchEvent(event)
     }
