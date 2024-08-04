@@ -7,12 +7,12 @@
     tools:context=".fragment.SettingsFragment">
 
     <com.panov.widget.BounceScrollView
-        style="@style/ScrollView"
+        style="@style/Layout.Fill"
         android:paddingHorizontal="16dp">
 
         <LinearLayout
             android:id="@+id/layout_container"
-            style="@style/ScrollLayout">
+            style="@style/Layout.Divided">
 
             <TextView
                 style="@style/Text.Title"
