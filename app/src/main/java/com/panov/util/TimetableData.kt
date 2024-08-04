@@ -113,8 +113,8 @@ class TimetableTime(jsonArray: JSONArray) {
     }
 
     override fun toString(): String {
-        val start = "${Tools.getTwoDigitNumber(startHour)}:${Tools.getTwoDigitNumber(startMinute)}"
-        val end = "${Tools.getTwoDigitNumber(endHour)}:${Tools.getTwoDigitNumber(endMinute)}"
+        val start = "${Converter.getTwoDigitNumber(startHour)}:${Converter.getTwoDigitNumber(startMinute)}"
+        val end = "${Converter.getTwoDigitNumber(endHour)}:${Converter.getTwoDigitNumber(endMinute)}"
         return "$start\n$end"
     }
 }

@@ -14,7 +14,7 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.panov.timetable.R
 import com.panov.timetable.TimetableAdapter
-import com.panov.util.Tools
+import com.panov.util.Converter
 import kotlin.math.abs
 
 class TimetableFragment : Fragment() {
@@ -33,7 +33,7 @@ class TimetableFragment : Fragment() {
         val transformer = CompositePageTransformer()
         transformer.addTransformer { page, position ->
             val offset = 1 - abs(position)
-            page.translationX = position * Tools.getPxFromDp(requireContext(), -40)
+            page.translationX = position * Converter.getPxFromDp(requireContext(), -40)
             page.scaleX = 0.8f + offset * 0.2f
             page.scaleY = 0.8f + offset * 0.2f
             page.alpha = offset
@@ -101,7 +101,7 @@ class TimetableFragment : Fragment() {
             return
         }
 
-        button.text = Tools.getDateText(tempCalendar)
+        button.text = Converter.getDateText(tempCalendar)
     }
 
     private fun resetCalendar() {

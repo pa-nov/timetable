@@ -2,7 +2,6 @@ package com.panov.util
 
 import android.content.Context
 import android.content.Intent
-import android.icu.util.Calendar
 import android.net.Uri
 import android.view.View
 import android.view.View.MeasureSpec
@@ -10,7 +9,7 @@ import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import kotlin.math.abs
 
-object Tools {
+object UiUtils {
     fun showToast(context: Context, resId: Int) {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
     }
@@ -25,7 +24,7 @@ object Tools {
 
     fun setViewVisibility(view: View, visibility: Int, duration: Long = 250) {
         val start = if (visibility == View.VISIBLE) 0 else 1
-        val offset = getPxFromDp(view.context, 32)
+        val offset = Converter.getPxFromDp(view.context, 32)
         val animator = view.animate()
 
         animator.cancel()
@@ -49,23 +48,5 @@ object Tools {
         }
         animator.withEndAction { view.visibility = visibility }
         animator.start()
-    }
-
-
-    fun getPxFromDp(context: Context, dp: Int): Int {
-        return (dp * (context.resources.displayMetrics.densityDpi / 160f)).toInt()
-    }
-
-    fun getTwoDigitNumber(number: Int): String {
-        if (number > 9) return number.toString()
-        return "0$number"
-    }
-
-    fun getDateText(calendar: Calendar): String {
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-        val month = calendar.get(Calendar.MONTH) + 1
-        val year = calendar.get(Calendar.YEAR)
-        val week = calendar.get(Calendar.WEEK_OF_YEAR)
-        return "${getTwoDigitNumber(day)}.${getTwoDigitNumber(month)}.$year (${getTwoDigitNumber(week)})"
     }
 }

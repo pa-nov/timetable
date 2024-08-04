@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.panov.timetable.R
 import com.panov.timetable.Storage
 import com.panov.util.TimetableData
-import com.panov.util.Tools
+import com.panov.util.UiUtils
 import java.util.Locale
 import kotlin.math.abs
 
@@ -37,7 +37,7 @@ class SettingsFragment : Fragment() {
 
 
         fragment.findViewById<SwitchMaterial>(R.id.switch_modifiers).setOnCheckedChangeListener { _, isChecked ->
-            Tools.setViewVisibility(fragment.findViewById(R.id.layout_modifiers), if (isChecked) View.VISIBLE else View.GONE)
+            UiUtils.setViewVisibility(fragment.findViewById(R.id.layout_modifiers), if (isChecked) View.VISIBLE else View.GONE)
         }
         val buttonModifierHourRound = fragment.findViewById<Button>(R.id.button_modifier_hour_round)
         val buttonModifierHourSet = fragment.findViewById<Button>(R.id.button_modifier_hour_set)
@@ -72,10 +72,10 @@ class SettingsFragment : Fragment() {
 
 
         fragment.findViewById<View>(R.id.button_source_code).setOnClickListener {
-            Tools.openURL(requireContext(), "https://github.com/pa-nov/Timetable")
+            UiUtils.openURL(requireContext(), "https://github.com/pa-nov/Timetable")
         }
         fragment.findViewById<View>(R.id.button_timetable_editor).setOnClickListener {
-            Tools.openURL(requireContext(), "https://github.com/pa-nov/TimetableEditor")
+            UiUtils.openURL(requireContext(), "https://github.com/pa-nov/TimetableEditor")
         }
         fragment.findViewById<TextView>(R.id.text_app_version).text = getString(
             R.string.app_version, requireContext().packageManager.getPackageInfo(requireContext().packageName, PackageManager.GET_ACTIVITIES).versionName
@@ -160,7 +160,7 @@ class SettingsFragment : Fragment() {
         }
 
         editor.apply()
-        Tools.showToast(requireContext(), R.string.message_applied)
+        UiUtils.showToast(requireContext(), R.string.message_applied)
         (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(requireView().windowToken, 0)
         requireView().clearFocus()
         readSettings(view)

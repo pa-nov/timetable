@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.panov.timetable.fragment.ClockFragment
 import com.panov.timetable.fragment.SettingsFragment
 import com.panov.timetable.fragment.TimetableFragment
-import com.panov.util.Tools
+import com.panov.util.Converter
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 view.setPadding(0, 0, 0, 0)
             }
 
-            findViewById<View>(R.id.layout_container)?.setPadding(0, systemBarsInsets.top, 0, Tools.getPxFromDp(applicationContext, 48))
+            findViewById<View>(R.id.layout_container)?.setPadding(0, systemBarsInsets.top, 0, Converter.getPxFromDp(applicationContext, 48))
             shadowStatusBar.updateLayoutParams { height = systemBarsInsets.top * 2 }
             navigationSystem.updateLayoutParams { height = systemBarsInsets.bottom }
 
