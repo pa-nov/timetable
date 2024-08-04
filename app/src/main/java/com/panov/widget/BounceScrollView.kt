@@ -9,7 +9,6 @@ import android.view.ViewConfiguration
 import android.view.animation.Interpolator
 import androidx.core.widget.NestedScrollView
 import kotlin.math.abs
-import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.pow
@@ -146,15 +145,17 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
                     scrollY -= yOffset
                     overScrollDelta -= abs(yOffset)
                 } else {
-                    scrollY -= floor(overScrollDelta).toInt()
+                    scrollY -= overScrollDelta.toInt()
                     overScrollDelta = 0f
                     overScrollDirection = 0
                 }
                 childView.translationY = overScrollDelta * overScrollDirection
             }
-        } else if ((yCurrent == 0 && yOffset < 0) || (yCurrent == getScrollMax() && yOffset > 0)) {
-            childView.translationY = -yOffset.toFloat()
-            moveToDefaultPosition()
+        } else {
+            if ((yCurrent == 0 && yOffset < 0) || (yCurrent == getScrollMax() && yOffset > 0)) {
+                childView.translationY = -yOffset.toFloat()
+                moveToDefaultPosition()
+            }
         }
     }
 
@@ -173,7 +174,8 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     private fun moveToDefaultPosition() {
         stopAnimation()
         animator = ObjectAnimator.ofFloat(childView, View.TRANSLATION_Y, 0f)
-        animator.setDuration(400).interpolator = QuartOutInterpolator
+        animator.interpolator = QuartOutInterpolator
+        animator.setDuration(400)
         animator.start()
     }
 
