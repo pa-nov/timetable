@@ -1,4 +1,4 @@
-package com.panov.timetable.utils
+package com.panov.util
 
 import android.content.Context
 import android.content.Intent

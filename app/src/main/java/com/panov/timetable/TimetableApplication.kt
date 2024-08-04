@@ -3,8 +3,7 @@ package com.panov.timetable
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
-import com.panov.timetable.utils.Storage
-import com.panov.timetable.utils.TimetableData
+import com.panov.util.TimetableData
 import java.util.Locale
 
 class TimetableApplication : Application() {

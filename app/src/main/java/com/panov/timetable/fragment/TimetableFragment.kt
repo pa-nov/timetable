@@ -1,4 +1,4 @@
-package com.panov.timetable
+package com.panov.timetable.fragment
 
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
@@ -12,8 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.panov.timetable.utils.TimetableAdapter
-import com.panov.timetable.utils.Tools
+import com.panov.timetable.R
+import com.panov.timetable.TimetableAdapter
+import com.panov.util.Tools
 import kotlin.math.abs
 
 class TimetableFragment : Fragment() {

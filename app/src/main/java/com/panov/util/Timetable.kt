@@ -1,4 +1,4 @@
-package com.panov.timetable.utils
+package com.panov.util
 
 import org.json.JSONArray
 import org.json.JSONObject

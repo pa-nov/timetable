@@ -1,4 +1,4 @@
-package com.panov.timetable.utils
+package com.panov.timetable
 
 import android.icu.util.Calendar
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.panov.timetable.R
-import com.panov.timetable.TimetableFragment
+import com.panov.timetable.fragment.TimetableFragment
+import com.panov.util.TimetableData
 
 class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.Adapter<TimetableViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimetableViewHolder {

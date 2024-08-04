@@ -1,4 +1,4 @@
-package com.panov.timetable.utils
+package com.panov.widget
 
 import android.animation.ObjectAnimator
 import android.content.Context

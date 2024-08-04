@@ -1,6 +1,7 @@
-package com.panov.timetable.utils
+package com.panov.timetable
 
 import android.content.SharedPreferences
+import com.panov.util.TimetableData
 
 object Storage {
     lateinit var settings: SharedPreferences

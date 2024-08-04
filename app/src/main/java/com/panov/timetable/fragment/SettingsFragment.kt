@@ -1,4 +1,4 @@
-package com.panov.timetable
+package com.panov.timetable.fragment
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -14,9 +14,10 @@ import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
-import com.panov.timetable.utils.Storage
-import com.panov.timetable.utils.TimetableData
-import com.panov.timetable.utils.Tools
+import com.panov.timetable.R
+import com.panov.timetable.Storage
+import com.panov.util.TimetableData
+import com.panov.util.Tools
 import java.util.Locale
 import kotlin.math.abs
 

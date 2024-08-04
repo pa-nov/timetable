@@ -10,7 +10,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.forEach
 import androidx.core.view.updateLayoutParams
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.panov.timetable.utils.Tools
+import com.panov.timetable.fragment.ClockFragment
+import com.panov.timetable.fragment.SettingsFragment
+import com.panov.timetable.fragment.TimetableFragment
+import com.panov.util.Tools
 
 class MainActivity : AppCompatActivity() {
     companion object {
