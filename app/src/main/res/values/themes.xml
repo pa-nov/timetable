@@ -5,8 +5,8 @@
     <color name="accent">@color/blue</color>
     <color name="title">#808080</color>
     <color name="text">@color/black</color>
-    <color name="item">#E0E0E0</color>
-    <color name="line">#C0C0C0</color>
+    <color name="item">#F0F0F0</color>
+    <color name="line">#E0E0E0</color>
 
     <style name="Theme.Timetable" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/background</item>
