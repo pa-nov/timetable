@@ -34,7 +34,9 @@ class TimetableData(jsonString: String?) {
             val evenDayList = arrayListOf<Int>()
             val oddDayList = arrayListOf<Int>()
             for (time in 0 until times.count()) {
+                lessons[jsonEven.getJSONArray(day).getInt(time)]
                 evenDayList.add(jsonEven.getJSONArray(day).getInt(time))
+                lessons[jsonOdd.getJSONArray(day).getInt(time)]
                 oddDayList.add(jsonOdd.getJSONArray(day).getInt(time))
             }
             evenList.add(evenDayList.toTypedArray())
@@ -135,8 +137,8 @@ class TimetableLesson(jsonArray: JSONArray) {
 
         val teacherNames = jsonArray.getString(2).split("|")
         teacherLastName = teacherNames[0].trim()
-        teacherFirstName = teacherNames[1].trim()
-        teacherMiddleName = teacherNames[2].trim()
+        teacherFirstName = if (teacherNames.count() > 1) teacherNames[1].trim() else ""
+        teacherMiddleName = if (teacherNames.count() > 2) teacherNames[2].trim() else ""
 
         val others = jsonArray.getString(3).split("|")
         val otherList = arrayListOf<Int>()
