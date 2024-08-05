@@ -2,6 +2,7 @@ package com.panov.util
 
 import android.content.Context
 import android.icu.util.Calendar
+import com.google.android.material.textfield.TextInputEditText
 
 object Converter {
     fun getTwoDigitNumber(number: Int): String {
@@ -34,5 +35,9 @@ object Converter {
     fun getPxFromDp(context: Context, dp: Int): Int {
         val dpi = context.resources.displayMetrics.densityDpi
         return (dp * (dpi / 160f)).toInt()
+    }
+
+    fun getIntFromInput(input: TextInputEditText, default: Int = 0): Int {
+        return input.text.toString().toIntOrNull() ?: default
     }
 }

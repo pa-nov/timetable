@@ -6,6 +6,7 @@ import android.net.Uri
 import android.view.View
 import android.view.View.MeasureSpec
 import android.view.ViewGroup.MarginLayoutParams
+import android.widget.Button
 import android.widget.Toast
 import kotlin.math.abs
 
@@ -48,5 +49,15 @@ object UiUtils {
         }
         animator.withEndAction { view.visibility = visibility }
         animator.start()
+    }
+
+    fun setupButtonGroup(buttons: Array<Button>) {
+        for (button in 0 until buttons.count()) {
+            buttons[button].setOnClickListener {
+                for (index in 0 until buttons.count()) {
+                    buttons[index].isEnabled = index != button
+                }
+            }
+        }
     }
 }
