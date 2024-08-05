@@ -3,14 +3,14 @@ package com.panov.util
 import org.json.JSONArray
 import org.json.JSONObject
 
-class TimetableData(jsonString: String?) {
+class TimetableData(jsonString: String) {
     private val times: Array<TimetableTime>
     private val lessons: Array<TimetableLesson>
     private val even: Array<Array<Int>>
     private val odd: Array<Array<Int>>
 
     init {
-        val jsonObject = JSONObject(jsonString ?: "")
+        val jsonObject = JSONObject(jsonString)
         val jsonTimes = jsonObject.getJSONArray("times")
         val jsonLessons = jsonObject.getJSONArray("lessons")
         val jsonEven = jsonObject.getJSONArray("even")
