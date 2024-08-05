@@ -6,11 +6,16 @@ import android.net.Uri
 import android.view.View
 import android.view.View.MeasureSpec
 import android.view.ViewGroup.MarginLayoutParams
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Toast
 import kotlin.math.abs
 
 object UiUtils {
+    fun openURL(context: Context, url: String) {
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    }
+
     fun showToast(context: Context, resId: Int) {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
     }
@@ -19,8 +24,20 @@ object UiUtils {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
-    fun openURL(context: Context, url: String) {
-        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    fun clearFocus(context: Context, view: View) {
+        val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+        view.clearFocus()
+    }
+
+    fun setupButtonGroup(buttons: Array<Button>) {
+        for (button in 0 until buttons.count()) {
+            buttons[button].setOnClickListener {
+                for (index in 0 until buttons.count()) {
+                    buttons[index].isEnabled = index != button
+                }
+            }
+        }
     }
 
     fun setViewVisibility(view: View, visibility: Int, duration: Long = 250) {
@@ -49,15 +66,5 @@ object UiUtils {
         }
         animator.withEndAction { view.visibility = visibility }
         animator.start()
-    }
-
-    fun setupButtonGroup(buttons: Array<Button>) {
-        for (button in 0 until buttons.count()) {
-            buttons[button].setOnClickListener {
-                for (index in 0 until buttons.count()) {
-                    buttons[index].isEnabled = index != button
-                }
-            }
-        }
     }
 }

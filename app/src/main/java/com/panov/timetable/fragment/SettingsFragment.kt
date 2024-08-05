@@ -1,12 +1,10 @@
 package com.panov.timetable.fragment
 
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
@@ -128,8 +126,7 @@ class SettingsFragment : Fragment() {
 
         Storage.settings.save()
         UiUtils.showToast(requireContext(), R.string.message_applied)
-        (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(requireView().windowToken, 0)
-        requireView().clearFocus()
+        UiUtils.clearFocus(requireContext(), requireView())
         readSettings(view)
     }
 }
