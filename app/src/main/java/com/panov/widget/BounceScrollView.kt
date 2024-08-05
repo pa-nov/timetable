@@ -17,6 +17,8 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context) : this(context, null)
 
+    private val scaledTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
+
     init {
         isHorizontalScrollBarEnabled = false
         isVerticalScrollBarEnabled = false
@@ -26,7 +28,6 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
 
     private lateinit var childView: View
     private lateinit var animator: ObjectAnimator
-    private val scaledTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
 
     private var touched = false
     private var canScroll = false
@@ -39,13 +40,15 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     override fun onInterceptTouchEvent(event: MotionEvent): Boolean {
         if (getScrollMax() == 0) return false
         onPointerEvent(event)
-        return super.onInterceptTouchEvent(event)
+        val source = super.onInterceptTouchEvent(event)
+        return if (overScrollDirection == 0) source else true
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (getScrollMax() == 0) return false
         onPointerEvent(event)
-        return super.onTouchEvent(event)
+        val source = super.onTouchEvent(event)
+        return if (overScrollDirection == 0) source else true
     }
 
     override fun onScrollChanged(xCurrent: Int, yCurrent: Int, xPrevious: Int, yPrevious: Int) {
@@ -163,12 +166,12 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     private fun stopAnimation() {
         if (::animator.isInitialized && animator.isRunning) {
             animator.cancel()
-        }
-        if (::childView.isInitialized) {
-            val delta = childView.translationY
-            if (delta > 0) overScrollDirection = 1
-            if (delta < 0) overScrollDirection = -1
-            overScrollDelta = abs(delta)
+            if (::childView.isInitialized) {
+                val delta = childView.translationY
+                if (delta > 0) overScrollDirection = 1
+                if (delta < 0) overScrollDirection = -1
+                overScrollDelta = abs(delta)
+            }
         }
     }
 
