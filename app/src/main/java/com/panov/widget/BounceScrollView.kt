@@ -17,8 +17,6 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context) : this(context, null)
 
-    private val scaledTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
-
     init {
         isHorizontalScrollBarEnabled = false
         isVerticalScrollBarEnabled = false
@@ -26,9 +24,9 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
         overScrollMode = View.OVER_SCROLL_NEVER
     }
 
-    private lateinit var childView: View
-    private lateinit var animator: ObjectAnimator
-
+    private val scaledTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
+    private var animator: ObjectAnimator = ObjectAnimator()
+    private lateinit var content: View
     private var touched = false
     private var canScroll = false
     private var pointerId = 0
@@ -38,17 +36,11 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
 
 
     override fun onInterceptTouchEvent(event: MotionEvent): Boolean {
-        if (getScrollMax() == 0) return false
-        onPointerEvent(event)
-        val source = super.onInterceptTouchEvent(event)
-        return if (overScrollDirection == 0) source else true
+        return onPointerEvent(event, super.onInterceptTouchEvent(event))
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        if (getScrollMax() == 0) return false
-        onPointerEvent(event)
-        val source = super.onTouchEvent(event)
-        return if (overScrollDirection == 0) source else true
+        return onPointerEvent(event, super.onTouchEvent(event))
     }
 
     override fun onScrollChanged(xCurrent: Int, yCurrent: Int, xPrevious: Int, yPrevious: Int) {
@@ -58,21 +50,23 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
 
     override fun onViewAdded(child: View?) {
         super.onViewAdded(child)
-        if (child != null) childView = child
+        if (child != null) content = child
     }
 
 
-    private fun onPointerEvent(event: MotionEvent) {
+    private fun onPointerEvent(event: MotionEvent, source: Boolean): Boolean {
+        if (getScrollMax() == 0) return false
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN, MotionEvent.ACTION_POINTER_DOWN -> onPointerDown(event)
             MotionEvent.ACTION_MOVE -> onPointerMove(event)
             MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP, MotionEvent.ACTION_CANCEL -> onPointerUp(event)
         }
+        return if (abs(content.translationY) < scaledTouchSlop) source else true
     }
 
     private fun onPointerDown(event: MotionEvent) {
         val index = event.actionIndex
-        if (!touched) stopAnimation()
+        if (animator.isRunning) animator.cancel()
 
         touched = true
         pointerId = event.getPointerId(index)
@@ -90,6 +84,10 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
                 if (abs(offset) > scaledTouchSlop) {
                     canScroll = true
                     pointerPrevious = pointerCurrent
+                    val delta = content.translationY
+                    if (delta > 0) overScrollDirection = 1
+                    if (delta < 0) overScrollDirection = -1
+                    overScrollDelta = abs(delta)
                 }
                 return
             }
@@ -103,7 +101,7 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
                     overScrollDelta += getDamping(abs(offset))
                 } else {
                     overScrollDelta -= max(abs(offset) - scrollMax, 0f)
-                    if (overScrollDelta <= 0) overScrollDelta = 0f
+                    if (overScrollDelta < 0) overScrollDelta = 0f
                 }
             }
 
@@ -113,13 +111,13 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
                     overScrollDelta += getDamping(abs(offset))
                 } else {
                     overScrollDelta -= max(abs(offset) - scrollMax, 0f)
-                    if (overScrollDelta <= 0) overScrollDelta = 0f
+                    if (overScrollDelta < 0) overScrollDelta = 0f
                 }
             }
 
             if (overScrollDelta <= 0) overScrollDirection = 0
             overScrollDelta = min(overScrollDelta, height / 2f)
-            childView.translationY = overScrollDelta * overScrollDirection
+            content.translationY = overScrollDelta * overScrollDirection
         }
     }
 
@@ -153,31 +151,19 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
                     overScrollDelta = 0f
                     overScrollDirection = 0
                 }
-                childView.translationY = overScrollDelta * overScrollDirection
+                content.translationY = overScrollDelta * overScrollDirection
             }
         } else {
             if ((yCurrent == 0 && yOffset < 0) || (yCurrent == getScrollMax() && yOffset > 0)) {
-                childView.translationY = -yOffset.toFloat()
+                content.translationY = -yOffset.toFloat()
                 moveToDefaultPosition()
             }
         }
     }
 
-    private fun stopAnimation() {
-        if (::animator.isInitialized && animator.isRunning) {
-            animator.cancel()
-            if (::childView.isInitialized) {
-                val delta = childView.translationY
-                if (delta > 0) overScrollDirection = 1
-                if (delta < 0) overScrollDirection = -1
-                overScrollDelta = abs(delta)
-            }
-        }
-    }
-
     private fun moveToDefaultPosition() {
-        stopAnimation()
-        animator = ObjectAnimator.ofFloat(childView, View.TRANSLATION_Y, 0f)
+        if (animator.isRunning) animator.cancel()
+        animator = ObjectAnimator.ofFloat(content, View.TRANSLATION_Y, 0f)
         animator.interpolator = QuartOutInterpolator
         animator.setDuration(400)
         animator.start()
@@ -188,8 +174,7 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
     }
 
     private fun getScrollMax(): Int {
-        val scrollMax = childView.height - height
-        return max(scrollMax, 0)
+        return max(content.height - height, 0)
     }
 
 
