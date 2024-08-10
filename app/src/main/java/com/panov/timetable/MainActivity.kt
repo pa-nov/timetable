@@ -17,7 +17,7 @@ import com.panov.util.Converter
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        private var selectedItem = R.id.menu_timetable
+        private var selectedItem = if (Storage.timetable != null) R.id.menu_timetable else R.id.menu_settings
         private var clockFragment = ClockFragment()
         private var timetableFragment = TimetableFragment()
         private var settingsFragment = SettingsFragment()
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val navigation = findViewById<BottomNavigationView>(R.id.navigation_main)
         navigation.setOnItemSelectedListener { item -> selectItem(item.itemId) }
         navigation.findViewById<View>(selectedItem).performClick()
-        navigation.menu.forEach { item -> findViewById<View>(item.itemId).setOnLongClickListener { resetItem(item.itemId) } }
+        navigation.menu.forEach { item -> navigation.findViewById<View>(item.itemId).setOnLongClickListener { resetItem(item.itemId) } }
 
         val shadowStatusBar = findViewById<View>(R.id.shadow_status_bar)
         val navigationSystem = findViewById<View>(R.id.navigation_system)
@@ -64,8 +64,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(
             R.id.view_main, when (item) {
                 R.id.menu_clock -> clockFragment
-                R.id.menu_settings -> settingsFragment
-                else -> timetableFragment
+                R.id.menu_timetable -> timetableFragment
+                else -> settingsFragment
             }
         ).commit()
         return true
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_timetable -> timetableFragment = TimetableFragment()
                 R.id.menu_settings -> settingsFragment = SettingsFragment()
             }
-            findViewById<View>(item).performClick()
+            selectItem(item)
         }
         return true
     }
