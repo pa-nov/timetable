@@ -126,7 +126,7 @@ class SettingsFragment : Fragment() {
 
         Storage.settings.save()
         UiUtils.showToast(requireContext(), R.string.message_applied)
-        UiUtils.clearFocus(requireContext(), requireView())
+        UiUtils.clearFocus(requireView())
         readSettings(view)
     }
 }

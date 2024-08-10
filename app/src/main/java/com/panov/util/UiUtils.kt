@@ -24,8 +24,8 @@ object UiUtils {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
-    fun clearFocus(context: Context, view: View) {
-        val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    fun clearFocus(view: View) {
+        val inputMethodManager = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
         view.clearFocus()
     }
@@ -64,7 +64,9 @@ object UiUtils {
                 view.visibility = View.VISIBLE
             }
         }
-        animator.withEndAction { view.visibility = visibility }
+        animator.withEndAction {
+            view.visibility = visibility
+        }
         animator.start()
     }
 }
