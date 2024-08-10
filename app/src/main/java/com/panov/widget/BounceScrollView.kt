@@ -61,12 +61,12 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
             MotionEvent.ACTION_MOVE -> onPointerMove(event)
             MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP, MotionEvent.ACTION_CANCEL -> onPointerUp(event)
         }
-        return if (abs(content.translationY) < scaledTouchSlop) source else true
+        return if (abs(content.translationY) > scaledTouchSlop) true else source
     }
 
     private fun onPointerDown(event: MotionEvent) {
         val index = event.actionIndex
-        if (animator.isRunning) animator.cancel()
+        if (animator.isRunning && abs(content.translationY) > scaledTouchSlop) animator.cancel()
 
         touched = true
         pointerId = event.getPointerId(index)
@@ -84,6 +84,8 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
                 if (abs(offset) > scaledTouchSlop) {
                     canScroll = true
                     pointerPrevious = pointerCurrent
+
+                    if (animator.isRunning) animator.cancel()
                     val delta = content.translationY
                     if (delta > 0) overScrollDirection = 1
                     if (delta < 0) overScrollDirection = -1
