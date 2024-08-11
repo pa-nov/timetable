@@ -20,6 +20,15 @@
     <string name="day_yesterday">Yesterday</string>
     <string name="day_today">Today</string>
     <string name="day_tomorrow">Tomorrow</string>
+    <string name="week_every">Every week</string>
+    <string name="week_even">Even week</string>
+    <string name="week_odd">Odd week</string>
+    <string name="info_title">Title</string>
+    <string name="info_titles">Titles</string>
+    <string name="info_teacher">Teacher</string>
+    <string name="info_teachers">Teachers</string>
+    <string name="info_classroom">Classroom</string>
+    <string name="info_classrooms">Classrooms</string>
 
     <string name="theme">Theme</string>
     <string name="theme_system">System</string>

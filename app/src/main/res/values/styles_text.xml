@@ -9,10 +9,22 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="Text.Large">
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Text.Title">
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/text</item>
         <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Title.Small">
+        <item name="android:textColor">@color/title</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
