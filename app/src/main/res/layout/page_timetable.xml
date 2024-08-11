@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Layout.Divided"
-    android:paddingHorizontal="16dp">
+    style="@style/Layout.Divided">
 
     <TextView
-        android:id="@+id/text_title"
+        android:id="@+id/title_weekday"
         style="@style/Text.Title"
         android:text="@string/message_error" />
 

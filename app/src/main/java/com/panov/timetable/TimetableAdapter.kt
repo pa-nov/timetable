@@ -9,11 +9,17 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.panov.timetable.fragment.TimetableFragment
+import com.panov.util.Converter
 import com.panov.util.TimetableData
 
 class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.Adapter<TimetableViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimetableViewHolder {
-        return TimetableViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.page_timetable, parent, false))
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.page_timetable, parent, false)
+
+        val padding = Converter.getPxFromDp(parent.context, 16)
+        view.setPadding(padding, 0, padding, 0)
+
+        return TimetableViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -30,7 +36,7 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
         if (timetable != null) {
             val week = if (calendar.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
             val day = if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
-            view.findViewById<TextView>(R.id.text_title).text = view.context.resources.getStringArray(R.array.weekdays)[day]
+            view.findViewById<TextView>(R.id.title_weekday).text = view.context.resources.getStringArray(R.array.weekdays)[day]
 
             while (view.childCount > timetable.getLessonsCount() + 1) {
                 view.removeViewAt(1)
@@ -42,10 +48,12 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
 
             for (index in 1 until view.childCount) {
                 val item = view.getChildAt(index) as LinearLayout
-                fillLessonView(item, timetable, index - 1, day, week)
+                val lessonIndex = index - 1
+
+                fillLessonView(item, timetable, lessonIndex, day, week)
             }
         } else {
-            view.findViewById<TextView>(R.id.text_title).text = view.context.getString(R.string.message_error)
+            view.findViewById<TextView>(R.id.title_weekday).text = view.context.getString(R.string.message_error)
 
             while (view.childCount > 1) {
                 view.removeViewAt(1)
