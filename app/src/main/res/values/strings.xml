@@ -38,6 +38,8 @@
     <string name="language_english">English</string>
     <string name="language_russian">Russian</string>
     <string name="initial_index">Number of the first lesson</string>
+    <string name="number_zero">0</string>
+    <string name="number_one">1</string>
 
     <string name="timetable_json">Timetable (JSON)</string>
 

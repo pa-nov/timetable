@@ -26,12 +26,16 @@ class SettingsFragment : Fragment() {
         fragment.findViewById<Button>(R.id.button_theme_system).setOnClickListener { setTheme(fragment, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) }
         fragment.findViewById<Button>(R.id.button_theme_light).setOnClickListener { setTheme(fragment, AppCompatDelegate.MODE_NIGHT_NO) }
         fragment.findViewById<Button>(R.id.button_theme_dark).setOnClickListener { setTheme(fragment, AppCompatDelegate.MODE_NIGHT_YES) }
-        setTheme(fragment, Storage.settings.getInt("app_theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM), true)
+        setTheme(fragment, Storage.settings.getInt("app-theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM), true)
 
 
         fragment.findViewById<Button>(R.id.button_language_english).setOnClickListener { setLanguage(fragment, "en") }
         fragment.findViewById<Button>(R.id.button_language_russian).setOnClickListener { setLanguage(fragment, "ru") }
-        setLanguage(fragment, Storage.settings.getString("app_language", Locale.getDefault().language), true)
+        setLanguage(fragment, Storage.settings.getString("app-language", Locale.getDefault().language), true)
+
+        fragment.findViewById<Button>(R.id.button_initial_index_zero).setOnClickListener { setInitialIndex(fragment, 0) }
+        fragment.findViewById<Button>(R.id.button_initial_index_one).setOnClickListener { setInitialIndex(fragment, 1) }
+        setInitialIndex(fragment, Storage.settings.getInt("app-initial_index", 1), true)
 
 
         fragment.findViewById<SwitchMaterial>(R.id.switch_modifiers).setOnCheckedChangeListener { _, isChecked ->
@@ -62,7 +66,7 @@ class SettingsFragment : Fragment() {
     private fun setTheme(view: View, theme: Int, onlyRead: Boolean = false) {
         if (!onlyRead) {
             AppCompatDelegate.setDefaultNightMode(theme)
-            Storage.settings.saveInt("app_theme", theme)
+            Storage.settings.saveInt("app-theme", theme)
         }
         view.findViewById<Button>(R.id.button_theme_system).isEnabled = theme != AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         view.findViewById<Button>(R.id.button_theme_light).isEnabled = theme != AppCompatDelegate.MODE_NIGHT_NO
@@ -72,20 +76,26 @@ class SettingsFragment : Fragment() {
     private fun setLanguage(view: View, language: String, onlyRead: Boolean = false) {
         if (!onlyRead) {
             AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(language))
-            Storage.settings.saveString("app_language", language)
+            Storage.settings.saveString("app-language", language)
         }
         view.findViewById<Button>(R.id.button_language_english).isEnabled = language != "en"
         view.findViewById<Button>(R.id.button_language_russian).isEnabled = language != "ru"
     }
 
+    private fun setInitialIndex(view: View, index: Int, onlyRead: Boolean = false) {
+        if (!onlyRead) {
+            Storage.settings.saveInt("app-initial_index", index)
+        }
+        view.findViewById<Button>(R.id.button_initial_index_zero).isEnabled = index != 0
+        view.findViewById<Button>(R.id.button_initial_index_one).isEnabled = index != 1
+    }
+
     private fun readSettings(view: View) {
-        view.findViewById<TextInputEditText>(R.id.input_initial_index).setText(Storage.settings.getInt("app_initial_index", 1).toString())
+        view.findViewById<TextInputEditText>(R.id.input_timetable_json).setText(Storage.settings.getString("timetable-json"))
 
-        view.findViewById<TextInputEditText>(R.id.input_timetable_json).setText(Storage.settings.getString("timetable_json"))
-
-        val modifierHour = Storage.settings.getInt("widget_modifier_hour", 1)
-        val modifierMinute = Storage.settings.getInt("widget_modifier_minute", 1)
-        val modifierSecond = Storage.settings.getInt("widget_modifier_second", 1)
+        val modifierHour = Storage.settings.getInt("widget-modifier_hour", 1)
+        val modifierMinute = Storage.settings.getInt("widget-modifier_minute", 1)
+        val modifierSecond = Storage.settings.getInt("widget-modifier_second", 1)
 
         view.findViewById<SwitchMaterial>(R.id.switch_modifiers).isChecked = !(modifierHour == 1 && modifierMinute == 1 && modifierSecond == 1)
 
@@ -99,10 +109,8 @@ class SettingsFragment : Fragment() {
     }
 
     private fun saveSettings(view: View) {
-        Storage.settings.setInt("app_initial_index", Converter.getIntFromInput(view.findViewById(R.id.input_initial_index), 1))
-
         val timetableString = view.findViewById<TextInputEditText>(R.id.input_timetable_json).text.toString()
-        Storage.settings.setString("timetable_json", timetableString)
+        Storage.settings.setString("timetable-json", timetableString)
         Storage.setTimetable(timetableString)
 
         if (view.findViewById<SwitchMaterial>(R.id.switch_modifiers).isChecked) {
@@ -110,18 +118,18 @@ class SettingsFragment : Fragment() {
             val modifierMinute = Converter.getIntFromInput(view.findViewById(R.id.input_modifier_minute), 1)
             val modifierSecond = Converter.getIntFromInput(view.findViewById(R.id.input_modifier_second), 1)
             Storage.settings.setInt(
-                "widget_modifier_hour", if (view.findViewById<Button>(R.id.button_modifier_hour_round).isEnabled) -modifierHour else modifierHour
+                "widget-modifier_hour", if (view.findViewById<Button>(R.id.button_modifier_hour_round).isEnabled) -modifierHour else modifierHour
             )
             Storage.settings.setInt(
-                "widget_modifier_minute", if (view.findViewById<Button>(R.id.button_modifier_minute_round).isEnabled) -modifierMinute else modifierMinute
+                "widget-modifier_minute", if (view.findViewById<Button>(R.id.button_modifier_minute_round).isEnabled) -modifierMinute else modifierMinute
             )
             Storage.settings.setInt(
-                "widget_modifier_second", if (view.findViewById<Button>(R.id.button_modifier_second_round).isEnabled) -modifierSecond else modifierSecond
+                "widget-modifier_second", if (view.findViewById<Button>(R.id.button_modifier_second_round).isEnabled) -modifierSecond else modifierSecond
             )
         } else {
-            Storage.settings.setInt("widget_modifier_hour", 1)
-            Storage.settings.setInt("widget_modifier_minute", 1)
-            Storage.settings.setInt("widget_modifier_second", 1)
+            Storage.settings.setInt("widget-modifier_hour", 1)
+            Storage.settings.setInt("widget-modifier_minute", 1)
+            Storage.settings.setInt("widget-modifier_second", 1)
         }
 
         Storage.settings.save()

@@ -38,6 +38,8 @@
     <string name="language_english">Английский</string>
     <string name="language_russian">Русский</string>
     <string name="initial_index">Номер первого предмета</string>
+    <string name="number_zero">0</string>
+    <string name="number_one">1</string>
 
     <string name="timetable_json">Расписание (JSON)</string>
 

@@ -67,15 +67,27 @@
 
             </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout">
+            <LinearLayout style="@style/Layout.Vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/input_initial_index"
-                    style="@style/TextInputEditText"
-                    android:hint="@string/initial_index"
-                    android:inputType="numberSigned" />
+                <TextView
+                    style="@style/Text.Setting"
+                    android:text="@string/initial_index" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout style="@style/Layout.Horizontal.Rounded">
+
+                    <Button
+                        android:id="@+id/button_initial_index_zero"
+                        style="@style/Button.Item"
+                        android:text="@string/number_zero" />
+
+                    <Button
+                        android:id="@+id/button_initial_index_one"
+                        style="@style/Button.Item"
+                        android:text="@string/number_one" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <FrameLayout style="@style/Separator" />
 
