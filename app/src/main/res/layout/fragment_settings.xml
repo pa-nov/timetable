@@ -6,13 +6,12 @@
     android:orientation="vertical"
     tools:context=".fragment.SettingsFragment">
 
-    <com.panov.widget.BounceScrollView
-        style="@style/Layout.Fill"
-        android:paddingHorizontal="16dp">
+    <com.panov.widget.BounceScrollView style="@style/Layout.Fill">
 
         <LinearLayout
             android:id="@+id/layout_container"
-            style="@style/Layout.Divided">
+            style="@style/Layout.Divided"
+            android:layout_marginHorizontal="16dp">
 
             <TextView
                 style="@style/Text.Title"
@@ -78,12 +77,12 @@
                     <Button
                         android:id="@+id/button_initial_index_zero"
                         style="@style/Button.Item"
-                        android:text="@string/number_zero" />
+                        android:text="@string/initial_index_zero" />
 
                     <Button
                         android:id="@+id/button_initial_index_one"
                         style="@style/Button.Item"
-                        android:text="@string/number_one" />
+                        android:text="@string/initial_index_one" />
 
                 </LinearLayout>
 

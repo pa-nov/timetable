@@ -6,13 +6,12 @@
     android:orientation="vertical"
     tools:context=".fragment.ClockFragment">
 
-    <com.panov.widget.BounceScrollView
-        style="@style/Layout.Fill"
-        android:paddingHorizontal="16dp">
+    <com.panov.widget.BounceScrollView style="@style/Layout.Fill">
 
         <LinearLayout
             android:id="@+id/layout_container"
-            style="@style/Layout.Divided">
+            style="@style/Layout.Divided"
+            android:layout_marginHorizontal="16dp">
 
             <TextView
                 style="@style/Text.Title"
