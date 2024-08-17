@@ -51,41 +51,41 @@ class TimetableData(jsonString: String) {
         return times.count()
     }
 
-    fun getLessonTime(lessonIndex: Int): String {
-        return times[lessonIndex].toString()
+    fun getLessonTimeText(lessonIndex: Int): String {
+        return times[lessonIndex].toString().replace(" ", "\n")
     }
 
-    fun getLessonStart(lessonIndex: Int): Int {
+    fun getLessonTimeStart(lessonIndex: Int): Int {
         return times[lessonIndex].getStartSeconds()
     }
 
-    fun getLessonEnd(lessonIndex: Int): Int {
+    fun getLessonTimeEnd(lessonIndex: Int): Int {
         return times[lessonIndex].getEndSeconds()
     }
 
-
-    fun getLessonShortTitle(lessonId: Int): String {
-        return lessons[lessonId].getShortTitle()
-    }
 
     fun getLessonFullTitle(lessonId: Int): String {
         return lessons[lessonId].getFullTitle()
     }
 
-    fun getLessonClassroom(lessonId: Int): String {
+    fun getLessonShortTitle(lessonId: Int): String {
+        return lessons[lessonId].getShortTitle()
+    }
+
+    fun getClassroom(lessonId: Int): String {
         return lessons[lessonId].getClassroom()
     }
 
-    fun getLessonClassroomText(lessonId: Int): String {
+    fun getClassroomText(lessonId: Int): String {
         return lessons[lessonId].getClassroomText()
-    }
-
-    fun getTeacherShortName(lessonId: Int): String {
-        return lessons[lessonId].getTeacherShortName()
     }
 
     fun getTeacherFullName(lessonId: Int): String {
         return lessons[lessonId].getTeacherFullName()
+    }
+
+    fun getTeacherShortName(lessonId: Int): String {
+        return lessons[lessonId].getTeacherShortName()
     }
 
     fun getLessonOtherIds(lessonId: Int): Array<Int> {
@@ -117,13 +117,13 @@ class TimetableTime(jsonArray: JSONArray) {
     override fun toString(): String {
         val start = "${Converter.getTwoDigitNumber(startHour)}:${Converter.getTwoDigitNumber(startMinute)}"
         val end = "${Converter.getTwoDigitNumber(endHour)}:${Converter.getTwoDigitNumber(endMinute)}"
-        return "$start\n$end"
+        return "$start $end"
     }
 }
 
 class TimetableLesson(jsonArray: JSONArray) {
-    private val titleShort: String
     private val titleFull: String
+    private val titleShort: String
     private val classroom: String = jsonArray.getString(1).trim()
     private val teacherLastName: String
     private val teacherFirstName: String
@@ -132,8 +132,8 @@ class TimetableLesson(jsonArray: JSONArray) {
 
     init {
         val titles = jsonArray.getString(0).split("|")
-        titleShort = titles[0].trim()
-        titleFull = if (titles.count() > 1) titles[1].trim() else titles[0].trim()
+        titleFull = titles[0].trim()
+        titleShort = if (titles.count() > 1) titles[1].trim() else titleFull
 
         val teacherNames = jsonArray.getString(2).split("|")
         teacherLastName = teacherNames[0].trim()
@@ -149,12 +149,12 @@ class TimetableLesson(jsonArray: JSONArray) {
         other = otherList.toTypedArray()
     }
 
-    fun getShortTitle(): String {
-        return titleShort
-    }
-
     fun getFullTitle(): String {
         return titleFull
+    }
+
+    fun getShortTitle(): String {
+        return titleShort
     }
 
     fun getClassroom(): String {
@@ -165,26 +165,8 @@ class TimetableLesson(jsonArray: JSONArray) {
         return "($classroom)"
     }
 
-    fun getTeacherShortName(): String {
-        if (teacherLastName.isNotEmpty()) {
-            var teacherName = teacherLastName
-            if (teacherFirstName.isNotEmpty()) {
-                teacherName += " ${teacherFirstName[0]}."
-                if (teacherMiddleName.isNotEmpty()) {
-                    teacherName += " ${teacherMiddleName[0]}."
-                }
-            }
-            return teacherName
-        } else {
-            return "-"
-        }
-    }
-
     fun getTeacherFullName(): String {
-        var teacherName = ""
-        if (teacherLastName.isNotEmpty()) {
-            teacherName += "$teacherLastName "
-        }
+        var teacherName = "$teacherLastName "
         if (teacherFirstName.isNotEmpty()) {
             teacherName += "$teacherFirstName "
             if (teacherMiddleName.isNotEmpty()) {
@@ -192,6 +174,20 @@ class TimetableLesson(jsonArray: JSONArray) {
             }
         }
         return teacherName.trim().ifEmpty { "-" }
+    }
+
+    fun getTeacherShortName(): String {
+        var teacherName = ""
+        if (teacherLastName.isNotEmpty()) {
+            teacherName += teacherLastName
+            if (teacherFirstName.isNotEmpty()) {
+                teacherName += " ${teacherFirstName[0]}."
+                if (teacherMiddleName.isNotEmpty()) {
+                    teacherName += " ${teacherMiddleName[0]}."
+                }
+            }
+        }
+        return teacherName.ifEmpty { "-" }
     }
 
     fun getOtherIds(): Array<Int> {

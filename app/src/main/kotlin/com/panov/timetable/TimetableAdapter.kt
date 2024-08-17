@@ -87,14 +87,14 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
         val textClassroom = ((view.getChildAt(4) as LinearLayout).getChildAt(1) as LinearLayout).getChildAt(1) as TextView
 
         textNumber.text = lessonNumber.toString()
-        textTime.text = timetable.getLessonTime(lessonIndex)
+        textTime.text = timetable.getLessonTimeText(lessonIndex)
         lineLeft.setBackgroundColor(view.context.getColor(if (isNow) R.color.green else R.color.line))
         lineRight.setBackgroundColor(view.context.getColor(if (otherLessonDiffers) R.color.red else R.color.line))
 
         if (lessonId > 0) {
             textTitle.text = timetable.getLessonShortTitle(lessonId)
             textTeacher.text = timetable.getTeacherShortName(lessonId)
-            textClassroom.text = timetable.getLessonClassroomText(lessonId)
+            textClassroom.text = timetable.getClassroomText(lessonId)
         } else {
             textTitle.text = ""
             textTeacher.text = ""
@@ -130,7 +130,7 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
         for (lessonId in lessonIds) {
             val title = timetable.getLessonFullTitle(lessonId)
             val teacher = timetable.getTeacherFullName(lessonId)
-            val classroom = timetable.getLessonClassroom(lessonId)
+            val classroom = timetable.getClassroom(lessonId)
 
             if (title !in titles) titles.add(title)
             if (teacher !in teachers) teachers.add(teacher)
