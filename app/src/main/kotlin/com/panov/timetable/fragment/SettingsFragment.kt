@@ -28,7 +28,6 @@ class SettingsFragment : Fragment() {
         fragment.findViewById<Button>(R.id.button_theme_dark).setOnClickListener { setTheme(fragment, AppCompatDelegate.MODE_NIGHT_YES) }
         setTheme(fragment, Storage.settings.getInt(Storage.Application.THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM), true)
 
-
         fragment.findViewById<Button>(R.id.button_language_english).setOnClickListener { setLanguage(fragment, "en") }
         fragment.findViewById<Button>(R.id.button_language_russian).setOnClickListener { setLanguage(fragment, "ru") }
         setLanguage(fragment, Storage.settings.getString(Storage.Application.LANGUAGE, Locale.getDefault().language), true)
@@ -46,10 +45,10 @@ class SettingsFragment : Fragment() {
         UiUtils.setupButtonGroup(arrayOf(fragment.findViewById(R.id.button_modifier_second_round), fragment.findViewById(R.id.button_modifier_second_set)))
 
 
-        fragment.findViewById<View>(R.id.button_source_code).setOnClickListener {
+        fragment.findViewById<Button>(R.id.button_source_code).setOnClickListener {
             UiUtils.openURL(requireContext(), "https://github.com/pa-nov/Timetable")
         }
-        fragment.findViewById<View>(R.id.button_timetable_editor).setOnClickListener {
+        fragment.findViewById<Button>(R.id.button_timetable_editor).setOnClickListener {
             UiUtils.openURL(requireContext(), "https://github.com/pa-nov/TimetableEditor")
         }
         fragment.findViewById<TextView>(R.id.text_app_version).text = getString(
@@ -117,6 +116,7 @@ class SettingsFragment : Fragment() {
             val modifierHour = Converter.getIntFromInput(view.findViewById(R.id.input_modifier_hour), 1)
             val modifierMinute = Converter.getIntFromInput(view.findViewById(R.id.input_modifier_minute), 1)
             val modifierSecond = Converter.getIntFromInput(view.findViewById(R.id.input_modifier_second), 1)
+
             Storage.settings.setInt(
                 Storage.Widget.MODIFIER_HOUR, if (view.findViewById<Button>(R.id.button_modifier_hour_round).isEnabled) -modifierHour else modifierHour
             )
