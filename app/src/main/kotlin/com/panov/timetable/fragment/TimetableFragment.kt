@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.panov.timetable.R
@@ -40,16 +39,15 @@ class TimetableFragment : Fragment() {
         }
 
         val viewTimetable = fragment.findViewById<ViewPager2>(R.id.layout_container)
-        viewTimetable.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        viewTimetable.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
         viewTimetable.adapter = TimetableAdapter(this)
         viewTimetable.setCurrentItem(1, false)
         viewTimetable.setPageTransformer(transformer)
         viewTimetable.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                tempPosition = if (position < 1) if (positionOffset < 0.5f) -1 else 0 else if (positionOffset > 0.5f) 1 else 0
                 if (position < 1 && positionOffset <= 0) selectPage(fragment, -1)
                 if (position > 1) selectPage(fragment, 1)
-
-                tempPosition = if (position < 1) if (positionOffset < 0.5f) -1 else 0 else if (positionOffset > 0.5f) 1 else 0
                 updateDate(fragment)
             }
         })
@@ -71,6 +69,7 @@ class TimetableFragment : Fragment() {
     }
 
     private fun selectPage(view: View, offset: Int) {
+        tempPosition = 0
         calendar.add(Calendar.DAY_OF_MONTH, offset)
         view.findViewById<ViewPager2>(R.id.layout_container).setCurrentItem(1, false)
         updateView(view)
