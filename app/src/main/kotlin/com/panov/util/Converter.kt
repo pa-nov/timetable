@@ -32,6 +32,13 @@ object Converter {
         return "${getTwoDigitNumber(hour)}:${getTwoDigitNumber(minute)}:${getTwoDigitNumber(second)}"
     }
 
+    fun getTimeText(seconds: Int): String {
+        val hour = seconds / 3600f
+        val minute = (seconds - hour.toInt() * 3600) / 60f
+        val second = seconds % 60
+        return "${getTwoDigitNumber(hour.toInt())}:${getTwoDigitNumber(minute.toInt())}:${getTwoDigitNumber(second)}"
+    }
+
     fun getPxFromDp(context: Context, dp: Int): Int {
         val dpi = context.resources.displayMetrics.densityDpi
         return (dp * (dpi / 160f)).toInt()
