@@ -118,9 +118,9 @@
                     android:layout_gravity="center"
                     android:text="@string/modifiers" />
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
+                <com.google.android.material.materialswitch.MaterialSwitch
                     android:id="@+id/switch_modifiers"
-                    style="@style/SwitchMaterial" />
+                    style="@style/MaterialSwitch" />
 
             </FrameLayout>
 
