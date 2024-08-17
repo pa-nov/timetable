@@ -21,7 +21,7 @@
         <item name="android:colorControlActivated">@color/green</item>
     </style>
 
-    <style name="Theme.SwitchMaterial" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+    <style name="Theme.MaterialSwitch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
         <item name="android:colorControlActivated">@color/empty</item>
         <item name="android:colorControlHighlight">@color/empty</item>
     </style>

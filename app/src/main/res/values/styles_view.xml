@@ -96,7 +96,7 @@
         <item name="thumbTint">@color/thumb_switch</item>
         <item name="trackTint">@color/track_switch</item>
         <item name="track">@drawable/square_rounded_small</item>
-        <item name="theme">@style/Theme.SwitchMaterial</item>
+        <item name="theme">@style/Theme.MaterialSwitch</item>
     </style>
 
 </resources>

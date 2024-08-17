@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.SwitchCompat
 import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.textfield.TextInputEditText
 import com.panov.timetable.R
 import com.panov.timetable.Storage
@@ -37,7 +37,7 @@ class SettingsFragment : Fragment() {
         setInitialIndex(fragment, Storage.settings.getInt(Storage.Application.INITIAL_INDEX, 1), true)
 
 
-        fragment.findViewById<SwitchCompat>(R.id.switch_modifiers).setOnCheckedChangeListener { _, isChecked ->
+        fragment.findViewById<MaterialSwitch>(R.id.switch_modifiers).setOnCheckedChangeListener { _, isChecked ->
             UiUtils.setViewVisibility(fragment.findViewById(R.id.layout_modifiers), if (isChecked) View.VISIBLE else View.GONE)
         }
         UiUtils.setupButtonGroup(arrayOf(fragment.findViewById(R.id.button_modifier_hour_round), fragment.findViewById(R.id.button_modifier_hour_set)))
@@ -96,7 +96,7 @@ class SettingsFragment : Fragment() {
         val modifierMinute = Storage.settings.getInt(Storage.Widget.MODIFIER_MINUTE, 1)
         val modifierSecond = Storage.settings.getInt(Storage.Widget.MODIFIER_SECOND, 1)
 
-        view.findViewById<SwitchCompat>(R.id.switch_modifiers).isChecked = !(modifierHour == 1 && modifierMinute == 1 && modifierSecond == 1)
+        view.findViewById<MaterialSwitch>(R.id.switch_modifiers).isChecked = !(modifierHour == 1 && modifierMinute == 1 && modifierSecond == 1)
 
         view.findViewById<TextInputEditText>(R.id.input_modifier_hour).setText(abs(modifierHour).toString())
         view.findViewById<TextInputEditText>(R.id.input_modifier_minute).setText(abs(modifierMinute).toString())
@@ -112,7 +112,7 @@ class SettingsFragment : Fragment() {
         Storage.settings.setString(Storage.Timetable.JSON, timetableString)
         Storage.setTimetable(timetableString)
 
-        if (view.findViewById<SwitchCompat>(R.id.switch_modifiers).isChecked) {
+        if (view.findViewById<MaterialSwitch>(R.id.switch_modifiers).isChecked) {
             val modifierHour = Converter.getIntFromInput(view.findViewById(R.id.input_modifier_hour), 1)
             val modifierMinute = Converter.getIntFromInput(view.findViewById(R.id.input_modifier_minute), 1)
             val modifierSecond = Converter.getIntFromInput(view.findViewById(R.id.input_modifier_second), 1)
