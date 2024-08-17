@@ -41,10 +41,10 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
         if (timetable != null) {
             val week = if (calendar.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
             val day = if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
-            view.findViewById<TextView>(R.id.title_weekday).text = view.context.resources.getStringArray(R.array.weekdays)[day]
+            view.findViewById<TextView>(R.id.title_weekday).text = view.resources.getStringArray(R.array.weekdays)[day]
 
             while (view.childCount > timetable.getLessonsCount() + 1) {
-                view.removeViewAt(1)
+                view.removeViewAt(view.childCount - 1)
             }
 
             while (view.childCount < timetable.getLessonsCount() + 1) {
@@ -56,6 +56,7 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
                 val lessonIndex = index - 1
 
                 fillLessonView(item, timetable, lessonIndex, day, week)
+
                 if (timetable.getLessonId(week, day, lessonIndex) > 0) {
                     item.setOnClickListener { showInfoPopup(item, timetable, lessonIndex, day, week) }
                 } else {
@@ -63,10 +64,10 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
                 }
             }
         } else {
-            view.findViewById<TextView>(R.id.title_weekday).text = view.context.getString(R.string.message_error)
+            view.findViewById<TextView>(R.id.title_weekday).text = view.resources.getString(R.string.message_error)
 
             while (view.childCount > 1) {
-                view.removeViewAt(1)
+                view.removeViewAt(view.childCount - 1)
             }
         }
     }
@@ -102,11 +103,11 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
         }
     }
 
-    private fun showInfoPopup(item: View, timetable: TimetableData, lessonIndex: Int, day: Int, week: String, context: Context = item.context) {
-        val view = LayoutInflater.from(context).inflate(R.layout.popup_lesson_info, null, false)
+    private fun showInfoPopup(item: View, timetable: TimetableData, lessonIndex: Int, day: Int, week: String) {
+        val view = LayoutInflater.from(item.context).inflate(R.layout.popup_lesson_info, null, false)
         view.clipToOutline = true
         view.outlineProvider = object : ViewOutlineProvider() {
-            val radius = Converter.getPxFromDp(context, 16).toFloat()
+            private val radius = Converter.getPxFromDp(item.context, 16).toFloat()
             override fun getOutline(view: View, outline: Outline) {
                 outline.setRoundRect(0, 0, view.width, view.height, radius)
             }
@@ -137,9 +138,9 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
             if (classroom !in classrooms) classrooms.add(classroom)
         }
 
-        if (titles.count() > 1) titleTitle.text = context.getString(R.string.info_titles)
-        if (teachers.count() > 1) titleTeacher.text = context.getString(R.string.info_teachers)
-        if (classrooms.count() > 1) titleClassroom.text = context.getString(R.string.info_classrooms)
+        if (titles.count() > 1) titleTitle.text = item.resources.getString(R.string.info_titles)
+        if (teachers.count() > 1) titleTeacher.text = item.resources.getString(R.string.info_teachers)
+        if (classrooms.count() > 1) titleClassroom.text = item.resources.getString(R.string.info_classrooms)
         textTitle.text = titles.joinToString(",\n")
         textTeacher.text = teachers.joinToString(",\n")
         textClassroom.text = classrooms.joinToString(",\n")
@@ -160,16 +161,16 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
                 val lessonOddId = timetable.getLessonId("odd", tempDay, tempIndex)
 
                 if (lessonEvenId in lessonIds) {
-                    if (tempLayoutEven == null) tempLayoutEven = createDayLayout(context, tempDay)
-                    val tempItem = LayoutInflater.from(context).inflate(R.layout.item_lesson, null, false) as LinearLayout
+                    if (tempLayoutEven == null) tempLayoutEven = createDayLayout(item.context, tempDay)
+                    val tempItem = LayoutInflater.from(item.context).inflate(R.layout.item_lesson, null, false) as LinearLayout
                     val isNow = tempIndex == lessonIndex && tempDay == day && "even" == week
                     fillLessonView(tempItem, timetable, tempIndex, tempDay, "even", isNow)
                     tempLayoutEven.addView(tempItem)
                 }
 
                 if (lessonOddId in lessonIds) {
-                    if (tempLayoutOdd == null) tempLayoutOdd = createDayLayout(context, tempDay)
-                    val tempItem = LayoutInflater.from(context).inflate(R.layout.item_lesson, null, false) as LinearLayout
+                    if (tempLayoutOdd == null) tempLayoutOdd = createDayLayout(item.context, tempDay)
+                    val tempItem = LayoutInflater.from(item.context).inflate(R.layout.item_lesson, null, false) as LinearLayout
                     val isNow = tempIndex == lessonIndex && tempDay == day && "odd" == week
                     fillLessonView(tempItem, timetable, tempIndex, tempDay, "odd", isNow)
                     tempLayoutOdd.addView(tempItem)
@@ -184,7 +185,7 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
 
         if (!isDifferent) {
             (if (week == "even") layoutOdd else layoutEven).visibility = View.GONE
-            (if (week == "even") titleEven else titleOdd).text = context.getString(R.string.week_every)
+            (if (week == "even") titleEven else titleOdd).text = item.resources.getString(R.string.week_every)
         }
 
 
@@ -192,7 +193,7 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
         val itemLocationArray = IntArray(2)
         item.getLocationOnScreen(itemLocationArray)
         view.measure(MeasureSpec.makeMeasureSpec(item.width, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(fragmentHeight / 2, MeasureSpec.AT_MOST))
-        val direction = if (itemLocationArray[1] + view.measuredHeight > fragmentHeight + Converter.getPxFromDp(context, 64)) 1 else -1
+        val direction = if (itemLocationArray[1] + view.measuredHeight > fragmentHeight + Converter.getPxFromDp(item.context, 64)) 1 else -1
         PopupWindow(view, view.measuredWidth, view.measuredHeight, true).showAsDropDown(item, 0, item.height * direction)
     }
 
