@@ -74,7 +74,7 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
 
     private fun fillLessonView(view: LinearLayout, timetable: TimetableData, lessonIndex: Int, day: Int, week: String, isNow: Boolean = false) {
         val lessonId = timetable.getLessonId(week, day, lessonIndex)
-        val lessonNumber = Storage.settings.getInt("app-initial_index", 1) + lessonIndex
+        val lessonNumber = Storage.settings.getInt(Storage.Application.INITIAL_INDEX, 1) + lessonIndex
         val otherLessonId = timetable.getLessonId(if (week == "odd") "even" else "odd", day, lessonIndex)
         val otherLessonDiffers = !(otherLessonId == lessonId || otherLessonId in timetable.getLessonOtherIds(lessonId))
 

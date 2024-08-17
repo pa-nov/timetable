@@ -11,8 +11,12 @@ class TimetableApplication : Application() {
         super.onCreate()
 
         Storage.settings = SettingsData(applicationContext)
-        Storage.setTimetable(Storage.settings.getString("timetable-json"))
-        AppCompatDelegate.setDefaultNightMode(Storage.settings.getInt("app-theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM))
-        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(Storage.settings.getString("app-language", Locale.getDefault().language)))
+        Storage.setTimetable(Storage.settings.getString(Storage.Timetable.JSON))
+        AppCompatDelegate.setDefaultNightMode(Storage.settings.getInt(Storage.Application.THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM))
+        AppCompatDelegate.setApplicationLocales(
+            LocaleListCompat.forLanguageTags(
+                Storage.settings.getString(Storage.Application.LANGUAGE, Locale.getDefault().language)
+            )
+        )
     }
 }
