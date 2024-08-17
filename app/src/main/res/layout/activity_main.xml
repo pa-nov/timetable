@@ -17,17 +17,18 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+        <FrameLayout style="@style/Separator" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation_main"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:background="@color/item"
+            android:background="@color/background"
             android:outlineAmbientShadowColor="@color/empty"
             android:outlineSpotShadowColor="@color/empty"
             app:itemIconSize="32dp"
             app:itemIconTint="@color/accent_checked"
-            app:itemRippleColor="@color/line"
-            app:itemTextAppearanceActiveBoldEnabled="false"
+            app:itemRippleColor="@color/item"
             app:itemTextColor="@color/accent_checked"
             app:menu="@menu/menu_main" />
 
@@ -35,7 +36,7 @@
             android:id="@+id/navigation_system"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/line" />
+            android:background="@color/item" />
 
     </LinearLayout>
 
