@@ -90,12 +90,14 @@
     </style>
 
     <style name="MaterialSwitch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical|end</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="thumbTint">@color/thumb_switch</item>
         <item name="trackTint">@color/track_switch</item>
-        <item name="track">@drawable/square_rounded_small</item>
+        <item name="track">@drawable/square_track</item>
         <item name="theme">@style/Theme.MaterialSwitch</item>
     </style>
 

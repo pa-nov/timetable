@@ -111,18 +111,15 @@
                 style="@style/Text.Title"
                 android:text="@string/title_settings_widget" />
 
-            <FrameLayout style="@style/Layout">
-
-                <TextView
-                    style="@style/Text.Setting"
-                    android:layout_gravity="center"
-                    android:text="@string/modifiers" />
-
-                <com.google.android.material.materialswitch.MaterialSwitch
-                    android:id="@+id/switch_modifiers"
-                    style="@style/MaterialSwitch" />
-
-            </FrameLayout>
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_modifiers"
+                style="@style/MaterialSwitch"
+                android:gravity="center"
+                android:paddingStart="80dp"
+                android:paddingEnd="0dp"
+                android:text="@string/modifiers"
+                android:textSize="24sp"
+                android:textStyle="normal" />
 
             <LinearLayout
                 android:id="@+id/layout_modifiers"
