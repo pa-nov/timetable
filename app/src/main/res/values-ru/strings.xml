@@ -10,12 +10,22 @@
     <string name="title_settings_widget">Виджет</string>
     <string name="title_settings_about">О приложении</string>
 
+    <string name="description_clock">Поверните устройство, чтобы открыть часы</string>
     <string name="description_widget">Виджет</string>
 
     <string name="message_error">Ошибка</string>
     <string name="message_success">Успешно</string>
     <string name="message_applied">Применено</string>
     <string name="message_apply">Применить</string>
+
+    <string name="clock_mode">Режим часов</string>
+    <string name="clock_mode_clock">Часы</string>
+    <string name="clock_mode_timer">Таймер</string>
+    <string name="display_headers">Отображать заголовки</string>
+    <string name="display_date">Отображать дату</string>
+    <string name="display_date_time">Отображать дату и время</string>
+    <string name="display_current_lesson">Отображать название текущего предмета</string>
+    <string name="display_next_lesson">Отображать название следующего предмета</string>
 
     <string name="day_yesterday">Вчера</string>
     <string name="day_today">Сегодня</string>

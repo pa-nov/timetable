@@ -17,6 +17,58 @@
                 style="@style/Text.Title"
                 android:text="@string/title_clock" />
 
+            <LinearLayout style="@style/Layout.Vertical">
+
+                <TextView
+                    style="@style/Text.Setting"
+                    android:text="@string/clock_mode" />
+
+                <LinearLayout style="@style/Layout.Horizontal.Rounded">
+
+                    <Button
+                        android:id="@+id/button_clock_mode_clock"
+                        style="@style/Button.Item"
+                        android:text="@string/clock_mode_clock" />
+
+                    <Button
+                        android:id="@+id/button_clock_mode_timer"
+                        style="@style/Button.Item"
+                        android:text="@string/clock_mode_timer" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_display_headers"
+                style="@style/MaterialSwitch"
+                android:text="@string/display_headers" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_display_date_time"
+                style="@style/MaterialSwitch"
+                android:text="@string/display_date_time" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_display_current_lesson"
+                style="@style/MaterialSwitch"
+                android:text="@string/display_current_lesson" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_display_next_lesson"
+                style="@style/MaterialSwitch"
+                android:text="@string/display_next_lesson" />
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/empty" />
+
+            <TextView
+                style="@style/Text.Title.Small"
+                android:text="@string/description_clock" />
+
         </LinearLayout>
 
     </com.panov.widget.BounceScrollView>
@@ -26,6 +78,6 @@
     <Button
         android:id="@+id/button_action"
         style="@style/Button.Action"
-        android:text="@string/message_error" />
+        android:text="@string/message_apply" />
 
 </LinearLayout>

@@ -10,12 +10,22 @@
     <string name="title_settings_widget">Widget</string>
     <string name="title_settings_about">About the app</string>
 
+    <string name="description_clock">Rotate the device to open the clock</string>
     <string name="description_widget">Widget</string>
 
     <string name="message_error">Error</string>
     <string name="message_success">Success</string>
     <string name="message_applied">Applied</string>
     <string name="message_apply">Apply</string>
+
+    <string name="clock_mode">Clock mode</string>
+    <string name="clock_mode_clock">Clock</string>
+    <string name="clock_mode_timer">Timer</string>
+    <string name="display_headers">Display headers</string>
+    <string name="display_date">Display date</string>
+    <string name="display_date_time">Display date and time</string>
+    <string name="display_current_lesson">Display title of the current lesson</string>
+    <string name="display_next_lesson">Display title of the next lesson</string>
 
     <string name="day_yesterday">Yesterday</string>
     <string name="day_today">Today</string>
