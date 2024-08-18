@@ -113,13 +113,8 @@
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/switch_modifiers"
-                style="@style/MaterialSwitch"
-                android:gravity="center"
-                android:paddingStart="80dp"
-                android:paddingEnd="0dp"
-                android:text="@string/modifiers"
-                android:textSize="24sp"
-                android:textStyle="normal" />
+                style="@style/MaterialSwitch.Center"
+                android:text="@string/modifiers" />
 
             <LinearLayout
                 android:id="@+id/layout_modifiers"

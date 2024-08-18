@@ -101,4 +101,12 @@
         <item name="theme">@style/Theme.MaterialSwitch</item>
     </style>
 
+    <style name="MaterialSwitch.Center">
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">80dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>
