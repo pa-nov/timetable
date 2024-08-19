@@ -60,9 +60,7 @@
                 android:text="@string/display_next_lesson" />
 
             <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                style="@style/Layout.FillHeight"
                 android:background="@color/empty" />
 
             <TextView

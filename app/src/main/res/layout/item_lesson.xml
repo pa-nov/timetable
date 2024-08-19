@@ -4,11 +4,11 @@
     android:baselineAligned="false">
 
     <TextView
-        style="@style/Text"
+        style="@style/Title"
         android:layout_width="32dp"
         android:layout_height="64dp"
-        android:gravity="center"
-        android:text="@string/message_error" />
+        android:text="@string/message_error"
+        android:textSize="24sp" />
 
     <FrameLayout
         android:layout_width="2dp"
@@ -16,10 +16,9 @@
         android:background="@color/line" />
 
     <TextView
-        style="@style/Text"
+        style="@style/Title"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:gravity="center"
         android:text="@string/message_error"
         android:textSize="18sp" />
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.panov.widget.BounceScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/square_rounded_small"
     android:backgroundTint="@color/line">
 
@@ -23,6 +24,7 @@
                 style="@style/Text"
                 android:text="@string/message_error" />
 
+
             <TextView
                 android:id="@+id/title_teacher"
                 style="@style/Title.Header"
@@ -34,6 +36,7 @@
                 android:id="@+id/text_teacher"
                 style="@style/Text"
                 android:text="@string/message_error" />
+
 
             <TextView
                 android:id="@+id/title_classroom"
