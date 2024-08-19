@@ -6,21 +6,21 @@
     android:orientation="vertical"
     tools:context=".fragment.ClockFragment">
 
-    <com.panov.widget.BounceScrollView style="@style/Layout.Fill">
+    <com.panov.widget.BounceScrollView style="@style/Layout.FillHeight">
 
         <LinearLayout
             android:id="@+id/layout_container"
-            style="@style/Layout.Divided"
+            style="@style/Layout.Vertical.Divided"
             android:layout_marginHorizontal="16dp">
 
             <TextView
-                style="@style/Text.Title"
+                style="@style/Title"
                 android:text="@string/title_clock" />
 
             <LinearLayout style="@style/Layout.Vertical">
 
                 <TextView
-                    style="@style/Text.Setting"
+                    style="@style/Title.Setting"
                     android:text="@string/clock_mode" />
 
                 <LinearLayout style="@style/Layout.Horizontal.Rounded">
@@ -66,7 +66,7 @@
                 android:background="@color/empty" />
 
             <TextView
-                style="@style/Text.Title.Small"
+                style="@style/Title.Header"
                 android:text="@string/description_clock" />
 
         </LinearLayout>

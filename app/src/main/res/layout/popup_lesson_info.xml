@@ -5,7 +5,7 @@
     android:backgroundTint="@color/line">
 
     <LinearLayout
-        style="@style/Layout.Divided"
+        style="@style/Layout.Vertical.Divided"
         android:padding="8dp">
 
         <LinearLayout
@@ -14,37 +14,37 @@
 
             <TextView
                 android:id="@+id/title_title"
-                style="@style/Text.Title.Small"
+                style="@style/Title.Header"
                 android:gravity="start"
                 android:text="@string/info_title" />
 
             <TextView
                 android:id="@+id/text_title"
-                style="@style/Text.Large"
+                style="@style/Text"
                 android:text="@string/message_error" />
 
             <TextView
                 android:id="@+id/title_teacher"
-                style="@style/Text.Title.Small"
+                style="@style/Title.Header"
                 android:layout_marginTop="4dp"
                 android:gravity="start"
                 android:text="@string/info_teacher" />
 
             <TextView
                 android:id="@+id/text_teacher"
-                style="@style/Text.Large"
+                style="@style/Text"
                 android:text="@string/message_error" />
 
             <TextView
                 android:id="@+id/title_classroom"
-                style="@style/Text.Title.Small"
+                style="@style/Title.Header"
                 android:layout_marginTop="4dp"
                 android:gravity="start"
                 android:text="@string/info_classroom" />
 
             <TextView
                 android:id="@+id/text_classroom"
-                style="@style/Text.Large"
+                style="@style/Text"
                 android:text="@string/message_error" />
 
         </LinearLayout>
@@ -52,11 +52,11 @@
 
         <LinearLayout
             android:id="@+id/layout_even"
-            style="@style/Layout.Divided">
+            style="@style/Layout.Vertical.Divided">
 
             <TextView
                 android:id="@+id/title_even"
-                style="@style/Text.Title.Small"
+                style="@style/Title.Header"
                 android:text="@string/week_even" />
 
         </LinearLayout>
@@ -64,11 +64,11 @@
 
         <LinearLayout
             android:id="@+id/layout_odd"
-            style="@style/Layout.Divided">
+            style="@style/Layout.Vertical.Divided">
 
             <TextView
                 android:id="@+id/title_odd"
-                style="@style/Text.Title.Small"
+                style="@style/Title.Header"
                 android:text="@string/week_odd" />
 
         </LinearLayout>

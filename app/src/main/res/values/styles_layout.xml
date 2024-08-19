@@ -6,15 +6,22 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="Layout.Fill">
+    <style name="Layout.FillHeight">
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
     </style>
 
-    <style name="Layout.Divided">
-        <item name="android:layout_height">match_parent</item>
+    <style name="Layout.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="Layout.Horizontal.Rounded">
+        <item name="android:background">@drawable/square_rounded_small</item>
+        <item name="android:backgroundTint">@color/item</item>
+    </style>
+
+    <style name="Layout.Horizontal.Divided">
         <item name="android:divider">@drawable/divider</item>
-        <item name="android:orientation">vertical</item>
         <item name="android:showDividers">middle</item>
     </style>
 
@@ -25,31 +32,11 @@
     <style name="Layout.Vertical.Rounded">
         <item name="android:background">@drawable/square_rounded_small</item>
         <item name="android:backgroundTint">@color/item</item>
-        <item name="backgroundTint">@null</item>
     </style>
 
-    <style name="Layout.Horizontal">
-        <item name="android:orientation">horizontal</item>
-    </style>
-
-    <style name="Layout.Horizontal.Rounded">
-        <item name="android:background">@drawable/square_rounded_small</item>
-        <item name="android:backgroundTint">@color/item</item>
-        <item name="backgroundTint">@null</item>
-    </style>
-
-    <style name="Separator">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/line</item>
-    </style>
-
-    <style name="ShadowBottom">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:layout_marginTop">-48dp</item>
-        <item name="android:background">@drawable/square_shadow_bottom</item>
-        <item name="android:backgroundTint">@color/background</item>
+    <style name="Layout.Vertical.Divided">
+        <item name="android:divider">@drawable/divider</item>
+        <item name="android:showDividers">middle</item>
     </style>
 
 </resources>
