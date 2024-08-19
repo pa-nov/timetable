@@ -17,21 +17,21 @@ import com.panov.timetable.fragment.TimetableFragment
 import com.panov.util.Converter
 import com.panov.util.TimetableData
 
-class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.Adapter<TimetableViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimetableViewHolder {
+class TimetableRecyclerAdapter(private val fragment: TimetableFragment) : RecyclerView.Adapter<TimetableRecyclerAdapter.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.page_timetable, parent, false)
 
         val padding = Converter.getPxFromDp(parent.context, 16)
         view.setPadding(padding, 0, padding, 0)
 
-        return TimetableViewHolder(view)
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return 3
     }
 
-    override fun onBindViewHolder(holder: TimetableViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val view = holder.itemView as LinearLayout
         val offset = position - 1
         val calendar = fragment.calendar.clone() as Calendar
@@ -71,6 +71,9 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
             }
         }
     }
+
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 
     private fun fillLessonView(view: LinearLayout, timetable: TimetableData, lessonIndex: Int, day: Int, week: String, isNow: Boolean = false) {
@@ -207,6 +210,3 @@ class TimetableAdapter(private val fragment: TimetableFragment) : RecyclerView.A
         return layout
     }
 }
-
-
-class TimetableViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.panov.timetable.R
-import com.panov.timetable.TimetableAdapter
+import com.panov.timetable.TimetableRecyclerAdapter
 import com.panov.util.Converter
 import kotlin.math.abs
 
@@ -40,7 +40,7 @@ class TimetableFragment : Fragment() {
 
         val viewTimetable = fragment.findViewById<ViewPager2>(R.id.layout_container)
         viewTimetable.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
-        viewTimetable.adapter = TimetableAdapter(this)
+        viewTimetable.adapter = TimetableRecyclerAdapter(this)
         viewTimetable.setCurrentItem(1, false)
         viewTimetable.setPageTransformer(transformer)
         viewTimetable.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -76,7 +76,7 @@ class TimetableFragment : Fragment() {
     }
 
     private fun updateView(view: View) {
-        val viewAdapter = view.findViewById<ViewPager2>(R.id.layout_container).adapter as TimetableAdapter
+        val viewAdapter = view.findViewById<ViewPager2>(R.id.layout_container).adapter as TimetableRecyclerAdapter
         viewAdapter.notifyItemChanged(0)
         viewAdapter.notifyItemChanged(1)
         viewAdapter.notifyItemChanged(2)
