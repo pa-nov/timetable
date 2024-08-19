@@ -191,6 +191,9 @@ class TimetableRecyclerAdapter(private val fragment: TimetableFragment) : Recycl
             (if (week == "even") titleEven else titleOdd).text = item.resources.getString(R.string.week_every)
         }
 
+        if (layoutEven.childCount < 2) layoutEven.visibility = View.GONE
+        if (layoutOdd.childCount < 2) layoutOdd.visibility = View.GONE
+
 
         val fragmentHeight = fragment.requireView().height
         val itemLocationArray = IntArray(2)
