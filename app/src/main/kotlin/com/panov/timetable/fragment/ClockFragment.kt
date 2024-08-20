@@ -15,18 +15,23 @@ class ClockFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragment = inflater.inflate(R.layout.fragment_clock, container, false)
 
-        fragment.findViewById<Button>(R.id.button_clock_mode_clock).setOnClickListener { switchClockMode(fragment, false) }
-        fragment.findViewById<Button>(R.id.button_clock_mode_timer).setOnClickListener { switchClockMode(fragment, true) }
+        fragment.findViewById<Button>(R.id.button_clock_mode_clock).setOnClickListener { switchClockMode(fragment, false, animate = true) }
+        fragment.findViewById<Button>(R.id.button_clock_mode_timer).setOnClickListener { switchClockMode(fragment, true, animate = true) }
         fragment.findViewById<Button>(R.id.button_action).setOnClickListener { saveSettings(fragment) }
         readSettings(fragment)
 
         return fragment
     }
 
-    private fun switchClockMode(view: View, mode: Boolean) {
+    private fun switchClockMode(view: View, mode: Boolean, animate: Boolean = false) {
         view.findViewById<Button>(R.id.button_clock_mode_clock).isEnabled = mode
         view.findViewById<Button>(R.id.button_clock_mode_timer).isEnabled = !mode
         view.findViewById<MaterialSwitch>(R.id.switch_display_date_time).text = getString(if (mode) R.string.display_date_time else R.string.display_date)
+        if (animate) {
+            UiUtils.setViewVisibility(view.findViewById(R.id.switch_not_display_next_time), if (mode) View.VISIBLE else View.GONE)
+        } else {
+            UiUtils.setViewVisibility(view.findViewById(R.id.switch_not_display_next_time), if (mode) View.VISIBLE else View.GONE, 0)
+        }
     }
 
     private fun readSettings(view: View) {
@@ -35,6 +40,7 @@ class ClockFragment : Fragment() {
         view.findViewById<MaterialSwitch>(R.id.switch_display_date_time).isChecked = Storage.settings.getBoolean(Storage.Clock.DISPLAY_DATE_TIME)
         view.findViewById<MaterialSwitch>(R.id.switch_display_current_lesson).isChecked = Storage.settings.getBoolean(Storage.Clock.DISPLAY_CURRENT_LESSON)
         view.findViewById<MaterialSwitch>(R.id.switch_display_next_lesson).isChecked = Storage.settings.getBoolean(Storage.Clock.DISPLAY_NEXT_LESSON)
+        view.findViewById<MaterialSwitch>(R.id.switch_not_display_next_time).isChecked = Storage.settings.getBoolean(Storage.Clock.NOT_DISPLAY_NEXT_TIME)
     }
 
     private fun saveSettings(view: View) {
@@ -43,6 +49,7 @@ class ClockFragment : Fragment() {
         Storage.settings.setBoolean(Storage.Clock.DISPLAY_DATE_TIME, view.findViewById<MaterialSwitch>(R.id.switch_display_date_time).isChecked)
         Storage.settings.setBoolean(Storage.Clock.DISPLAY_CURRENT_LESSON, view.findViewById<MaterialSwitch>(R.id.switch_display_current_lesson).isChecked)
         Storage.settings.setBoolean(Storage.Clock.DISPLAY_NEXT_LESSON, view.findViewById<MaterialSwitch>(R.id.switch_display_next_lesson).isChecked)
+        Storage.settings.setBoolean(Storage.Clock.NOT_DISPLAY_NEXT_TIME, view.findViewById<MaterialSwitch>(R.id.switch_not_display_next_time).isChecked)
         Storage.settings.save()
 
         UiUtils.showToast(requireContext(), R.string.message_applied)

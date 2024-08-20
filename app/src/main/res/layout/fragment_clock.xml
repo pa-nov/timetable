@@ -59,6 +59,11 @@
                 style="@style/MaterialSwitch"
                 android:text="@string/display_next_lesson" />
 
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_not_display_next_time"
+                style="@style/MaterialSwitch"
+                android:text="@string/not_display_next_time" />
+
             <FrameLayout
                 style="@style/Layout.FillHeight"
                 android:background="@color/empty" />

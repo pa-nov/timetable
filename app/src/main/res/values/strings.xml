@@ -26,6 +26,7 @@
     <string name="display_date_time">Display date and time</string>
     <string name="display_current_lesson">Display title of the current lesson</string>
     <string name="display_next_lesson">Display title of the next lesson</string>
+    <string name="not_display_next_time">Do not display time until the next lesson</string>
 
     <string name="day_yesterday">Yesterday</string>
     <string name="day_today">Today</string>

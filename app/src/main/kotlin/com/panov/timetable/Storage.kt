@@ -22,6 +22,7 @@ object Storage {
         const val DISPLAY_DATE_TIME = "$CORE-display_date_time"
         const val DISPLAY_CURRENT_LESSON = "$CORE-display_current_lesson"
         const val DISPLAY_NEXT_LESSON = "$CORE-display_next_lesson"
+        const val NOT_DISPLAY_NEXT_TIME = "$CORE-not_display_next_time"
     }
 
     object Application {
