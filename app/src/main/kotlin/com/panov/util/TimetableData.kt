@@ -1,5 +1,6 @@
 package com.panov.util
 
+import android.icu.util.Calendar
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -192,5 +193,101 @@ class TimetableLesson(jsonArray: JSONArray) {
 
     fun getOtherIds(): Array<Int> {
         return other
+    }
+}
+
+class TimetableOffset(timetable: TimetableData, calendar: Calendar) {
+    val currentLessonIndex: Int
+    val currentDay: Int
+    val currentWeek: String
+    val currentDaysOffset: Int
+
+    val nextLessonIndex: Int
+    val nextDay: Int
+    val nextWeek: String
+    val nextDaysOffset: Int
+
+    init {
+        val day = if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
+        val week = if (calendar.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
+        val seconds = calendar.get(Calendar.MILLISECONDS_IN_DAY) / 1000
+        val lessonsCount = timetable.getLessonsCount()
+
+        var tempLessonIndex = -1
+        var tempDay = day
+        var tempWeek = week
+        var tempDaysOffset = 0
+
+        for (index in 0 until lessonsCount) {
+            if (timetable.getLessonTimeStart(index) > seconds) break
+            tempLessonIndex = index
+        }
+        var tempOffset = lessonsCount * 14
+        while (tempOffset >= 0) {
+            if (tempLessonIndex < 0) {
+                tempLessonIndex = lessonsCount - 1
+                tempDaysOffset--
+                tempDay--
+                if (tempDay < 0) {
+                    tempDay = 6
+                    tempWeek = if (tempWeek == "odd") "even" else "odd"
+                }
+            }
+            if (timetable.getLessonId(tempWeek, tempDay, tempLessonIndex) > 0) {
+                tempOffset = 0
+            } else {
+                if (tempOffset > 0) {
+                    tempLessonIndex--
+                }
+            }
+            tempOffset--
+        }
+
+        currentLessonIndex = tempLessonIndex
+        currentDay = tempDay
+        currentWeek = tempWeek
+        currentDaysOffset = tempDaysOffset
+    }
+
+    init {
+        val day = if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
+        val week = if (calendar.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
+        val seconds = calendar.get(Calendar.MILLISECONDS_IN_DAY) / 1000
+        val lessonsCount = timetable.getLessonsCount()
+
+        var tempLessonIndex = 0
+        var tempDay = day
+        var tempWeek = week
+        var tempDaysOffset = 0
+
+        for (index in 0 until lessonsCount) {
+            if (timetable.getLessonTimeStart(index) > seconds) break
+            tempLessonIndex = index + 1
+        }
+        var tempOffset = lessonsCount * 14
+        while (tempOffset >= 0) {
+            if (tempLessonIndex >= lessonsCount) {
+                tempLessonIndex = 0
+                tempDaysOffset++
+                tempDay++
+                if (tempDay > 6) {
+                    tempDay = 0
+                    tempWeek = if (tempWeek == "odd") "even" else "odd"
+                }
+            }
+            if (timetable.getLessonId(tempWeek, tempDay, tempLessonIndex) > 0) {
+                tempOffset = 0
+            } else {
+                if (tempOffset > 0) {
+                    tempLessonIndex++
+                }
+            }
+            tempOffset--
+        }
+
+        nextLessonIndex = tempLessonIndex
+        nextDay = tempDay
+        nextWeek = tempWeek
+        nextDaysOffset = tempDaysOffset
     }
 }
