@@ -49,41 +49,41 @@ class ClockActivity : AppCompatActivity() {
         val textDateTime = findViewById<TextView>(R.id.text_date_time)
 
         if (timetable == null) {
-            titleCurrentLesson.visibility = View.INVISIBLE
-            titleTime.visibility = View.INVISIBLE
-            titleNextLesson.visibility = View.INVISIBLE
+            titleCurrentLesson.visibility = View.GONE
+            titleTime.visibility = View.GONE
+            titleNextLesson.visibility = View.GONE
 
-            textCurrentLesson.visibility = View.INVISIBLE
-            textAgo.visibility = View.INVISIBLE
-            textNextLesson.visibility = View.INVISIBLE
-            textDateTime.visibility = View.INVISIBLE
+            textCurrentLesson.visibility = View.GONE
+            textAgo.visibility = View.GONE
+            textNextLesson.visibility = View.GONE
+            textDateTime.visibility = View.GONE
 
             textTime.textSize = 160f
             return
         }
 
         if (!displayTimer || !notDisplayNextTime) {
-            textAgo.visibility = View.INVISIBLE
+            textAgo.visibility = View.GONE
         }
 
         if (!displayHeaders) {
-            titleCurrentLesson.visibility = View.INVISIBLE
-            titleTime.visibility = View.INVISIBLE
-            titleNextLesson.visibility = View.INVISIBLE
+            titleCurrentLesson.visibility = View.GONE
+            titleTime.visibility = View.GONE
+            titleNextLesson.visibility = View.GONE
         }
 
         if (!displayDateTime) {
-            textDateTime.visibility = View.INVISIBLE
+            textDateTime.visibility = View.GONE
         }
 
         if (!displayCurrentLesson) {
-            titleCurrentLesson.visibility = View.INVISIBLE
-            textCurrentLesson.visibility = View.INVISIBLE
+            titleCurrentLesson.visibility = View.GONE
+            textCurrentLesson.visibility = View.GONE
         }
 
         if (!displayNextLesson) {
-            titleNextLesson.visibility = View.INVISIBLE
-            textNextLesson.visibility = View.INVISIBLE
+            titleNextLesson.visibility = View.GONE
+            textNextLesson.visibility = View.GONE
         }
 
         if (!displayDateTime && !displayCurrentLesson && !displayNextLesson) {
@@ -107,7 +107,7 @@ class ClockActivity : AppCompatActivity() {
                     val daySeconds = (DateUtils.DAY_IN_MILLIS / 1000).toInt()
                     textTime.text = if (offset.currentDaysOffset == 0 && currentLessonEnd > seconds) {
                         titleTime.text = getString(R.string.timer_ends_in)
-                        textAgo.visibility = View.INVISIBLE
+                        textAgo.visibility = View.GONE
                         Converter.getTimeText(currentLessonEnd - seconds)
                     } else {
                         if (notDisplayNextTime) {
@@ -116,7 +116,7 @@ class ClockActivity : AppCompatActivity() {
                             Converter.getTimeText(abs(offset.currentDaysOffset * daySeconds + currentLessonEnd - seconds))
                         } else {
                             titleTime.text = getString(R.string.timer_starts_in)
-                            textAgo.visibility = View.INVISIBLE
+                            textAgo.visibility = View.GONE
                             Converter.getTimeText(offset.nextDaysOffset * daySeconds + nextLessonStart - seconds)
                         }
                     }
