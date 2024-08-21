@@ -11,6 +11,7 @@
     <string name="title_settings_about">About the app</string>
 
     <string name="description_clock_open">Rotate the device to open the clock</string>
+    <string name="description_clock_close">Rotate the device to close the clock</string>
     <string name="description_widget">Widget</string>
 
     <string name="message_error">Error</string>
@@ -27,6 +28,15 @@
     <string name="display_current_lesson">Display title of the current lesson</string>
     <string name="display_next_lesson">Display title of the next lesson</string>
     <string name="not_display_next_time">Do not display time until the next lesson</string>
+
+    <string name="timer_time">Time</string>
+    <string name="timer_ago">ago</string>
+    <string name="timer_earlier">Earlier</string>
+    <string name="timer_now">Now</string>
+    <string name="timer_then">Then</string>
+    <string name="timer_ended">Ended</string>
+    <string name="timer_ends_in">Ends in</string>
+    <string name="timer_starts_in">Starts in</string>
 
     <string name="day_yesterday">Yesterday</string>
     <string name="day_today">Today</string>

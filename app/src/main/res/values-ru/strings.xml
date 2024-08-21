@@ -11,6 +11,7 @@
     <string name="title_settings_about">О приложении</string>
 
     <string name="description_clock_open">Поверните устройство, чтобы открыть часы</string>
+    <string name="description_clock_close">Поверните устройство, чтобы закрыть часы</string>
     <string name="description_widget">Виджет</string>
 
     <string name="message_error">Ошибка</string>
@@ -27,6 +28,15 @@
     <string name="display_current_lesson">Отображать название текущего предмета</string>
     <string name="display_next_lesson">Отображать название следующего предмета</string>
     <string name="not_display_next_time">Не отображать время до следующего предмета</string>
+
+    <string name="timer_time">Время</string>
+    <string name="timer_ago">назад</string>
+    <string name="timer_earlier">Ранее</string>
+    <string name="timer_now">Сейчас</string>
+    <string name="timer_then">Далее</string>
+    <string name="timer_ended">Закончилось</string>
+    <string name="timer_ends_in">Закончится через</string>
+    <string name="timer_starts_in">Начнётся через</string>
 
     <string name="day_yesterday">Вчера</string>
     <string name="day_today">Сегодня</string>

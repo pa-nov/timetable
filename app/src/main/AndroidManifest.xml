@@ -16,6 +16,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ClockActivity" />
+
         <receiver
             android:name=".appwidget.AppWidget"
             android:exported="false">

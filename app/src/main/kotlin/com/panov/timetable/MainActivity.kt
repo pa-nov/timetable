@@ -1,6 +1,8 @@
 package com.panov.timetable
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -27,6 +29,9 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (selectedItem == R.id.menu_clock && resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            startActivity(Intent(applicationContext, ClockActivity::class.java))
+        }
 
         val navigation = findViewById<BottomNavigationView>(R.id.navigation_main)
         navigation.setOnItemSelectedListener { item -> selectItem(item.itemId) }
