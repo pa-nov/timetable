@@ -70,7 +70,7 @@
 
             <TextView
                 style="@style/Title.Header"
-                android:text="@string/description_clock" />
+                android:text="@string/description_clock_open" />
 
         </LinearLayout>
 

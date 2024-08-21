@@ -10,7 +10,7 @@
     <string name="title_settings_widget">Виджет</string>
     <string name="title_settings_about">О приложении</string>
 
-    <string name="description_clock">Поверните устройство, чтобы открыть часы</string>
+    <string name="description_clock_open">Поверните устройство, чтобы открыть часы</string>
     <string name="description_widget">Виджет</string>
 
     <string name="message_error">Ошибка</string>
