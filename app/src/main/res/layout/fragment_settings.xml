@@ -109,11 +109,16 @@
 
             <TextView
                 style="@style/Title"
-                android:text="@string/title_settings_widget" />
+                android:text="@string/title_settings_widgets" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_combine_background"
+                style="@style/MaterialSwitch"
+                android:text="@string/combine_background" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/switch_modifiers"
-                style="@style/MaterialSwitch.Header"
+                style="@style/MaterialSwitch"
                 android:text="@string/modifiers" />
 
             <LinearLayout

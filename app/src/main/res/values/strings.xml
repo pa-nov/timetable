@@ -7,7 +7,7 @@
     <string name="title_settings">Settings</string>
     <string name="title_settings_application">Application</string>
     <string name="title_settings_timetable">Timetable</string>
-    <string name="title_settings_widget">Widget</string>
+    <string name="title_settings_widgets">Widgets</string>
     <string name="title_settings_about">About the app</string>
 
     <string name="description_clock_open">Rotate the device to open the clock</string>
@@ -64,6 +64,7 @@
 
     <string name="timetable_json">Timetable (JSON)</string>
 
+    <string name="combine_background">Combine widget background</string>
     <string name="modifiers">Modifiers</string>
     <string name="modifier_hour">Hour</string>
     <string name="modifier_minute">Minute</string>

@@ -92,10 +92,11 @@ class SettingsFragment : Fragment() {
     private fun readSettings(view: View) {
         view.findViewById<TextInputEditText>(R.id.input_timetable_json).setText(Storage.settings.getString(Storage.Timetable.JSON))
 
-        val modifierHour = Storage.settings.getInt(Storage.Widget.MODIFIER_HOUR, 1)
-        val modifierMinute = Storage.settings.getInt(Storage.Widget.MODIFIER_MINUTE, 1)
-        val modifierSecond = Storage.settings.getInt(Storage.Widget.MODIFIER_SECOND, 1)
+        val modifierHour = Storage.settings.getInt(Storage.Widgets.MODIFIER_HOUR, 1)
+        val modifierMinute = Storage.settings.getInt(Storage.Widgets.MODIFIER_MINUTE, 1)
+        val modifierSecond = Storage.settings.getInt(Storage.Widgets.MODIFIER_SECOND, 1)
 
+        view.findViewById<MaterialSwitch>(R.id.switch_combine_background).isChecked = Storage.settings.getBoolean(Storage.Widgets.COMBINE_BACKGROUND)
         view.findViewById<MaterialSwitch>(R.id.switch_modifiers).isChecked = !(modifierHour == 1 && modifierMinute == 1 && modifierSecond == 1)
 
         view.findViewById<TextInputEditText>(R.id.input_modifier_hour).setText(abs(modifierHour).toString())
@@ -112,24 +113,25 @@ class SettingsFragment : Fragment() {
         Storage.settings.setString(Storage.Timetable.JSON, timetableString)
         Storage.setTimetable(timetableString)
 
+        Storage.settings.setBoolean(Storage.Widgets.COMBINE_BACKGROUND, view.findViewById<MaterialSwitch>(R.id.switch_combine_background).isChecked)
         if (view.findViewById<MaterialSwitch>(R.id.switch_modifiers).isChecked) {
             val modifierHour = Converter.getIntFromInput(view.findViewById(R.id.input_modifier_hour), 1)
             val modifierMinute = Converter.getIntFromInput(view.findViewById(R.id.input_modifier_minute), 1)
             val modifierSecond = Converter.getIntFromInput(view.findViewById(R.id.input_modifier_second), 1)
 
             Storage.settings.setInt(
-                Storage.Widget.MODIFIER_HOUR, if (view.findViewById<Button>(R.id.button_modifier_hour_round).isEnabled) -modifierHour else modifierHour
+                Storage.Widgets.MODIFIER_HOUR, if (view.findViewById<Button>(R.id.button_modifier_hour_round).isEnabled) -modifierHour else modifierHour
             )
             Storage.settings.setInt(
-                Storage.Widget.MODIFIER_MINUTE, if (view.findViewById<Button>(R.id.button_modifier_minute_round).isEnabled) -modifierMinute else modifierMinute
+                Storage.Widgets.MODIFIER_MINUTE, if (view.findViewById<Button>(R.id.button_modifier_minute_round).isEnabled) -modifierMinute else modifierMinute
             )
             Storage.settings.setInt(
-                Storage.Widget.MODIFIER_SECOND, if (view.findViewById<Button>(R.id.button_modifier_second_round).isEnabled) -modifierSecond else modifierSecond
+                Storage.Widgets.MODIFIER_SECOND, if (view.findViewById<Button>(R.id.button_modifier_second_round).isEnabled) -modifierSecond else modifierSecond
             )
         } else {
-            Storage.settings.setInt(Storage.Widget.MODIFIER_HOUR, 1)
-            Storage.settings.setInt(Storage.Widget.MODIFIER_MINUTE, 1)
-            Storage.settings.setInt(Storage.Widget.MODIFIER_SECOND, 1)
+            Storage.settings.setInt(Storage.Widgets.MODIFIER_HOUR, 1)
+            Storage.settings.setInt(Storage.Widgets.MODIFIER_MINUTE, 1)
+            Storage.settings.setInt(Storage.Widgets.MODIFIER_SECOND, 1)
         }
 
         Storage.settings.save()

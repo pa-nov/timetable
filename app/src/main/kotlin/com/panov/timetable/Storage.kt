@@ -37,8 +37,9 @@ object Storage {
         const val JSON = "$CORE-json"
     }
 
-    object Widget {
-        private const val CORE = "widget"
+    object Widgets {
+        private const val CORE = "widgets"
+        const val COMBINE_BACKGROUND = "$CORE-combine_background"
         const val MODIFIER_HOUR = "$CORE-modifier_hour"
         const val MODIFIER_MINUTE = "$CORE-modifier_minute"
         const val MODIFIER_SECOND = "$CORE-modifier_second"

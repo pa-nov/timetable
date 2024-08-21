@@ -108,18 +108,10 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/accent</item>
         <item name="android:textSize">20sp</item>
-        <item name="switchPadding">16dp</item>
         <item name="thumbTint">@color/thumb_switch</item>
         <item name="trackTint">@color/track_switch</item>
         <item name="track">@drawable/square_track</item>
         <item name="theme">@style/Theme.MaterialSwitch</item>
-    </style>
-
-    <style name="MaterialSwitch.Header">
-        <item name="android:gravity">center</item>
-        <item name="android:paddingStart">80dp</item>
-        <item name="android:paddingEnd">0dp</item>
-        <item name="android:textSize">24sp</item>
     </style>
 
 </resources>

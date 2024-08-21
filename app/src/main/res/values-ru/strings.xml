@@ -7,7 +7,7 @@
     <string name="title_settings">Настройки</string>
     <string name="title_settings_application">Приложение</string>
     <string name="title_settings_timetable">Расписание</string>
-    <string name="title_settings_widget">Виджет</string>
+    <string name="title_settings_widgets">Виджеты</string>
     <string name="title_settings_about">О приложении</string>
 
     <string name="description_clock_open">Поверните устройство, чтобы открыть часы</string>
@@ -64,6 +64,7 @@
 
     <string name="timetable_json">Расписание (JSON)</string>
 
+    <string name="combine_background">Объединить фон виджета</string>
     <string name="modifiers">Модификаторы</string>
     <string name="modifier_hour">Час</string>
     <string name="modifier_minute">Минута</string>
