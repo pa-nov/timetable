@@ -46,6 +46,14 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="Button.Action">
+        <item name="android:layout_height">64dp</item>
+        <item name="android:background">@drawable/square_rounded</item>
+        <item name="android:layout_marginHorizontal">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginTop">-32dp</item>
+    </style>
+
     <style name="Button.GitHub">
         <item name="android:layout_height">48dp</item>
         <item name="android:paddingLeft">4dp</item>
@@ -55,14 +63,6 @@
         <item name="iconPadding">4dp</item>
         <item name="iconSize">40dp</item>
         <item name="iconTint">@color/background</item>
-    </style>
-
-    <style name="Button.Action">
-        <item name="android:layout_height">64dp</item>
-        <item name="android:background">@drawable/square_rounded</item>
-        <item name="android:layout_marginHorizontal">16dp</item>
-        <item name="android:layout_marginBottom">16dp</item>
-        <item name="android:layout_marginTop">-32dp</item>
     </style>
 
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -108,7 +108,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/square_rounded_small</item>
         <item name="android:backgroundTint">@color/item</item>
-        <item name="android:minHeight">0dp</item>
+        <item name="android:minHeight">64dp</item>
         <item name="android:padding">16dp</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:textColor">@color/accent</item>
