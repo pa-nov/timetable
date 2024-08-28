@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         val shadowStatusBar = findViewById<View>(R.id.shadow_status_bar)
         val navigationSystem = findViewById<View>(R.id.navigation_system)
+        val navigationSeparator = findViewById<View>(R.id.navigation_separator)
 
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView.rootView) { view, insets ->
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -48,10 +49,12 @@ class MainActivity : AppCompatActivity() {
             if (insets.isVisible(WindowInsetsCompat.Type.ime())) {
                 navigation.visibility = View.GONE
                 navigationSystem.visibility = View.GONE
+                navigationSeparator.visibility = if (keyboardInsets.bottom > 0) View.VISIBLE else View.GONE
                 view.setPadding(0, 0, 0, keyboardInsets.bottom)
             } else {
                 navigation.visibility = View.VISIBLE
                 navigationSystem.visibility = View.VISIBLE
+                navigationSeparator.visibility = View.VISIBLE
                 view.setPadding(0, 0, 0, 0)
             }
 

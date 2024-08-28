@@ -6,7 +6,7 @@ import androidx.core.os.LocaleListCompat
 import com.panov.util.SettingsData
 import java.util.Locale
 
-class TimetableApplication : Application() {
+class Application : Application() {
     override fun onCreate() {
         super.onCreate()
 

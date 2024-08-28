@@ -15,7 +15,9 @@
             android:id="@+id/view_main"
             style="@style/Layout.FillHeight" />
 
-        <FrameLayout style="@style/Separator" />
+        <FrameLayout
+            android:id="@+id/navigation_separator"
+            style="@style/Separator" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation_main"

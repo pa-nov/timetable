@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:name=".TimetableApplication"
+        android:name=".Application"
         android:icon="@mipmap/app_icon"
         android:label="@string/title_app"
         android:theme="@style/Theme.Timetable">
