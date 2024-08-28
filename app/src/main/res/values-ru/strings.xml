@@ -5,14 +5,15 @@
     <string name="title_clock">Часы</string>
     <string name="title_timetable">Расписание</string>
     <string name="title_settings">Настройки</string>
+    <string name="title_settings_clock">Часы</string>
     <string name="title_settings_application">Приложение</string>
     <string name="title_settings_timetable">Расписание</string>
     <string name="title_settings_widgets">Виджеты</string>
     <string name="title_settings_about">О приложении</string>
+    <string name="title_widget">Виджет</string>
 
     <string name="description_clock_open">Поверните устройство, чтобы открыть часы</string>
     <string name="description_clock_close">Поверните устройство, чтобы закрыть часы</string>
-    <string name="description_widget">Виджет</string>
 
     <string name="message_error">Ошибка</string>
     <string name="message_success">Успешно</string>
@@ -53,8 +54,8 @@
 
     <string name="theme">Тема</string>
     <string name="theme_system">Системная</string>
-    <string name="theme_dark">Тёмная</string>
     <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
     <string name="language">Язык</string>
     <string name="language_english">Английский</string>
     <string name="language_russian">Русский</string>

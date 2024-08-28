@@ -15,15 +15,15 @@
 
             <TextView
                 style="@style/Title"
-                android:text="@string/title_clock" />
+                android:text="@string/title_settings_clock" />
 
-            <LinearLayout style="@style/Layout.Vertical">
+            <LinearLayout style="@style/Layout.Vertical.Rounded">
 
                 <TextView
                     style="@style/Title.Setting"
                     android:text="@string/clock_mode" />
 
-                <LinearLayout style="@style/Layout.Horizontal.Rounded">
+                <LinearLayout style="@style/Layout.Horizontal">
 
                     <Button
                         android:id="@+id/button_clock_mode_clock"
