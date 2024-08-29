@@ -1,5 +1,6 @@
 package com.panov.timetable
 
+import android.content.Context
 import android.content.res.Configuration
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
 import com.panov.util.Converter
 import com.panov.util.UiUtils
+import java.util.Locale
 import kotlin.math.abs
 
 class ClockActivity : AppCompatActivity() {
@@ -24,6 +26,18 @@ class ClockActivity : AppCompatActivity() {
     private val displayCurrentLesson = Storage.settings.getBoolean(Storage.Clock.DISPLAY_CURRENT_LESSON)
     private val displayNextLesson = Storage.settings.getBoolean(Storage.Clock.DISPLAY_NEXT_LESSON)
     private val notDisplayNextTime = Storage.settings.getBoolean(Storage.Clock.NOT_DISPLAY_NEXT_TIME)
+
+    override fun attachBaseContext(context: Context) {
+        val language = Storage.settings.getString(Storage.Application.LANGUAGE, Locale.getDefault().language)
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+
+        val config = Configuration(context.resources.configuration)
+        config.setLocale(locale)
+        config.setLayoutDirection(locale)
+
+        super.attachBaseContext(context.createConfigurationContext(config))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()

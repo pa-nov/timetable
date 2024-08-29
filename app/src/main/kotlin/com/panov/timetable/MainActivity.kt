@@ -1,5 +1,6 @@
 package com.panov.timetable
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -16,6 +17,7 @@ import com.panov.timetable.fragment.ClockFragment
 import com.panov.timetable.fragment.SettingsFragment
 import com.panov.timetable.fragment.TimetableFragment
 import com.panov.util.Converter
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -23,6 +25,18 @@ class MainActivity : AppCompatActivity() {
         private var clockFragment = ClockFragment()
         private var timetableFragment = TimetableFragment()
         private var settingsFragment = SettingsFragment()
+    }
+
+    override fun attachBaseContext(context: Context) {
+        val language = Storage.settings.getString(Storage.Application.LANGUAGE, Locale.getDefault().language)
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+
+        val config = Configuration(context.resources.configuration)
+        config.setLocale(locale)
+        config.setLayoutDirection(locale)
+
+        super.attachBaseContext(context.createConfigurationContext(config))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_timetable -> timetableFragment
                 else -> settingsFragment
             }
-        ).commit()
+        ).commitNow()
         return true
     }
 

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.textfield.TextInputEditText
@@ -64,8 +63,8 @@ class SettingsFragment : Fragment() {
 
     private fun setTheme(view: View, theme: Int, onlyRead: Boolean = false) {
         if (!onlyRead) {
-            AppCompatDelegate.setDefaultNightMode(theme)
             Storage.settings.saveInt(Storage.Application.THEME, theme)
+            AppCompatDelegate.setDefaultNightMode(theme)
         }
         view.findViewById<Button>(R.id.button_theme_system).isEnabled = theme != AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         view.findViewById<Button>(R.id.button_theme_light).isEnabled = theme != AppCompatDelegate.MODE_NIGHT_NO
@@ -74,8 +73,8 @@ class SettingsFragment : Fragment() {
 
     private fun setLanguage(view: View, language: String, onlyRead: Boolean = false) {
         if (!onlyRead) {
-            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(language))
             Storage.settings.saveString(Storage.Application.LANGUAGE, language)
+            requireActivity().recreate()
         }
         view.findViewById<Button>(R.id.button_language_english).isEnabled = language != "en"
         view.findViewById<Button>(R.id.button_language_russian).isEnabled = language != "ru"
