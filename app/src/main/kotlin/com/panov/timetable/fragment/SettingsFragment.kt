@@ -15,6 +15,7 @@ import com.panov.timetable.R
 import com.panov.timetable.Storage
 import com.panov.util.Converter
 import com.panov.util.UiUtils
+import com.panov.util.WebUtils
 import java.util.Locale
 import kotlin.math.abs
 
@@ -45,10 +46,10 @@ class SettingsFragment : Fragment() {
 
 
         fragment.findViewById<Button>(R.id.button_source_code).setOnClickListener {
-            UiUtils.openURL(requireContext(), "https://github.com/pa-nov/Timetable")
+            WebUtils.openURL(requireContext(), "https://github.com/pa-nov/Timetable")
         }
         fragment.findViewById<Button>(R.id.button_timetable_editor).setOnClickListener {
-            UiUtils.openURL(requireContext(), "https://github.com/pa-nov/TimetableEditor")
+            WebUtils.openURL(requireContext(), "https://github.com/pa-nov/TimetableEditor")
         }
         fragment.findViewById<TextView>(R.id.text_app_version).text = getString(
             R.string.app_version, requireContext().packageManager.getPackageInfo(requireContext().packageName, PackageManager.GET_ACTIVITIES).versionName

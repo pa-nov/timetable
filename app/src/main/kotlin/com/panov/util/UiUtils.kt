@@ -1,8 +1,6 @@
 package com.panov.util
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.view.View
 import android.view.View.MeasureSpec
 import android.view.ViewGroup.MarginLayoutParams
@@ -12,10 +10,6 @@ import android.widget.Toast
 import kotlin.math.abs
 
 object UiUtils {
-    fun openURL(context: Context, url: String) {
-        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-    }
-
     fun showToast(context: Context, resId: Int) {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
     }
