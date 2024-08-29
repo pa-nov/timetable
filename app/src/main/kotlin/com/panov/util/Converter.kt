@@ -34,7 +34,7 @@ object Converter {
 
     fun getTimeText(seconds: Int): String {
         val hour = seconds / 3600
-        val minute = (seconds - hour * 3600) / 60
+        val minute = seconds / 60 % 60
         val second = seconds % 60
         return "${getTwoDigitNumber(hour)}:${getTwoDigitNumber(minute)}:${getTwoDigitNumber(second)}"
     }
