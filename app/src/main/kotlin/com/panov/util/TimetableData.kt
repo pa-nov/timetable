@@ -78,7 +78,7 @@ class TimetableData(jsonString: String) {
     }
 
     fun getClassroomText(lessonId: Int): String {
-        return lessons[lessonId].getClassroomText()
+        return "(${lessons[lessonId].getClassroom()})"
     }
 
     fun getTeacherFullName(lessonId: Int): String {
@@ -111,18 +111,18 @@ class TimetableData(jsonString: String) {
         private val endHour: Int = jsonArray.getString(2).toIntOrNull() ?: 0
         private val endMinute: Int = jsonArray.getString(3).toIntOrNull() ?: 0
 
+        override fun toString(): String {
+            val start = "${Converter.getTwoDigitNumber(startHour)}:${Converter.getTwoDigitNumber(startMinute)}"
+            val end = "${Converter.getTwoDigitNumber(endHour)}:${Converter.getTwoDigitNumber(endMinute)}"
+            return "$start $end"
+        }
+
         fun getStartSeconds(): Int {
             return ((startHour * 60) + startMinute) * 60
         }
 
         fun getEndSeconds(): Int {
             return ((endHour * 60) + endMinute) * 60
-        }
-
-        override fun toString(): String {
-            val start = "${Converter.getTwoDigitNumber(startHour)}:${Converter.getTwoDigitNumber(startMinute)}"
-            val end = "${Converter.getTwoDigitNumber(endHour)}:${Converter.getTwoDigitNumber(endMinute)}"
-            return "$start $end"
         }
     }
 
@@ -167,10 +167,6 @@ class TimetableData(jsonString: String) {
             return classroom
         }
 
-        fun getClassroomText(): String {
-            return "($classroom)"
-        }
-
         fun getTeacherFullName(): String {
             var teacherName = "$teacherLastName "
             if (teacherFirstName.isNotEmpty()) {
@@ -203,15 +199,15 @@ class TimetableData(jsonString: String) {
 
 
     class Offset(timetable: TimetableData, calendar: Calendar) {
-        val currentLessonIndex: Int
-        val currentDay: Int
-        val currentWeek: String
         val currentDaysOffset: Int
+        val currentWeek: String
+        val currentDay: Int
+        val currentLessonIndex: Int
 
-        val nextLessonIndex: Int
-        val nextDay: Int
-        val nextWeek: String
         val nextDaysOffset: Int
+        val nextWeek: String
+        val nextDay: Int
+        val nextLessonIndex: Int
 
         init {
             val day = if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
@@ -219,10 +215,10 @@ class TimetableData(jsonString: String) {
             val seconds = calendar.get(Calendar.MILLISECONDS_IN_DAY) / 1000
             val lessonsCount = timetable.getLessonsCount()
 
-            var tempLessonIndex = -1
-            var tempDay = day
-            var tempWeek = week
             var tempDaysOffset = 0
+            var tempWeek = week
+            var tempDay = day
+            var tempLessonIndex = -1
 
             for (index in 0 until lessonsCount) {
                 if (timetable.getLessonTimeStart(index) > seconds) break
@@ -249,10 +245,10 @@ class TimetableData(jsonString: String) {
                 tempOffset--
             }
 
-            currentLessonIndex = tempLessonIndex
-            currentDay = tempDay
-            currentWeek = tempWeek
             currentDaysOffset = tempDaysOffset
+            currentWeek = tempWeek
+            currentDay = tempDay
+            currentLessonIndex = tempLessonIndex
         }
 
         init {
@@ -261,10 +257,10 @@ class TimetableData(jsonString: String) {
             val seconds = calendar.get(Calendar.MILLISECONDS_IN_DAY) / 1000
             val lessonsCount = timetable.getLessonsCount()
 
-            var tempLessonIndex = 0
-            var tempDay = day
-            var tempWeek = week
             var tempDaysOffset = 0
+            var tempWeek = week
+            var tempDay = day
+            var tempLessonIndex = 0
 
             for (index in 0 until lessonsCount) {
                 if (timetable.getLessonTimeStart(index) > seconds) break
@@ -291,10 +287,10 @@ class TimetableData(jsonString: String) {
                 tempOffset--
             }
 
-            nextLessonIndex = tempLessonIndex
-            nextDay = tempDay
-            nextWeek = tempWeek
             nextDaysOffset = tempDaysOffset
+            nextWeek = tempWeek
+            nextDay = tempDay
+            nextLessonIndex = tempLessonIndex
         }
     }
 }
