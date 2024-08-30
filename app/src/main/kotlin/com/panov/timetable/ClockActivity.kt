@@ -111,6 +111,8 @@ class ClockActivity : AppCompatActivity() {
             override fun run() {
                 if (isDestroyed) return
                 val calendar = Calendar.getInstance()
+                calendar.firstDayOfWeek = Calendar.MONDAY
+                calendar.minimalDaysInFirstWeek = 4
                 handler.postDelayed(this, (1000 - calendar.get(Calendar.MILLISECOND)).toLong())
                 val seconds = calendar.get(Calendar.MILLISECONDS_IN_DAY) / 1000
                 val offset = timetable.getOffset(calendar)
