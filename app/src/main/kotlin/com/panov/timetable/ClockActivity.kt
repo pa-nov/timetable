@@ -48,7 +48,7 @@ class ClockActivity : AppCompatActivity() {
         window.insetsController?.hide(WindowInsetsCompat.Type.systemBars())
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                UiUtils.showToast(applicationContext, R.string.description_clock_close)
+                UiUtils.showToast(baseContext, R.string.description_clock_close)
             }
         })
 

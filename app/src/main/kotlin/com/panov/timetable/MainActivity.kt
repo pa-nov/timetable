@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
             if (insets.isVisible(WindowInsetsCompat.Type.ime())) {
                 navigation.visibility = View.GONE
-                navigationSystem.visibility = View.GONE
+                navigationSystem.visibility = if (keyboardInsets.bottom > 0) View.GONE else View.VISIBLE
                 navigationSeparator.visibility = if (keyboardInsets.bottom > 0) View.VISIBLE else View.GONE
                 view.setPadding(0, 0, 0, keyboardInsets.bottom)
             } else {
