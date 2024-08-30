@@ -1,5 +1,6 @@
 package com.panov.timetable.widget
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Outline
 import android.icu.util.Calendar
@@ -21,7 +22,7 @@ import com.panov.util.TimetableData
 
 class Timetable {
     companion object {
-        private fun fillLessonView(view: LinearLayout, timetable: TimetableData, lessonIndex: Int, day: Int, week: String, isNow: Boolean = false) {
+        private fun fillLessonView(view: LinearLayout, timetable: TimetableData, week: String, day: Int, lessonIndex: Int, isNow: Boolean = false) {
             val lessonId = timetable.getLessonId(week, day, lessonIndex)
             val lessonNumber = Storage.settings.getInt(Storage.Application.INITIAL_INDEX, 1) + lessonIndex
             val otherLessonId = timetable.getLessonId(if (week == "odd") "even" else "odd", day, lessonIndex)
@@ -51,7 +52,7 @@ class Timetable {
             }
         }
 
-        private fun showInfoPopup(parent: View, item: View, timetable: TimetableData, lessonIndex: Int, day: Int, week: String) {
+        private fun showLessonInfoPopup(item: View, timetable: TimetableData, week: String, day: Int, lessonIndex: Int) {
             val view = LayoutInflater.from(item.context).inflate(R.layout.popup_lesson_info, null, false)
             view.clipToOutline = true
             view.outlineProvider = object : ViewOutlineProvider() {
@@ -111,16 +112,16 @@ class Timetable {
                     if (lessonEvenId in lessonIds) {
                         if (tempLayoutEven == null) tempLayoutEven = createDayLayout(item.context, tempDay)
                         val tempItem = LayoutInflater.from(item.context).inflate(R.layout.item_lesson, null, false) as LinearLayout
-                        val isNow = tempIndex == lessonIndex && tempDay == day && "even" == week
-                        fillLessonView(tempItem, timetable, tempIndex, tempDay, "even", isNow)
+                        val isNow = "even" == week && tempDay == day && tempIndex == lessonIndex
+                        fillLessonView(tempItem, timetable, "even", tempDay, tempIndex, isNow)
                         tempLayoutEven.addView(tempItem)
                     }
 
                     if (lessonOddId in lessonIds) {
                         if (tempLayoutOdd == null) tempLayoutOdd = createDayLayout(item.context, tempDay)
                         val tempItem = LayoutInflater.from(item.context).inflate(R.layout.item_lesson, null, false) as LinearLayout
-                        val isNow = tempIndex == lessonIndex && tempDay == day && "odd" == week
-                        fillLessonView(tempItem, timetable, tempIndex, tempDay, "odd", isNow)
+                        val isNow = "odd" == week && tempDay == day && tempIndex == lessonIndex
+                        fillLessonView(tempItem, timetable, "odd", tempDay, tempIndex, isNow)
                         tempLayoutOdd.addView(tempItem)
                     }
 
@@ -140,11 +141,9 @@ class Timetable {
             if (layoutOdd.childCount < 2) layoutOdd.visibility = View.GONE
 
 
-            val fragmentHeight = parent.height
-            val itemLocationArray = IntArray(2)
-            item.getLocationOnScreen(itemLocationArray)
-            view.measure(MeasureSpec.makeMeasureSpec(item.width, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(fragmentHeight / 2, MeasureSpec.AT_MOST))
-            val direction = if (itemLocationArray[1] + view.measuredHeight > fragmentHeight + Converter.getPxFromDp(item.context, 65)) 1 else -1
+            val containerHeight = getVerticalLocation((item.context as Activity).findViewById(R.id.navigation_system))
+            view.measure(MeasureSpec.makeMeasureSpec(item.width, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(containerHeight / 2, MeasureSpec.AT_MOST))
+            val direction = if (getVerticalLocation(item) + view.measuredHeight < containerHeight) -1 else 1
             PopupWindow(view, view.measuredWidth, view.measuredHeight, true).showAsDropDown(item, 0, item.height * direction)
         }
 
@@ -156,6 +155,12 @@ class Timetable {
             title.textSize = 20f
 
             return layout
+        }
+
+        private fun getVerticalLocation(view: View): Int {
+            val location = IntArray(2)
+            view.getLocationInWindow(location)
+            return location[1]
         }
     }
 
@@ -198,10 +203,10 @@ class Timetable {
                     val item = view.getChildAt(index) as LinearLayout
                     val lessonIndex = index - 1
 
-                    fillLessonView(item, timetable, lessonIndex, day, week)
+                    fillLessonView(item, timetable, week, day, lessonIndex)
 
                     if (timetable.getLessonId(week, day, lessonIndex) > 0) {
-                        item.setOnClickListener { showInfoPopup(fragment.requireView(), item, timetable, lessonIndex, day, week) }
+                        item.setOnClickListener { showLessonInfoPopup(item, timetable, week, day, lessonIndex) }
                     } else {
                         item.setOnClickListener(null)
                     }
