@@ -29,11 +29,11 @@ object Storage {
         private const val CORE = "application"
         const val THEME = "$CORE-theme"
         const val LANGUAGE = "$CORE-language"
-        const val INITIAL_INDEX = "$CORE-initial_index"
     }
 
     object Timetable {
         private const val CORE = "timetable"
+        const val INITIAL_INDEX = "$CORE-initial_index"
         const val JSON = "$CORE-json"
     }
 

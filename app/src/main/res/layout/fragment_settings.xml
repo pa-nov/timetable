@@ -66,6 +66,13 @@
 
             </LinearLayout>
 
+            <FrameLayout style="@style/Separator" />
+
+
+            <TextView
+                style="@style/Title"
+                android:text="@string/title_settings_timetable" />
+
             <LinearLayout style="@style/Layout.Vertical.Rounded">
 
                 <TextView
@@ -87,13 +94,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-            <FrameLayout style="@style/Separator" />
-
-
-            <TextView
-                style="@style/Title"
-                android:text="@string/title_settings_timetable" />
 
             <com.google.android.material.textfield.TextInputLayout style="@style/TextInputLayout">
 

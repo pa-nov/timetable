@@ -24,7 +24,7 @@ class Timetable {
     companion object {
         private fun fillLessonView(view: LinearLayout, timetable: TimetableData, week: String, day: Int, lessonIndex: Int, isNow: Boolean = false) {
             val lessonId = timetable.getLessonId(week, day, lessonIndex)
-            val lessonNumber = Storage.settings.getInt(Storage.Application.INITIAL_INDEX, 1) + lessonIndex
+            val lessonNumber = Storage.settings.getInt(Storage.Timetable.INITIAL_INDEX, 1) + lessonIndex
             val otherLessonId = timetable.getLessonId(if (week == "odd") "even" else "odd", day, lessonIndex)
             val otherLessonDiffers = !(otherLessonId == lessonId || otherLessonId in timetable.getLessonOtherIds(lessonId))
 

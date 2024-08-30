@@ -32,9 +32,8 @@ class SettingsFragment : Fragment() {
         fragment.findViewById<Button>(R.id.button_language_russian).setOnClickListener { setLanguage(fragment, "ru") }
         setLanguage(fragment, Storage.settings.getString(Storage.Application.LANGUAGE, Locale.getDefault().language), true)
 
-        fragment.findViewById<Button>(R.id.button_initial_index_zero).setOnClickListener { setInitialIndex(fragment, 0) }
-        fragment.findViewById<Button>(R.id.button_initial_index_one).setOnClickListener { setInitialIndex(fragment, 1) }
-        setInitialIndex(fragment, Storage.settings.getInt(Storage.Application.INITIAL_INDEX, 1), true)
+
+        UiUtils.setupButtonGroup(arrayOf(fragment.findViewById(R.id.button_initial_index_zero), fragment.findViewById(R.id.button_initial_index_one)))
 
 
         fragment.findViewById<MaterialSwitch>(R.id.switch_modifiers).setOnCheckedChangeListener { _, isChecked ->
@@ -81,15 +80,9 @@ class SettingsFragment : Fragment() {
         view.findViewById<Button>(R.id.button_language_russian).isEnabled = language != "ru"
     }
 
-    private fun setInitialIndex(view: View, index: Int, onlyRead: Boolean = false) {
-        if (!onlyRead) {
-            Storage.settings.saveInt(Storage.Application.INITIAL_INDEX, index)
-        }
-        view.findViewById<Button>(R.id.button_initial_index_zero).isEnabled = index != 0
-        view.findViewById<Button>(R.id.button_initial_index_one).isEnabled = index != 1
-    }
-
     private fun readSettings(view: View) {
+        val initialIndex = Storage.settings.getInt(Storage.Timetable.INITIAL_INDEX, 1)
+        view.findViewById<Button>(if (initialIndex > 0) R.id.button_initial_index_one else R.id.button_initial_index_zero).performClick()
         view.findViewById<TextInputEditText>(R.id.input_timetable_json).setText(Storage.settings.getString(Storage.Timetable.JSON))
 
         val modifierHour = Storage.settings.getInt(Storage.Widgets.MODIFIER_HOUR, 1)
@@ -109,9 +102,11 @@ class SettingsFragment : Fragment() {
     }
 
     private fun saveSettings(view: View) {
-        val timetableString = view.findViewById<TextInputEditText>(R.id.input_timetable_json).text.toString()
-        Storage.settings.setString(Storage.Timetable.JSON, timetableString)
-        Storage.setTimetable(timetableString)
+        val initialIndex = if (view.findViewById<Button>(R.id.button_initial_index_one).isEnabled) 0 else 1
+        Storage.settings.setInt(Storage.Timetable.INITIAL_INDEX, initialIndex)
+        val timetableJson = view.findViewById<TextInputEditText>(R.id.input_timetable_json).text.toString()
+        Storage.settings.setString(Storage.Timetable.JSON, timetableJson)
+        Storage.setTimetable(timetableJson)
 
         Storage.settings.setBoolean(Storage.Widgets.COMBINE_BACKGROUND, view.findViewById<MaterialSwitch>(R.id.switch_combine_background).isChecked)
         if (view.findViewById<MaterialSwitch>(R.id.switch_modifiers).isChecked) {
