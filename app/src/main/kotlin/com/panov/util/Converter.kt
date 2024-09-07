@@ -3,6 +3,7 @@ package com.panov.util
 import android.content.Context
 import android.icu.util.Calendar
 import com.google.android.material.textfield.TextInputEditText
+import com.panov.timetable.R
 
 object Converter {
     fun getTwoDigitNumber(number: Int): String {
@@ -37,6 +38,33 @@ object Converter {
         val minute = seconds / 60 % 60
         val second = seconds % 60
         return "${getTwoDigitNumber(hour)}:${getTwoDigitNumber(minute)}:${getTwoDigitNumber(second)}"
+    }
+
+    fun getTimeText(seconds: Int, context: Context): String {
+        val hour = seconds / 3600
+        val minute = seconds / 60 % 60
+        val second = seconds % 60
+
+        val hourText = getNumberText(
+            hour,
+            context.getString(R.string.timer_hour_single),
+            context.getString(R.string.timer_hour_small),
+            context.getString(R.string.timer_hour_large)
+        )
+        val minuteText = getNumberText(
+            minute,
+            context.getString(R.string.timer_minute_single),
+            context.getString(R.string.timer_minute_small),
+            context.getString(R.string.timer_minute_large)
+        )
+        val secondText = getNumberText(
+            second,
+            context.getString(R.string.timer_second_single),
+            context.getString(R.string.timer_second_small),
+            context.getString(R.string.timer_second_large)
+        )
+
+        return "${if (hour > 0) "$hour $hourText  " else ""}$minute $minuteText  $second $secondText"
     }
 
     fun getPxFromDp(context: Context, dp: Int): Int {

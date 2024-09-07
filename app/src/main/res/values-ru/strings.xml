@@ -38,6 +38,15 @@
     <string name="timer_ended">Закончилось</string>
     <string name="timer_ends_in">Закончится через</string>
     <string name="timer_starts_in">Начнётся через</string>
+    <string name="timer_hour_single">час</string>
+    <string name="timer_hour_small">часа</string>
+    <string name="timer_hour_large">часов</string>
+    <string name="timer_minute_single">минуту</string>
+    <string name="timer_minute_small">минуты</string>
+    <string name="timer_minute_large">минут</string>
+    <string name="timer_second_single">секунду</string>
+    <string name="timer_second_small">секунды</string>
+    <string name="timer_second_large">секунд</string>
 
     <string name="day_yesterday">Вчера</string>
     <string name="day_today">Сегодня</string>

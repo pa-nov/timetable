@@ -38,6 +38,15 @@
     <string name="timer_ended">Ended</string>
     <string name="timer_ends_in">Ends in</string>
     <string name="timer_starts_in">Starts in</string>
+    <string name="timer_hour_single">hours</string>
+    <string name="timer_hour_small">hours</string>
+    <string name="timer_hour_large">hours</string>
+    <string name="timer_minute_single">minutes</string>
+    <string name="timer_minute_small">minutes</string>
+    <string name="timer_minute_large">minutes</string>
+    <string name="timer_second_single">seconds</string>
+    <string name="timer_second_small">seconds</string>
+    <string name="timer_second_large">seconds</string>
 
     <string name="day_yesterday">Yesterday</string>
     <string name="day_today">Today</string>
