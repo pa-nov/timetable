@@ -156,15 +156,15 @@ class TimetableData(jsonString: String) {
         }
 
         fun getFullTitle(): String {
-            return titleFull
+            return titleFull.ifEmpty { "-" }
         }
 
         fun getShortTitle(): String {
-            return titleShort
+            return titleShort.ifEmpty { "-" }
         }
 
         fun getClassroom(): String {
-            return classroom
+            return classroom.ifEmpty { "-" }
         }
 
         fun getTeacherFullName(): String {
