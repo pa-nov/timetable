@@ -16,7 +16,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.panov.util.Converter
 import com.panov.util.UiUtils
 import java.util.Locale
-import kotlin.math.abs
 
 class ClockActivity : AppCompatActivity() {
     private val timetable = Storage.timetable
@@ -129,7 +128,7 @@ class ClockActivity : AppCompatActivity() {
                         if (notDisplayNextTime) {
                             titleTime.text = getString(R.string.timer_ended)
                             textAgo.visibility = View.VISIBLE
-                            Converter.getTimeText(abs(offset.currentDaysOffset * daySeconds + currentLessonEnd - seconds))
+                            Converter.getTimeText(-(offset.currentDaysOffset * daySeconds + currentLessonEnd - seconds))
                         } else {
                             titleTime.text = getString(R.string.timer_starts_in)
                             textAgo.visibility = View.GONE
