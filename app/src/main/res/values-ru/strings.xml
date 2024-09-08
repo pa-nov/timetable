@@ -10,7 +10,7 @@
     <string name="title_settings_timetable">Расписание</string>
     <string name="title_settings_widgets">Виджеты</string>
     <string name="title_settings_about">О приложении</string>
-    <string name="title_widget">Виджет</string>
+    <string name="title_widget_lesson">Предмет</string>
 
     <string name="description_clock_open">Поверните устройство, чтобы открыть часы</string>
     <string name="description_clock_close">Поверните устройство, чтобы закрыть часы</string>

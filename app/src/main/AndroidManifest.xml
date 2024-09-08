@@ -20,15 +20,15 @@
         <activity android:name=".ClockActivity" />
 
         <receiver
-            android:name=".appwidget.AppWidget"
+            android:name=".appwidget.LessonWidgetProvider"
             android:exported="false"
-            android:label="@string/title_widget">
+            android:label="@string/title_widget_lesson">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_app_info" />
+                android:resource="@xml/widget_lesson_info" />
         </receiver>
 
     </application>
