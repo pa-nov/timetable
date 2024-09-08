@@ -17,7 +17,6 @@ import com.panov.timetable.fragment.ClockFragment
 import com.panov.timetable.fragment.SettingsFragment
 import com.panov.timetable.fragment.TimetableFragment
 import com.panov.util.Converter
-import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -28,15 +27,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun attachBaseContext(context: Context) {
-        val language = Storage.settings.getString(Storage.Application.LANGUAGE, Locale.getDefault().language)
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-
-        val config = Configuration(context.resources.configuration)
-        config.setLocale(locale)
-        config.setLayoutDirection(locale)
-
-        super.attachBaseContext(context.createConfigurationContext(config))
+        super.attachBaseContext(AppUtils.getLocalizedContext(context, Storage.settings))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

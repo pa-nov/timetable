@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
 import com.panov.util.Converter
 import com.panov.util.UiUtils
-import java.util.Locale
 
 class ClockActivity : AppCompatActivity() {
     private val timetable = Storage.timetable
@@ -28,15 +27,7 @@ class ClockActivity : AppCompatActivity() {
     private val notDisplayNextTime = Storage.settings.getBoolean(Storage.Clock.NOT_DISPLAY_NEXT_TIME)
 
     override fun attachBaseContext(context: Context) {
-        val language = Storage.settings.getString(Storage.Application.LANGUAGE, Locale.getDefault().language)
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-
-        val config = Configuration(context.resources.configuration)
-        config.setLocale(locale)
-        config.setLayoutDirection(locale)
-
-        super.attachBaseContext(context.createConfigurationContext(config))
+        super.attachBaseContext(AppUtils.getLocalizedContext(context, Storage.settings))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
