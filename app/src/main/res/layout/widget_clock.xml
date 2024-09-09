@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null"
+    android:backgroundTint="@color/item">
+
+    <LinearLayout
+        style="@style/Layout.Horizontal.Rounded"
+        android:layout_alignParentTop="true"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/title_weekday"
+            style="@style/RemoteText.WeekDay"
+            android:text="@string/message_error" />
+
+        <LinearLayout
+            style="@style/Layout.Vertical"
+            android:layout_width="wrap_content">
+
+            <TextView
+                android:id="@+id/text_date"
+                style="@style/RemoteText.DateTime"
+                android:text="@string/message_error" />
+
+            <TextView
+                android:id="@+id/text_time"
+                style="@style/RemoteText.DateTime"
+                android:text="@string/message_error" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/Layout.Vertical.Rounded"
+        android:layout_alignParentBottom="true"
+        android:padding="12dp">
+
+        <LinearLayout style="@style/Layout.Horizontal">
+
+            <TextView
+                android:id="@+id/title_current_lesson"
+                style="@style/RemoteText.Title"
+                android:text="@string/timer_now" />
+
+            <TextView
+                android:id="@+id/text_current_lesson"
+                style="@style/RemoteText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="4dp"
+                android:text="@string/message_error" />
+
+            <TextView
+                android:id="@+id/text_current_classroom"
+                style="@style/RemoteText"
+                android:ellipsize="middle"
+                android:text="@string/message_error" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title_current_time"
+            style="@style/RemoteText.Title"
+            android:text="@string/timer_ends_in"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/text_current_time"
+            style="@style/RemoteText"
+            android:layout_marginBottom="6dp"
+            android:text="@string/message_error" />
+
+
+        <LinearLayout style="@style/Layout.Horizontal">
+
+            <TextView
+                android:id="@+id/title_next_lesson"
+                style="@style/RemoteText.Title"
+                android:text="@string/timer_then" />
+
+            <TextView
+                android:id="@+id/text_next_lesson"
+                style="@style/RemoteText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="4dp"
+                android:text="@string/message_error" />
+
+            <TextView
+                android:id="@+id/text_next_classroom"
+                style="@style/RemoteText"
+                android:ellipsize="middle"
+                android:text="@string/message_error" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title_next_time"
+            style="@style/RemoteText.Title"
+            android:text="@string/timer_starts_in"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/text_next_time"
+            style="@style/RemoteText"
+            android:text="@string/message_error" />
+
+    </LinearLayout>
+
+</RelativeLayout>
