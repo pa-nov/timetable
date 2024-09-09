@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/square_rounded_small"
-    android:backgroundTint="@color/line">
+    android:backgroundTint="@color/item">
 
     <LinearLayout
         style="@style/Layout.Horizontal"
         android:layout_alignParentTop="true"
-        android:padding="8dp">
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/title_weekday"
@@ -38,12 +38,11 @@
     <LinearLayout
         style="@style/Layout.Horizontal"
         android:layout_alignParentBottom="true"
-        android:padding="8dp">
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/title_current_lesson"
             style="@style/RemoteText.Title"
-            android:layout_marginEnd="4dp"
             android:text="@string/timer_now" />
 
         <TextView
@@ -51,6 +50,7 @@
             style="@style/RemoteText"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:paddingHorizontal="4dp"
             android:text="@string/message_error" />
 
         <TextView
