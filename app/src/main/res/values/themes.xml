@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Timetable" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:statusBarColor">@color/background</item>
-    </style>
-
-    <color name="item">#D0D0D0</color>
-    <color name="line">#C0C0C0</color>
-    <color name="background">#E0E0E0</color>
+    <color name="background">@color/white</color>
+    <color name="item">#F0F0F0</color>
+    <color name="line">#E0E0E0</color>
+    <color name="shadow">#D0D0D0</color>
     <color name="title">#808080</color>
     <color name="text">@color/black</color>
-    <color name="button">@color/blue</color>
+    <color name="accent">@color/blue</color>
 
-    <color name="widget_background">#F3F3F3</color>
-
-    <style name="Theme.DatePicker" parent="ThemeOverlay.MaterialComponents.Dialog">
-        <item name="android:windowBackground">@drawable/rounded</item>
-        <item name="android:backgroundTint">@color/background</item>
-        <item name="android:colorControlActivated">@color/button</item>
-        <item name="android:colorControlHighlight">@color/item</item>
-        <item name="android:textColorPrimary">@color/text</item>
-        <item name="android:textColorPrimaryInverse">@color/text</item>
-        <item name="android:textColorSecondary">@color/title</item>
-        <item name="android:textColorSecondaryInverse">@color/title</item>
-        <item name="colorPrimary">@color/button</item>
+    <style name="Theme.Timetable" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/background</item>
     </style>
 
-    <style name="Theme.CheckBox" parent="Theme.Timetable">
+    <style name="Theme.TextInputEditText.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:colorControlActivated">@color/green</item>
+    </style>
+
+    <style name="Theme.TextInputEditText.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:colorControlActivated">@color/green</item>
+    </style>
+
+    <style name="Theme.MaterialSwitch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
         <item name="android:colorControlActivated">@color/empty</item>
         <item name="android:colorControlHighlight">@color/empty</item>
     </style>
 
-    <style name="Theme.TextInputEdit" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="android:colorControlActivated">@color/green</item>
+    <style name="Theme.DatePickerDialog" parent="ThemeOverlay.Material3.Dialog">
+        <item name="android:windowBackground">@drawable/square_rounded_small</item>
+        <item name="android:backgroundTint">@color/line</item>
+        <item name="android:colorControlActivated">@color/accent</item>
+        <item name="android:colorControlHighlight">@color/shadow</item>
+        <item name="android:textColorPrimary">@color/text</item>
+        <item name="android:textColorPrimaryInverse">@color/text</item>
+        <item name="android:textColorSecondary">@color/title</item>
+        <item name="android:textColorSecondaryInverse">@color/title</item>
+        <item name="colorPrimary">@color/accent</item>
     </style>
 
 </resources>

@@ -1,58 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="clock">Часы</string>
-    <string name="timetable">Расписание</string>
-    <string name="settings">Настройки</string>
-    <string name="apply">Применить</string>
-    <string name="applied">Применено</string>
-    <string name="error">Ошибка</string>
 
-    <string name="clock_hint">Поверните устройство, чтобы открыть часы</string>
-    <string name="show_date">Отображать дату и время</string>
-    <string name="show_title">Отображать заголовки</string>
-    <string name="show_other">Отображать прочую информацию</string>
-    <string name="theme">Тема:</string>
-    <string name="theme_system">Системная</string>
-    <string name="theme_dark">Тёмная</string>
-    <string name="theme_light">Светлая</string>
-    <string name="modifier_hour">Модификатор (Часы):</string>
-    <string name="modifier_minute">Модификатор (Минуты):</string>
-    <string name="modifier_second">Модификатор (Секунды):</string>
-    <string name="initial_index">Номер первого предмета:</string>
-    <string name="json">Расписание (JSON):</string>
+    <string name="title_app">Расписание</string>
+    <string name="title_clock">Часы</string>
+    <string name="title_timetable">Расписание</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_settings_clock">Часы</string>
+    <string name="title_settings_application">Приложение</string>
+    <string name="title_settings_timetable">Расписание</string>
+    <string name="title_settings_widgets">Виджеты</string>
+    <string name="title_settings_about">О приложении</string>
+    <string name="title_widget_lesson">Предмет</string>
+    <string name="title_widget_clock">Часы</string>
 
-    <string name="info_name">Название:</string>
-    <string name="info_teacher">Преподаватель:</string>
-    <string name="info_teachers">Преподаватели:</string>
-    <string name="info_room">Кабинет:</string>
-    <string name="info_rooms">Кабинеты:</string>
-    <string name="info_week_every">Каждую неделю</string>
-    <string name="info_week_even">Чётная неделя</string>
-    <string name="info_week_odd">Нечётная неделя</string>
+    <string name="description_clock_open">Поверните устройство, чтобы открыть часы</string>
+    <string name="description_clock_close">Поверните устройство, чтобы закрыть часы</string>
 
-    <string name="earlier">Ранее:</string>
-    <string name="earlier_time">Закончилось:</string>
-    <string name="now">Сейчас:</string>
-    <string name="now_time">Закончится через:</string>
-    <string name="then">Далее:</string>
-    <string name="then_time">Начнётся через:</string>
+    <string name="message_error">Ошибка</string>
+    <string name="message_success">Успешно</string>
+    <string name="message_applied">Применено</string>
+    <string name="message_apply">Применить</string>
 
-    <string name="time_hours_single">час</string>
-    <string name="time_hours_small">часа</string>
-    <string name="time_hours_large">часов</string>
-    <string name="time_minutes">мин</string>
-    <string name="time_minutes_single">минуту</string>
-    <string name="time_minutes_small">минуты</string>
-    <string name="time_minutes_large">минут</string>
-    <string name="time_seconds">сек</string>
-    <string name="time_seconds_single">секунду</string>
-    <string name="time_seconds_small">секунды</string>
-    <string name="time_seconds_large">секунд</string>
+    <string name="clock_mode">Режим часов</string>
+    <string name="clock_mode_clock">Часы</string>
+    <string name="clock_mode_timer">Таймер</string>
+    <string name="display_headers">Отображать заголовки</string>
+    <string name="display_date">Отображать дату</string>
+    <string name="display_date_time">Отображать дату и время</string>
+    <string name="display_current_lesson">Отображать название текущего предмета</string>
+    <string name="display_next_lesson">Отображать название следующего предмета</string>
+    <string name="not_display_next_time">Не отображать время до следующего предмета</string>
 
-    <string name="time_ago">назад</string>
+    <string name="timer_time">Время</string>
+    <string name="timer_ago">назад</string>
+    <string name="timer_earlier">Ранее</string>
+    <string name="timer_now">Сейчас</string>
+    <string name="timer_then">Далее</string>
+    <string name="timer_ended">Закончилось</string>
+    <string name="timer_ends_in">Закончится через</string>
+    <string name="timer_starts_in">Начнётся через</string>
+    <string name="timer_hour_single">час</string>
+    <string name="timer_hour_small">часа</string>
+    <string name="timer_hour_large">часов</string>
+    <string name="timer_minute_single">минуту</string>
+    <string name="timer_minute_small">минуты</string>
+    <string name="timer_minute_large">минут</string>
+    <string name="timer_second_single">секунду</string>
+    <string name="timer_second_small">секунды</string>
+    <string name="timer_second_large">секунд</string>
+
     <string name="day_yesterday">Вчера</string>
     <string name="day_today">Сегодня</string>
     <string name="day_tomorrow">Завтра</string>
+    <string name="week_every">Каждую неделю</string>
+    <string name="week_even">Четная неделя</string>
+    <string name="week_odd">Нечетная неделя</string>
+    <string name="info_title">Название</string>
+    <string name="info_titles">Названия</string>
+    <string name="info_teacher">Преподаватель</string>
+    <string name="info_teachers">Преподаватели</string>
+    <string name="info_classroom">Аудитория</string>
+    <string name="info_classrooms">Аудитории</string>
+
+    <string name="theme">Тема</string>
+    <string name="theme_system">Системная</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="language">Язык</string>
+    <string name="language_english">Английский</string>
+    <string name="language_russian">Русский</string>
+
+    <string name="initial_index">Номер первого предмета</string>
+    <string name="initial_index_zero">0</string>
+    <string name="initial_index_one">1</string>
+    <string name="timetable_json">Расписание (JSON)</string>
+
+    <string name="combine_background">Объединить фон виджета</string>
+    <string name="modifiers">Модификаторы</string>
+    <string name="modifier_hour">Час</string>
+    <string name="modifier_minute">Минута</string>
+    <string name="modifier_second">Секунда</string>
+    <string name="modifier_round">Округлить</string>
+    <string name="modifier_set">Установить</string>
+
+    <string name="source_code">Исходный код</string>
+    <string name="timetable_editor">Редактор расписания</string>
+    <string name="app_version">Версия приложения: %s</string>
 
     <string-array name="weekdays">
         <item>Понедельник</item>
@@ -64,8 +97,4 @@
         <item>Воскресенье</item>
     </string-array>
 
-    <string name="placeholder_day_of_week">День недели</string>
-    <string name="placeholder_somebody">Кто-то</string>
-    <string name="placeholder_something">Что-то</string>
-    <string name="placeholder_sometime">%s минут  %s секунд</string>
 </resources>

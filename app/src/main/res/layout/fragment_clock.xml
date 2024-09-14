@@ -1,50 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".ClockFragment">
+    android:orientation="vertical"
+    tools:context=".fragment.ClockFragment">
 
-    <FrameLayout style="@style/Frame_Main">
+    <com.panov.widget.BounceScrollView style="@style/Layout.FillHeight">
 
         <LinearLayout
-            style="@style/Frame_Vertical"
-            android:paddingHorizontal="16dp">
+            android:id="@+id/layout_container"
+            style="@style/Layout.Vertical.Divided"
+            android:layout_marginHorizontal="16dp">
 
             <TextView
                 style="@style/Title"
-                android:text="@string/clock" />
+                android:text="@string/title_settings_clock" />
 
-            <CheckBox
-                android:id="@+id/input_date"
-                style="@style/CheckBox"
-                android:text="@string/show_date" />
+            <LinearLayout style="@style/Layout.Vertical.Rounded">
 
-            <CheckBox
-                android:id="@+id/input_title"
-                style="@style/CheckBox"
-                android:text="@string/show_title" />
+                <TextView
+                    style="@style/Title.Setting"
+                    android:text="@string/clock_mode" />
 
-            <CheckBox
-                android:id="@+id/input_other"
-                style="@style/CheckBox"
-                android:text="@string/show_other" />
+                <LinearLayout style="@style/Layout.Horizontal">
+
+                    <Button
+                        android:id="@+id/button_clock_mode_clock"
+                        style="@style/Button.Item"
+                        android:text="@string/clock_mode_clock" />
+
+                    <Button
+                        android:id="@+id/button_clock_mode_timer"
+                        style="@style/Button.Item"
+                        android:text="@string/clock_mode_timer" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_display_headers"
+                style="@style/MaterialSwitch"
+                android:text="@string/display_headers" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_display_date_time"
+                style="@style/MaterialSwitch"
+                android:text="@string/display_date_time" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_display_current_lesson"
+                style="@style/MaterialSwitch"
+                android:text="@string/display_current_lesson" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_display_next_lesson"
+                style="@style/MaterialSwitch"
+                android:text="@string/display_next_lesson" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_not_display_next_time"
+                style="@style/MaterialSwitch"
+                android:text="@string/not_display_next_time" />
+
+            <FrameLayout
+                style="@style/Layout.FillHeight"
+                android:background="@color/empty" />
+
+            <TextView
+                style="@style/Title.Header"
+                android:text="@string/description_clock_open" />
 
         </LinearLayout>
 
-        <TextView
-            style="@style/Text"
-            android:layout_gravity="bottom"
-            android:padding="16dp"
-            android:text="@string/clock_hint" />
+    </com.panov.widget.BounceScrollView>
 
-    </FrameLayout>
+    <FrameLayout style="@style/ShadowBottom" />
 
     <Button
         android:id="@+id/button_action"
-        style="@style/Button"
-        android:layout_gravity="bottom"
-        android:text="@string/apply" />
+        style="@style/Button.Action"
+        android:text="@string/message_apply" />
 
-</FrameLayout>
+</LinearLayout>

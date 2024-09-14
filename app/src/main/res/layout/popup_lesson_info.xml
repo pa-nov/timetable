@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.panov.widget.BounceScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/square_rounded_small"
+    android:backgroundTint="@color/line">
+
+    <LinearLayout
+        style="@style/Layout.Vertical.Divided"
+        android:padding="8dp">
+
+        <LinearLayout
+            style="@style/Layout.Vertical.Rounded"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/title_title"
+                style="@style/Title.Header"
+                android:gravity="start"
+                android:text="@string/info_title" />
+
+            <TextView
+                android:id="@+id/text_title"
+                style="@style/Text"
+                android:text="@string/message_error" />
+
+
+            <TextView
+                android:id="@+id/title_teacher"
+                style="@style/Title.Header"
+                android:layout_marginTop="4dp"
+                android:gravity="start"
+                android:text="@string/info_teacher" />
+
+            <TextView
+                android:id="@+id/text_teacher"
+                style="@style/Text"
+                android:text="@string/message_error" />
+
+
+            <TextView
+                android:id="@+id/title_classroom"
+                style="@style/Title.Header"
+                android:layout_marginTop="4dp"
+                android:gravity="start"
+                android:text="@string/info_classroom" />
+
+            <TextView
+                android:id="@+id/text_classroom"
+                style="@style/Text"
+                android:text="@string/message_error" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_even"
+            style="@style/Layout.Vertical.Divided">
+
+            <TextView
+                android:id="@+id/title_even"
+                style="@style/Title.Header"
+                android:text="@string/week_even" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_odd"
+            style="@style/Layout.Vertical.Divided">
+
+            <TextView
+                android:id="@+id/title_odd"
+                style="@style/Title.Header"
+                android:text="@string/week_odd" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.panov.widget.BounceScrollView>

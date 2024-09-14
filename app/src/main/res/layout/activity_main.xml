@@ -6,23 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/view_main"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="64dp" />
+        android:orientation="vertical">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/menu_main"
+        <FrameLayout
+            android:id="@+id/view_main"
+            style="@style/Layout.FillHeight" />
+
+        <FrameLayout
+            android:id="@+id/navigation_separator"
+            style="@style/Separator" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigation_main"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@color/background"
+            android:outlineAmbientShadowColor="@color/empty"
+            android:outlineSpotShadowColor="@color/empty"
+            app:itemIconSize="32dp"
+            app:itemIconTint="@color/accent_checked"
+            app:itemRippleColor="@color/item"
+            app:itemTextColor="@color/accent_checked"
+            app:menu="@menu/menu_main" />
+
+        <FrameLayout
+            android:id="@+id/navigation_system"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/line" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/shadow_status_bar"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="@color/background"
-        app:itemIconSize="32dp"
-        app:itemIconTint="@color/button_checked"
-        app:itemRippleColor="@color/item"
-        app:itemTextAppearanceActiveBoldEnabled="false"
-        app:itemTextColor="@color/button_checked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/main_menu" />
+        android:layout_height="0dp"
+        android:background="@drawable/square_shadow_top"
+        android:backgroundTint="@color/background"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

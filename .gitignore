@@ -1,10 +1,9 @@
-.gradle
-.idea
-app/build/
-app/libs/
-app/release/
-/build/
-/captures/
+.gradle/
+.idea/
+build/
+captures/
+libs/
+release/
 
 local.properties
 .DS_Store

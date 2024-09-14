@@ -1,58 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="clock">Clock</string>
-    <string name="timetable">Timetable</string>
-    <string name="settings">Settings</string>
-    <string name="apply">Apply</string>
-    <string name="applied">Applied</string>
-    <string name="error">Error</string>
 
-    <string name="clock_hint">Rotate device to open clock</string>
-    <string name="show_date">Show date and time</string>
-    <string name="show_title">Show titles</string>
-    <string name="show_other">Show other info</string>
-    <string name="theme">Theme:</string>
-    <string name="theme_system">System</string>
-    <string name="theme_dark">Dark</string>
-    <string name="theme_light">Light</string>
-    <string name="modifier_hour">Modifier (Hour):</string>
-    <string name="modifier_minute">Modifier (Minute):</string>
-    <string name="modifier_second">Modifier (Second):</string>
-    <string name="initial_index">Number of the first lesson:</string>
-    <string name="json">Timetable (JSON):</string>
+    <string name="title_app">Timetable</string>
+    <string name="title_clock">Clock</string>
+    <string name="title_timetable">Timetable</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_settings_clock">Clock</string>
+    <string name="title_settings_application">Application</string>
+    <string name="title_settings_timetable">Timetable</string>
+    <string name="title_settings_widgets">Widgets</string>
+    <string name="title_settings_about">About the app</string>
+    <string name="title_widget_lesson">Lesson</string>
+    <string name="title_widget_clock">Clock</string>
 
-    <string name="info_name">Name:</string>
-    <string name="info_teacher">Teacher:</string>
-    <string name="info_teachers">Teachers:</string>
-    <string name="info_room">Room:</string>
-    <string name="info_rooms">Rooms:</string>
-    <string name="info_week_every">Every week</string>
-    <string name="info_week_even">Even week</string>
-    <string name="info_week_odd">Odd week</string>
+    <string name="description_clock_open">Rotate the device to open the clock</string>
+    <string name="description_clock_close">Rotate the device to close the clock</string>
 
-    <string name="earlier">Earlier:</string>
-    <string name="earlier_time">Ended:</string>
-    <string name="now">Now:</string>
-    <string name="now_time">End in:</string>
-    <string name="then">Then:</string>
-    <string name="then_time">Start in:</string>
+    <string name="message_error">Error</string>
+    <string name="message_success">Success</string>
+    <string name="message_applied">Applied</string>
+    <string name="message_apply">Apply</string>
 
-    <string name="time_hours_single">hour</string>
-    <string name="time_hours_small">hours</string>
-    <string name="time_hours_large">hours</string>
-    <string name="time_minutes">min</string>
-    <string name="time_minutes_single">minute</string>
-    <string name="time_minutes_small">minutes</string>
-    <string name="time_minutes_large">minutes</string>
-    <string name="time_seconds">sec</string>
-    <string name="time_seconds_single">second</string>
-    <string name="time_seconds_small">seconds</string>
-    <string name="time_seconds_large">seconds</string>
+    <string name="clock_mode">Clock mode</string>
+    <string name="clock_mode_clock">Clock</string>
+    <string name="clock_mode_timer">Timer</string>
+    <string name="display_headers">Display headers</string>
+    <string name="display_date">Display date</string>
+    <string name="display_date_time">Display date and time</string>
+    <string name="display_current_lesson">Display title of the current lesson</string>
+    <string name="display_next_lesson">Display title of the next lesson</string>
+    <string name="not_display_next_time">Do not display time until the next lesson</string>
 
-    <string name="time_ago">ago</string>
+    <string name="timer_time">Time</string>
+    <string name="timer_ago">ago</string>
+    <string name="timer_earlier">Earlier</string>
+    <string name="timer_now">Now</string>
+    <string name="timer_then">Then</string>
+    <string name="timer_ended">Ended</string>
+    <string name="timer_ends_in">Ends in</string>
+    <string name="timer_starts_in">Starts in</string>
+    <string name="timer_hour_single">hours</string>
+    <string name="timer_hour_small">hours</string>
+    <string name="timer_hour_large">hours</string>
+    <string name="timer_minute_single">minutes</string>
+    <string name="timer_minute_small">minutes</string>
+    <string name="timer_minute_large">minutes</string>
+    <string name="timer_second_single">seconds</string>
+    <string name="timer_second_small">seconds</string>
+    <string name="timer_second_large">seconds</string>
+
     <string name="day_yesterday">Yesterday</string>
     <string name="day_today">Today</string>
     <string name="day_tomorrow">Tomorrow</string>
+    <string name="week_every">Every week</string>
+    <string name="week_even">Even week</string>
+    <string name="week_odd">Odd week</string>
+    <string name="info_title">Title</string>
+    <string name="info_titles">Titles</string>
+    <string name="info_teacher">Teacher</string>
+    <string name="info_teachers">Teachers</string>
+    <string name="info_classroom">Classroom</string>
+    <string name="info_classrooms">Classrooms</string>
+
+    <string name="theme">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="language">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_russian">Russian</string>
+
+    <string name="initial_index">Number of the first lesson</string>
+    <string name="initial_index_zero">0</string>
+    <string name="initial_index_one">1</string>
+    <string name="timetable_json">Timetable (JSON)</string>
+
+    <string name="combine_background">Combine widget background</string>
+    <string name="modifiers">Modifiers</string>
+    <string name="modifier_hour">Hour</string>
+    <string name="modifier_minute">Minute</string>
+    <string name="modifier_second">Second</string>
+    <string name="modifier_round">Round</string>
+    <string name="modifier_set">Set</string>
+
+    <string name="source_code">Source code</string>
+    <string name="timetable_editor">Timetable editor</string>
+    <string name="app_version">Application version: %s</string>
 
     <string-array name="weekdays">
         <item>Monday</item>
@@ -64,18 +97,4 @@
         <item>Sunday</item>
     </string-array>
 
-    <string name="placeholder_day_of_week">Day of week</string>
-    <string name="placeholder_somebody">Somebody</string>
-    <string name="placeholder_something">Something</string>
-    <string name="placeholder_sometime">%s minutes  %s seconds</string>
-
-    <string name="placeholder" translatable="false">%s</string>
-    <string name="placeholder_room" translatable="false">(%s)</string>
-    <string name="placeholder_teacher" translatable="false">%s %s. %s.</string>
-    <string name="placeholder_date_time" translatable="false">%s.%s.%s   %s:%s:%s</string>
-    <string name="placeholder_date" translatable="false">%s.%s (%s)</string>
-    <string name="placeholder_time" translatable="false">%s:%s:%s</string>
-    <string name="placeholder_times" translatable="false">%s:%s\n%s:%s</string>
-    <string name="placeholder_date_text" translatable="false">%s (%s)</string>
-    <string name="placeholder_date_number" translatable="false">%s.%s.%s (%s)</string>
 </resources>
