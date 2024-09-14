@@ -58,7 +58,10 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
 
 
     private fun onPointerEvent(event: MotionEvent): Boolean? {
-        if (getScrollMax() == 0) return false
+        if (getScrollMax() == 0) {
+            if (content.translationY != 0f && !animator.isRunning) moveToDefaultPosition()
+            return false
+        }
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN, MotionEvent.ACTION_POINTER_DOWN -> onPointerDown(event)
             MotionEvent.ACTION_MOVE -> onPointerMove(event)
