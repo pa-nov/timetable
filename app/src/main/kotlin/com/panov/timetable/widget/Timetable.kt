@@ -28,13 +28,13 @@ class Timetable {
             val otherLessonId = timetable.getLessonId(if (week == "odd") "even" else "odd", day, lessonIndex)
             val otherLessonDiffers = !(otherLessonId == lessonId || otherLessonId in timetable.getLessonOtherIds(lessonId))
 
-            val textNumber = view.getChildAt(0) as TextView
-            val lineLeft = view.getChildAt(1) as FrameLayout
-            val textTime = view.getChildAt(2) as TextView
-            val lineRight = view.getChildAt(3) as FrameLayout
-            val textTitle = (view.getChildAt(4) as LinearLayout).getChildAt(0) as TextView
-            val textTeacher = ((view.getChildAt(4) as LinearLayout).getChildAt(1) as LinearLayout).getChildAt(0) as TextView
-            val textClassroom = ((view.getChildAt(4) as LinearLayout).getChildAt(1) as LinearLayout).getChildAt(1) as TextView
+            val textNumber = view.findViewById<TextView>(R.id.text_number)
+            val lineLeft = view.findViewById<FrameLayout>(R.id.line_left)
+            val textTime = view.findViewById<TextView>(R.id.text_time)
+            val lineRight = view.findViewById<FrameLayout>(R.id.line_right)
+            val textTitle = view.findViewById<TextView>(R.id.text_title)
+            val textTeacher = view.findViewById<TextView>(R.id.text_teacher)
+            val textClassroom = view.findViewById<TextView>(R.id.text_classroom)
 
             textNumber.text = lessonNumber.toString()
             textTime.text = timetable.getLessonTimeText(lessonIndex)
