@@ -106,7 +106,7 @@ class ClockActivity : AppCompatActivity() {
                 calendar.firstDayOfWeek = Calendar.MONDAY
                 calendar.minimalDaysInFirstWeek = 4
                 handler.postDelayed(this, (1000 - calendar.get(Calendar.MILLISECOND)).toLong())
-                val seconds = calendar.get(Calendar.MILLISECONDS_IN_DAY) / 1000
+                val seconds = Converter.getSecondsInDay(calendar)
                 val offset = timetable.getOffset(calendar)
 
                 if (displayTimer) {

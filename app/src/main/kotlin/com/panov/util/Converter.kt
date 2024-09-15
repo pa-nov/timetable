@@ -67,6 +67,18 @@ object Converter {
         return "${if (hour > 0) "$hour $hourText  " else ""}$minute $minuteText  $second $secondText"
     }
 
+    fun getWeek(calendar: Calendar): String {
+        return if (calendar.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
+    }
+
+    fun getDayOfWeek(calendar: Calendar): Int {
+        return if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
+    }
+
+    fun getSecondsInDay(calendar: Calendar): Int {
+        return calendar.get(Calendar.MILLISECONDS_IN_DAY) / 1000
+    }
+
     fun getPxFromDp(context: Context, dp: Int): Int {
         val dpi = context.resources.displayMetrics.densityDpi
         return (dp * (dpi / 160f)).toInt()

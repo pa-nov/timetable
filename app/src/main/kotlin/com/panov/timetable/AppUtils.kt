@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.icu.util.Calendar
 import com.panov.util.SettingsData
+import com.panov.util.TimetableData
 import java.util.Locale
 
 object AppUtils {
@@ -33,5 +34,13 @@ object AppUtils {
         calendar.set(Calendar.SECOND, if (modifierSecond > 0) calendar.get(Calendar.SECOND) / modifierSecond * modifierSecond else -modifierSecond)
 
         return calendar
+    }
+
+    fun getTimetableData(jsonString: String): TimetableData? {
+        return try {
+            TimetableData(jsonString)
+        } catch (_: Exception) {
+            null
+        }
     }
 }

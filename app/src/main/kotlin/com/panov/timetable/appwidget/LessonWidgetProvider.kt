@@ -5,14 +5,12 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.icu.util.Calendar
 import android.widget.RemoteViews
 import com.panov.timetable.AppUtils
 import com.panov.timetable.R
 import com.panov.timetable.Storage
 import com.panov.util.Converter
 import com.panov.util.SettingsData
-import com.panov.util.TimetableData
 
 class LessonWidgetProvider : AppWidgetProvider() {
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
@@ -26,22 +24,18 @@ class LessonWidgetProvider : AppWidgetProvider() {
         val calendar = AppUtils.getModifiedCalendar(settings)
         val context = AppUtils.getLocalizedContext(sourceContext, settings)
         val views = RemoteViews(context.packageName, R.layout.widget_lesson)
-        val day = if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
+        val day = Converter.getDayOfWeek(calendar)
 
 
         views.setTextViewText(R.id.title_weekday, context.resources.getStringArray(R.array.weekdays)[day])
         views.setTextViewText(R.id.text_date, Converter.getDateText(calendar, true))
         views.setTextViewText(R.id.text_time, Converter.getTimeText(calendar))
 
-        val timetable = try {
-            TimetableData(settings.getString(Storage.Timetable.JSON))
-        } catch (_: Exception) {
-            null
-        }
+        val timetable = AppUtils.getTimetableData(settings.getString(Storage.Timetable.JSON))
 
         if (timetable != null) {
             val offset = timetable.getOffset(calendar)
-            val seconds = calendar.get(Calendar.MILLISECONDS_IN_DAY) / 1000
+            val seconds = Converter.getSecondsInDay(calendar)
             val currentLessonEnd = timetable.getLessonTimeEnd(offset.currentLessonIndex)
 
             if (offset.currentDaysOffset == 0 && currentLessonEnd > seconds) {

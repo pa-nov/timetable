@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.textfield.TextInputEditText
+import com.panov.timetable.AppUtils
 import com.panov.timetable.R
 import com.panov.timetable.Storage
 import com.panov.util.Converter
@@ -106,7 +107,7 @@ class SettingsFragment : Fragment() {
         Storage.settings.setInt(Storage.Timetable.INITIAL_INDEX, initialIndex)
         val timetableJson = view.findViewById<TextInputEditText>(R.id.input_timetable_json).text.toString()
         Storage.settings.setString(Storage.Timetable.JSON, timetableJson)
-        Storage.setTimetable(timetableJson)
+        Storage.timetable = AppUtils.getTimetableData(timetableJson)
 
         Storage.settings.setBoolean(Storage.Widgets.COMBINE_BACKGROUND, view.findViewById<MaterialSwitch>(R.id.switch_combine_background).isChecked)
         if (view.findViewById<MaterialSwitch>(R.id.switch_modifiers).isChecked) {

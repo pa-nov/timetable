@@ -193,8 +193,8 @@ class Timetable {
             calendar.add(Calendar.DAY_OF_MONTH, offset)
 
             if (timetable != null) {
-                val week = if (calendar.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
-                val day = if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
+                val week = Converter.getWeek(calendar)
+                val day = Converter.getDayOfWeek(calendar)
                 view.findViewById<TextView>(R.id.title_weekday).text = view.resources.getStringArray(R.array.weekdays)[day]
 
                 while (view.childCount > timetable.getLessonsCount() + 1) {
@@ -246,11 +246,7 @@ class Timetable {
             val settings = SettingsData(context)
             calendar = AppUtils.getModifiedCalendar(settings)
             initialIndex = settings.getInt(Storage.Timetable.INITIAL_INDEX, 1)
-            timetableData = try {
-                TimetableData(settings.getString(Storage.Timetable.JSON))
-            } catch (_: Exception) {
-                null
-            }
+            timetableData = AppUtils.getTimetableData(settings.getString(Storage.Timetable.JSON))
         }
 
         override fun getCount(): Int {
@@ -262,9 +258,9 @@ class Timetable {
             val timetable = timetableData
 
             if (timetable != null) {
-                val seconds = calendar.get(Calendar.MILLISECONDS_IN_DAY) / 1000
-                val week = if (calendar.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
-                val day = if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
+                val seconds = Converter.getSecondsInDay(calendar)
+                val week = Converter.getWeek(calendar)
+                val day = Converter.getDayOfWeek(calendar)
 
                 val lessonId = timetable.getLessonId(week, day, position)
                 val lessonNumber = initialIndex + position

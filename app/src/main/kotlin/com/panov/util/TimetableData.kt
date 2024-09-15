@@ -210,9 +210,9 @@ class TimetableData(jsonString: String) {
         val nextLessonIndex: Int
 
         init {
-            val day = if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
-            val week = if (calendar.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
-            val seconds = calendar.get(Calendar.MILLISECONDS_IN_DAY) / 1000
+            val day = Converter.getDayOfWeek(calendar)
+            val week = Converter.getWeek(calendar)
+            val seconds = Converter.getSecondsInDay(calendar)
             val lessonsCount = timetable.getLessonsCount()
 
             var tempDaysOffset = 0
@@ -252,9 +252,9 @@ class TimetableData(jsonString: String) {
         }
 
         init {
-            val day = if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
-            val week = if (calendar.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
-            val seconds = calendar.get(Calendar.MILLISECONDS_IN_DAY) / 1000
+            val day = Converter.getDayOfWeek(calendar)
+            val week = Converter.getWeek(calendar)
+            val seconds = Converter.getSecondsInDay(calendar)
             val lessonsCount = timetable.getLessonsCount()
 
             var tempDaysOffset = 0

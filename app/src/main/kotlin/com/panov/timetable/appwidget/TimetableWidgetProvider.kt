@@ -5,7 +5,6 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.icu.util.Calendar
 import android.widget.RemoteViews
 import com.panov.timetable.AppUtils
 import com.panov.timetable.R
@@ -26,7 +25,7 @@ class TimetableWidgetProvider : AppWidgetProvider() {
         val calendar = AppUtils.getModifiedCalendar(settings)
         val context = AppUtils.getLocalizedContext(sourceContext, settings)
         val views = RemoteViews(context.packageName, R.layout.widget_timetable)
-        val day = if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
+        val day = Converter.getDayOfWeek(calendar)
         val combineBackground = settings.getBoolean(Storage.Widgets.COMBINE_BACKGROUND)
 
 
