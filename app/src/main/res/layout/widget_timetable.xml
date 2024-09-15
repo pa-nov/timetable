@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null"
+    android:backgroundTint="@color/item">
+
+    <LinearLayout
+        android:id="@+id/layout_header"
+        style="@style/Layout.Horizontal.Rounded"
+        android:layout_alignParentTop="true"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/title_weekday"
+            style="@style/RemoteText.WeekDay"
+            android:text="@string/message_error" />
+
+        <LinearLayout
+            style="@style/Layout.Vertical"
+            android:layout_width="wrap_content">
+
+            <TextView
+                android:id="@+id/text_date"
+                style="@style/RemoteText.DateTime"
+                android:text="@string/message_error" />
+
+            <TextView
+                android:id="@+id/text_time"
+                style="@style/RemoteText.DateTime"
+                android:text="@string/message_error" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/Layout.Vertical"
+        android:layout_below="@id/layout_header"
+        android:layout_alignParentBottom="true">
+
+        <FrameLayout style="@style/Layout.FillHeight" />
+
+        <FrameLayout
+            style="@style/Layout.Vertical.Rounded"
+            android:backgroundTint="@color/line"
+            android:padding="6dp">
+
+            <ListView
+                android:id="@+id/layout_container"
+                style="@style/Layout"
+                android:divider="@null"
+                android:dividerHeight="6dp"
+                android:listSelector="@color/empty"
+                android:scrollbars="none"
+                tools:listitem="@layout/item_lesson" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

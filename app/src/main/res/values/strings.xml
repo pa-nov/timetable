@@ -12,6 +12,7 @@
     <string name="title_settings_about">About the app</string>
     <string name="title_widget_lesson">Lesson</string>
     <string name="title_widget_clock">Clock</string>
+    <string name="title_widget_timetable">Timetable</string>
 
     <string name="description_clock_open">Rotate the device to open the clock</string>
     <string name="description_clock_close">Rotate the device to close the clock</string>

@@ -2,6 +2,7 @@ package com.panov.timetable.widget
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Outline
 import android.icu.util.Calendar
 import android.view.LayoutInflater
@@ -12,12 +13,17 @@ import android.view.ViewOutlineProvider
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import android.widget.RemoteViews
+import android.widget.RemoteViewsService
+import android.widget.RemoteViewsService.RemoteViewsFactory
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.panov.timetable.AppUtils
 import com.panov.timetable.R
 import com.panov.timetable.Storage
 import com.panov.timetable.fragment.TimetableFragment
 import com.panov.util.Converter
+import com.panov.util.SettingsData
 import com.panov.util.TimetableData
 
 class Timetable {
@@ -223,4 +229,85 @@ class Timetable {
 
 
     class RecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+
+    class RemoteListFactory(private val context: Context) : RemoteViewsFactory {
+        private lateinit var calendar: Calendar
+        private var initialIndex: Int = 1
+        private var timetableData: TimetableData? = null
+
+        override fun onCreate() {}
+        override fun onDestroy() {}
+        override fun getViewTypeCount(): Int = 1
+        override fun getItemId(position: Int): Long = position.toLong()
+        override fun hasStableIds(): Boolean = false
+
+        override fun onDataSetChanged() {
+            val settings = SettingsData(context)
+            calendar = AppUtils.getModifiedCalendar(settings)
+            initialIndex = settings.getInt(Storage.Timetable.INITIAL_INDEX, 1)
+            timetableData = try {
+                TimetableData(settings.getString(Storage.Timetable.JSON))
+            } catch (_: Exception) {
+                null
+            }
+        }
+
+        override fun getCount(): Int {
+            return timetableData?.getLessonsCount() ?: 0
+        }
+
+        override fun getViewAt(position: Int): RemoteViews {
+            val views = RemoteViews(context.packageName, R.layout.item_lesson)
+            val timetable = timetableData
+
+            if (timetable != null) {
+                val seconds = calendar.get(Calendar.MILLISECONDS_IN_DAY) / 1000
+                val week = if (calendar.get(Calendar.WEEK_OF_YEAR) % 2 == 0) "even" else "odd"
+                val day = if (calendar.get(Calendar.DAY_OF_WEEK) > 1) calendar.get(Calendar.DAY_OF_WEEK) - 2 else 6
+
+                val lessonId = timetable.getLessonId(week, day, position)
+                val lessonNumber = initialIndex + position
+                val otherLessonId = timetable.getLessonId(if (week == "odd") "even" else "odd", day, position)
+                val otherLessonDiffers = !(otherLessonId == lessonId || otherLessonId in timetable.getLessonOtherIds(lessonId))
+                val isNow = seconds >= timetable.getLessonTimeStart(position) && seconds < timetable.getLessonTimeEnd(position)
+
+                views.setTextViewText(R.id.text_number, lessonNumber.toString())
+                views.setTextViewText(R.id.text_time, timetable.getLessonTimeText(position))
+                views.setInt(R.id.line_left, "setBackgroundColor", context.getColor(if (isNow && lessonId > 0) R.color.green else R.color.line))
+                views.setInt(R.id.line_right, "setBackgroundColor", context.getColor(if (otherLessonDiffers) R.color.red else R.color.line))
+
+                if (lessonId > 0) {
+                    views.setTextViewText(R.id.text_title, timetable.getLessonShortTitle(lessonId))
+                    views.setTextViewText(R.id.text_teacher, timetable.getTeacherShortName(lessonId))
+                    views.setTextViewText(R.id.text_classroom, timetable.getClassroomText(lessonId))
+                } else {
+                    views.setTextViewText(R.id.text_title, "")
+                    views.setTextViewText(R.id.text_teacher, "")
+                    views.setTextViewText(R.id.text_classroom, "")
+                }
+            } else {
+                views.setTextViewText(R.id.text_number, "")
+                views.setTextViewText(R.id.text_time, "")
+                views.setInt(R.id.line_left, "setBackgroundColor", context.getColor(R.color.line))
+                views.setInt(R.id.line_right, "setBackgroundColor", context.getColor(R.color.line))
+                views.setTextViewText(R.id.text_title, "")
+                views.setTextViewText(R.id.text_teacher, "")
+                views.setTextViewText(R.id.text_classroom, "")
+            }
+
+            return views
+        }
+
+        override fun getLoadingView(): RemoteViews {
+            return RemoteViews(context.packageName, R.layout.item_lesson)
+        }
+    }
+
+
+    class RemoteListService : RemoteViewsService() {
+        override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory {
+            return RemoteListFactory(applicationContext)
+        }
+    }
 }
