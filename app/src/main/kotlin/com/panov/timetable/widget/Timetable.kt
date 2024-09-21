@@ -234,6 +234,7 @@ class Timetable {
     class RemoteListFactory(private val context: Context) : RemoteViewsFactory {
         private lateinit var calendar: Calendar
         private var initialIndex: Int = 1
+        private var errorMessage: String = context.getString(R.string.message_error)
         private var timetableData: TimetableData? = null
 
         override fun onCreate() {}
@@ -246,11 +247,12 @@ class Timetable {
             val settings = SettingsData(context)
             calendar = AppUtils.getModifiedCalendar(settings)
             initialIndex = settings.getInt(Storage.Timetable.INITIAL_INDEX, 1)
+            errorMessage = AppUtils.getLocalizedContext(context, settings).getString(R.string.message_error)
             timetableData = AppUtils.getTimetableData(settings.getString(Storage.Timetable.JSON))
         }
 
         override fun getCount(): Int {
-            return timetableData?.getLessonsCount() ?: 0
+            return timetableData?.getLessonsCount() ?: 1
         }
 
         override fun getViewAt(position: Int): RemoteViews {
@@ -287,7 +289,7 @@ class Timetable {
                 views.setTextViewText(R.id.text_time, "")
                 views.setInt(R.id.line_left, "setBackgroundColor", context.getColor(R.color.line))
                 views.setInt(R.id.line_right, "setBackgroundColor", context.getColor(R.color.line))
-                views.setTextViewText(R.id.text_title, "")
+                views.setTextViewText(R.id.text_title, errorMessage)
                 views.setTextViewText(R.id.text_teacher, "")
                 views.setTextViewText(R.id.text_classroom, "")
             }
