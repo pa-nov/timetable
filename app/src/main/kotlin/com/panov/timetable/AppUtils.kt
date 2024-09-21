@@ -50,10 +50,10 @@ object AppUtils {
     }
 
     fun resizeWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int, options: Bundle) {
-        val height = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT)
-        if (height >= 160) {
+        val height = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT)
+        if (height >= 320) {
             TimetableWidgetProvider().onUpdate(context, appWidgetManager, arrayOf(appWidgetId).toIntArray())
-        } else if (height >= 80) {
+        } else if (height >= 160) {
             ClockWidgetProvider().onUpdate(context, appWidgetManager, arrayOf(appWidgetId).toIntArray())
         } else {
             LessonWidgetProvider().onUpdate(context, appWidgetManager, arrayOf(appWidgetId).toIntArray())
