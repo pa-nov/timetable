@@ -231,10 +231,10 @@ class Timetable {
     class RecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 
-    class RemoteListFactory(private val context: Context) : RemoteViewsFactory {
-        private lateinit var calendar: Calendar
+    class RemoteListFactory(sourceContext: Context) : RemoteViewsFactory {
+        private var context: Context = sourceContext
+        private var calendar: Calendar = Calendar.getInstance()
         private var initialIndex: Int = 1
-        private var errorMessage: String = context.getString(R.string.message_error)
         private var timetableData: TimetableData? = null
 
         override fun onCreate() {}
@@ -245,9 +245,9 @@ class Timetable {
 
         override fun onDataSetChanged() {
             val settings = SettingsData(context)
+            context = AppUtils.getLocalizedContext(context, settings)
             calendar = AppUtils.getModifiedCalendar(settings)
             initialIndex = settings.getInt(Storage.Timetable.INITIAL_INDEX, 1)
-            errorMessage = AppUtils.getLocalizedContext(context, settings).getString(R.string.message_error)
             timetableData = AppUtils.getTimetableData(settings.getString(Storage.Timetable.JSON))
         }
 
@@ -289,7 +289,7 @@ class Timetable {
                 views.setTextViewText(R.id.text_time, "")
                 views.setInt(R.id.line_left, "setBackgroundColor", context.getColor(R.color.line))
                 views.setInt(R.id.line_right, "setBackgroundColor", context.getColor(R.color.line))
-                views.setTextViewText(R.id.text_title, errorMessage)
+                views.setTextViewText(R.id.text_title, context.getString(R.string.message_error))
                 views.setTextViewText(R.id.text_teacher, "")
                 views.setTextViewText(R.id.text_classroom, "")
             }
@@ -304,7 +304,7 @@ class Timetable {
             views.setTextViewText(R.id.text_time, "")
             views.setInt(R.id.line_left, "setBackgroundColor", context.getColor(R.color.line))
             views.setInt(R.id.line_right, "setBackgroundColor", context.getColor(R.color.line))
-            views.setTextViewText(R.id.text_title, errorMessage)
+            views.setTextViewText(R.id.text_title, "")
             views.setTextViewText(R.id.text_teacher, "")
             views.setTextViewText(R.id.text_classroom, "")
 
