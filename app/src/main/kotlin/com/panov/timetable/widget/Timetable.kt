@@ -298,7 +298,17 @@ class Timetable {
         }
 
         override fun getLoadingView(): RemoteViews {
-            return RemoteViews(context.packageName, R.layout.item_lesson)
+            val views = RemoteViews(context.packageName, R.layout.item_lesson)
+
+            views.setTextViewText(R.id.text_number, "")
+            views.setTextViewText(R.id.text_time, "")
+            views.setInt(R.id.line_left, "setBackgroundColor", context.getColor(R.color.line))
+            views.setInt(R.id.line_right, "setBackgroundColor", context.getColor(R.color.line))
+            views.setTextViewText(R.id.text_title, errorMessage)
+            views.setTextViewText(R.id.text_teacher, "")
+            views.setTextViewText(R.id.text_classroom, "")
+
+            return views
         }
     }
 
