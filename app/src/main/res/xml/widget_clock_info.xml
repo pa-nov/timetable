@@ -3,6 +3,7 @@
     android:initialLayout="@layout/widget_clock"
     android:minWidth="320dp"
     android:minHeight="80dp"
+    android:minResizeHeight="40dp"
     android:previewLayout="@layout/widget_clock"
-    android:resizeMode="none"
+    android:resizeMode="vertical"
     android:widgetCategory="home_screen" />

@@ -1,8 +1,13 @@
 package com.panov.timetable
 
+import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.res.Configuration
 import android.icu.util.Calendar
+import android.os.Bundle
+import com.panov.timetable.appwidget.ClockWidgetProvider
+import com.panov.timetable.appwidget.LessonWidgetProvider
+import com.panov.timetable.appwidget.TimetableWidgetProvider
 import com.panov.util.SettingsData
 import com.panov.util.TimetableData
 import java.util.Locale
@@ -41,6 +46,17 @@ object AppUtils {
             TimetableData(jsonString)
         } catch (_: Exception) {
             null
+        }
+    }
+
+    fun resizeWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int, options: Bundle) {
+        val height = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT)
+        if (height >= 160) {
+            TimetableWidgetProvider().onUpdate(context, appWidgetManager, arrayOf(appWidgetId).toIntArray())
+        } else if (height >= 80) {
+            ClockWidgetProvider().onUpdate(context, appWidgetManager, arrayOf(appWidgetId).toIntArray())
+        } else {
+            LessonWidgetProvider().onUpdate(context, appWidgetManager, arrayOf(appWidgetId).toIntArray())
         }
     }
 }

@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.text.format.DateUtils
 import android.widget.RemoteViews
 import com.panov.timetable.AppUtils
@@ -14,6 +15,12 @@ import com.panov.util.Converter
 import com.panov.util.SettingsData
 
 class ClockWidgetProvider : AppWidgetProvider() {
+    override fun onAppWidgetOptionsChanged(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetId: Int, newOptions: Bundle?) {
+        if (context != null && appWidgetManager != null && newOptions != null) {
+            AppUtils.resizeWidget(context, appWidgetManager, appWidgetId, newOptions)
+        }
+    }
+
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         for (appWidgetId in appWidgetIds) {
             updateWidget(context, appWidgetManager, appWidgetId)

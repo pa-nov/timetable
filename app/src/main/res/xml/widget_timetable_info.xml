@@ -3,6 +3,7 @@
     android:initialLayout="@layout/widget_timetable"
     android:minWidth="320dp"
     android:minHeight="160dp"
+    android:minResizeHeight="40dp"
     android:previewLayout="@layout/widget_timetable"
     android:resizeMode="vertical"
     android:widgetCategory="home_screen" />
