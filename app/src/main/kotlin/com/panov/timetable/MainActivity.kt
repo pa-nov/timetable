@@ -19,13 +19,6 @@ import com.panov.timetable.fragment.TimetableFragment
 import com.panov.util.Converter
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        private var selectedItem = if (Storage.timetable != null) R.id.menu_timetable else R.id.menu_settings
-        private var clockFragment = ClockFragment()
-        private var timetableFragment = TimetableFragment()
-        private var settingsFragment = SettingsFragment()
-    }
-
     override fun attachBaseContext(context: Context) {
         super.attachBaseContext(AppUtils.getLocalizedContext(context, Storage.settings))
     }
@@ -34,36 +27,39 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val defaultItem = if (Storage.timetable != null) R.id.menu_timetable else R.id.menu_settings
+        val selectedItem = savedInstanceState?.getInt("selected_item", defaultItem) ?: defaultItem
+
         if (selectedItem == R.id.menu_clock && resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            startActivity(Intent(applicationContext, ClockActivity::class.java))
+            startActivity(Intent(baseContext, ClockActivity::class.java))
         }
 
-        val navigation = findViewById<BottomNavigationView>(R.id.navigation_main)
-        navigation.setOnItemSelectedListener { item -> selectItem(item.itemId) }
-        navigation.findViewById<View>(selectedItem).performClick()
-        navigation.menu.forEach { item -> navigation.findViewById<View>(item.itemId).setOnLongClickListener { resetItem(item.itemId) } }
-
         val shadowStatusBar = findViewById<View>(R.id.shadow_status_bar)
-        val navigationSystem = findViewById<View>(R.id.navigation_system)
         val navigationSeparator = findViewById<View>(R.id.navigation_separator)
+        val navigationMain = findViewById<BottomNavigationView>(R.id.navigation_main)
+        val navigationSystem = findViewById<View>(R.id.navigation_system)
+
+        navigationMain.setOnItemSelectedListener { item -> selectItem(item.itemId) }
+        navigationMain.findViewById<View>(selectedItem).performClick()
+        navigationMain.menu.forEach { item -> navigationMain.findViewById<View>(item.itemId).setOnLongClickListener { resetItem(item.itemId) } }
 
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView.rootView) { view, insets ->
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             val keyboardInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
 
             if (insets.isVisible(WindowInsetsCompat.Type.ime())) {
-                navigation.visibility = View.GONE
-                navigationSystem.visibility = if (keyboardInsets.bottom > 0) View.GONE else View.VISIBLE
                 navigationSeparator.visibility = if (keyboardInsets.bottom > 0) View.VISIBLE else View.GONE
-                view.setPadding(0, 0, 0, keyboardInsets.bottom)
+                navigationMain.visibility = View.GONE
+                navigationSystem.visibility = if (keyboardInsets.bottom > 0) View.GONE else View.VISIBLE
             } else {
-                navigation.visibility = View.VISIBLE
-                navigationSystem.visibility = View.VISIBLE
                 navigationSeparator.visibility = View.VISIBLE
-                view.setPadding(0, 0, 0, 0)
+                navigationMain.visibility = View.VISIBLE
+                navigationSystem.visibility = View.VISIBLE
             }
 
-            findViewById<View>(R.id.layout_container)?.setPadding(0, systemBarsInsets.top, 0, Converter.getPxFromDp(applicationContext, 48))
+            view.setPadding(0, 0, 0, keyboardInsets.bottom)
+            findViewById<View>(R.id.layout_container)?.setPadding(0, systemBarsInsets.top, 0, Converter.getPxFromDp(baseContext, 48))
             shadowStatusBar.updateLayoutParams { height = systemBarsInsets.top * 2 }
             navigationSystem.updateLayoutParams { height = systemBarsInsets.bottom }
 
@@ -71,27 +67,36 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (findViewById<View>(R.id.menu_clock).isSelected) {
+            outState.putInt("selected_item", R.id.menu_clock)
+        } else if (findViewById<View>(R.id.menu_timetable).isSelected) {
+            outState.putInt("selected_item", R.id.menu_timetable)
+        } else if (findViewById<View>(R.id.menu_settings).isSelected) {
+            outState.putInt("selected_item", R.id.menu_settings)
+        }
+    }
+
     private fun selectItem(item: Int): Boolean {
-        selectedItem = item
         requestedOrientation = if (item == R.id.menu_clock) ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         supportFragmentManager.beginTransaction().replace(
-            R.id.view_main, when (item) {
-                R.id.menu_clock -> clockFragment
-                R.id.menu_timetable -> timetableFragment
-                else -> settingsFragment
-            }
+            R.id.view_main, supportFragmentManager.findFragmentByTag(item.toString()) ?: when (item) {
+                R.id.menu_clock -> ClockFragment()
+                R.id.menu_timetable -> TimetableFragment()
+                else -> SettingsFragment()
+            }, item.toString()
         ).commitNow()
         return true
     }
 
     private fun resetItem(item: Int): Boolean {
-        if (item == selectedItem) {
-            when (item) {
-                R.id.menu_clock -> clockFragment = ClockFragment()
-                R.id.menu_timetable -> timetableFragment = TimetableFragment()
-                R.id.menu_settings -> settingsFragment = SettingsFragment()
+        if (findViewById<View>(item).isSelected) {
+            val fragment = supportFragmentManager.findFragmentByTag(item.toString())
+            if (fragment != null) {
+                supportFragmentManager.beginTransaction().remove(fragment).commitNow()
+                selectItem(item)
             }
-            selectItem(item)
         }
         return true
     }
