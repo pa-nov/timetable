@@ -17,13 +17,21 @@ import com.panov.util.SettingsData
 class TimetableWidgetProvider : AppWidgetProvider() {
     override fun onAppWidgetOptionsChanged(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetId: Int, newOptions: Bundle?) {
         if (context != null && appWidgetManager != null && newOptions != null) {
-            AppUtils.resizeWidget(context, appWidgetManager, appWidgetId, newOptions)
+            onUpdate(context, appWidgetManager, arrayOf(appWidgetId).toIntArray())
         }
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         for (appWidgetId in appWidgetIds) {
-            updateWidget(context, appWidgetManager, appWidgetId)
+            val options = appWidgetManager.getAppWidgetOptions(appWidgetId)
+            val height = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT)
+            if (height >= 320) {
+                updateWidget(context, appWidgetManager, appWidgetId)
+            } else if (height >= 160) {
+                ClockWidgetProvider().onUpdate(context, appWidgetManager, arrayOf(appWidgetId).toIntArray())
+            } else {
+                LessonWidgetProvider().onUpdate(context, appWidgetManager, arrayOf(appWidgetId).toIntArray())
+            }
         }
     }
 
