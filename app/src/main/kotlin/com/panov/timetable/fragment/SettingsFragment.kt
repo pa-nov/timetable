@@ -25,14 +25,14 @@ class SettingsFragment : Fragment() {
         val fragment = inflater.inflate(R.layout.fragment_settings, container, false)
 
         // Application
-        fragment.findViewById<Button>(R.id.button_theme_system).setOnClickListener { setTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) }
-        fragment.findViewById<Button>(R.id.button_theme_light).setOnClickListener { setTheme(AppCompatDelegate.MODE_NIGHT_NO) }
-        fragment.findViewById<Button>(R.id.button_theme_dark).setOnClickListener { setTheme(AppCompatDelegate.MODE_NIGHT_YES) }
-        setTheme(Storage.settings.getInt(Storage.Application.THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM), true)
+        fragment.findViewById<Button>(R.id.button_theme_system).setOnClickListener { setTheme(fragment, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) }
+        fragment.findViewById<Button>(R.id.button_theme_light).setOnClickListener { setTheme(fragment, AppCompatDelegate.MODE_NIGHT_NO) }
+        fragment.findViewById<Button>(R.id.button_theme_dark).setOnClickListener { setTheme(fragment, AppCompatDelegate.MODE_NIGHT_YES) }
+        setTheme(fragment, Storage.settings.getInt(Storage.Application.THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM), true)
 
-        fragment.findViewById<Button>(R.id.button_language_english).setOnClickListener { setLanguage("en") }
-        fragment.findViewById<Button>(R.id.button_language_russian).setOnClickListener { setLanguage("ru") }
-        setLanguage(Storage.settings.getString(Storage.Application.LANGUAGE, Locale.getDefault().language), true)
+        fragment.findViewById<Button>(R.id.button_language_english).setOnClickListener { setLanguage(fragment, "en") }
+        fragment.findViewById<Button>(R.id.button_language_russian).setOnClickListener { setLanguage(fragment, "ru") }
+        setLanguage(fragment, Storage.settings.getString(Storage.Application.LANGUAGE, Locale.getDefault().language), true)
 
         // Timetable
         UiUtils.setupButtonGroup(arrayOf(fragment.findViewById(R.id.button_initial_index_zero), fragment.findViewById(R.id.button_initial_index_one)))
@@ -66,23 +66,23 @@ class SettingsFragment : Fragment() {
         return fragment
     }
 
-    private fun setTheme(theme: Int, onlyRead: Boolean = false) {
+    private fun setTheme(view: View, theme: Int, onlyRead: Boolean = false) {
         if (!onlyRead) {
             Storage.settings.saveInt(Storage.Application.THEME, theme)
             AppCompatDelegate.setDefaultNightMode(theme)
         }
-        requireView().findViewById<Button>(R.id.button_theme_system).isEnabled = theme != AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-        requireView().findViewById<Button>(R.id.button_theme_light).isEnabled = theme != AppCompatDelegate.MODE_NIGHT_NO
-        requireView().findViewById<Button>(R.id.button_theme_dark).isEnabled = theme != AppCompatDelegate.MODE_NIGHT_YES
+        view.findViewById<Button>(R.id.button_theme_system).isEnabled = theme != AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        view.findViewById<Button>(R.id.button_theme_light).isEnabled = theme != AppCompatDelegate.MODE_NIGHT_NO
+        view.findViewById<Button>(R.id.button_theme_dark).isEnabled = theme != AppCompatDelegate.MODE_NIGHT_YES
     }
 
-    private fun setLanguage(language: String, onlyRead: Boolean = false) {
+    private fun setLanguage(view: View, language: String, onlyRead: Boolean = false) {
         if (!onlyRead) {
             Storage.settings.saveString(Storage.Application.LANGUAGE, language)
             requireActivity().recreate()
         }
-        requireView().findViewById<Button>(R.id.button_language_english).isEnabled = language != "en"
-        requireView().findViewById<Button>(R.id.button_language_russian).isEnabled = language != "ru"
+        view.findViewById<Button>(R.id.button_language_english).isEnabled = language != "en"
+        view.findViewById<Button>(R.id.button_language_russian).isEnabled = language != "ru"
     }
 
     private fun readSettings(view: View) {
