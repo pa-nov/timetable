@@ -139,9 +139,7 @@ class ClockActivity : AppCompatActivity() {
         handler.post(object : Runnable {
             override fun run() {
                 if (isDestroyed) return
-                val calendar = Calendar.getInstance()
-                calendar.firstDayOfWeek = Calendar.MONDAY
-                calendar.minimalDaysInFirstWeek = 4
+                val calendar = AppUtils.getCalendar()
                 handler.postDelayed(this, (1000 - calendar.get(Calendar.MILLISECOND)).toLong())
                 val seconds = Converter.getSecondsInDay(calendar)
                 val offset = timetable.getOffset(calendar)

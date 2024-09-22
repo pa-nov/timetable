@@ -11,18 +11,17 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.panov.timetable.AppUtils
 import com.panov.timetable.R
 import com.panov.timetable.widget.Timetable
 import com.panov.util.Converter
 import kotlin.math.abs
 
 class TimetableFragment : Fragment() {
-    val calendar: Calendar = Calendar.getInstance()
+    val calendar: Calendar = AppUtils.getCalendar()
     private var tempPosition = 0
 
     init {
-        calendar.firstDayOfWeek = Calendar.MONDAY
-        calendar.minimalDaysInFirstWeek = 4
         resetCalendar()
     }
 
@@ -104,7 +103,7 @@ class TimetableFragment : Fragment() {
     }
 
     private fun resetCalendar() {
-        val tempCalendar = Calendar.getInstance()
+        val tempCalendar = AppUtils.getCalendar()
         calendar.clear()
         calendar.set(Calendar.YEAR, tempCalendar.get(Calendar.YEAR))
         calendar.set(Calendar.MONTH, tempCalendar.get(Calendar.MONTH))

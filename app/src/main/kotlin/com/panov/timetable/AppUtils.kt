@@ -20,10 +20,15 @@ object AppUtils {
         return context.createConfigurationContext(config)
     }
 
-    fun getModifiedCalendar(settings: SettingsData): Calendar {
+    fun getCalendar(): Calendar {
         val calendar = Calendar.getInstance()
         calendar.firstDayOfWeek = Calendar.MONDAY
         calendar.minimalDaysInFirstWeek = 4
+        return calendar
+    }
+
+    fun getModifiedCalendar(settings: SettingsData): Calendar {
+        val calendar = getCalendar()
 
         val modifierHour = settings.getInt(Storage.Widgets.MODIFIER_HOUR, 1)
         val modifierMinute = settings.getInt(Storage.Widgets.MODIFIER_MINUTE, 1)

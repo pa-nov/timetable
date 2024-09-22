@@ -233,7 +233,7 @@ class Timetable {
 
     class RemoteListFactory(sourceContext: Context) : RemoteViewsFactory {
         private var context: Context = sourceContext
-        private var calendar: Calendar = Calendar.getInstance()
+        private var calendar: Calendar = AppUtils.getCalendar()
         private var initialIndex: Int = 1
         private var timetableData: TimetableData? = null
 
