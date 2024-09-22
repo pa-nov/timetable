@@ -33,8 +33,11 @@ object Storage {
     object Widgets {
         private const val CORE = "widgets"
         const val COMBINE_BACKGROUND = "$CORE-combine_background"
-        const val MODIFIER_HOUR = "$CORE-modifier_hour"
-        const val MODIFIER_MINUTE = "$CORE-modifier_minute"
-        const val MODIFIER_SECOND = "$CORE-modifier_second"
+        const val MODIFIER_HOURS = "$CORE-modifier_hours"
+        const val MODIFIER_MINUTES = "$CORE-modifier_minutes"
+        const val MODIFIER_SECONDS = "$CORE-modifier_seconds"
+        const val UPDATE_ON_UNLOCK = "$CORE-update_on_unlock"
+        const val UPDATE_BY_TIMETABLE = "$CORE-update_by_timetable"
+        const val UPDATE_TIMER = "$CORE-update_timer"
     }
 }

@@ -78,10 +78,13 @@
     <string name="timetable_json">Расписание (JSON)</string>
 
     <string name="combine_background">Объединить фон виджета</string>
+    <string name="update_on_unlock">Обновлять виджет при разблокировке экрана</string>
+    <string name="update_by_timetable">Обновлять виджет при смене предмета</string>
+    <string name="update_by_timer">Обновлять виджет по таймеру</string>
     <string name="modifiers">Модификаторы</string>
-    <string name="modifier_hour">Час</string>
-    <string name="modifier_minute">Минута</string>
-    <string name="modifier_second">Секунда</string>
+    <string name="modifier_hours">Часы</string>
+    <string name="modifier_minutes">Минуты</string>
+    <string name="modifier_seconds">Секунды</string>
     <string name="modifier_round">Округлить</string>
     <string name="modifier_set">Установить</string>
 

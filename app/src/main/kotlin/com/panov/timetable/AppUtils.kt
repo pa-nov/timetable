@@ -30,13 +30,13 @@ object AppUtils {
     fun getModifiedCalendar(settings: SettingsData): Calendar {
         val calendar = getCalendar()
 
-        val modifierHour = settings.getInt(Storage.Widgets.MODIFIER_HOUR, 1)
-        val modifierMinute = settings.getInt(Storage.Widgets.MODIFIER_MINUTE, 1)
-        val modifierSecond = settings.getInt(Storage.Widgets.MODIFIER_SECOND, 1)
+        val modifierHours = settings.getInt(Storage.Widgets.MODIFIER_HOURS, 1)
+        val modifierMinutes = settings.getInt(Storage.Widgets.MODIFIER_MINUTES, 1)
+        val modifierSeconds = settings.getInt(Storage.Widgets.MODIFIER_SECONDS, 1)
 
-        calendar.set(Calendar.HOUR_OF_DAY, if (modifierHour > 0) calendar.get(Calendar.HOUR_OF_DAY) / modifierHour * modifierHour else -modifierHour)
-        calendar.set(Calendar.MINUTE, if (modifierMinute > 0) calendar.get(Calendar.MINUTE) / modifierMinute * modifierMinute else -modifierMinute)
-        calendar.set(Calendar.SECOND, if (modifierSecond > 0) calendar.get(Calendar.SECOND) / modifierSecond * modifierSecond else -modifierSecond)
+        calendar.set(Calendar.HOUR_OF_DAY, if (modifierHours > 0) calendar.get(Calendar.HOUR_OF_DAY) / modifierHours * modifierHours else -modifierHours)
+        calendar.set(Calendar.MINUTE, if (modifierMinutes > 0) calendar.get(Calendar.MINUTE) / modifierMinutes * modifierMinutes else -modifierMinutes)
+        calendar.set(Calendar.SECOND, if (modifierSeconds > 0) calendar.get(Calendar.SECOND) / modifierSeconds * modifierSeconds else -modifierSeconds)
 
         return calendar
     }

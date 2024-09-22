@@ -78,10 +78,13 @@
     <string name="timetable_json">Timetable (JSON)</string>
 
     <string name="combine_background">Combine widget background</string>
+    <string name="update_on_unlock">Update widget when screen is unlocked</string>
+    <string name="update_by_timetable">Update widget when lesson changes</string>
+    <string name="update_by_timer">Update widget on a timer</string>
     <string name="modifiers">Modifiers</string>
-    <string name="modifier_hour">Hour</string>
-    <string name="modifier_minute">Minute</string>
-    <string name="modifier_second">Second</string>
+    <string name="modifier_hours">Hours</string>
+    <string name="modifier_minutes">Minutes</string>
+    <string name="modifier_seconds">Seconds</string>
     <string name="modifier_round">Round</string>
     <string name="modifier_set">Set</string>
 
