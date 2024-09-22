@@ -40,6 +40,11 @@
             </LinearLayout>
 
             <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_display_on_lockscreen"
+                style="@style/MaterialSwitch"
+                android:text="@string/display_on_lockscreen" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/switch_display_headers"
                 style="@style/MaterialSwitch"
                 android:text="@string/display_headers" />

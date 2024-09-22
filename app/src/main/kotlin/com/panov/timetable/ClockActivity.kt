@@ -1,6 +1,10 @@
 package com.panov.timetable
 
+import android.app.KeyguardManager
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.res.Configuration
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -20,11 +24,21 @@ import com.panov.util.UiUtils
 class ClockActivity : AppCompatActivity() {
     private val timetable = Storage.timetable
     private val displayTimer = Storage.settings.getBoolean(Storage.Clock.DISPLAY_TIMER, true)
+    private val displayOnLockscreen = Storage.settings.getBoolean(Storage.Clock.DISPLAY_ON_LOCKSCREEN)
     private val displayHeaders = Storage.settings.getBoolean(Storage.Clock.DISPLAY_HEADERS)
     private val displayDateTime = Storage.settings.getBoolean(Storage.Clock.DISPLAY_DATE_TIME)
     private val displayCurrentLesson = Storage.settings.getBoolean(Storage.Clock.DISPLAY_CURRENT_LESSON)
     private val displayNextLesson = Storage.settings.getBoolean(Storage.Clock.DISPLAY_NEXT_LESSON)
     private val notDisplayNextTime = Storage.settings.getBoolean(Storage.Clock.NOT_DISPLAY_NEXT_TIME)
+
+    private var unlockReceiverRegistered = false
+    private val unlockReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent != null && intent.action == Intent.ACTION_USER_PRESENT) {
+                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return finish()
+            }
+        }
+    }
 
     override fun attachBaseContext(context: Context) {
         super.attachBaseContext(AppUtils.getLocalizedContext(context, Storage.settings))
@@ -33,14 +47,21 @@ class ClockActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        setShowWhenLocked(displayOnLockscreen)
         setContentView(R.layout.activity_clock)
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return finish()
+        if (!displayOnLockscreen || !(getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return finish()
+        }
         window.insetsController?.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         window.insetsController?.hide(WindowInsetsCompat.Type.systemBars())
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                UiUtils.showToast(baseContext, R.string.description_clock_close)
+                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    finish()
+                } else {
+                    UiUtils.showToast(baseContext, R.string.description_clock_close)
+                }
             }
         })
 
@@ -53,6 +74,22 @@ class ClockActivity : AppCompatActivity() {
         val textAgo = findViewById<TextView>(R.id.text_ago)
         val textNextLesson = findViewById<TextView>(R.id.text_next_lesson)
         val textDateTime = findViewById<TextView>(R.id.text_date_time)
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            titleCurrentLesson.visibility = View.GONE
+            titleTime.visibility = View.GONE
+            titleNextLesson.visibility = View.GONE
+
+            textCurrentLesson.visibility = View.GONE
+            textTime.visibility = View.GONE
+            textAgo.visibility = View.GONE
+            textNextLesson.visibility = View.GONE
+            textDateTime.visibility = View.GONE
+
+            registerReceiver(unlockReceiver, IntentFilter(Intent.ACTION_USER_PRESENT))
+            unlockReceiverRegistered = true
+            return
+        }
 
         if (timetable == null) {
             titleCurrentLesson.visibility = View.GONE
@@ -158,5 +195,13 @@ class ClockActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (unlockReceiverRegistered) {
+            unlockReceiverRegistered = false
+            unregisterReceiver(unlockReceiver)
+        }
     }
 }

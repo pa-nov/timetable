@@ -25,6 +25,7 @@
     <string name="clock_mode">Clock mode</string>
     <string name="clock_mode_clock">Clock</string>
     <string name="clock_mode_timer">Timer</string>
+    <string name="display_on_lockscreen">Display on the lock screen</string>
     <string name="display_headers">Display headers</string>
     <string name="display_date">Display date</string>
     <string name="display_date_time">Display date and time</string>

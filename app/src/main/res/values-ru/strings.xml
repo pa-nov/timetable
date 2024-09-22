@@ -25,6 +25,7 @@
     <string name="clock_mode">Режим часов</string>
     <string name="clock_mode_clock">Часы</string>
     <string name="clock_mode_timer">Таймер</string>
+    <string name="display_on_lockscreen">Отображать на экране блокировки</string>
     <string name="display_headers">Отображать заголовки</string>
     <string name="display_date">Отображать дату</string>
     <string name="display_date_time">Отображать дату и время</string>

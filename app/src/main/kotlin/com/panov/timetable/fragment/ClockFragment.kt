@@ -36,6 +36,7 @@ class ClockFragment : Fragment() {
 
     private fun readSettings(view: View) {
         switchClockMode(view, Storage.settings.getBoolean(Storage.Clock.DISPLAY_TIMER, true))
+        view.findViewById<MaterialSwitch>(R.id.switch_display_on_lockscreen).isChecked = Storage.settings.getBoolean(Storage.Clock.DISPLAY_ON_LOCKSCREEN)
         view.findViewById<MaterialSwitch>(R.id.switch_display_headers).isChecked = Storage.settings.getBoolean(Storage.Clock.DISPLAY_HEADERS)
         view.findViewById<MaterialSwitch>(R.id.switch_display_date_time).isChecked = Storage.settings.getBoolean(Storage.Clock.DISPLAY_DATE_TIME)
         view.findViewById<MaterialSwitch>(R.id.switch_display_current_lesson).isChecked = Storage.settings.getBoolean(Storage.Clock.DISPLAY_CURRENT_LESSON)
@@ -45,6 +46,7 @@ class ClockFragment : Fragment() {
 
     private fun saveSettings(view: View) {
         Storage.settings.setBoolean(Storage.Clock.DISPLAY_TIMER, view.findViewById<Button>(R.id.button_clock_mode_clock).isEnabled)
+        Storage.settings.setBoolean(Storage.Clock.DISPLAY_ON_LOCKSCREEN, view.findViewById<MaterialSwitch>(R.id.switch_display_on_lockscreen).isChecked)
         Storage.settings.setBoolean(Storage.Clock.DISPLAY_HEADERS, view.findViewById<MaterialSwitch>(R.id.switch_display_headers).isChecked)
         Storage.settings.setBoolean(Storage.Clock.DISPLAY_DATE_TIME, view.findViewById<MaterialSwitch>(R.id.switch_display_date_time).isChecked)
         Storage.settings.setBoolean(Storage.Clock.DISPLAY_CURRENT_LESSON, view.findViewById<MaterialSwitch>(R.id.switch_display_current_lesson).isChecked)

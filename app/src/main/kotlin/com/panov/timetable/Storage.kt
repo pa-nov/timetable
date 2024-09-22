@@ -9,6 +9,7 @@ object Storage {
 
     object Clock {
         private const val CORE = "clock"
+        const val DISPLAY_ON_LOCKSCREEN = "$CORE-display_on_lockscreen"
         const val DISPLAY_TIMER = "$CORE-display_timer"
         const val DISPLAY_HEADERS = "$CORE-display_headers"
         const val DISPLAY_DATE_TIME = "$CORE-display_date_time"
