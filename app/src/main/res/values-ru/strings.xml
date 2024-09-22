@@ -13,6 +13,7 @@
     <string name="title_widget_lesson">Предмет</string>
     <string name="title_widget_clock">Часы</string>
     <string name="title_widget_timetable">Расписание</string>
+    <string name="title_notification_background">Фоновая активность</string>
 
     <string name="description_clock_open">Поверните устройство, чтобы открыть часы</string>
     <string name="description_clock_close">Поверните устройство, чтобы закрыть часы</string>

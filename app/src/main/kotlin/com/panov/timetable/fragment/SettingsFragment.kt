@@ -1,5 +1,6 @@
 package com.panov.timetable.fragment
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.panov.timetable.AppUtils
 import com.panov.timetable.R
 import com.panov.timetable.Storage
+import com.panov.timetable.WidgetService
 import com.panov.util.Converter
 import com.panov.util.UiUtils
 import com.panov.util.WebUtils
@@ -163,5 +165,7 @@ class SettingsFragment : Fragment() {
         readSettings(view)
 
         Storage.timetable = AppUtils.getTimetableData(timetableJson)
+        requireContext().stopService(Intent(requireContext(), WidgetService::class.java))
+        AppUtils.startWidgetService(requireContext())
     }
 }

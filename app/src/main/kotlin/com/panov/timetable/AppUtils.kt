@@ -1,6 +1,7 @@
 package com.panov.timetable
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.icu.util.Calendar
 import com.panov.util.SettingsData
@@ -47,5 +48,12 @@ object AppUtils {
         } catch (_: Exception) {
             null
         }
+    }
+
+    fun startWidgetService(context: Context) {
+        val updateOnUnlock = Storage.settings.getBoolean(Storage.Widgets.UPDATE_ON_UNLOCK)
+        val updateByTimetable = Storage.settings.getBoolean(Storage.Widgets.UPDATE_BY_TIMETABLE)
+        val updateByTimer = Storage.settings.getInt(Storage.Widgets.UPDATE_TIMER) > 0
+        if (updateOnUnlock || updateByTimetable || updateByTimer) context.startService(Intent(context, WidgetService::class.java))
     }
 }
