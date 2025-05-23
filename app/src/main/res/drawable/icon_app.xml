@@ -1,31 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="64dp"
-    android:height="64dp"
-    android:viewportWidth="64"
-    android:viewportHeight="64">
-    <group
-        android:scaleX="0.65625"
-        android:scaleY="0.65625"
-        android:translateX="11"
-        android:translateY="11">
-        <path
-            android:fillColor="#4285F4"
-            android:pathData="m28,42a4,4 0,0 0,-4 4,4 4,0 0,0 4,4h20a4,4 0,0 0,4 -4,4 4,0 0,0 -4,-4z" />
-        <path
-            android:fillColor="#34A853"
-            android:pathData="m28,28a4,4 0,0 0,-4 4,4 4,0 0,0 4,4h20a4,4 0,0 0,4 -4,4 4,0 0,0 -4,-4z" />
-        <path
-            android:fillColor="#EA4335"
-            android:pathData="m28,14a4,4 0,0 0,-4 4,4 4,0 0,0 4,4h20a4,4 0,0 0,4 -4,4 4,0 0,0 -4,-4z" />
-        <path
-            android:fillColor="#FBBC05"
-            android:pathData="m16,42a4,4 0,0 0,-4 4,4 4,0 0,0 4,4 4,4 0,0 0,4 -4,4 4,0 0,0 -4,-4z" />
-        <path
-            android:fillColor="#FBBC05"
-            android:pathData="m16,28a4,4 0,0 0,-4 4,4 4,0 0,0 4,4 4,4 0,0 0,4 -4,4 4,0 0,0 -4,-4z" />
-        <path
-            android:fillColor="#FBBC05"
-            android:pathData="m16,14a4,4 0,0 0,-4 4,4 4,0 0,0 4,4 4,4 0,0 0,4 -4,4 4,0 0,0 -4,-4z" />
-    </group>
-</vector>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:bottom="16dp"
+        android:drawable="@drawable/icon_logo"
+        android:left="16dp"
+        android:right="16dp"
+        android:top="16dp" />
+</layer-list>
