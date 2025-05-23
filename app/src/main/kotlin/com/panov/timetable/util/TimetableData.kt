@@ -36,13 +36,12 @@ class TimetableData(jsonString: String) {
             val evenDayList = arrayListOf<Int>()
             val oddDayList = arrayListOf<Int>()
             for (time in 0 until times.count()) {
-                val lessonIdEven = jsonEven.getJSONArray(day).getInt(time)
-                if (lessonIdEven >= lessons.size) throw ArrayIndexOutOfBoundsException(lessonIdEven)
-                evenDayList.add(lessonIdEven)
-
-                val lessonIdOdd = jsonOdd.getJSONArray(day).getInt(time)
-                if (lessonIdOdd >= lessons.size) throw ArrayIndexOutOfBoundsException(lessonIdOdd)
-                oddDayList.add(lessonIdOdd)
+                val evenLesson = jsonEven.getJSONArray(day).getInt(time)
+                if (evenLesson >= lessons.size) throw ArrayIndexOutOfBoundsException(evenLesson)
+                evenDayList.add(evenLesson)
+                val oddLesson = jsonOdd.getJSONArray(day).getInt(time)
+                if (oddLesson >= lessons.size) throw ArrayIndexOutOfBoundsException(oddLesson)
+                oddDayList.add(oddLesson)
             }
             evenList.add(evenDayList.toTypedArray())
             oddList.add(oddDayList.toTypedArray())
