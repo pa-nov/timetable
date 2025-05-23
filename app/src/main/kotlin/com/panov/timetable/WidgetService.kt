@@ -21,6 +21,10 @@ import com.panov.util.Converter
 import com.panov.util.SettingsData
 
 class WidgetService : Service() {
+    companion object {
+        const val CHANNEL_ID = "background_service"
+    }
+
     private lateinit var handler: Handler
     private var updateOnUnlock = false
     private var timetable = emptyArray<Int>()
@@ -69,6 +73,10 @@ class WidgetService : Service() {
         }
     }
 
+    override fun attachBaseContext(context: Context) {
+        super.attachBaseContext(AppUtils.getLocalizedContext(context, SettingsData(context)))
+    }
+
     override fun onCreate() {
         super.onCreate()
         val settings = SettingsData(applicationContext)
@@ -96,15 +104,17 @@ class WidgetService : Service() {
         if (timetable.isNotEmpty()) handler.post(timetableUpdater)
         if (timer > 0) handler.post(timerUpdater)
 
-        val notificationChannel = NotificationChannel(
-            "background_service", applicationContext.getString(R.string.title_notification_background), NotificationManager.IMPORTANCE_LOW
-        )
+        val notificationChannel = NotificationChannel(CHANNEL_ID, getString(R.string.title_notification_background), NotificationManager.IMPORTANCE_LOW)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(notificationChannel)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        startForeground(startId, NotificationCompat.Builder(applicationContext, "background_service").build())
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+        notification.setSmallIcon(R.drawable.icon_logo)
+        notification.setContentTitle(getString(R.string.title_notification_background))
+        notification.setContentText(getString(R.string.description_notification_background))
+        startForeground(startId, notification.build())
         return START_STICKY
     }
 

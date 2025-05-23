@@ -3,7 +3,9 @@ package com.panov.timetable
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -64,6 +66,13 @@ class MainActivity : AppCompatActivity() {
             navigationSystem.updateLayoutParams { height = systemBarsInsets.bottom }
 
             WindowInsetsCompat.CONSUMED
+        }
+
+        if (Build.VERSION.SDK_INT >= 33) {
+            val isGranted = checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)
+            if (isGranted != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 0)
+            }
         }
     }
 
