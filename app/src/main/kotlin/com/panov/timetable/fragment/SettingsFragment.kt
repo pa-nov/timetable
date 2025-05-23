@@ -52,10 +52,10 @@ class SettingsFragment : Fragment() {
 
         // About
         fragment.findViewById<Button>(R.id.button_source_code).setOnClickListener {
-            WebUtils.openURL(requireContext(), "https://github.com/pa-nov/Timetable")
+            WebUtils.openURL(requireContext(), "https://github.com/pa-nov/timetable")
         }
         fragment.findViewById<Button>(R.id.button_timetable_editor).setOnClickListener {
-            WebUtils.openURL(requireContext(), "https://github.com/pa-nov/TimetableEditor")
+            WebUtils.openURL(requireContext(), "https://github.com/pa-nov/timetable-editor")
         }
         fragment.findViewById<TextView>(R.id.text_app_version).text = getString(
             R.string.app_version, requireContext().packageManager.getPackageInfo(requireContext().packageName, PackageManager.GET_ACTIVITIES).versionName
