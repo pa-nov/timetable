@@ -18,16 +18,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.panov.timetable.fragment.ClockFragment
 import com.panov.timetable.fragment.SettingsFragment
 import com.panov.timetable.fragment.TimetableFragment
+import com.panov.timetable.util.ApplicationUtils
+import com.panov.timetable.util.Storage
 import com.panov.util.Converter
 
 class MainActivity : AppCompatActivity() {
     override fun attachBaseContext(context: Context) {
-        super.attachBaseContext(AppUtils.getLocalizedContext(context, Storage.settings))
+        super.attachBaseContext(ApplicationUtils.getLocalizedContext(context, Storage.settings))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
         val defaultItem = if (Storage.timetable != null) R.id.menu_timetable else R.id.menu_settings

@@ -1,15 +1,12 @@
-package com.panov.timetable
+package com.panov.timetable.util
 
 import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import android.icu.util.Calendar
-import com.panov.util.SettingsData
-import com.panov.util.TimetableData
 import java.util.Locale
 
-object AppUtils {
-    fun getLocalizedContext(context: Context, settings: SettingsData): Context {
+object ApplicationUtils {
+    fun getLocalizedContext(context: Context, settings: SettingsData = SettingsData(context)): Context {
         val language = settings.getString(Storage.Application.LANGUAGE, Locale.getDefault().language)
         val locale = Locale(language)
         Locale.setDefault(locale)
@@ -48,12 +45,5 @@ object AppUtils {
         } catch (_: Exception) {
             null
         }
-    }
-
-    fun startWidgetService(context: Context) {
-        val updateOnUnlock = Storage.settings.getBoolean(Storage.Widgets.UPDATE_ON_UNLOCK)
-        val updateByTimetable = Storage.settings.getBoolean(Storage.Widgets.UPDATE_BY_TIMETABLE)
-        val updateByTimer = Storage.settings.getInt(Storage.Widgets.UPDATE_TIMER) > 0
-        if (updateOnUnlock || updateByTimetable || updateByTimer) context.startService(Intent(context, WidgetService::class.java))
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.icu.util.Calendar
 import com.google.android.material.textfield.TextInputEditText
 import com.panov.timetable.R
+import kotlin.math.abs
 
 object Converter {
     fun getTwoDigitNumber(number: Int): String {
@@ -11,7 +12,12 @@ object Converter {
         return "$number"
     }
 
-    fun getNumberText(number: Int, single: String, small: String, large: String): String {
+    fun getNumberTextEn(number: Int, single: String, large: String): String {
+        if (abs(number) == 1) return single
+        return large
+    }
+
+    fun getNumberTextRu(number: Int, single: String, small: String, large: String): String {
         if ((number / 10) % 10 != 1) {
             if (number % 10 == 1) return single
             if (number % 10 == 2 || number % 10 == 3 || number % 10 == 4) return small
@@ -41,28 +47,39 @@ object Converter {
     }
 
     fun getTimeText(seconds: Int, context: Context): String {
+        val langCode = context.getString(R.string.lang_code)
+
         val hour = seconds / 3600
         val minute = seconds / 60 % 60
         val second = seconds % 60
 
-        val hourText = getNumberText(
-            hour,
-            context.getString(R.string.timer_hour_single),
-            context.getString(R.string.timer_hour_small),
-            context.getString(R.string.timer_hour_large)
-        )
-        val minuteText = getNumberText(
-            minute,
-            context.getString(R.string.timer_minute_single),
-            context.getString(R.string.timer_minute_small),
-            context.getString(R.string.timer_minute_large)
-        )
-        val secondText = getNumberText(
-            second,
-            context.getString(R.string.timer_second_single),
-            context.getString(R.string.timer_second_small),
-            context.getString(R.string.timer_second_large)
-        )
+        val hourText = when (langCode) {
+            "ru" -> getNumberTextRu(
+                hour, context.getString(R.string.timer_hour_single), context.getString(R.string.timer_hour_small), context.getString(R.string.timer_hour_large)
+            )
+
+            else -> getNumberTextEn(
+                hour, context.getString(R.string.timer_hour_single), context.getString(R.string.timer_hour_large)
+            )
+        }
+        val minuteText = when (langCode) {
+            "ru" -> getNumberTextRu(
+                minute, context.getString(R.string.timer_minute_single), context.getString(R.string.timer_minute_small), context.getString(R.string.timer_minute_large)
+            )
+
+            else -> getNumberTextEn(
+                minute, context.getString(R.string.timer_minute_single), context.getString(R.string.timer_minute_large)
+            )
+        }
+        val secondText = when (langCode) {
+            "ru" -> getNumberTextRu(
+                second, context.getString(R.string.timer_second_single), context.getString(R.string.timer_second_small), context.getString(R.string.timer_second_large)
+            )
+
+            else -> getNumberTextEn(
+                second, context.getString(R.string.timer_second_single), context.getString(R.string.timer_second_large)
+            )
+        }
 
         return "${if (hour > 0) "$hour $hourText  " else ""}$minute $minuteText  $second $secondText"
     }

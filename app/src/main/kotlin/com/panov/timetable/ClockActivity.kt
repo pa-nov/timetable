@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
 import android.icu.util.Calendar
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.format.DateUtils
@@ -18,6 +19,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
+import com.panov.timetable.util.ApplicationUtils
+import com.panov.timetable.util.Storage
 import com.panov.util.Converter
 import com.panov.util.UiUtils
 
@@ -41,14 +44,15 @@ class ClockActivity : AppCompatActivity() {
     }
 
     override fun attachBaseContext(context: Context) {
-        super.attachBaseContext(AppUtils.getLocalizedContext(context, Storage.settings))
+        super.attachBaseContext(ApplicationUtils.getLocalizedContext(context, Storage.settings))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        setShowWhenLocked(displayOnLockscreen)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_clock)
+        if (Build.VERSION.SDK_INT >= 27) setShowWhenLocked(displayOnLockscreen)
+
         if (!displayOnLockscreen || !(getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
             if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return finish()
         }
@@ -139,7 +143,7 @@ class ClockActivity : AppCompatActivity() {
         handler.post(object : Runnable {
             override fun run() {
                 if (isDestroyed) return
-                val calendar = AppUtils.getCalendar()
+                val calendar = ApplicationUtils.getCalendar()
                 handler.postDelayed(this, (1000 - calendar.get(Calendar.MILLISECOND)).toLong())
                 val seconds = Converter.getSecondsInDay(calendar)
                 val offset = timetable.getOffset(calendar)

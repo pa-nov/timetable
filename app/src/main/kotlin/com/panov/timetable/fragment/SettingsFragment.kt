@@ -12,10 +12,11 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.textfield.TextInputEditText
-import com.panov.timetable.AppUtils
 import com.panov.timetable.R
-import com.panov.timetable.Storage
-import com.panov.timetable.WidgetService
+import com.panov.timetable.appwidget.WidgetService
+import com.panov.timetable.util.ApplicationUtils
+import com.panov.timetable.util.Storage
+import com.panov.timetable.util.WidgetUtils
 import com.panov.util.Converter
 import com.panov.util.UiUtils
 import com.panov.util.WebUtils
@@ -142,16 +143,13 @@ class SettingsFragment : Fragment() {
             val modifierSeconds = Converter.getIntFromInput(view.findViewById(R.id.input_modifier_seconds), 1)
 
             Storage.settings.setInt(
-                Storage.Widgets.MODIFIER_HOURS,
-                if (view.findViewById<Button>(R.id.button_modifier_hours_round).isEnabled) -modifierHours else modifierHours
+                Storage.Widgets.MODIFIER_HOURS, if (view.findViewById<Button>(R.id.button_modifier_hours_round).isEnabled) -modifierHours else modifierHours
             )
             Storage.settings.setInt(
-                Storage.Widgets.MODIFIER_MINUTES,
-                if (view.findViewById<Button>(R.id.button_modifier_minutes_round).isEnabled) -modifierMinutes else modifierMinutes
+                Storage.Widgets.MODIFIER_MINUTES, if (view.findViewById<Button>(R.id.button_modifier_minutes_round).isEnabled) -modifierMinutes else modifierMinutes
             )
             Storage.settings.setInt(
-                Storage.Widgets.MODIFIER_SECONDS,
-                if (view.findViewById<Button>(R.id.button_modifier_seconds_round).isEnabled) -modifierSeconds else modifierSeconds
+                Storage.Widgets.MODIFIER_SECONDS, if (view.findViewById<Button>(R.id.button_modifier_seconds_round).isEnabled) -modifierSeconds else modifierSeconds
             )
         } else {
             Storage.settings.setInt(Storage.Widgets.MODIFIER_HOURS, 1)
@@ -164,8 +162,8 @@ class SettingsFragment : Fragment() {
         UiUtils.clearFocus(requireView())
         readSettings(view)
 
-        Storage.timetable = AppUtils.getTimetableData(timetableJson)
+        Storage.timetable = ApplicationUtils.getTimetableData(timetableJson)
         requireContext().stopService(Intent(requireContext(), WidgetService::class.java))
-        AppUtils.startWidgetService(requireContext())
+        WidgetUtils.startWidgetService(requireContext())
     }
 }

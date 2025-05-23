@@ -64,7 +64,7 @@
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <service
-            android:name=".WidgetService"
+            android:name=".appwidget.WidgetService"
             android:foregroundServiceType="specialUse" />
 
     </application>

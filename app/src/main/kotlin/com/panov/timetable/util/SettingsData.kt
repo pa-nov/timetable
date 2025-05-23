@@ -1,8 +1,9 @@
-package com.panov.util
+package com.panov.timetable.util
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
+import androidx.core.content.edit
 
 class SettingsData(context: Context) {
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences("Settings", Context.MODE_PRIVATE)
@@ -19,7 +20,7 @@ class SettingsData(context: Context) {
     }
 
     fun saveInt(key: String, value: Int) {
-        sharedPreferences.edit().putInt(key, value).apply()
+        sharedPreferences.edit { putInt(key, value) }
         editor?.putInt(key, value)
     }
 
@@ -34,7 +35,7 @@ class SettingsData(context: Context) {
     }
 
     fun saveString(key: String, value: String) {
-        sharedPreferences.edit().putString(key, value).apply()
+        sharedPreferences.edit { putString(key, value) }
         editor?.putString(key, value)
     }
 
@@ -49,7 +50,7 @@ class SettingsData(context: Context) {
     }
 
     fun saveBoolean(key: String, value: Boolean) {
-        sharedPreferences.edit().putBoolean(key, value).apply()
+        sharedPreferences.edit { putBoolean(key, value) }
         editor?.putBoolean(key, value)
     }
 

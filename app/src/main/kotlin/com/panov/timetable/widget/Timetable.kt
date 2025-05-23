@@ -18,13 +18,13 @@ import android.widget.RemoteViewsService
 import android.widget.RemoteViewsService.RemoteViewsFactory
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.panov.timetable.AppUtils
 import com.panov.timetable.R
-import com.panov.timetable.Storage
 import com.panov.timetable.fragment.TimetableFragment
+import com.panov.timetable.util.ApplicationUtils
+import com.panov.timetable.util.SettingsData
+import com.panov.timetable.util.Storage
+import com.panov.timetable.util.TimetableData
 import com.panov.util.Converter
-import com.panov.util.SettingsData
-import com.panov.util.TimetableData
 
 class Timetable {
     companion object {
@@ -233,7 +233,7 @@ class Timetable {
 
     class RemoteListFactory(sourceContext: Context) : RemoteViewsFactory {
         private var context: Context = sourceContext
-        private var calendar: Calendar = AppUtils.getCalendar()
+        private var calendar: Calendar = ApplicationUtils.getCalendar()
         private var initialIndex: Int = 1
         private var timetableData: TimetableData? = null
 
@@ -245,10 +245,10 @@ class Timetable {
 
         override fun onDataSetChanged() {
             val settings = SettingsData(context)
-            context = AppUtils.getLocalizedContext(context, settings)
-            calendar = AppUtils.getModifiedCalendar(settings)
+            context = ApplicationUtils.getLocalizedContext(context, settings)
+            calendar = ApplicationUtils.getModifiedCalendar(settings)
             initialIndex = settings.getInt(Storage.Timetable.INITIAL_INDEX, 1)
-            timetableData = AppUtils.getTimetableData(settings.getString(Storage.Timetable.JSON))
+            timetableData = ApplicationUtils.getTimetableData(settings.getString(Storage.Timetable.JSON))
         }
 
         override fun getCount(): Int {

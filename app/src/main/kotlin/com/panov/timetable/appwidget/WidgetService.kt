@@ -1,11 +1,9 @@
-package com.panov.timetable
+package com.panov.timetable.appwidget
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
-import android.appwidget.AppWidgetManager
 import android.content.BroadcastReceiver
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -14,11 +12,12 @@ import android.os.Handler
 import android.os.IBinder
 import android.text.format.DateUtils
 import androidx.core.app.NotificationCompat
-import com.panov.timetable.appwidget.ClockWidgetProvider
-import com.panov.timetable.appwidget.LessonWidgetProvider
-import com.panov.timetable.appwidget.TimetableWidgetProvider
+import com.panov.timetable.R
+import com.panov.timetable.util.ApplicationUtils
+import com.panov.timetable.util.SettingsData
+import com.panov.timetable.util.Storage
+import com.panov.timetable.util.WidgetUtils
 import com.panov.util.Converter
-import com.panov.util.SettingsData
 
 class WidgetService : Service() {
     companion object {
@@ -33,15 +32,15 @@ class WidgetService : Service() {
     private val unlockReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (context != null && intent != null && intent.action == Intent.ACTION_USER_PRESENT) {
-                updateWidgets(context)
+                WidgetUtils.updateWidgets(context)
             }
         }
     }
 
     private val timetableUpdater = object : Runnable {
         override fun run() {
-            updateWidgets(applicationContext)
-            val calendar = AppUtils.getCalendar()
+            WidgetUtils.updateWidgets(applicationContext)
+            val calendar = ApplicationUtils.getCalendar()
             val seconds = Converter.getSecondsInDay(calendar)
 
             for (index in timetable.indices) {
@@ -59,8 +58,8 @@ class WidgetService : Service() {
 
     private val timerUpdater = object : Runnable {
         override fun run() {
-            updateWidgets(applicationContext)
-            val calendar = AppUtils.getCalendar()
+            WidgetUtils.updateWidgets(applicationContext)
+            val calendar = ApplicationUtils.getCalendar()
             val minute = timer / 60 % 60
             val second = timer % 60
 
@@ -74,7 +73,7 @@ class WidgetService : Service() {
     }
 
     override fun attachBaseContext(context: Context) {
-        super.attachBaseContext(AppUtils.getLocalizedContext(context, SettingsData(context)))
+        super.attachBaseContext(ApplicationUtils.getLocalizedContext(context))
     }
 
     override fun onCreate() {
@@ -83,7 +82,7 @@ class WidgetService : Service() {
         handler = Handler(mainLooper)
         updateOnUnlock = settings.getBoolean(Storage.Widgets.UPDATE_ON_UNLOCK)
         timetable = if (settings.getBoolean(Storage.Widgets.UPDATE_BY_TIMETABLE)) {
-            val timetableData = AppUtils.getTimetableData(settings.getString(Storage.Timetable.JSON))
+            val timetableData = ApplicationUtils.getTimetableData(settings.getString(Storage.Timetable.JSON))
             if (timetableData != null) {
                 val timetableList = arrayListOf<Int>()
                 for (index in 0 until timetableData.getLessonsCount()) {
@@ -127,17 +126,5 @@ class WidgetService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
-    }
-
-    private fun updateWidgets(context: Context) {
-        val appWidgetManager = AppWidgetManager.getInstance(context)
-
-        val lessonWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, LessonWidgetProvider::class.java))
-        val clockWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, ClockWidgetProvider::class.java))
-        val timetableWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, TimetableWidgetProvider::class.java))
-
-        LessonWidgetProvider().onUpdate(context, appWidgetManager, lessonWidgetIds)
-        ClockWidgetProvider().onUpdate(context, appWidgetManager, clockWidgetIds)
-        TimetableWidgetProvider().onUpdate(context, appWidgetManager, timetableWidgetIds)
     }
 }

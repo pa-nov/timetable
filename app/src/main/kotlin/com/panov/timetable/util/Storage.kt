@@ -1,7 +1,4 @@
-package com.panov.timetable
-
-import com.panov.util.SettingsData
-import com.panov.util.TimetableData
+package com.panov.timetable.util
 
 object Storage {
     lateinit var settings: SettingsData

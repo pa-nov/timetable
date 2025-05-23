@@ -8,7 +8,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.panov.timetable.R
-import com.panov.timetable.Storage
+import com.panov.timetable.util.Storage
 import com.panov.util.UiUtils
 
 class ClockFragment : Fragment() {

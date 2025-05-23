@@ -8,11 +8,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.widget.RemoteViews
-import com.panov.timetable.AppUtils
 import com.panov.timetable.R
-import com.panov.timetable.Storage
+import com.panov.timetable.util.ApplicationUtils
+import com.panov.timetable.util.SettingsData
+import com.panov.timetable.util.Storage
 import com.panov.util.Converter
-import com.panov.util.SettingsData
 
 class ClockWidgetProvider : AppWidgetProvider() {
     override fun onAppWidgetOptionsChanged(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetId: Int, newOptions: Bundle?) {
@@ -37,8 +37,8 @@ class ClockWidgetProvider : AppWidgetProvider() {
 
     private fun updateWidget(sourceContext: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
         val settings = SettingsData(sourceContext)
-        val calendar = AppUtils.getModifiedCalendar(settings)
-        val context = AppUtils.getLocalizedContext(sourceContext, settings)
+        val calendar = ApplicationUtils.getModifiedCalendar(settings)
+        val context = ApplicationUtils.getLocalizedContext(sourceContext, settings)
         val views = RemoteViews(context.packageName, R.layout.widget_clock)
         val day = Converter.getDayOfWeek(calendar)
         val combineBackground = settings.getBoolean(Storage.Widgets.COMBINE_BACKGROUND)
@@ -49,7 +49,7 @@ class ClockWidgetProvider : AppWidgetProvider() {
         views.setTextViewText(R.id.text_date, Converter.getDateText(calendar, true))
         views.setTextViewText(R.id.text_time, Converter.getTimeText(calendar))
 
-        val timetable = AppUtils.getTimetableData(settings.getString(Storage.Timetable.JSON))
+        val timetable = ApplicationUtils.getTimetableData(settings.getString(Storage.Timetable.JSON))
 
         if (timetable != null) {
             val offset = timetable.getOffset(calendar)

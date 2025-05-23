@@ -1,6 +1,7 @@
-package com.panov.util
+package com.panov.timetable.util
 
 import android.icu.util.Calendar
+import com.panov.util.Converter
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -35,10 +36,13 @@ class TimetableData(jsonString: String) {
             val evenDayList = arrayListOf<Int>()
             val oddDayList = arrayListOf<Int>()
             for (time in 0 until times.count()) {
-                lessons[jsonEven.getJSONArray(day).getInt(time)]
-                evenDayList.add(jsonEven.getJSONArray(day).getInt(time))
-                lessons[jsonOdd.getJSONArray(day).getInt(time)]
-                oddDayList.add(jsonOdd.getJSONArray(day).getInt(time))
+                val lessonIdEven = jsonEven.getJSONArray(day).getInt(time)
+                if (lessonIdEven >= lessons.size) throw ArrayIndexOutOfBoundsException(lessonIdEven)
+                evenDayList.add(lessonIdEven)
+
+                val lessonIdOdd = jsonOdd.getJSONArray(day).getInt(time)
+                if (lessonIdOdd >= lessons.size) throw ArrayIndexOutOfBoundsException(lessonIdOdd)
+                oddDayList.add(lessonIdOdd)
             }
             evenList.add(evenDayList.toTypedArray())
             oddList.add(oddDayList.toTypedArray())
@@ -146,7 +150,7 @@ class TimetableData(jsonString: String) {
             teacherFirstName = if (teacherNames.count() > 1) teacherNames[1].trim() else ""
             teacherMiddleName = if (teacherNames.count() > 2) teacherNames[2].trim() else ""
 
-            val others = jsonArray.getString(3).split("|")
+            val others = if (jsonArray.length() > 3) jsonArray.getString(3).split("|") else listOf("")
             val otherList = arrayListOf<Int>()
             for (index in 0 until others.count()) {
                 val number = others[index].toIntOrNull() ?: 0
