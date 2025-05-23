@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="lang_code">ru</string>
+
     <string name="title_app">Расписание</string>
     <string name="title_clock">Часы</string>
     <string name="title_timetable">Расписание</string>
@@ -17,6 +19,7 @@
 
     <string name="description_clock_open">Поверните устройство, чтобы открыть часы</string>
     <string name="description_clock_close">Поверните устройство, чтобы закрыть часы</string>
+    <string name="description_notification_background">Приложение работает в фоновом режиме для автоматического обновления виджетов</string>
 
     <string name="message_error">Ошибка</string>
     <string name="message_success">Успешно</string>
@@ -58,6 +61,7 @@
     <string name="week_every">Каждую неделю</string>
     <string name="week_even">Четная неделя</string>
     <string name="week_odd">Нечетная неделя</string>
+
     <string name="info_title">Название</string>
     <string name="info_titles">Названия</string>
     <string name="info_teacher">Преподаватель</string>

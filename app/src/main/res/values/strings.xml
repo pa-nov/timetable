@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="lang_code">en</string>
+
     <string name="title_app">Timetable</string>
     <string name="title_clock">Clock</string>
     <string name="title_timetable">Timetable</string>
@@ -17,6 +19,7 @@
 
     <string name="description_clock_open">Rotate the device to open the clock</string>
     <string name="description_clock_close">Rotate the device to close the clock</string>
+    <string name="description_notification_background">Application is running in the background to automatically update widgets</string>
 
     <string name="message_error">Error</string>
     <string name="message_success">Success</string>
@@ -42,13 +45,13 @@
     <string name="timer_ended">Ended</string>
     <string name="timer_ends_in">Ends in</string>
     <string name="timer_starts_in">Starts in</string>
-    <string name="timer_hour_single">hours</string>
+    <string name="timer_hour_single">hour</string>
     <string name="timer_hour_small">hours</string>
     <string name="timer_hour_large">hours</string>
-    <string name="timer_minute_single">minutes</string>
+    <string name="timer_minute_single">minute</string>
     <string name="timer_minute_small">minutes</string>
     <string name="timer_minute_large">minutes</string>
-    <string name="timer_second_single">seconds</string>
+    <string name="timer_second_single">second</string>
     <string name="timer_second_small">seconds</string>
     <string name="timer_second_large">seconds</string>
 
@@ -58,6 +61,7 @@
     <string name="week_every">Every week</string>
     <string name="week_even">Even week</string>
     <string name="week_odd">Odd week</string>
+
     <string name="info_title">Title</string>
     <string name="info_titles">Titles</string>
     <string name="info_teacher">Teacher</string>
