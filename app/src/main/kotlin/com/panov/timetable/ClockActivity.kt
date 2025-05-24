@@ -40,20 +40,6 @@ class ClockActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_clock)
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            if ((getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
-                if (displayOnLockscreen) {
-                    Handler(mainLooper).postDelayed({
-                        if (!isDestroyed && resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                            finish()
-                        }
-                    }, 200)
-                }
-            } else {
-                return finish()
-            }
-        }
-
         onBackPressedDispatcher.addCallback {
             if ((getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
                 finish()
@@ -74,6 +60,22 @@ class ClockActivity : AppCompatActivity() {
             window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         }
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if ((getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
+                if (displayOnLockscreen) {
+                    Handler(mainLooper).postDelayed({
+                        if (!isDestroyed && resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                            finish()
+                        }
+                    }, 200)
+                } else {
+                    return finish()
+                }
+            } else {
+                return finish()
+            }
+        }
 
         val titleCurrentLesson = findViewById<TextView>(R.id.title_current_lesson)
         val titleTime = findViewById<TextView>(R.id.title_time)
