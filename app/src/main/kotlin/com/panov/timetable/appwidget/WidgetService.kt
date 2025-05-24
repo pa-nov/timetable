@@ -31,15 +31,15 @@ class WidgetService : Service() {
 
     private val unlockReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            if (context != null && intent != null && intent.action == Intent.ACTION_USER_PRESENT) {
-                WidgetUtils.updateWidgets(context)
+            if (intent != null && intent.action == Intent.ACTION_USER_PRESENT) {
+                WidgetUtils.updateWidgets(baseContext)
             }
         }
     }
 
     private val timetableUpdater = object : Runnable {
         override fun run() {
-            WidgetUtils.updateWidgets(applicationContext)
+            WidgetUtils.updateWidgets(baseContext)
             val calendar = ApplicationUtils.getCalendar()
             val seconds = Converter.getSecondsInDay(calendar)
 
@@ -51,21 +51,18 @@ class WidgetService : Service() {
                 }
             }
 
-            val delay = DateUtils.DAY_IN_MILLIS + (timetable[0] - seconds) * 1000 - calendar.get(Calendar.MILLISECOND)
+            val delay = DateUtils.DAY_IN_MILLIS + (timetable[0] - seconds) * 1000 - calendar.get(Calendar.MILLISECOND).toLong()
             handler.postDelayed(this, delay)
         }
     }
 
     private val timerUpdater = object : Runnable {
         override fun run() {
-            WidgetUtils.updateWidgets(applicationContext)
+            WidgetUtils.updateWidgets(baseContext)
             val calendar = ApplicationUtils.getCalendar()
-            val minute = timer / 60 % 60
-            val second = timer % 60
-
             var delay = timer
-            if (timer >= 3600 && minute == 0L) delay -= calendar.get(Calendar.MINUTE)
-            if (timer >= 60 && second == 0L) delay -= calendar.get(Calendar.SECOND)
+            if (timer >= 3600 && timer / 60 % 60 == 0L) delay -= calendar.get(Calendar.MINUTE) * 60
+            if (timer >= 60 && timer % 60 == 0L) delay -= calendar.get(Calendar.SECOND)
             delay *= 1000
             delay -= calendar.get(Calendar.MILLISECOND)
             handler.postDelayed(this, delay)
@@ -78,7 +75,7 @@ class WidgetService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        val settings = SettingsData(applicationContext)
+        val settings = SettingsData(baseContext)
         handler = Handler(mainLooper)
         updateOnUnlock = settings.getBoolean(Storage.Widgets.UPDATE_ON_UNLOCK)
         timetable = if (settings.getBoolean(Storage.Widgets.UPDATE_BY_TIMETABLE)) {
@@ -103,13 +100,14 @@ class WidgetService : Service() {
         if (timetable.isNotEmpty()) handler.post(timetableUpdater)
         if (timer > 0) handler.post(timerUpdater)
 
-        val notificationChannel = NotificationChannel(CHANNEL_ID, getString(R.string.title_notification_background), NotificationManager.IMPORTANCE_LOW)
+        val notificationTitle = applicationContext.getString(R.string.title_notification_background)
+        val notificationChannel = NotificationChannel(CHANNEL_ID, notificationTitle, NotificationManager.IMPORTANCE_LOW)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(notificationChannel)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+        val notification = NotificationCompat.Builder(baseContext, CHANNEL_ID)
         notification.setSmallIcon(R.drawable.icon_logo)
         notification.setContentTitle(getString(R.string.title_notification_background))
         notification.setContentText(getString(R.string.description_notification_background))

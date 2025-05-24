@@ -10,9 +10,9 @@ import com.panov.timetable.util.WidgetUtils
 class Application : Application() {
     override fun onCreate() {
         super.onCreate()
-        Storage.settings = SettingsData(this)
+        Storage.settings = SettingsData(applicationContext)
         Storage.timetable = ApplicationUtils.getTimetableData(Storage.settings.getString(Storage.Timetable.JSON))
         AppCompatDelegate.setDefaultNightMode(Storage.settings.getInt(Storage.Application.THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM))
-        WidgetUtils.startWidgetService(this)
+        WidgetUtils.startWidgetService(applicationContext, Storage.settings)
     }
 }

@@ -1,13 +1,16 @@
 package com.panov.timetable
 
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -23,6 +26,14 @@ import com.panov.timetable.util.Storage
 import com.panov.util.Converter
 
 class MainActivity : AppCompatActivity() {
+    private val unlockReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent != null && intent.action == Intent.ACTION_USER_PRESENT) {
+                if (findViewById<View>(R.id.menu_clock).isSelected) startClockActivity()
+            }
+        }
+    }
+
     override fun attachBaseContext(context: Context) {
         super.attachBaseContext(ApplicationUtils.getLocalizedContext(context, Storage.settings))
     }
@@ -31,13 +42,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        onBackPressedDispatcher.addCallback { finish() }
+        registerReceiver(unlockReceiver, IntentFilter(Intent.ACTION_USER_PRESENT))
 
         val defaultItem = if (Storage.timetable != null) R.id.menu_timetable else R.id.menu_settings
         val selectedItem = savedInstanceState?.getInt("selected_item", defaultItem) ?: defaultItem
-
-        if (selectedItem == R.id.menu_clock && resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            startActivity(Intent(baseContext, ClockActivity::class.java))
-        }
+        if (selectedItem == R.id.menu_clock) startClockActivity()
 
         val shadowStatusBar = findViewById<View>(R.id.shadow_status_bar)
         val navigationSeparator = findViewById<View>(R.id.navigation_separator)
@@ -49,23 +59,23 @@ class MainActivity : AppCompatActivity() {
         navigationMain.menu.forEach { item -> navigationMain.findViewById<View>(item.itemId).setOnLongClickListener { resetItem(item.itemId) } }
 
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView.rootView) { view, insets ->
-            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val keyboardInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val keyboard = insets.getInsets(WindowInsetsCompat.Type.ime())
 
             if (insets.isVisible(WindowInsetsCompat.Type.ime())) {
-                navigationSeparator.visibility = if (keyboardInsets.bottom > 0) View.VISIBLE else View.GONE
+                navigationSeparator.visibility = if (keyboard.bottom > 0) View.VISIBLE else View.GONE
                 navigationMain.visibility = View.GONE
-                navigationSystem.visibility = if (keyboardInsets.bottom > 0) View.GONE else View.VISIBLE
+                navigationSystem.visibility = if (keyboard.bottom > 0) View.GONE else View.VISIBLE
             } else {
                 navigationSeparator.visibility = View.VISIBLE
                 navigationMain.visibility = View.VISIBLE
                 navigationSystem.visibility = View.VISIBLE
             }
 
-            view.setPadding(0, 0, 0, keyboardInsets.bottom)
-            findViewById<View>(R.id.layout_container)?.setPadding(0, systemBarsInsets.top, 0, Converter.getPxFromDp(baseContext, 48))
-            shadowStatusBar.updateLayoutParams { height = systemBarsInsets.top * 2 }
-            navigationSystem.updateLayoutParams { height = systemBarsInsets.bottom }
+            view.setPadding(0, 0, 0, keyboard.bottom)
+            findViewById<View>(R.id.layout_container)?.setPadding(0, systemBars.top, 0, Converter.getPxFromDp(baseContext, 48))
+            shadowStatusBar.updateLayoutParams { height = systemBars.top * 2 }
+            navigationSystem.updateLayoutParams { height = systemBars.bottom }
 
             WindowInsetsCompat.CONSUMED
         }
@@ -79,14 +89,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(
+            "selected_item", if (findViewById<View>(R.id.menu_clock).isSelected) {
+                R.id.menu_clock
+            } else if (findViewById<View>(R.id.menu_timetable).isSelected) {
+                R.id.menu_timetable
+            } else {
+                R.id.menu_settings
+            }
+        )
         super.onSaveInstanceState(outState)
-        if (findViewById<View>(R.id.menu_clock).isSelected) {
-            outState.putInt("selected_item", R.id.menu_clock)
-        } else if (findViewById<View>(R.id.menu_timetable).isSelected) {
-            outState.putInt("selected_item", R.id.menu_timetable)
-        } else if (findViewById<View>(R.id.menu_settings).isSelected) {
-            outState.putInt("selected_item", R.id.menu_settings)
-        }
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(unlockReceiver)
+        super.onDestroy()
     }
 
     private fun selectItem(item: Int): Boolean {
@@ -110,5 +127,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    private fun startClockActivity() {
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            startActivity(Intent(baseContext, ClockActivity::class.java))
+        }
     }
 }

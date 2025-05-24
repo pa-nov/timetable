@@ -1,10 +1,7 @@
 package com.panov.timetable
 
 import android.app.KeyguardManager
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.content.res.Configuration
 import android.icu.util.Calendar
 import android.os.Build
@@ -15,7 +12,7 @@ import android.view.View
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
@@ -34,15 +31,6 @@ class ClockActivity : AppCompatActivity() {
     private val displayNextLesson = Storage.settings.getBoolean(Storage.Clock.DISPLAY_NEXT_LESSON)
     private val notDisplayNextTime = Storage.settings.getBoolean(Storage.Clock.NOT_DISPLAY_NEXT_TIME)
 
-    private var unlockReceiverRegistered = false
-    private val unlockReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent != null && intent.action == Intent.ACTION_USER_PRESENT) {
-                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return finish()
-            }
-        }
-    }
-
     override fun attachBaseContext(context: Context) {
         super.attachBaseContext(ApplicationUtils.getLocalizedContext(context, Storage.settings))
     }
@@ -51,23 +39,41 @@ class ClockActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_clock)
-        if (Build.VERSION.SDK_INT >= 27) setShowWhenLocked(displayOnLockscreen)
 
-        if (!displayOnLockscreen || !(getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return finish()
-        }
-        window.insetsController?.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        window.insetsController?.hide(WindowInsetsCompat.Type.systemBars())
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    finish()
-                } else {
-                    UiUtils.showToast(baseContext, R.string.description_clock_close)
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if ((getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
+                if (displayOnLockscreen) {
+                    Handler(mainLooper).postDelayed({
+                        if (!isDestroyed && resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                            finish()
+                        }
+                    }, 200)
                 }
+            } else {
+                return finish()
             }
-        })
+        }
+
+        onBackPressedDispatcher.addCallback {
+            if ((getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
+                finish()
+            } else {
+                UiUtils.showToast(baseContext, R.string.description_clock_close)
+            }
+        }
+
+        if (Build.VERSION.SDK_INT >= 27) {
+            setShowWhenLocked(displayOnLockscreen)
+        }
+        if (Build.VERSION.SDK_INT >= 30) {
+            window.insetsController?.apply {
+                systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                hide(WindowInsetsCompat.Type.systemBars())
+            }
+        } else {
+            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         val titleCurrentLesson = findViewById<TextView>(R.id.title_current_lesson)
         val titleTime = findViewById<TextView>(R.id.title_time)
@@ -90,8 +96,6 @@ class ClockActivity : AppCompatActivity() {
             textNextLesson.visibility = View.GONE
             textDateTime.visibility = View.GONE
 
-            registerReceiver(unlockReceiver, IntentFilter(Intent.ACTION_USER_PRESENT))
-            unlockReceiverRegistered = true
             return
         }
 
@@ -197,13 +201,5 @@ class ClockActivity : AppCompatActivity() {
                 }
             }
         })
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (unlockReceiverRegistered) {
-            unlockReceiverRegistered = false
-            unregisterReceiver(unlockReceiver)
-        }
     }
 }
