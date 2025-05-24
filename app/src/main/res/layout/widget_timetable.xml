@@ -47,6 +47,7 @@
         <FrameLayout
             style="@style/Layout.Vertical.Rounded"
             android:backgroundTint="@color/line"
+            android:minHeight="40dp"
             android:padding="6dp">
 
             <ListView
