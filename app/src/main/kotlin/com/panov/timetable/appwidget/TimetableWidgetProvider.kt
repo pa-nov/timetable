@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.widget.RemoteViews
 import com.panov.timetable.R
 import com.panov.timetable.util.ApplicationUtils
-import com.panov.timetable.util.SettingsData
 import com.panov.timetable.util.Storage
 import com.panov.timetable.widget.Timetable
 import com.panov.util.Converter
@@ -36,12 +35,11 @@ class TimetableWidgetProvider : AppWidgetProvider() {
     }
 
     private fun updateWidget(sourceContext: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
-        val settings = SettingsData(sourceContext)
-        val calendar = ApplicationUtils.getModifiedCalendar(settings)
-        val context = ApplicationUtils.getLocalizedContext(sourceContext, settings)
+        val calendar = ApplicationUtils.getModifiedCalendar()
+        val context = ApplicationUtils.getLocalizedContext(sourceContext)
         val views = RemoteViews(context.packageName, R.layout.widget_timetable)
         val day = Converter.getDayOfWeek(calendar)
-        val combineBackground = settings.getBoolean(Storage.Widgets.COMBINE_BACKGROUND)
+        val combineBackground = Storage.settings.getBoolean(Storage.Widgets.COMBINE_BACKGROUND)
 
 
         views.setInt(R.id.layout_background, "setBackgroundResource", if (combineBackground) R.drawable.square_rounded_small else 0)

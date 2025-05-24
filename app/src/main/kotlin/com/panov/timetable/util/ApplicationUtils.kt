@@ -6,8 +6,8 @@ import android.icu.util.Calendar
 import java.util.Locale
 
 object ApplicationUtils {
-    fun getLocalizedContext(context: Context, settings: SettingsData = SettingsData(context)): Context {
-        val language = settings.getString(Storage.Application.LANGUAGE, Locale.getDefault().language)
+    fun getLocalizedContext(context: Context): Context {
+        val language = Storage.settings.getString(Storage.Application.LANGUAGE, Locale.getDefault().language)
         val locale = Locale(language)
         Locale.setDefault(locale)
 
@@ -25,12 +25,12 @@ object ApplicationUtils {
         return calendar
     }
 
-    fun getModifiedCalendar(settings: SettingsData): Calendar {
+    fun getModifiedCalendar(): Calendar {
         val calendar = getCalendar()
 
-        val modifierHours = settings.getInt(Storage.Widgets.MODIFIER_HOURS, 1)
-        val modifierMinutes = settings.getInt(Storage.Widgets.MODIFIER_MINUTES, 1)
-        val modifierSeconds = settings.getInt(Storage.Widgets.MODIFIER_SECONDS, 1)
+        val modifierHours = Storage.settings.getInt(Storage.Widgets.MODIFIER_HOURS, 1)
+        val modifierMinutes = Storage.settings.getInt(Storage.Widgets.MODIFIER_MINUTES, 1)
+        val modifierSeconds = Storage.settings.getInt(Storage.Widgets.MODIFIER_SECONDS, 1)
 
         calendar.set(Calendar.HOUR_OF_DAY, if (modifierHours > 0) calendar.get(Calendar.HOUR_OF_DAY) / modifierHours * modifierHours else -modifierHours)
         calendar.set(Calendar.MINUTE, if (modifierMinutes > 0) calendar.get(Calendar.MINUTE) / modifierMinutes * modifierMinutes else -modifierMinutes)

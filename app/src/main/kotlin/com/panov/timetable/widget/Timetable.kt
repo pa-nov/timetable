@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.panov.timetable.R
 import com.panov.timetable.fragment.TimetableFragment
 import com.panov.timetable.util.ApplicationUtils
-import com.panov.timetable.util.SettingsData
 import com.panov.timetable.util.Storage
 import com.panov.timetable.util.TimetableData
 import com.panov.util.Converter
@@ -244,11 +243,10 @@ class Timetable {
         override fun hasStableIds(): Boolean = false
 
         override fun onDataSetChanged() {
-            val settings = SettingsData(context)
-            context = ApplicationUtils.getLocalizedContext(context, settings)
-            calendar = ApplicationUtils.getModifiedCalendar(settings)
-            initialIndex = settings.getInt(Storage.Timetable.INITIAL_INDEX, 1)
-            timetableData = ApplicationUtils.getTimetableData(settings.getString(Storage.Timetable.JSON))
+            context = ApplicationUtils.getLocalizedContext(context)
+            calendar = ApplicationUtils.getModifiedCalendar()
+            initialIndex = Storage.settings.getInt(Storage.Timetable.INITIAL_INDEX, 1)
+            timetableData = Storage.timetable
         }
 
         override fun getCount(): Int {

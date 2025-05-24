@@ -23,6 +23,7 @@ import com.panov.timetable.fragment.SettingsFragment
 import com.panov.timetable.fragment.TimetableFragment
 import com.panov.timetable.util.ApplicationUtils
 import com.panov.timetable.util.Storage
+import com.panov.timetable.util.WidgetUtils
 import com.panov.util.Converter
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun attachBaseContext(context: Context) {
-        super.attachBaseContext(ApplicationUtils.getLocalizedContext(context, Storage.settings))
+        super.attachBaseContext(ApplicationUtils.getLocalizedContext(context))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         onBackPressedDispatcher.addCallback { finish() }
-        registerReceiver(unlockReceiver, IntentFilter(Intent.ACTION_USER_PRESENT))
 
         val defaultItem = if (Storage.timetable != null) R.id.menu_timetable else R.id.menu_settings
         val selectedItem = savedInstanceState?.getInt("selected_item", defaultItem) ?: defaultItem
@@ -79,6 +79,10 @@ class MainActivity : AppCompatActivity() {
 
             WindowInsetsCompat.CONSUMED
         }
+
+        registerReceiver(unlockReceiver, IntentFilter(Intent.ACTION_USER_PRESENT))
+
+        WidgetUtils.startWidgetService(applicationContext)
 
         if (Build.VERSION.SDK_INT >= 33) {
             val isGranted = checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)
@@ -131,7 +135,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun startClockActivity() {
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            startActivity(Intent(baseContext, ClockActivity::class.java))
+            startActivity(Intent(applicationContext, ClockActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
         }
     }
 }

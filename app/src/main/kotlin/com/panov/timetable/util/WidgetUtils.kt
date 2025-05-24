@@ -10,10 +10,10 @@ import com.panov.timetable.appwidget.TimetableWidgetProvider
 import com.panov.timetable.appwidget.WidgetService
 
 object WidgetUtils {
-    fun startWidgetService(context: Context, settings: SettingsData = SettingsData(context)) {
-        val updateOnUnlock = settings.getBoolean(Storage.Widgets.UPDATE_ON_UNLOCK)
-        val updateByTimetable = settings.getBoolean(Storage.Widgets.UPDATE_BY_TIMETABLE)
-        val updateByTimer = settings.getInt(Storage.Widgets.UPDATE_TIMER) > 0
+    fun startWidgetService(context: Context) {
+        val updateOnUnlock = Storage.settings.getBoolean(Storage.Widgets.UPDATE_ON_UNLOCK)
+        val updateByTimetable = Storage.settings.getBoolean(Storage.Widgets.UPDATE_BY_TIMETABLE)
+        val updateByTimer = Storage.settings.getInt(Storage.Widgets.UPDATE_TIMER) > 0
 
         if (updateOnUnlock || updateByTimetable || updateByTimer) {
             context.startForegroundService(Intent(context, WidgetService::class.java))

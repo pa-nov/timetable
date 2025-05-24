@@ -32,7 +32,7 @@ class ClockActivity : AppCompatActivity() {
     private val notDisplayNextTime = Storage.settings.getBoolean(Storage.Clock.NOT_DISPLAY_NEXT_TIME)
 
     override fun attachBaseContext(context: Context) {
-        super.attachBaseContext(ApplicationUtils.getLocalizedContext(context, Storage.settings))
+        super.attachBaseContext(ApplicationUtils.getLocalizedContext(context))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +68,7 @@ class ClockActivity : AppCompatActivity() {
                         if (!isDestroyed && resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             finish()
                         }
-                    }, 200)
+                    }, 500)
                 } else {
                     return finish()
                 }

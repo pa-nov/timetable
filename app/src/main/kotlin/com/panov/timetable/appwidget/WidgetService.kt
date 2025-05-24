@@ -14,7 +14,6 @@ import android.text.format.DateUtils
 import androidx.core.app.NotificationCompat
 import com.panov.timetable.R
 import com.panov.timetable.util.ApplicationUtils
-import com.panov.timetable.util.SettingsData
 import com.panov.timetable.util.Storage
 import com.panov.timetable.util.WidgetUtils
 import com.panov.util.Converter
@@ -75,11 +74,10 @@ class WidgetService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        val settings = SettingsData(baseContext)
         handler = Handler(mainLooper)
-        updateOnUnlock = settings.getBoolean(Storage.Widgets.UPDATE_ON_UNLOCK)
-        timetable = if (settings.getBoolean(Storage.Widgets.UPDATE_BY_TIMETABLE)) {
-            val timetableData = ApplicationUtils.getTimetableData(settings.getString(Storage.Timetable.JSON))
+        updateOnUnlock = Storage.settings.getBoolean(Storage.Widgets.UPDATE_ON_UNLOCK)
+        timetable = if (Storage.settings.getBoolean(Storage.Widgets.UPDATE_BY_TIMETABLE)) {
+            val timetableData = Storage.timetable
             if (timetableData != null) {
                 val timetableList = arrayListOf<Int>()
                 for (index in 0 until timetableData.getLessonsCount()) {
@@ -94,7 +92,7 @@ class WidgetService : Service() {
         } else {
             emptyArray<Int>()
         }
-        timer = settings.getInt(Storage.Widgets.UPDATE_TIMER).toLong()
+        timer = Storage.settings.getInt(Storage.Widgets.UPDATE_TIMER).toLong()
 
         if (updateOnUnlock) registerReceiver(unlockReceiver, IntentFilter(Intent.ACTION_USER_PRESENT))
         if (timetable.isNotEmpty()) handler.post(timetableUpdater)
