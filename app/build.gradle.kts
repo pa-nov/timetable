@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.panov.timetable"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.panov.timetable"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 120
         versionName = "1.2.0"
     }
