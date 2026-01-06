@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,9 +7,9 @@
 
     <LinearLayout
         style="@style/Layout.Vertical"
-        app:layout_constraintBottom_toTopOf="@id/text_time"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        android:layout_above="@id/text_time"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/title_current_lesson"
@@ -29,33 +28,29 @@
     <TextView
         android:id="@+id/title_time"
         style="@style/Title.Header"
-        android:text="@string/timer_ends_in"
-        app:layout_constraintTop_toTopOf="@id/text_time"
-        tools:ignore="MissingConstraints" />
+        android:layout_alignTop="@id/text_time"
+        android:text="@string/timer_ends_in" />
 
     <TextView
         android:id="@+id/text_time"
         style="@style/Title"
+        android:layout_centerVertical="true"
         android:text="@string/message_error"
-        android:textSize="100sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:textSize="100sp" />
 
     <TextView
         android:id="@+id/text_ago"
         style="@style/Title"
+        android:layout_alignBottom="@id/text_time"
         android:text="@string/timer_ago"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@id/text_time"
-        tools:ignore="MissingConstraints" />
+        android:textSize="16sp" />
 
 
     <LinearLayout
         style="@style/Layout.Vertical"
-        app:layout_constraintBottom_toTopOf="@id/text_date_time"
-        app:layout_constraintTop_toBottomOf="@id/text_time"
-        tools:ignore="MissingConstraints">
+        android:layout_above="@id/text_date_time"
+        android:layout_below="@id/text_time"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/title_next_lesson"
@@ -74,8 +69,7 @@
     <TextView
         android:id="@+id/text_date_time"
         style="@style/Title"
-        android:text="@string/message_error"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:layout_alignParentBottom="true"
+        android:text="@string/message_error" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

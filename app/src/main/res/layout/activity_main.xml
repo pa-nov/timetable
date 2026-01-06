@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -44,8 +44,8 @@
         android:id="@+id/shadow_status_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_alignParentTop="true"
         android:background="@drawable/square_shadow_top"
-        android:backgroundTint="@color/background"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:backgroundTint="@color/background" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
