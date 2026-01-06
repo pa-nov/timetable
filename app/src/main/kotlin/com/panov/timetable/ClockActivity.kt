@@ -41,7 +41,7 @@ class ClockActivity : AppCompatActivity() {
         setContentView(R.layout.activity_clock)
 
         onBackPressedDispatcher.addCallback {
-            if ((getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
+            if ((getSystemService(KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
                 finish()
             } else {
                 UiUtils.showToast(baseContext, R.string.description_clock_close)
@@ -62,7 +62,7 @@ class ClockActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            if ((getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
+            if ((getSystemService(KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
                 if (displayOnLockscreen) {
                     Handler(mainLooper).postDelayed({
                         if (!isDestroyed && resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {

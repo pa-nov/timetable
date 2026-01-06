@@ -21,7 +21,7 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
         isHorizontalScrollBarEnabled = false
         isVerticalScrollBarEnabled = false
         isFillViewport = true
-        overScrollMode = View.OVER_SCROLL_NEVER
+        overScrollMode = OVER_SCROLL_NEVER
     }
 
     private val scaledTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
@@ -147,7 +147,7 @@ class BounceScrollView(context: Context, attrs: AttributeSet?, defStyleAttr: Int
 
     private fun moveToDefaultPosition() {
         if (animator.isRunning) animator.cancel()
-        animator = ObjectAnimator.ofFloat(content, View.TRANSLATION_Y, 0f)
+        animator = ObjectAnimator.ofFloat(content, TRANSLATION_Y, 0f)
         animator.interpolator = QuartOutInterpolator
         animator.setDuration(400)
         animator.start()

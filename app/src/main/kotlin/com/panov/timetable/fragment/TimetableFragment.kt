@@ -11,8 +11,8 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.panov.timetable.util.ApplicationUtils
 import com.panov.timetable.R
+import com.panov.timetable.util.ApplicationUtils
 import com.panov.timetable.widget.Timetable
 import com.panov.util.Converter
 import kotlin.math.abs

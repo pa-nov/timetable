@@ -100,7 +100,7 @@ class WidgetService : Service() {
 
         val notificationTitle = applicationContext.getString(R.string.title_notification_background)
         val notificationChannel = NotificationChannel(CHANNEL_ID, notificationTitle, NotificationManager.IMPORTANCE_LOW)
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(notificationChannel)
     }
 
