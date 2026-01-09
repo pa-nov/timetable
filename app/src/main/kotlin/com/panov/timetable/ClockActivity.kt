@@ -1,5 +1,6 @@
 package com.panov.timetable
 
+import android.app.ActivityManager
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.res.Configuration
@@ -39,6 +40,7 @@ class ClockActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_clock)
+        setTaskDescription(ActivityManager.TaskDescription(getString(R.string.title_clock), null, getColor(R.color.accent)))
 
         onBackPressedDispatcher.addCallback {
             if ((getSystemService(KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
@@ -50,6 +52,8 @@ class ClockActivity : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= 27) {
             setShowWhenLocked(displayOnLockscreen)
+        } else {
+            window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
         }
         if (Build.VERSION.SDK_INT >= 30) {
             window.insetsController?.apply {
@@ -57,7 +61,7 @@ class ClockActivity : AppCompatActivity() {
                 hide(WindowInsetsCompat.Type.systemBars())
             }
         } else {
-            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         }
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 

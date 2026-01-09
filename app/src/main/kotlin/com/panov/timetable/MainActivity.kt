@@ -1,5 +1,6 @@
 package com.panov.timetable
 
+import android.app.ActivityManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        setTaskDescription(ActivityManager.TaskDescription(getString(R.string.title_app), null, getColor(R.color.accent)))
         onBackPressedDispatcher.addCallback { finish() }
 
         val defaultItem = if (Storage.timetable != null) R.id.menu_timetable else R.id.menu_settings
