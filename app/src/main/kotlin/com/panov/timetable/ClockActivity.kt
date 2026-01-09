@@ -52,7 +52,7 @@ class ClockActivity : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= 27) {
             setShowWhenLocked(displayOnLockscreen)
-        } else {
+        } else if (displayOnLockscreen) {
             window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
         }
         if (Build.VERSION.SDK_INT >= 30) {
