@@ -17,6 +17,7 @@ import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import com.panov.timetable.util.ApplicationUtils
 import com.panov.timetable.util.Storage
 import com.panov.util.Converter
@@ -50,11 +51,7 @@ class ClockActivity : AppCompatActivity() {
             }
         }
 
-        if (Build.VERSION.SDK_INT >= 27) {
-            setShowWhenLocked(displayOnLockscreen)
-        } else if (displayOnLockscreen) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
-        }
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         if (Build.VERSION.SDK_INT >= 30) {
             window.insetsController?.apply {
                 systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
@@ -63,7 +60,13 @@ class ClockActivity : AppCompatActivity() {
         } else {
             window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         }
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        if (displayOnLockscreen) {
+            if (Build.VERSION.SDK_INT >= 27) {
+                setShowWhenLocked(true)
+            } else {
+                window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
+            }
+        }
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             if ((getSystemService(KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {
@@ -72,7 +75,8 @@ class ClockActivity : AppCompatActivity() {
                         if (!isDestroyed && resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             finish()
                         }
-                    }, 500)
+                    }, 100)
+                    return hideUI()
                 } else {
                     return finish()
                 }
@@ -81,84 +85,139 @@ class ClockActivity : AppCompatActivity() {
             }
         }
 
+        if (!displayHeaders) {
+            findViewById<View>(R.id.title_current_lesson).visibility = View.GONE
+            findViewById<View>(R.id.title_time).visibility = View.GONE
+            findViewById<View>(R.id.title_next_lesson).visibility = View.GONE
+        }
+
+        if (!displayDateTime) {
+            findViewById<View>(R.id.text_date_time).updateLayoutParams { height = 0 }
+        }
+
+        if (!displayCurrentLesson) {
+            findViewById<View>(R.id.title_current_lesson).visibility = View.GONE
+            findViewById<View>(R.id.text_current_lesson).visibility = View.GONE
+        }
+
+        if (!displayNextLesson) {
+            findViewById<View>(R.id.title_next_lesson).visibility = View.GONE
+            findViewById<View>(R.id.text_next_lesson).visibility = View.GONE
+        }
+
+        if (!notDisplayNextTime || !displayTimer) {
+            findViewById<View>(R.id.text_ago).visibility = View.GONE
+        }
+
+        if (!displayDateTime && !displayCurrentLesson && !displayNextLesson && resources.configuration.screenWidthDp >= 720) {
+            findViewById<TextView>(R.id.title_time).textSize = 32f
+            findViewById<TextView>(R.id.text_time).textSize = 160f
+            findViewById<TextView>(R.id.text_ago).textSize = 32f
+        }
+
+        if (displayTimer) {
+            startTimer()
+        } else {
+            startClock()
+        }
+    }
+
+    private fun hideUI() {
+        findViewById<View>(R.id.title_current_lesson).visibility = View.GONE
+        findViewById<View>(R.id.title_time).visibility = View.GONE
+        findViewById<View>(R.id.title_next_lesson).visibility = View.GONE
+        findViewById<View>(R.id.text_current_lesson).visibility = View.GONE
+        findViewById<View>(R.id.text_time).visibility = View.GONE
+        findViewById<View>(R.id.text_ago).visibility = View.GONE
+        findViewById<View>(R.id.text_next_lesson).visibility = View.GONE
+        findViewById<View>(R.id.text_date_time).visibility = View.GONE
+    }
+
+    private fun startClock() {
         val titleCurrentLesson = findViewById<TextView>(R.id.title_current_lesson)
         val titleTime = findViewById<TextView>(R.id.title_time)
-        val titleNextLesson = findViewById<TextView>(R.id.title_next_lesson)
-
         val textCurrentLesson = findViewById<TextView>(R.id.text_current_lesson)
         val textTime = findViewById<TextView>(R.id.text_time)
         val textAgo = findViewById<TextView>(R.id.text_ago)
         val textNextLesson = findViewById<TextView>(R.id.text_next_lesson)
         val textDateTime = findViewById<TextView>(R.id.text_date_time)
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            titleCurrentLesson.visibility = View.GONE
-            titleTime.visibility = View.GONE
-            titleNextLesson.visibility = View.GONE
+        titleTime.text = getString(R.string.timer_time)
+        textAgo.visibility = View.GONE
 
-            textCurrentLesson.visibility = View.GONE
-            textTime.visibility = View.GONE
-            textAgo.visibility = View.GONE
-            textNextLesson.visibility = View.GONE
-            textDateTime.visibility = View.GONE
+        if (timetable != null) {
+            val handler = Handler(mainLooper)
+            handler.post(object : Runnable {
+                override fun run() {
+                    if (isDestroyed) return
+                    val calendar = ApplicationUtils.getCalendar()
+                    handler.postDelayed(this, (1000 - calendar.get(Calendar.MILLISECOND)).toLong())
+                    val seconds = Converter.getSecondsInDay(calendar)
+                    val offset = timetable.getOffset(calendar)
 
-            return
+                    textTime.text = Converter.getTimeText(calendar)
+
+                    if (displayCurrentLesson) {
+                        val currentLessonId = timetable.getLessonId(offset.currentWeek, offset.currentDay, offset.currentLessonIndex)
+                        val currentLessonEnd = timetable.getLessonTimeEnd(offset.currentLessonIndex)
+                        textCurrentLesson.text = timetable.getLessonFullTitle(currentLessonId)
+                        titleCurrentLesson.text = if (offset.currentDaysOffset == 0 && currentLessonEnd > seconds) {
+                            getString(R.string.timer_now)
+                        } else {
+                            getString(R.string.timer_earlier)
+                        }
+                    }
+
+                    if (displayNextLesson) {
+                        val nextLessonId = timetable.getLessonId(offset.nextWeek, offset.nextDay, offset.nextLessonIndex)
+                        textNextLesson.text = timetable.getLessonFullTitle(nextLessonId)
+                    }
+
+                    if (displayDateTime) {
+                        textDateTime.text = Converter.getDateText(calendar)
+                    }
+                }
+            })
+        } else {
+            textCurrentLesson.text = getString(R.string.message_error)
+            textNextLesson.text = getString(R.string.message_error)
+
+            val handler = Handler(mainLooper)
+            handler.post(object : Runnable {
+                override fun run() {
+                    if (isDestroyed) return
+                    val calendar = ApplicationUtils.getCalendar()
+                    handler.postDelayed(this, (1000 - calendar.get(Calendar.MILLISECOND)).toLong())
+
+                    textTime.text = Converter.getTimeText(calendar)
+
+                    if (displayDateTime) {
+                        textDateTime.text = Converter.getDateText(calendar)
+                    }
+                }
+            })
         }
+    }
 
-        if (timetable == null) {
-            titleCurrentLesson.visibility = View.GONE
-            titleTime.visibility = View.GONE
-            titleNextLesson.visibility = View.GONE
+    private fun startTimer() {
+        val titleCurrentLesson = findViewById<TextView>(R.id.title_current_lesson)
+        val titleTime = findViewById<TextView>(R.id.title_time)
+        val textCurrentLesson = findViewById<TextView>(R.id.text_current_lesson)
+        val textTime = findViewById<TextView>(R.id.text_time)
+        val textAgo = findViewById<TextView>(R.id.text_ago)
+        val textNextLesson = findViewById<TextView>(R.id.text_next_lesson)
+        val textDateTime = findViewById<TextView>(R.id.text_date_time)
 
-            textCurrentLesson.visibility = View.GONE
-            textAgo.visibility = View.GONE
-            textNextLesson.visibility = View.GONE
-            textDateTime.visibility = View.GONE
+        if (timetable != null) {
+            val handler = Handler(mainLooper)
+            handler.post(object : Runnable {
+                override fun run() {
+                    if (isDestroyed) return
+                    val calendar = ApplicationUtils.getCalendar()
+                    handler.postDelayed(this, (1000 - calendar.get(Calendar.MILLISECOND)).toLong())
+                    val seconds = Converter.getSecondsInDay(calendar)
+                    val offset = timetable.getOffset(calendar)
 
-            textTime.textSize = 160f
-            return
-        }
-
-        if (!displayTimer || !notDisplayNextTime) {
-            textAgo.visibility = View.GONE
-        }
-
-        if (!displayHeaders) {
-            titleCurrentLesson.visibility = View.GONE
-            titleTime.visibility = View.GONE
-            titleNextLesson.visibility = View.GONE
-        }
-
-        if (!displayDateTime) {
-            textDateTime.visibility = View.GONE
-        }
-
-        if (!displayCurrentLesson) {
-            titleCurrentLesson.visibility = View.GONE
-            textCurrentLesson.visibility = View.GONE
-        }
-
-        if (!displayNextLesson) {
-            titleNextLesson.visibility = View.GONE
-            textNextLesson.visibility = View.GONE
-        }
-
-        if (!displayDateTime && !displayCurrentLesson && !displayNextLesson) {
-            titleTime.textSize = 32f
-            textTime.textSize = 160f
-            textAgo.textSize = 32f
-        }
-
-        val handler = Handler(mainLooper)
-        handler.post(object : Runnable {
-            override fun run() {
-                if (isDestroyed) return
-                val calendar = ApplicationUtils.getCalendar()
-                handler.postDelayed(this, (1000 - calendar.get(Calendar.MILLISECOND)).toLong())
-                val seconds = Converter.getSecondsInDay(calendar)
-                val offset = timetable.getOffset(calendar)
-
-                if (displayTimer) {
                     val currentLessonEnd = timetable.getLessonTimeEnd(offset.currentLessonIndex)
                     val nextLessonStart = timetable.getLessonTimeStart(offset.nextLessonIndex)
                     val daySeconds = (DateUtils.DAY_IN_MILLIS / 1000).toInt()
@@ -177,35 +236,44 @@ class ClockActivity : AppCompatActivity() {
                             Converter.getTimeText(offset.nextDaysOffset * daySeconds + nextLessonStart - seconds)
                         }
                     }
-                } else {
-                    titleTime.text = getString(R.string.timer_time)
-                    textTime.text = Converter.getTimeText(calendar)
-                }
 
-                if (displayDateTime) {
-                    textDateTime.text = if (displayTimer) {
-                        Converter.getDateText(calendar) + "   " + Converter.getTimeText(calendar)
-                    } else {
-                        Converter.getDateText(calendar)
+                    if (displayCurrentLesson) {
+                        val currentLessonId = timetable.getLessonId(offset.currentWeek, offset.currentDay, offset.currentLessonIndex)
+                        textCurrentLesson.text = timetable.getLessonFullTitle(currentLessonId)
+                        titleCurrentLesson.text = if (offset.currentDaysOffset == 0 && currentLessonEnd > seconds) {
+                            getString(R.string.timer_now)
+                        } else {
+                            getString(R.string.timer_earlier)
+                        }
+                    }
+
+                    if (displayNextLesson) {
+                        val nextLessonId = timetable.getLessonId(offset.nextWeek, offset.nextDay, offset.nextLessonIndex)
+                        textNextLesson.text = timetable.getLessonFullTitle(nextLessonId)
+                    }
+
+                    if (displayDateTime) {
+                        textDateTime.text = "${Converter.getDateText(calendar)}   ${Converter.getTimeText(calendar)}"
                     }
                 }
+            })
+        } else {
+            textCurrentLesson.text = getString(R.string.message_error)
+            textTime.text = getString(R.string.message_error)
+            textNextLesson.text = getString(R.string.message_error)
+            textAgo.visibility = View.GONE
 
-                if (displayCurrentLesson) {
-                    val currentLessonId = timetable.getLessonId(offset.currentWeek, offset.currentDay, offset.currentLessonIndex)
-                    val currentLessonEnd = timetable.getLessonTimeEnd(offset.currentLessonIndex)
-                    textCurrentLesson.text = timetable.getLessonFullTitle(currentLessonId)
-                    titleCurrentLesson.text = if (offset.currentDaysOffset == 0 && currentLessonEnd > seconds) {
-                        getString(R.string.timer_now)
-                    } else {
-                        getString(R.string.timer_earlier)
+            if (displayDateTime) {
+                val handler = Handler(mainLooper)
+                handler.post(object : Runnable {
+                    override fun run() {
+                        if (isDestroyed) return
+                        val calendar = ApplicationUtils.getCalendar()
+                        handler.postDelayed(this, (1000 - calendar.get(Calendar.MILLISECOND)).toLong())
+                        textDateTime.text = "${Converter.getDateText(calendar)}   ${Converter.getTimeText(calendar)}"
                     }
-                }
-
-                if (displayNextLesson) {
-                    val nextLessonId = timetable.getLessonId(offset.nextWeek, offset.nextDay, offset.nextLessonIndex)
-                    textNextLesson.text = timetable.getLessonFullTitle(nextLessonId)
-                }
+                })
             }
-        })
+        }
     }
 }
