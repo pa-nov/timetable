@@ -9,7 +9,7 @@
     <LinearLayout
         style="@style/Layout.Horizontal.Rounded"
         android:layout_alignParentTop="true"
-        android:padding="12dp">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/title_weekday"
@@ -38,7 +38,7 @@
     <LinearLayout
         style="@style/Layout.Vertical.Rounded"
         android:layout_alignParentBottom="true"
-        android:padding="12dp">
+        android:padding="8dp">
 
         <LinearLayout style="@style/Layout.Horizontal">
 
