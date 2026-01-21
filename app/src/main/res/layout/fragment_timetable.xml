@@ -21,6 +21,7 @@
     <Button
         android:id="@+id/button_action"
         style="@style/Button.Action"
+        android:fontFeatureSettings="tnum"
         android:text="@string/message_error" />
 
 </LinearLayout>

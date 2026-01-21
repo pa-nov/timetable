@@ -22,6 +22,7 @@
         style="@style/Title"
         android:layout_width="64dp"
         android:layout_height="64dp"
+        android:fontFeatureSettings="tnum"
         android:text="@string/message_error"
         android:textSize="18sp" />
 

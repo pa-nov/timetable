@@ -35,6 +35,7 @@
         android:id="@+id/text_time"
         style="@style/Title"
         android:layout_centerVertical="true"
+        android:fontFeatureSettings="tnum"
         android:text="@string/message_error"
         android:textSize="100sp" />
 
@@ -70,6 +71,7 @@
         android:id="@+id/text_date_time"
         style="@style/Title"
         android:layout_alignParentBottom="true"
+        android:fontFeatureSettings="tnum"
         android:text="@string/message_error" />
 
 </RelativeLayout>
