@@ -75,7 +75,7 @@ class ClockActivity : AppCompatActivity() {
                         if (!isDestroyed && resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             finish()
                         }
-                    }, 100)
+                    }, 250)
                     return hideUI()
                 } else {
                     return finish()
