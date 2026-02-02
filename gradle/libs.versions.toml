@@ -1,9 +1,8 @@
 [versions]
-agp = "8.13.2"
-kotlin = "2.3.0"
+agp = "9.0.0"
 core-ktx = "1.17.0"
 appcompat = "1.7.1"
-activity = "1.12.2"
+activity = "1.12.3"
 material = "1.13.0"
 
 [libraries]
@@ -14,4 +13,3 @@ android-material = { group = "com.google.android.material", name = "material", v
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
