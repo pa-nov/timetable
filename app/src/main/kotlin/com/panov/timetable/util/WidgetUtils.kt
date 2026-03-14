@@ -16,7 +16,9 @@ object WidgetUtils {
         val updateByTimer = Storage.settings.getInt(Storage.Widgets.UPDATE_TIMER) > 0
 
         if (updateOnUnlock || updateByTimetable || updateByTimer) {
-            context.startForegroundService(Intent(context, WidgetService::class.java))
+            if (!ApplicationUtils.isServiceRunning(context, WidgetService::class.java)) {
+                context.startForegroundService(Intent(context, WidgetService::class.java))
+            }
         }
     }
 

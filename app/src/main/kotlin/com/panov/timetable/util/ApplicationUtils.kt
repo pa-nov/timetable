@@ -1,5 +1,6 @@
 package com.panov.timetable.util
 
+import android.app.ActivityManager
 import android.content.Context
 import android.content.res.Configuration
 import android.icu.util.Calendar
@@ -45,5 +46,16 @@ object ApplicationUtils {
         } catch (_: Exception) {
             null
         }
+    }
+
+    fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
+        val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val services = manager.getRunningServices(Int.MAX_VALUE)
+        for (service in services) {
+            if (service.service.className == serviceClass.name) {
+                return true
+            }
+        }
+        return false
     }
 }
