@@ -11,6 +11,7 @@
 
     <style name="Theme.Timetable" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/background</item>
+        <item name="colorPrimary">@color/accent</item>
     </style>
 
     <style name="Theme.TextInputEditText.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">

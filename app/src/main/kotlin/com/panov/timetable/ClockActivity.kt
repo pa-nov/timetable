@@ -1,6 +1,5 @@
 package com.panov.timetable
 
-import android.app.ActivityManager
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.res.Configuration
@@ -41,7 +40,6 @@ class ClockActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_clock)
-        setTaskDescription(ActivityManager.TaskDescription(getString(R.string.title_clock), null, getColor(R.color.accent)))
 
         onBackPressedDispatcher.addCallback {
             if ((getSystemService(KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) {

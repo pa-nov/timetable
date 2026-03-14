@@ -1,14 +1,11 @@
 package com.panov.timetable
 
-import android.app.ActivityManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
-import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
@@ -31,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private val unlockReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent != null && intent.action == Intent.ACTION_USER_PRESENT) {
-                if (findViewById<View>(R.id.menu_clock).isSelected) startClockActivity()
+                startClockActivity()
             }
         }
     }
@@ -44,12 +41,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        setTaskDescription(ActivityManager.TaskDescription(getString(R.string.title_app), null, getColor(R.color.accent)))
+
         onBackPressedDispatcher.addCallback { finish() }
 
         val defaultItem = if (Storage.timetable != null) R.id.menu_timetable else R.id.menu_settings
         val selectedItem = savedInstanceState?.getInt("selected_item", defaultItem) ?: defaultItem
-        if (selectedItem == R.id.menu_clock) startClockActivity()
 
         val shadowStatusBar = findViewById<View>(R.id.shadow_status_bar)
         val navigationSeparator = findViewById<View>(R.id.navigation_separator)
@@ -58,7 +54,9 @@ class MainActivity : AppCompatActivity() {
 
         navigationMain.setOnItemSelectedListener { item -> selectItem(item.itemId) }
         navigationMain.findViewById<View>(selectedItem).performClick()
-        navigationMain.menu.forEach { item -> navigationMain.findViewById<View>(item.itemId).setOnLongClickListener { resetItem(item.itemId) } }
+        navigationMain.menu.forEach { item ->
+            navigationMain.findViewById<View>(item.itemId).setOnLongClickListener { resetItem(item.itemId) }
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView.rootView) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -75,23 +73,19 @@ class MainActivity : AppCompatActivity() {
             }
 
             view.setPadding(0, 0, 0, keyboard.bottom)
-            findViewById<View>(R.id.layout_container)?.setPadding(0, systemBars.top, 0, Converter.getPxFromDp(baseContext, 48))
             shadowStatusBar.updateLayoutParams { height = systemBars.top * 2 }
             navigationSystem.updateLayoutParams { height = systemBars.bottom }
+
+            findViewById<View>(R.id.layout_container)?.setPadding(0, systemBars.top, 0, Converter.getPxFromDp(baseContext, 48))
 
             WindowInsetsCompat.CONSUMED
         }
 
-        registerReceiver(unlockReceiver, IntentFilter(Intent.ACTION_USER_PRESENT))
+        startClockActivity()
 
         WidgetUtils.startWidgetService(applicationContext)
 
-        if (Build.VERSION.SDK_INT >= 33) {
-            val isGranted = checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)
-            if (isGranted != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 0)
-            }
-        }
+        registerReceiver(unlockReceiver, IntentFilter(Intent.ACTION_USER_PRESENT))
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -113,7 +107,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun selectItem(item: Int): Boolean {
-        requestedOrientation = if (item == R.id.menu_clock) ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        requestedOrientation =
+            if (item == R.id.menu_clock) ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         supportFragmentManager.beginTransaction().replace(
             R.id.view_main, supportFragmentManager.findFragmentByTag(item.toString()) ?: when (item) {
                 R.id.menu_clock -> ClockFragment()
@@ -136,8 +131,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startClockActivity() {
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            startActivity(Intent(applicationContext, ClockActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+        if (findViewById<View>(R.id.menu_clock).isSelected) {
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                startActivity(Intent(applicationContext, ClockActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
+            }
         }
     }
 }

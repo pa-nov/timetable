@@ -45,9 +45,9 @@ class TimetableFragment : Fragment() {
         viewTimetable.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 tempPosition = if (position < 1) if (positionOffset < 0.5f) -1 else 0 else if (positionOffset > 0.5f) 1 else 0
-                if (position < 1 && positionOffset <= 0) selectPage(fragment, -1)
-                if (position > 1) selectPage(fragment, 1)
-                updateDate(fragment)
+                if (position < 1 && positionOffset <= 0) selectPage(-1)
+                if (position > 1) selectPage(1)
+                updateDate()
             }
         })
 
@@ -59,7 +59,7 @@ class TimetableFragment : Fragment() {
                     calendar.set(Calendar.MONTH, month)
                     calendar.set(Calendar.DAY_OF_MONTH, day)
                     calendar.add(Calendar.DAY_OF_MONTH, -tempPosition)
-                    updateView(fragment)
+                    updateView()
                 }
             }, tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH)).show()
         }
@@ -67,23 +67,31 @@ class TimetableFragment : Fragment() {
         return fragment
     }
 
-    private fun selectPage(view: View, offset: Int) {
+    private fun selectPage(offset: Int) {
+        val fragment = requireView()
+
         tempPosition = 0
         calendar.add(Calendar.DAY_OF_MONTH, offset)
-        view.findViewById<ViewPager2>(R.id.layout_container).setCurrentItem(1, false)
-        updateView(view)
+        fragment.findViewById<ViewPager2>(R.id.layout_container).setCurrentItem(1, false)
+
+        updateView()
     }
 
-    private fun updateView(view: View) {
-        val viewAdapter = view.findViewById<ViewPager2>(R.id.layout_container).adapter as Timetable.RecyclerViewAdapter
+    private fun updateView() {
+        val fragment = requireView()
+
+        val viewAdapter = fragment.findViewById<ViewPager2>(R.id.layout_container).adapter as Timetable.RecyclerViewAdapter
         viewAdapter.notifyItemChanged(0)
         viewAdapter.notifyItemChanged(1)
         viewAdapter.notifyItemChanged(2)
-        updateDate(view)
+
+        updateDate()
     }
 
-    private fun updateDate(view: View) {
-        val button = view.findViewById<Button>(R.id.button_action)
+    private fun updateDate() {
+        val fragment = requireView()
+
+        val button = fragment.findViewById<Button>(R.id.button_action)
         val tempCalendar = getTempCalendar()
 
         if (DateUtils.isToday(tempCalendar.timeInMillis + DateUtils.DAY_IN_MILLIS)) {

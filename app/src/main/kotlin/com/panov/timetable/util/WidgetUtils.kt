@@ -22,6 +22,12 @@ object WidgetUtils {
         }
     }
 
+    fun stopWidgetService(context: Context) {
+        if (ApplicationUtils.isServiceRunning(context, WidgetService::class.java)) {
+            context.stopService(Intent(context, WidgetService::class.java))
+        }
+    }
+
     fun updateWidgets(context: Context) {
         val appWidgetManager = AppWidgetManager.getInstance(context)
 
