@@ -1,12 +1,12 @@
 [versions]
-agp = "9.1.0"
-core-ktx = "1.18.0"
-appcompat = "1.7.1"
+agp = "9.2.0"
+core = "1.18.0"
+appcompat = "1.8.0"
 activity = "1.13.0"
-material = "1.13.0"
+material = "1.14.0"
 
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 android-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
