@@ -8,16 +8,20 @@ android {
 
     defaultConfig {
         applicationId = "com.panov.timetable"
+
         minSdk = 26
         targetSdk = 36
+
         versionCode = 120
         versionName = "1.2.0"
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+        }
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
         }
     }
 
