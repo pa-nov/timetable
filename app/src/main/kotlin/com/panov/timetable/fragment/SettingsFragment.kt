@@ -63,7 +63,7 @@ class SettingsFragment : Fragment() {
         )
 
         fragment.findViewById<Button>(R.id.button_source_code).setOnClickListener {
-            WebUtils.openURL(requireContext(), "https://github.com/pa-nov/timetable")
+            WebUtils.openURL(requireContext(), "https://github.com/pa-nov/timetable-android")
         }
         fragment.findViewById<Button>(R.id.button_timetable_editor).setOnClickListener {
             WebUtils.openURL(requireContext(), "https://github.com/pa-nov/timetable-editor")
